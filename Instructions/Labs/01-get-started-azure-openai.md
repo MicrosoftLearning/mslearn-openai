@@ -142,10 +142,11 @@ The **text-davinci** model you deployed is a good general model that can handle 
 ## Explore ChatGPT
 
 ---
-*Assumes a few things:*
+*Assumes a few things at publish-time:*
 
 1. *ChatGPT has been released and no longer requires the additional `?azureopenai_chatgpt_preview=true` URL parameter.*
 2. *There's a separate **ChatGPT** playground as there is in the preview (i.e. it doesn't all get merged into one playground)*
+3. ChatGPT is available in all regions where Azure openAI is available.
 
 ---
 
