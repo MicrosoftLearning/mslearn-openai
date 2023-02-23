@@ -73,7 +73,7 @@ So far, you've seen how to use a model to summarize text. However, the generativ
 
 1. In the **GPT-3 Playground** page, ensure your **text-davinci** deployment is selected and then in the **Examples** list, select **Classify text**.
 
-    The summatize text sample prompt describes the context for the model in the form of an instruction to classify a news article into one of a range of categories. It then provides the text for the news article (prefixed by *News article:*) and ends with *Classified category:*. The intention is that the model "completes" the final line of the prompt by predicting thre appropriate category.
+    The classify text sample prompt describes the context for the model in the form of an instruction to classify a news article into one of a range of categories. It then provides the text for the news article (prefixed by *News article:*) and ends with *Classified category:*. The intention is that the model "completes" the final line of the prompt by predicting thre appropriate category.
 
 2. Use the **Generate** button to submit the prompt to the model and retrieve a response. The model should predict an appropriate category for the news article.
 3. Under the predicted category, add the following text:
@@ -111,8 +111,65 @@ Up until now, you've based your prompts on examples that are provided in Azure O
     Observe the following about the prompt and parameters you used:
 
     - The prompt includes natural language context information that instructs the model on how to behave. Specifically, it indicates that the model should assume the role of a teacher creating a test for students.
-    The parameters include *Temperature*, which controls the degree to which response generation includes an element of randomness. The value of **0** used in your submission minimizes randomness, resulting in more predictable responses.
+    The parameters include *Temperature*, which controls the degree to which response generation includes an element of randomness. The value of **0** used in your submission minimizes randomness, resulting in stable, predictable responses.
 
 4. Use the **Regenerate** button to regenerate the response. It should be similar to the previous response.
 5. Change the **Temperature** parameter value to **0.9** and then use the **Regenerate** button to regenerate the response. This time the increased degree of randomness should result in a different response. However, the questions are more likely to contain inaccuracies than the ones in the previously generated response.
 
+## Explore code-generation
+
+The **text-davinci** model you deployed is a good general model that can handle most tasks well. However, in some cases it is better to choose a model that is optimized for a specific kind of task. For example, Azure openAI models can be used to generate computer code rather than natural language text, and some models have been optimized for that task.
+
+1. In Azure OpenAI Studio, view the **Models** page; which lists all of the available models in your Azure OpenAI service resource.
+2. Select the **code-davinci-002** model and use the **Deploy model** button to deploy it with the deployment name **code-davinci**.
+3. After deployment is complete, in Azure OpenAI Studio, view the **Deployments** page; which lists the models you have deployed.
+4. Select the **code-davinci** model deployment and use the **Open in Playground** button to open it in the playground.
+5. In the **GPT-3 Playground** page, ensure your **code-davinci** deployment is selected and then in the **Examples** list, select **Natural language to SQL**.
+
+    The natural language to SQL sample prompt provides detals of tables in a database, and a description of the query that is required followed by the `SELECT` keyword. The intention is for the model to complete the `SELECT` statement to create a query that satisfies the requirement.
+
+6. Use the **Generate** button to submit the prompt to the model and retrieve a response, which consists of a SQL `SELECT` query.
+7. Replace the entire prompt and response with the following new prompt:
+
+    *# Python 3*
+
+    *# Create a function to print "Hello " and a specified string*
+
+    *def print_hello(s):*
+
+8. Use the **Generate** button to submit the prompt and view the code that gets generated. The prompt included an indication of the programming language to be generated (Python 3), a comment describing the desired functionality, and the first part of the function definition. The **code-davinci** model should have completed the function with appropriate Python code.
+
+## Explore ChatGPT
+
+---
+*Assumes a few things:*
+
+1. *ChatGPT has been released and no longer requires the additional `?azureopenai_chatgpt_preview=true` URL parameter.*
+2. *There's a separate **ChatGPT** playground as there is in the preview (i.e. it doesn't all get merged into one playground)*
+
+---
+
+ChatGPT is a chatbot developed by OpenAI that can provide a wide variety of natural language responses in a conversational scenario. The ChatGPT model and APIs for using it are included in Azure OpenAI.
+
+1. In Azure OpenAI Studio, view the **Models** page; which lists all of the available models in your Azure OpenAI service resource.
+2. Select the **text-chat-davinci-002** model and use the **Deploy model** button to deploy it with the deployment name **chat-davinci**.
+3. After the model is deployed, in the **Playground** section, select the **ChatGPT** page.
+4. In the **Chat setup** section, in the **System message** box, replace the current text with the following:
+
+    *The system is an AI teacher that helps people learn about AI*
+
+4. Save the message to start a new session and set the behavioral context of the chat system.
+5. In the query box at the bottom of the page, enter the following text:
+
+    *What is artificial intelligence?*
+
+6. Use the **Send** button to submit the message and view the response.
+7. Review the response and then submit the following message to continue the conversation:
+
+    *How is it related to machine learning?*
+
+8. Review the response, noting that context from the previous interaction is retained (so the model understands that "it" refers to artificial intelligence).
+
+In this exercise, you've learned how to provision the Azure openAI service in an Azure subscription, and how to use Azure OpenAI Studio to deploy and explore models.
+
+As a developer, you can use the REST interface and language-specific APIs to create apps and services that consume Azure OpenAI models; enabling you to leverage generative AI models in your own applications. Coding against Azure OpenAI is covered in other exercises.
