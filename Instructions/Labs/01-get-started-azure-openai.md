@@ -54,7 +54,7 @@ The *playground* is a useful interface in Azure OpenAI Studio that you can use t
 
     The response consist of a summary of the original text. The summary should communicate the key points from the original text in less verbose language.
 
-5. Use the **Regenerate** button to resubmit the prompt, and note that the response may vary from the original one. The generative AI model produces new language each time it is called.
+5. Use the **Regenerate** button to resubmit the prompt, and note that the response may vary from the original one. A generative AI model can produce new language each time it is called.
 6. Under the summarized response, add a new line and enter the following text:
 
     *How are they formed?*
@@ -99,7 +99,7 @@ Up until now, you've based your prompts on examples that are provided in Azure O
     *\- Image classification involves training a machine learning model to classify images based on their contents. For example, in a traffic monitoring solution you might use an image classification model to classify images based on the type of vehicle they contain, such as taxis, buses, cyclists, and so on.*
 
     *\- Object detection machine learning models are trained to classify individual objects within an image, and identify their location with a bounding box. For example, a traffic monitoring solution might use object detection to identify the location of different classes of vehicle.*
-    
+
     *\- Semantic segmentation is an advanced machine learning technique in which individual pixels in the image are classified according to the object to which they belong. For example, a traffic monitoring solution might overlay traffic images with "mask" layers to highlight different vehicles using specific colors.*
 
 2. In the **Parameters** pane, set the following parameter values:
@@ -158,13 +158,13 @@ ChatGPT is a chatbot developed by OpenAI that can provide a wide variety of natu
 
     *The system is an AI teacher that helps people learn about AI*
 
-4. Save the message to start a new session and set the behavioral context of the chat system.
-5. In the query box at the bottom of the page, enter the following text:
+5. Save the message to start a new session and set the behavioral context of the chat system.
+6. In the query box at the bottom of the page, enter the following text:
 
     *What is artificial intelligence?*
 
-6. Use the **Send** button to submit the message and view the response.
-7. Review the response and then submit the following message to continue the conversation:
+7. Use the **Send** button to submit the message and view the response.
+8. Review the response and then submit the following message to continue the conversation:
 
     *How is it related to machine learning?*
 
