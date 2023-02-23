@@ -84,3 +84,35 @@ So far, you've seen how to use a model to summarize text. However, the generativ
 
 4. Use the **Generate** button to continue the dialog with the model and generate an appropriate categorization for the new news article.
 
+## Explore prompts and parameters
+
+Up until now, you've based your prompts on examples that are provided in Azure OpenAI Studio. Let's try something different.
+
+1. Replace all of the text in the prompt area with the following text:
+
+    *You are a teacher creating a test for your students.*
+
+    *Write three multiple choice questions based on the following text.*
+
+    *Most computer vision solutions are based on machine learning models that can be applied to visual input from cameras, videos, or images.*
+
+    *\- Image classification involves training a machine learning model to classify images based on their contents. For example, in a traffic monitoring solution you might use an image classification model to classify images based on the type of vehicle they contain, such as taxis, buses, cyclists, and so on.*
+
+    *\- Object detection machine learning models are trained to classify individual objects within an image, and identify their location with a bounding box. For example, a traffic monitoring solution might use object detection to identify the location of different classes of vehicle.*
+    
+    *\- Semantic segmentation is an advanced machine learning technique in which individual pixels in the image are classified according to the object to which they belong. For example, a traffic monitoring solution might overlay traffic images with "mask" layers to highlight different vehicles using specific colors.*
+
+2. In the **Parameters** pane, set the following parameter values:
+    - **Temperature**: 0
+    - **Max length (tokens)**: 500
+    - **Pre-response text**: Auto-generated questions. Validate before using in a test:
+3. Use the **Generate** button to submit the prompt and review the results, which should consist of the value in the *pre-response text* parameter followed by multiple-choice questions that a teacher could use to test students on the computer vision topics in the prompt. The total response should be smaller than the maximum length you specified as a parameter.
+
+    Observe the following about the prompt and parameters you used:
+
+    - The prompt includes natural language context information that instructs the model on how to behave. Specifically, it indicates that the model should assume the role of a teacher creating a test for students.
+    The parameters include *Temperature*, which controls the degree to which response generation includes an element of randomness. The value of **0** used in your submission minimizes randomness, resulting in more predictable responses.
+
+4. Use the **Regenerate** button to regenerate the response. It should be similar to the previous response.
+5. Change the **Temperature** parameter value to **0.9** and then use the **Regenerate** button to regenerate the response. This time the increased degree of randomness should result in a different response. However, the questions are more likely to contain inaccuracies than the ones in the previously generated response.
+
