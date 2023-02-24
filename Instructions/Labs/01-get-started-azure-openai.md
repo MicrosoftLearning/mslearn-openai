@@ -73,7 +73,7 @@ So far, you've seen how to use a model to summarize text. However, the generativ
 
 1. In the **GPT-3 Playground** page, ensure your **text-davinci** deployment is selected and then in the **Examples** list, select **Classify text**.
 
-    The classify text sample prompt describes the context for the model in the form of an instruction to classify a news article into one of a range of categories. It then provides the text for the news article (prefixed by *News article:*) and ends with *Classified category:*. The intention is that the model "completes" the final line of the prompt by predicting thre appropriate category.
+    The classify text sample prompt describes the context for the model in the form of an instruction to classify a news article into one of a range of categories. It then provides the text for the news article (prefixed by *News article:*) and ends with *Classified category:*. The intention is that the model "completes" the final line of the prompt by predicting the appropriate category.
 
 2. Use the **Generate** button to submit the prompt to the model and retrieve a response. The model should predict an appropriate category for the news article.
 3. Under the predicted category, add the following text:
