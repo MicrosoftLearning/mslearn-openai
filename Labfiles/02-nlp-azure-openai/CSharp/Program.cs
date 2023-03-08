@@ -1,10 +1,8 @@
 ﻿// Implicit using statements are included
 using System.Text;
+using System.Text.Json;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.Json;
-using System.Net.Http.Headers;
-using System.Web;
-using System.Text.Json;
 
 // Build a config object and retrieve user settings.
 IConfiguration config = new ConfigurationBuilder()
@@ -41,8 +39,8 @@ async Task GetSummaryFromOpenAI(string text)
             JsonSerializer.Serialize(new
             {
                 prompt = text,
-                max_tokens = 100,
-                temperature = .5
+                max_tokens = 60,
+                temperature = .8
             }),
             Encoding.UTF8,
             "application/json");
