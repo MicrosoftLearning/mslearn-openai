@@ -88,14 +88,31 @@ For this exercise, you'll complete some key parts of the application to enable u
     
 3. Update the configuration values to include the **endpoint** and **key** from the Azure OpenAI resource you created, as well as the model name that you deployed, `text-davinci`. Save the file.
 
-4. If you're using Python, you'll have to install the library for Azure OpenAI to use the SDK, as well as `dotenv-python`. If you're using C#, you can skip this step.
+4. Install the necessary packages for your preferred language
+
+    **C#**
+
+    ```bash
+    dotnet add package Azure.AI.OpenAI --prerelease
+    ```
+
+    **Python**
 
     ```bash
     pip install dotenv-python
     pip install openai
     ```
 
-    Then, navigate to the **Python** folder, select `test-openai-model.py`, and add the `openai` import.
+5. Navigate to your preferred language folder, select the code file, and add the necessary libraries.
+
+    **C#**
+
+    ```csharp
+    // Add Azure OpenAI package
+    using Azure.AI.OpenAI;
+    ```
+
+    **Python**
 
     ```python
     # Add OpenAI import
@@ -105,29 +122,29 @@ For this exercise, you'll complete some key parts of the application to enable u
 5. Open up the application code for your language and add the necessary code for building the request, which specifies the various parameters for your model such as `prompt` and `temperature`.
 
     **C#**
+
     ```csharp
-    // Set up HTTP client
-    client.BaseAddress = new Uri(oaiEndpoint);
-    client.DefaultRequestHeaders.Add("api-key", oaiKey);
-    
-    // Set up JSON request body, including parameters for Azure OpenAI model
-    using StringContent jsonContent = new(
-        JsonSerializer.Serialize(new
-        {
-            prompt = text,
-            max_tokens = 60,
-            temperature = .8
-        }),
-        Encoding.UTF8,
-        "application/json");
-    
-    // Send request to Azure OpenAI REST endpoint
-    using HttpResponseMessage response = await client.PostAsync(
-        "openai/deployments/" + oaiModelName + "/completions?api-version=2022-12-01",
-        jsonContent);
+    // Initialize the Azure OpenAI client
+    OpenAIClient client = new OpenAIClient(new Uri(oaiEndpoint), new AzureKeyCredential(oaiKey));
+
+    // Build completion options object
+    CompletionsOptions completionsOptions = new CompletionsOptions()
+    {
+        Prompt = {
+            text
+        },
+        MaxTokens = 60,
+        Temperature = 0.8f,
+    };
+
+    // Send request to Azure OpenAI model
+    Completions completionsResponse = client.GetCompletions(oaiModelName, completionsOptions);
+    string completion = completionsResponse.Choices[0].Text;
+    Console.WriteLine($"Chatbot: {completion}");
     ```
 
     **Python**
+
     ```python
     # Set OpenAI configuration settings
     openai.api_type = "azure"

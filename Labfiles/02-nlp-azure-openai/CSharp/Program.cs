@@ -3,6 +3,10 @@ using System.Text;
 using System.Text.Json;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.Json;
+using Azure;
+
+// Add Azure OpenAI package
+using Azure.AI.OpenAI;
 
 // Build a config object and retrieve user settings.
 IConfiguration config = new ConfigurationBuilder()
@@ -16,45 +20,33 @@ string? oaiModelName = config["AzureOAIModelName"];
 string textToSummarize = System.IO.File.ReadAllText(@"../text-files/sample-text.txt");
 
 // Generate summary from Azure OpenAI
-await GetSummaryFromOpenAI(textToSummarize);
+GetSummaryFromOpenAI(textToSummarize);
     
-async Task GetSummaryFromOpenAI(string text)  
+void GetSummaryFromOpenAI(string text)  
 {   
     Console.WriteLine("\nSending request for summary to Azure OpenAI endpoint...\n\n");
 
-    using (var client = new HttpClient())  
-    {  
-        // Verify that the user has set the required configuration settings.
-        if (oaiEndpoint == null || oaiKey == null || oaiModelName == null)
-        {
-            Console.WriteLine("Missing configuration settings.");
-            return;
-        }
+    if(string.IsNullOrEmpty(oaiEndpoint) || string.IsNullOrEmpty(oaiKey) || string.IsNullOrEmpty(oaiModelName) )
+    {
+        Console.WriteLine("Please check your appsettings.json file for missing or incorrect values.");
+        return;
+    }
 
-        // Set up HTTP client
-        client.BaseAddress = new Uri(oaiEndpoint);
-        client.DefaultRequestHeaders.Add("api-key", oaiKey);
-        
-        // Set up JSON request body, including parameters for Azure OpenAI model
-        using StringContent jsonContent = new(
-            JsonSerializer.Serialize(new
-            {
-                prompt = text,
-                max_tokens = 60,
-                temperature = .8
-            }),
-            Encoding.UTF8,
-            "application/json");
-        
-        // Send request to Azure OpenAI REST endpoint
-        using HttpResponseMessage response = await client.PostAsync(
-            "openai/deployments/" + oaiModelName + "/completions?api-version=2022-12-01",
-            jsonContent);
+    // Initialize the Azure OpenAI client
+    OpenAIClient client = new OpenAIClient(new Uri(oaiEndpoint), new AzureKeyCredential(oaiKey));
 
-        // Parse response
-        var jsonResponse = await response.Content.ReadAsStringAsync();
-        var results = JsonSerializer.Deserialize<dynamic>(jsonResponse);
-        Console.WriteLine("Summary of text: " + 
-            results?.GetProperty("choices")[0].GetProperty("text") + "\n");
-    } 
+    // Build completion options object
+    CompletionsOptions completionsOptions = new CompletionsOptions()
+    {
+        Prompt = {
+            text
+        },
+        MaxTokens = 60,
+        Temperature = 0.8f,
+    };
+
+    // Send request to Azure OpenAI model
+    Completions completionsResponse = client.GetCompletions(oaiModelName, completionsOptions);
+    string completion = completionsResponse.Choices[0].Text;
+    Console.WriteLine($"Chatbot: {completion}");
 }  
