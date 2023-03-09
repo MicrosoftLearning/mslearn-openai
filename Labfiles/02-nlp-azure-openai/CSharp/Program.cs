@@ -13,13 +13,15 @@ string? oaiKey = config["AzureOAIKey"];
 string? oaiModelName = config["AzureOAIModelName"];
 
 // Read sample text file into a string
-string textToSummarize = System.IO.File.ReadAllText(@"..\text-files\sample-text.txt");
+string textToSummarize = System.IO.File.ReadAllText(@"../text-files/sample-text.txt");
 
 // Generate summary from Azure OpenAI
 await GetSummaryFromOpenAI(textToSummarize);
     
 async Task GetSummaryFromOpenAI(string text)  
 {   
+    Console.WriteLine("\nSending request for summary to Azure OpenAI endpoint...\n\n");
+
     using (var client = new HttpClient())  
     {  
         // Verify that the user has set the required configuration settings.
@@ -30,7 +32,6 @@ async Task GetSummaryFromOpenAI(string text)
         }
 
         // Set up HTTP client
-        Console.WriteLine("\nSending request to Azure OpenAI endpoint...\n\n");
         client.BaseAddress = new Uri(oaiEndpoint);
         client.DefaultRequestHeaders.Add("api-key", oaiKey);
         
