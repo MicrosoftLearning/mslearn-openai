@@ -45,9 +45,9 @@ Azure OpenAI provides a web-based portal named **Azure OpenAI Studio**, that you
 The *playground* is a useful interface in Azure OpenAI Studio that you can use to experiment with your deployed models without needing to develop your own client application.
 
 1. In Azure OpenAI Studio, in the left pane under **Playground**, select **GPT-3**.
-2. In the **GPT-3 Playground** page, ensure your **text-davinci** deployment is selected and then in the **Examples** list, select **Summarize text**.
+2. In the **GPT-3 Playground** page, ensure your **text-davinci** deployment is selected and then in the **Examples** list, select **Summarize an article (abstractive)**.
 
-    The summarize text sample consists of a *prompt* that provides some text about neutron stars, ending with the line **Tl;dr:** (which stands for "too long, didn't read"). Ending the prompt with this keyword tells the model to summarize the preceding block of text.
+    The summarize text sample consists of a *prompt* that provides some text, starting with the line **Provide a summary of the text below...**. Starting the prompt with this sentence tells the model to summarize the following block of text.
 
 3. At the bottom of the page, note the number of *tokens* detected in the text. Tokens are the basic units of a prompt - essentially words or word-parts in the text.
 4. Use the **Generate** button to submit the prompt to the model and retrieve a response.
