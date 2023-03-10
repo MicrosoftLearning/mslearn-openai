@@ -57,14 +57,14 @@ The *playground* is a useful interface in Azure OpenAI Studio that you can use t
 5. Use the **Regenerate** button to resubmit the prompt, and note that the response may vary from the original one. A generative AI model can produce new language each time it is called.
 6. Under the summarized response, add a new line and enter the following text:
 
-    *How are they formed?*
+    *How has AI advanced?*
 
 7. Use the **Generate** button to submit the new prompt and review the response. The previous prompt and response provide context in an ongoing dialog with the model, enabling the model to generate an appropriate answer to your question.
 8. Replace the entire contents of the prompt with the following text:
 
+    *Provide a summary of the text below that captures its main idea.* 
     *Azure OpenAI Service provides REST API access to OpenAI's powerful language models including the GPT-3, Codex and Embeddings model series. These models can be easily adapted to your specific task including but not limited to content generation, summarization, semantic search, and natural language to code translation. Users can access the service through REST APIs, Python SDK, or our web-based interface in the Azure OpenAI Studio.*
 
-    *Tl;dr:*
 9. Use the **Generate** button to submit the new prompt and verify that the model summarizes the text appropriately.
 
 ## Use a model to classify text
