@@ -7,11 +7,11 @@ lab:
 
 Azure OpenAI Service brings the generative AI models developed by OpenAI to the Azure platform, enabling you to develop powerful AI solutions that benefit from the security, scalability, and integration of services provided by the Azure cloud platform. In this exercise, you'll learn how to get started with Azure OpenAI by provisioning the service as an Azure resource and using Azure OpenAI Studio to deploy and explore OpenAI models.
 
-This exercise will take approximately **30** minutes.
+This exercise takes approximately **30** minutes.
 
 ## Before you start
 
-You will need an Azure subscription that has been approved for access to the Azure OpenAI service.
+You'll need an Azure subscription that has been approved for access to the Azure OpenAI service.
 
 - To sign up for a free Azure subscription, visit [https://azure.microsoft.com/free](https://azure.microsoft.com/free).
 - To request access to the Azure OpenAI service, visit [https://aka.ms/oaiapply](https://aka.ms/oaiapply).
@@ -52,9 +52,9 @@ The *playground* is a useful interface in Azure OpenAI Studio that you can use t
 3. At the bottom of the page, note the number of *tokens* detected in the text. Tokens are the basic units of a prompt - essentially words or word-parts in the text.
 4. Use the **Generate** button to submit the prompt to the model and retrieve a response.
 
-    The response consist of a summary of the original text. The summary should communicate the key points from the original text in less verbose language.
+    The response consists of a summary of the original text. The summary should communicate the key points from the original text in less verbose language.
 
-5. Use the **Regenerate** button to resubmit the prompt, and note that the response may vary from the original one. A generative AI model can produce new language each time it is called.
+5. Use the **Regenerate** button to resubmit the prompt, and note that the response may vary from the original one. A generative AI model can produce new language each time it's called.
 6. Under the summarized response, add a new line and enter the following text:
 
     *How has AI advanced?*
@@ -119,15 +119,15 @@ Up until now, you've based your prompts on examples that are provided in Azure O
 
 ## Explore code-generation
 
-The **text-davinci** model you deployed is a good general model that can handle most tasks well. However, in some cases it is better to choose a model that is optimized for a specific kind of task. For example, Azure openAI models can be used to generate computer code rather than natural language text, and some models have been optimized for that task.
+The **text-davinci** model you deployed is a good general model that can handle most tasks well. However, in some cases it's better to choose a model that is optimized for a specific kind of task. For example, Azure openAI models can be used to generate computer code rather than natural language text, and some models have been optimized for that task.
 
 1. In Azure OpenAI Studio, view the **Models** page; which lists all of the available models in your Azure OpenAI service resource.
 2. Select the **code-davinci-002** model and use the **Deploy model** button to deploy it with the deployment name **code-davinci**.
-3. After deployment is complete, in Azure OpenAI Studio, view the **Deployments** page; which lists the models you have deployed.
+3. After deployment is complete, in Azure OpenAI Studio, view the **Deployments** page; which lists the models you've deployed.
 4. Select the **code-davinci** model deployment and use the **Open in Playground** button to open it in the playground.
 5. In the **GPT-3 Playground** page, ensure your **code-davinci** deployment is selected and then in the **Examples** list, select **Natural language to SQL**.
 
-    The natural language to SQL sample prompt provides detals of tables in a database, and a description of the query that is required followed by the `SELECT` keyword. The intention is for the model to complete the `SELECT` statement to create a query that satisfies the requirement.
+    The natural language to SQL sample prompt provides details of tables in a database, and a description of the query that is required followed by the `SELECT` keyword. The intention is for the model to complete the `SELECT` statement to create a query that satisfies the requirement.
 
 6. Use the **Generate** button to submit the prompt to the model and retrieve a response, which consists of a SQL `SELECT` query.
 7. Replace the entire prompt and response with the following new prompt:
@@ -141,15 +141,6 @@ The **text-davinci** model you deployed is a good general model that can handle 
 8. Use the **Generate** button to submit the prompt and view the code that gets generated. The prompt included an indication of the programming language to be generated (Python 3), a comment describing the desired functionality, and the first part of the function definition. The **code-davinci** model should have completed the function with appropriate Python code.
 
 ## Explore ChatGPT
-
----
-*Assumes a few things at publish-time:*
-
-1. *ChatGPT has been released and no longer requires the additional `?azureopenai_chatgpt_preview=true` URL parameter.*
-2. *There's a separate **ChatGPT** playground as there is in the preview (i.e. it doesn't all get merged into one playground)*
-3. ChatGPT is available in all regions where Azure openAI is available.
-
----
 
 ChatGPT is a chatbot developed by OpenAI that can provide a wide variety of natural language responses in a conversational scenario. The ChatGPT model and APIs for using it are included in Azure OpenAI.
 
