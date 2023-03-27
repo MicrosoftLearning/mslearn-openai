@@ -45,9 +45,9 @@ Azure OpenAI provides a web-based portal named **Azure OpenAI Studio**, that you
 The *playground* is a useful interface in Azure OpenAI Studio that you can use to experiment with your deployed models without needing to develop your own client application.
 
 1. In Azure OpenAI Studio, in the left pane under **Playground**, select **GPT-3**.
-2. In the **GPT-3 Playground** page, ensure your **text-davinci** deployment is selected and then in the **Examples** list, select **Summarize text**.
+2. In the **GPT-3 Playground** page, ensure your **text-davinci** deployment is selected and then in the **Examples** list, select **Summarize an article (abstractive)**.
 
-    The summarize text sample consists of a *prompt* that provides some text about neutron stars, ending with the line **Tl;dr:** (which stands for "too long, didn't read"). Ending the prompt with this keyword tells the model to summarize the preceding block of text.
+    The summarize text sample consists of a *prompt* that provides some text, starting with the line **Provide a summary of the text below...**. Starting the prompt with this sentence tells the model to summarize the following block of text.
 
 3. At the bottom of the page, note the number of *tokens* detected in the text. Tokens are the basic units of a prompt - essentially words or word-parts in the text.
 4. Use the **Generate** button to submit the prompt to the model and retrieve a response.
@@ -57,14 +57,15 @@ The *playground* is a useful interface in Azure OpenAI Studio that you can use t
 5. Use the **Regenerate** button to resubmit the prompt, and note that the response may vary from the original one. A generative AI model can produce new language each time it is called.
 6. Under the summarized response, add a new line and enter the following text:
 
-    *How are they formed?*
+    *How has AI advanced?*
 
 7. Use the **Generate** button to submit the new prompt and review the response. The previous prompt and response provide context in an ongoing dialog with the model, enabling the model to generate an appropriate answer to your question.
 8. Replace the entire contents of the prompt with the following text:
 
+    *Provide a summary of the text below that captures its main idea.* 
+    
     *Azure OpenAI Service provides REST API access to OpenAI's powerful language models including the GPT-3, Codex and Embeddings model series. These models can be easily adapted to your specific task including but not limited to content generation, summarization, semantic search, and natural language to code translation. Users can access the service through REST APIs, Python SDK, or our web-based interface in the Azure OpenAI Studio.*
 
-    *Tl;dr:*
 9. Use the **Generate** button to submit the new prompt and verify that the model summarizes the text appropriately.
 
 ## Use a model to classify text
@@ -73,7 +74,7 @@ So far, you've seen how to use a model to summarize text. However, the generativ
 
 1. In the **GPT-3 Playground** page, ensure your **text-davinci** deployment is selected and then in the **Examples** list, select **Classify text**.
 
-    The classify text sample prompt describes the context for the model in the form of an instruction to classify a news article into one of a range of categories. It then provides the text for the news article (prefixed by *News article:*) and ends with *Classified category:*. The intention is that the model "completes" the final line of the prompt by predicting thre appropriate category.
+    The classify text sample prompt describes the context for the model in the form of an instruction to classify a news article into one of a range of categories. It then provides the text for the news article (prefixed by *News article:*) and ends with *Classified category:*. The intention is that the model "completes" the final line of the prompt by predicting the appropriate category.
 
 2. Use the **Generate** button to submit the prompt to the model and retrieve a response. The model should predict an appropriate category for the news article.
 3. Under the predicted category, add the following text:
