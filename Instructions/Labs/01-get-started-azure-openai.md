@@ -157,20 +157,22 @@ ChatGPT is a chatbot developed by OpenAI that can provide a wide variety of natu
 
     Assistant: *There are three main types of artificial intelligence: Narrow or Weak AI (such as virtual assistants like Siri or Alexa, image recognition software, and spam filters), General or Strong AI (AI designed to be as intelligent as a human being. This type of AI does not currently exist and is purely theoretical), and Artificial Superintelligence (AI that is more intelligent than any human being and can perform tasks that are beyond human comprehension. This type of AI is also purely theoretical and has not yet been developed).*
 
+
 6. Save the changes to start a new session and set the behavioral context of the chat system.
+
 7. In the query box at the bottom of the page, enter the following text:
 
     *What is artificial intelligence?*
 
-7. Use the **Send** button to submit the message and view the response.
+8. Use the **Send** button to submit the message and view the response.
 
     > **Note**: You may receive a response that the API deployment is not yet ready. If so, wait for a few minutes and try again.
 
-8. Review the response and then submit the following message to continue the conversation:
+9. Review the response and then submit the following message to continue the conversation:
 
     *How is it related to machine learning?*
 
-8. Review the response, noting that context from the previous interaction is retained (so the model understands that "it" refers to artificial intelligence).
+10. Review the response, noting that context from the previous interaction is retained (so the model understands that "it" refers to artificial intelligence).
 
 In this exercise, you've learned how to provision the Azure openAI service in an Azure subscription, and how to use Azure OpenAI Studio to deploy and explore models.
 
