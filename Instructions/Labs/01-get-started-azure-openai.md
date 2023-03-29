@@ -147,12 +147,18 @@ ChatGPT is a chatbot developed by OpenAI that can provide a wide variety of natu
 1. In Azure OpenAI Studio, view the **Models** page; which lists all of the available models in your Azure OpenAI service resource.
 2. Select the **gpt-35-turbo** model and use the **Deploy model** button to deploy it with the deployment name **gpt-chat**.
 3. After the model is deployed, in the **Playground** section, select the **Chat** page, and ensure that the **gpt-chat** model is selected in the pane on the right.
-4. In the **Chat setup** section, in the **System message** box, replace the current text with the following:
+4. In the **Assistant setup** section, in the **System message** box, replace the current text with the following:
 
     *The system is an AI teacher that helps people learn about AI*
 
-5. Save the changes to start a new session and set the behavioral context of the chat system.
-6. In the query box at the bottom of the page, enter the following text:
+5. Below the **System message** box, click on **Add few-shot examples**, and enter the following message and response in the designated boxes:
+
+    User: *What are different types of artificial intelligence?*
+
+    Assistant: *There are three main types of artificial intelligence: Narrow or Weak AI (such as virtual assistants like Siri or Alexa, image recognition software, and spam filters), General or Strong AI (AI designed to be as intelligent as a human being. This type of AI does not currently exist and is purely theoretical), and Artificial Superintelligence (AI that is more intelligent than any human being and can perform tasks that are beyond human comprehension. This type of AI is also purely theoretical and has not yet been developed).*
+
+6. Save the changes to start a new session and set the behavioral context of the chat system.
+7. In the query box at the bottom of the page, enter the following text:
 
     *What is artificial intelligence?*
 
