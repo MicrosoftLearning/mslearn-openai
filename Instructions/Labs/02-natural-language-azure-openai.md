@@ -88,18 +88,20 @@ For this exercise, you'll complete some key parts of the application to enable u
     
 3. Update the configuration values to include the **endpoint** and **key** from the Azure OpenAI resource you created, as well as the model name that you deployed, `text-turbo`. Save the file.
 
-4. Install the necessary packages for your preferred language
+4. Navigate to the folder for your preferred language and install the necessary packages
 
     **C#**
 
     ```bash
+    cd CSharp
     dotnet add package Azure.AI.OpenAI --prerelease
     ```
 
     **Python**
 
     ```bash
-    pip install dotenv-python
+    cd Python
+    pip install python-dotenv
     pip install openai
     ```
 
@@ -130,7 +132,7 @@ For this exercise, you'll complete some key parts of the application to enable u
     // Build completion options object
     CompletionsOptions completionsOptions = new CompletionsOptions()
     {
-        Prompt = {
+        Prompts = {
             text
         },
         MaxTokens = 60,
