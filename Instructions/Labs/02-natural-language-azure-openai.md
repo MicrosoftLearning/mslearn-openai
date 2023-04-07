@@ -107,7 +107,7 @@ For this exercise, you'll complete some key parts of the application to enable u
 
 5. Navigate to your preferred language folder, select the code file, and add the necessary libraries.
 
-  **C#**
+    **C#**
 
     ```csharp
     // Add Azure OpenAI package
