@@ -57,15 +57,15 @@ To show how to integrate with an Azure OpenAI model, we'll use a short command-l
 
 5. Once the terminal starts, enter the following command to download the sample application and save it to a folder called `azure-openai`. If your Cloud Shell already has a folder named `azure-openai`, run `rm -r azure-openai -f ` before cloning the repo.
 
-    ```bash
-    git clone https://github.com/MicrosoftLearning/mslearn-openai azure-openai
-    ```
+  ```bash
+  git clone https://github.com/MicrosoftLearning/mslearn-openai azure-openai
+  ```
   
 6. The files are downloaded to a folder named **azure-openai**. Navigate to the lab files for this exercise using the following command.
 
-    ```bash
-    cd azure-openai/Labfiles/02-nlp-azure-openai
-    ```
+  ```bash
+  cd azure-openai/Labfiles/02-nlp-azure-openai
+  ```
 
 Applications for both C# and Python have been provided, as well as a sample text file you'll use to test the summarization. Both apps feature the same functionality, but achieve it differently; Python uses the available SDK, and C# uses REST since no SDK is currently available.
 
@@ -83,86 +83,86 @@ For this exercise, you'll complete some key parts of the application to enable u
 
 2. Open the configuration file for your language
 
-    - C#: `appsettings.json`
-    - Python: `.env`
+  - C#: `appsettings.json`
+  - Python: `.env`
     
 3. Update the configuration values to include the **endpoint** and **key** from the Azure OpenAI resource you created, as well as the model name that you deployed, `text-turbo`. Save the file.
 
 4. Navigate to the folder for your preferred language and install the necessary packages
 
-    **C#**
+  **C#**
 
-    ```bash
-    cd CSharp
-    dotnet add package Azure.AI.OpenAI --prerelease
-    ```
+  ```bash
+  cd CSharp
+  dotnet add package Azure.AI.OpenAI --prerelease
+  ```
 
-    **Python**
+  **Python**
 
-    ```bash
-    cd Python
-    pip install python-dotenv
-    pip install openai
-    ```
+  ```bash
+  cd Python
+  pip install python-dotenv
+  pip install openai
+  ```
 
 5. Navigate to your preferred language folder, select the code file, and add the necessary libraries.
 
-    **C#**
+  **C#**
 
-    ```csharp
-    // Add Azure OpenAI package
-    using Azure.AI.OpenAI;
-    ```
+  ```csharp
+  // Add Azure OpenAI package
+  using Azure.AI.OpenAI;
+  ```
 
-    **Python**
+  **Python**
 
-    ```python
-    # Add OpenAI import
-    import openai
-    ```
+  ```python
+  # Add OpenAI import
+  import openai
+  ```
 
 5. Open up the application code for your language and add the necessary code for building the request, which specifies the various parameters for your model such as `prompt` and `temperature`.
 
-    **C#**
+  **C#**
 
-    ```csharp
-    // Initialize the Azure OpenAI client
-    OpenAIClient client = new OpenAIClient(new Uri(oaiEndpoint), new AzureKeyCredential(oaiKey));
+  ```csharp
+  // Initialize the Azure OpenAI client
+  OpenAIClient client = new OpenAIClient(new Uri(oaiEndpoint), new AzureKeyCredential(oaiKey));
 
-    // Build completion options object
-    CompletionsOptions completionsOptions = new CompletionsOptions()
-    {
-        Prompts = {
-            text
-        },
-        MaxTokens = 60,
-        Temperature = 0.7f,
-    };
+  // Build completion options object
+  CompletionsOptions completionsOptions = new CompletionsOptions()
+  {
+      Prompts = {
+          text
+      },
+      MaxTokens = 60,
+      Temperature = 0.7f,
+  };
 
-    // Send request to Azure OpenAI model
-    Completions completionsResponse = client.GetCompletions(oaiModelName, completionsOptions);
-    string completion = completionsResponse.Choices[0].Text;
-    Console.WriteLine($"Chatbot: {completion}");
-    ```
+  // Send request to Azure OpenAI model
+  Completions completionsResponse = client.GetCompletions(oaiModelName, completionsOptions);
+  string completion = completionsResponse.Choices[0].Text;
+  Console.WriteLine($"Chatbot: {completion}");
+  ```
 
-    **Python**
+  **Python**
 
-    ```python
-    # Set OpenAI configuration settings
-    openai.api_type = "azure"
-    openai.api_base = azure_oai_endpoint
-    openai.api_version = "2022-12-01"
-    openai.api_key = azure_oai_key
+  ```python
+  # Set OpenAI configuration settings
+  openai.api_type = "azure"
+  openai.api_base = azure_oai_endpoint
+  openai.api_version = "2022-12-01"
+  openai.api_key = azure_oai_key
 
-    # Send request to Azure OpenAI model
-    print("Sending request for summary to Azure OpenAI endpoint...\n\n")
-    response = openai.Completion.create(
-        engine=azure_oai_model,
-        prompt=text,
-        temperature=0.7,
-        max_tokens=60
-    )
-    ```
+  # Send request to Azure OpenAI model
+  print("Sending request for summary to Azure OpenAI endpoint...\n\n")
+  response = openai.Completion.create(
+      engine=azure_oai_model,
+      prompt=text,
+      temperature=0.7,
+      max_tokens=60
+  )
+  ```
 
 ## Run your application
 
