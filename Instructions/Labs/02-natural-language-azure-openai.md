@@ -67,7 +67,7 @@ To show how to integrate with an Azure OpenAI model, we'll use a short command-l
     cd azure-openai/Labfiles/02-nlp-azure-openai
     ```
 
-Applications for both C# and Python have been provided, as well as a sample text file you'll use to test the summarization. Both apps feature the same functionality, but achieve it differently; Python uses the available SDK, and C# uses REST since no SDK is currently available.
+Applications for both C# and Python have been provided, as well as a sample text file you'll use to test the summarization. Both apps feature the same functionality.
 
 Open the built-in code editor, and observe the text file that you'll be summarizing with your model located at `text-files/sample-text.txt`. Use the following command to open the lab files in the code editor.
 
