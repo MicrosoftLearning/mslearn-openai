@@ -2,7 +2,6 @@ import os
 from dotenv import load_dotenv
 
 # Add OpenAI import
-import openai
 
 # Set to True to print the full response from OpenAI for each call
 printFullResponse = False
@@ -18,10 +17,7 @@ def main():
         azure_oai_model = os.getenv("AZURE_OAI_MODEL")
         
         # Set OpenAI configuration settings
-        openai.api_type = "azure"
-        openai.api_base = azure_oai_endpoint
-        openai.api_version = "2023-03-15-preview"
-        openai.api_key = azure_oai_key
+        
 
         while True:
             print('1: Basic prompt (no prompt engineering)\n' +
@@ -51,25 +47,16 @@ def call_openai_model(messages, model):
     # In this sample, each file contains both the system and user messages
     # First, read them into variables, strip whitespace, then build the messages array
     file = open(file=messages, encoding="utf8")
-    systemMessage = file.readline().split(':', 1)[1].strip()
-    userMessage = file.readline().split(':', 1)[1].strip()
+    system_message = file.readline().split(':', 1)[1].strip()
+    user_message = file.readline().split(':', 1)[1].strip()
 
     # Print the messages to the console
-    print("System message: " + systemMessage)
-    print("User message: " + userMessage)
+    print("System message: " + system_message)
+    print("User message: " + user_message)
 
-    messages =[
-        {"role": "system", "content": systemMessage},
-        {"role": "user", "content": userMessage},
-    ]
+    # Build the messages array
+    
 
-    # Call the Azure OpenAI model
-    response = openai.ChatCompletion.create(
-        engine=model,
-        messages=messages,
-        temperature=0.7,
-        max_tokens=800
-    )
 
     if printFullResponse:
         print(response)
