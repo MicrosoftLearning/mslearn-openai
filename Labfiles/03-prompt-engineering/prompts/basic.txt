@@ -1,0 +1,2 @@
+System:You are an AI assistant
+Prompt:Write an intro for a new wildlife Rescue
