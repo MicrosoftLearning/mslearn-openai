@@ -16,7 +16,7 @@ string? oaiKey = config["AzureOAIKey"];
 string? oaiModelName = config["AzureOAIModelName"];
 
 string command;
-string printFullResponse = false;
+bool printFullResponse = false;
 
 do {
     Console.WriteLine("\n1: Basic prompt (no prompt engineering)\n" +

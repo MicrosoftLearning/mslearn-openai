@@ -48,7 +48,7 @@ For this exercise, you'll complete some key parts of the application to enable u
 
     ```bash
     cd CSharp
-    dotnet add package Azure.AI.OpenAI --prerelease
+    dotnet add package Azure.AI.OpenAI --version 1.0.0-beta.5
     ```
 
     **Python**
@@ -116,6 +116,9 @@ For this exercise, you'll complete some key parts of the application to enable u
         oaiModelName,
         chatCompletionsOptions
     );
+
+    ChatCompletions completions = response.Value;
+    string completion = completions.Choices[0].Message.Content;
     ```
 
     **Python**
@@ -144,7 +147,7 @@ Now that your app has been configured, run it to send your request to your model
 1. Run the application, and expand the terminal to take up most of your browser window.
 
     - **C#**: `dotnet run`
-    - **Python**: `python test-openai-model.py`
+    - **Python**: `python prompt-engineering.py`
 
 1. Choose option 1 for the most basic prompt.
 1. Observe the prompt input, and generated output. The AI model will likely produce a good generic introduction to a wildlife rescue.
