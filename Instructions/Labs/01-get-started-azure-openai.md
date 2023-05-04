@@ -40,12 +40,12 @@ Azure OpenAI provides a web-based portal named **Azure OpenAI Studio**, that you
 
 > **Note**: Azure OpenAI includes multiple models, each optimized for a different balance of capabilities and performance. In this exercise, you'll start with the **Davinci** model from the **GPT-3** family of text generation models. **text-davinci-003** is a good general model for summarizing and generating natural language. For more information about the available models in Azure OpenAI, see [Models](https://learn.microsoft.com/azure/cognitive-services/openai/concepts/models) in the Azure OpenAI documentation.
 
-## Explore a model in the playground
+## Explore a model in the Completions playground
 
-The *playground* is a useful interface in Azure OpenAI Studio that you can use to experiment with your deployed models without needing to develop your own client application.
+*Playgrounds* are useful interfaces in Azure OpenAI Studio that you can use to experiment with your deployed models without needing to develop your own client application.
 
-1. In Azure OpenAI Studio, in the left pane under **Playground**, select **GPT-3**.
-2. In the **GPT-3 Playground** page, ensure your **text-davinci** deployment is selected and then in the **Examples** list, select **Summarize an article (abstractive)**.
+1. In Azure OpenAI Studio, in the left pane under **Playground**, select **Completions**.
+2. In the **Completions** page, ensure your **text-davinci** deployment is selected and then in the **Examples** list, select **Summarize an article (abstractive)**.
 
     The summarize text sample consists of a *prompt* that provides some text, starting with the line **Provide a summary of the text below...**. Starting the prompt with this sentence tells the model to summarize the following block of text.
 
@@ -64,7 +64,7 @@ The *playground* is a useful interface in Azure OpenAI Studio that you can use t
 
     *Provide a summary of the text below that captures its main idea.* 
     
-    *Azure OpenAI Service provides REST API access to OpenAI's powerful language models including the GPT-3, Codex and Embeddings model series. These models can be easily adapted to your specific task including but not limited to content generation, summarization, semantic search, and natural language to code translation. Users can access the service through REST APIs, Python SDK, or our web-based interface in the Azure OpenAI Studio.*
+    *Azure OpenAI Service provides REST API access to OpenAI's powerful language models including the GPT-4, Codex and Embeddings model series. These models can be easily adapted to your specific task including but not limited to content generation, summarization, semantic search, and natural language to code translation. Users can access the service through REST APIs, Python SDK, or our web-based interface in the Azure OpenAI Studio.*
 
 9. Use the **Generate** button to submit the new prompt and verify that the model summarizes the text appropriately.
 
@@ -72,7 +72,7 @@ The *playground* is a useful interface in Azure OpenAI Studio that you can use t
 
 So far, you've seen how to use a model to summarize text. However, the generative models in Azure OpenAI can support a range of different types of task. Let's explore a different example; *text classification*.
 
-1. In the **GPT-3 Playground** page, ensure your **text-davinci** deployment is selected and then in the **Examples** list, select **Classify text**.
+1. In the **Completions** page, ensure your **text-davinci** deployment is selected and then in the **Examples** list, select **Classify text**.
 
     The classify text sample prompt describes the context for the model in the form of an instruction to classify a news article into one of a range of categories. It then provides the text for the news article (prefixed by *News article:*) and ends with *Classified category:*. The intention is that the model "completes" the final line of the prompt by predicting the appropriate category.
 
@@ -125,7 +125,7 @@ The **text-davinci** model you deployed is a good general model that can handle 
 2. Select the **code-davinci-002** model and use the **Deploy model** button to deploy it with the deployment name **code-davinci**.
 3. After deployment is complete, in Azure OpenAI Studio, view the **Deployments** page; which lists the models you've deployed.
 4. Select the **code-davinci** model deployment and use the **Open in Playground** button to open it in the playground.
-5. In the **GPT-3 Playground** page, ensure your **code-davinci** deployment is selected and then in the **Examples** list, select **Natural language to SQL**.
+5. In the **Completions** page, ensure your **code-davinci** deployment is selected and then in the **Examples** list, select **Natural language to SQL**.
 
     The natural language to SQL sample prompt provides details of tables in a database, and a description of the query that is required followed by the `SELECT` keyword. The intention is for the model to complete the `SELECT` statement to create a query that satisfies the requirement.
 
