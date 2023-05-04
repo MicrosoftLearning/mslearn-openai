@@ -13,7 +13,7 @@ Imagine you are trying to send out information for a new wildlife rescue, and wa
 
 This exercise will take approximately **30** minutes.
 
-[!INCLUDE [Initial setup](includes/initial-setup.md)]
+{% include_relative includes/initial-setup.md %}
 
 The files are downloaded to a folder named **azure-openai**. Navigate to the lab files for this exercise using the following command.
 
