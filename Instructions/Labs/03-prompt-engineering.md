@@ -17,9 +17,9 @@ This exercise will take approximately **30** minutes.
 
 The files are downloaded to a folder named **azure-openai**. Navigate to the lab files for this exercise using the following command.
 
-    ```bash
-    cd azure-openai/Labfiles/03-prompt-engineering
-    ```
+```bash
+cd azure-openai/Labfiles/03-prompt-engineering
+```
 
 Applications for both C# and Python have been provided, as well as a text files that provide the prompts. Both apps feature the same functionality.
 
@@ -149,13 +149,13 @@ Now that your app has been configured, run it to send your request to your model
     - **C#**: `dotnet run`
     - **Python**: `python prompt-engineering.py`
 
-1. Choose option 1 for the most basic prompt.
+1. Choose option **1** for the most basic prompt.
 1. Observe the prompt input, and generated output. The AI model will likely produce a good generic introduction to a wildlife rescue.
-1. Next, choose option 2 to give it a prompt asking for an intro email, along with some details about the wildlife rescue.
+1. Next, choose option **2** to give it a prompt asking for an intro email, along with some details about the wildlife rescue.
 1. Observe the prompt input, and generated output. This time, you'll likely see the format of an email with the specific animals included, as well as the call for donations.
-1. Next, choose option 3 to ask for an email similar to above, but with a formatted table with additional animals included.
+1. Next, choose option **3** to ask for an email similar to above, but with a formatted table with additional animals included.
 1. Observe the prompt input, and generated output. This time, you'll likely see a similar email with text formatted in a specific way (in this case, a table near the end) demonstrating how the generative AI models can format output when requested.
-1. Next, choose option 4 to ask for a similar email, but this time specifying different tone in the system message.
+1. Next, choose option **4** to ask for a similar email, but this time specifying different tone in the system message.
 1. Observe the prompt input, and generated output. This time you'll likely see the email in a similar format, but with a much less informal tone. You'll likely even see jokes included!
 
 Increasing the temperature often causes the response to vary, even when provided the same prompt, due to the increased randomness. You can run it multiple times with different temperature or top_p values to see how that impacts the response to the same prompt.
