@@ -13,21 +13,7 @@ Imagine you are trying to send out information for a new wildlife rescue, and wa
 
 This exercise will take approximately **25** minutes.
 
-{% include_relative includes/initial-setup.md %}
-
-The files are downloaded to a folder named **azure-openai**. Navigate to the lab files for this exercise using the following command.
-
-```bash
-cd azure-openai/Labfiles/03-prompt-engineering
-```
-
-Applications for both C# and Python have been provided, as well as a text files that provide the prompts. Both apps feature the same functionality.
-
-Open the built-in code editor, and you can observe the prompt files that you'll be using in `prompts`. Use the following command to open the lab files in the code editor.
-
-```bash
-code .
-```
+{% include_relative includes/initial-setup.md folder="03-prompt-engineering" %}
 
 ## Configure your application
 

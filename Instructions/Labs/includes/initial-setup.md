@@ -44,8 +44,22 @@ To show how to integrate with an Azure OpenAI model, we'll use a short command-l
 
 4. Make sure the type of shell indicated on the top left of the Cloud Shell pane is switched to *Bash*. If it's *PowerShell*, switch to *Bash* by using the drop-down menu.
 
-5. Once the terminal starts, enter the following command to download the sample application and save it to a folder called `azure-openai`. If your Cloud Shell already has a folder named `azure-openai`, run `rm -r azure-openai -f ` before cloning the repo.
+5. Once the terminal starts, enter the following command to download the sample application and save it to a folder called `azure-openai`.
 
     ```bash
+    rm -r azure-openai -f
     git clone https://github.com/MicrosoftLearning/mslearn-openai azure-openai
     ```
+6. The files are downloaded to a folder named **azure-openai**. Navigate to the lab files for this exercise using the following command.
+
+```bash
+cd azure-openai/Labfiles/{{include.folder}}
+```
+
+Applications for both C# and Python have been provided, as well as a text files that provide the prompts. Both apps feature the same functionality.
+
+Open the built-in code editor, and you can observe the prompt files that you'll be using in `prompts`. Use the following command to open the lab files in the code editor.
+
+```bash
+code .
+```
