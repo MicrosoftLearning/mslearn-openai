@@ -108,7 +108,7 @@ Before using your app, examine how prompt engineering improves the model respons
 
 1. This time the model should respond with an appropriate classification, even without instructions.
 
-{% include_relative includes/init-cloudshellp.md folder="03-prompt-engineering" %}
+{% include_relative includes/init-cloudshell.md folder="03-prompt-engineering" %}
 
 ## Configure your application
 
