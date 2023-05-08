@@ -39,7 +39,7 @@ Before using your app, examine how prompt engineering improves the model respons
     # 3. Combine them randomly into a list of 25 animal and name pairs
     ```
 
-1. The model will likely respond with complete python code doing what the comments requested.
+1. The model should correctly respond with complete python code doing what the comments requested.
 1. Next we'll see the impact of few shot prompting when attempting to classify articles. Return to the system message, and enter `You are a helpful AI assistant` again, and save your changes. This will create a new chat session.
 1. Send the following prompt to the model.
 
@@ -107,6 +107,7 @@ Before using your app, examine how prompt engineering improves the model respons
     ```
 
 1. This time the model should respond with an appropriate classification, even without instructions.
+
 
 {% include_relative includes/init-cloudshell.md folder="03-prompt-engineering" %}
 
