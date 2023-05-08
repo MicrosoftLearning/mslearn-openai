@@ -13,7 +13,102 @@ Imagine you are trying to send out information for a new wildlife rescue, and wa
 
 This exercise will take approximately **25** minutes.
 
-{% include_relative includes/initial-setup.md folder="03-prompt-engineering" %}
+{% include_relative includes/provision-deploy.md %}
+
+## Apply prompt engineering in chat playground
+
+Before using your app, examine how prompt engineering improves the model response in the playground. In this first example, imagine you are trying to write a python app of animals with fun names.
+
+1. In [Azure OpenAI Studio](https://oai.azure.com/?azure-portal=true), navigate to the **Chat** playground in the left pane.
+1. In the **Assistant setup** section at the top, enter `You are a helpful AI assistant` as the system message.
+1. In the **Chat session** section, enter the following prompt and press *Enter*.
+
+    ```code
+    1. Create a list of animals
+    2. Create a list of whimsical names for those animals
+    3. Combine them randomly into a list of 25 animal and name pairs
+    ```
+
+1. The model will likely respond with an answer to satisfy the prompt, split into a numbered list. This is a good response, but not what we're looking for.
+1. Next, update the system message to include instructions `You are an AI assistant helping write python code. Complete the app based on provided comments`. Click **Save changes**
+1. Format the instructions as python comments. Send the following prompt to the model.
+
+    ```code
+    # 1. Create a list of animals
+    # 2. Create a list of whimsical names for those animals
+    # 3. Combine them randomly into a list of 25 animal and name pairs
+    ```
+
+1. The model will likely respond with complete python code doing what the comments requested.
+1. Next we'll see the impact of few shot prompting when attempting to classify articles. Return to the system message, and enter `You are a helpful AI assistant` again, and save your changes. This will create a new chat session.
+1. Send the following prompt to the model.
+
+    ```code
+    Severe drought likely in California
+
+    Millions of California residents are bracing for less water and dry lawns as drought threatens to leave a large swath of the region with a growing water shortage.
+    
+    In a remarkable indication of drought severity, officials in Southern California have declared a first-of-its-kind action limiting outdoor water use to one day a week for nearly 8 million residents.
+    
+    Much remains to be determined about how daily life will change as people adjust to a drier normal. But officials are warning the situation is dire and could lead to even more severe limits later in the year.
+    ```
+
+1. The response will likely be some information about drought in California. While not a bad response, it's not the classification we're looking for.
+1. In the **Assistant setup** section near the system message, select the **Add an example** button. Add the following example.
+
+    **User:**
+
+    ```code
+    New York Baseballers Wins Big Against Chicago
+    
+    New York Baseballers mounted a big 5-0 shutout against the Chicago Cyclones last night, solidifying their win with a 3 run homerun late in the bottom of the 7th inning.
+    
+    Pitcher Mario Rogers threw 96 pitches with only two hits for New York, marking his best performance this year.
+    
+    The Chicago Cyclones' two hits came in the 2nd and the 5th innings, but were unable to get the runner home to score.
+    ```
+
+    **Assistant:**
+
+    ```code
+    Sports
+    ```
+
+1. Add another example with the following text.
+
+    **User:**
+
+    ```code
+    Joyous moments at the Oscars
+
+    The Oscars this past week where quite something!
+    
+    Though a certain scandal might have stolen the show, this year's Academy Awards were full of moments that filled us with joy and even moved us to tears.
+    These actors and actresses delivered some truly emotional performances, along with some great laughs, to get us through the winter.
+    From Robin Kline's history-making win to a full performance by none other than Casey Jensen herself, don't miss tomorrows rerun of all the festivities.
+    ```
+
+    **Assistant:**
+
+    ```code
+    Entertainment
+    ```
+
+1. Save those changed to the assistant setup, and send the same prompt about California drought, provided here again for convenience.
+
+    ```code
+    Severe drought likely in California
+
+    Millions of California residents are bracing for less water and dry lawns as drought threatens to leave a large swath of the region with a growing water shortage.
+    
+    In a remarkable indication of drought severity, officials in Southern California have declared a first-of-its-kind action limiting outdoor water use to one day a week for nearly 8 million residents.
+    
+    Much remains to be determined about how daily life will change as people adjust to a drier normal. But officials are warning the situation is dire and could lead to even more severe limits later in the year.
+    ```
+
+1. This time the model should respond with an appropriate classification, even without instructions.
+
+{% include_relative includes/init-cloudshellp.md folder="03-prompt-engineering" %}
 
 ## Configure your application
 
@@ -21,14 +116,14 @@ For this exercise, you'll complete some key parts of the application to enable u
 
 1. In the code editor, expand the **CSharp** or **Python** folder, depending on your language preference.
 
-2. Open the configuration file for your language
+2. Open the configuration file for your language.
 
     - C#: `appsettings.json`
     - Python: `.env`
     
 3. Update the configuration values to include the **endpoint** and **key** from the Azure OpenAI resource you created, as well as the model name that you deployed, `text-turbo`. Save the file.
 
-4. Navigate to the folder for your preferred language and install the necessary packages
+4. Navigate to the folder for your preferred language and install the necessary packages.
 
     **C#**
 
@@ -129,6 +224,8 @@ For this exercise, you'll complete some key parts of the application to enable u
 
 Now that your app has been configured, run it to send your request to your model and observe the response. You'll notice the only difference between the different options is the content of the prompt, all other parameters (such as token count and temperature) remain the same for each request.
 
+Each prompt is displayed in the console as it sends for you to see how differences in prompts produce different responses.
+
 1. In the Cloud Shell bash terminal, navigate to the folder for your preferred language.
 1. Run the application, and expand the terminal to take up most of your browser window.
 
@@ -150,4 +247,4 @@ If you would like to see the full response from Azure OpenAI, you can set the `p
 
 ## Clean up
 
-When you're done with your Azure OpenAI resource, remember to delete the deployment or the entire resource in the [Azure portal](https://portal.azure.com?azure-portal=true).
+When you're done with your Azure OpenAI resource, remember to delete the deployment or the entire resource in the [Azure portal](https://portal.azure.com/?azure-portal=true).
