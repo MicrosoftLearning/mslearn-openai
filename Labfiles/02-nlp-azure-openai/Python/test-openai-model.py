@@ -19,9 +19,6 @@ def main():
         
         # Set OpenAI configuration settings
         
-        
-
-        print("Summary of text: " + response.choices[0].text + "\n")
 
     except Exception as ex:
         print(ex)

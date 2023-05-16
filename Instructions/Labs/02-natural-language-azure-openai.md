@@ -55,9 +55,10 @@ To show how to integrate with an Azure OpenAI model, we'll use a short command-l
 
 4. Make sure the type of shell indicated on the top left of the Cloud Shell pane is switched to *Bash*. If it's *PowerShell*, switch to *Bash* by using the drop-down menu.
 
-5. Once the terminal starts, enter the following command to download the sample application and save it to a folder called `azure-openai`. If your Cloud Shell already has a folder named `azure-openai`, run `rm -r azure-openai -f` before cloning the repo.
+5. Once the terminal starts, enter the following command to download the sample application and save it to a folder called `azure-openai`.
 
     ```bash
+    rm -r azure-openai -f
     git clone https://github.com/MicrosoftLearning/mslearn-openai azure-openai
     ```
   
@@ -130,19 +131,24 @@ For this exercise, you'll complete some key parts of the application to enable u
     OpenAIClient client = new OpenAIClient(new Uri(oaiEndpoint), new AzureKeyCredential(oaiKey));
 
     // Build completion options object
-    CompletionsOptions completionsOptions = new CompletionsOptions()
+    ChatCompletionsOptions chatCompletionsOptions = new ChatCompletionsOptions()
     {
-        Prompts = {
-          text
+        Messages =
+        {
+            new ChatMessage(ChatRole.System, "You are a helpful assistant. Summarize the following text in 60 words or less."),
+            new ChatMessage(ChatRole.User, text),
         },
-        MaxTokens = 60,
+        MaxTokens = 120,
         Temperature = 0.7f,
     };
 
     // Send request to Azure OpenAI model
-    Completions completionsResponse = client.GetCompletions(oaiModelName, completionsOptions);
-    string completion = completionsResponse.Choices[0].Text;
-    Console.WriteLine($"Chatbot: {completion}");
+    ChatCompletions response = client.GetChatCompletions(
+        deploymentOrModelName: oaiModelName, 
+        chatCompletionsOptions);
+    string completion = response.Choices[0].Message.Content;
+
+    Console.WriteLine("Summary: " + completion + "\n");
     ```
 
     **Python**
@@ -151,17 +157,22 @@ For this exercise, you'll complete some key parts of the application to enable u
     # Set OpenAI configuration settings
     openai.api_type = "azure"
     openai.api_base = azure_oai_endpoint
-    openai.api_version = "2022-12-01"
+    openai.api_version = "2023-03-15-preview"
     openai.api_key = azure_oai_key
 
     # Send request to Azure OpenAI model
     print("Sending request for summary to Azure OpenAI endpoint...\n\n")
-    response = openai.Completion.create(
+    response = openai.ChatCompletion.create(
         engine=azure_oai_model,
-        prompt=text,
         temperature=0.7,
-        max_tokens=60
+        max_tokens=120,
+        messages=[
+            {"role": "system", "content": "You are a helpful assistant. Summarize the following text in 60 words or less."},
+            {"role": "user", "content": text}
+        ]
     )
+
+    print("Summary: " + response.choices[0].message.content + "\n")
     ```
 
 ## Run your application
