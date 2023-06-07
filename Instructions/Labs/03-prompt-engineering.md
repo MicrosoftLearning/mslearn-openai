@@ -54,9 +54,9 @@ Before using your app, examine how prompt engineering improves the model respons
 1. In the **Chat session** section, enter the following prompt and press *Enter*.
 
     ```code
-    1. Create a list of animals
-    2. Create a list of whimsical names for those animals
-    3. Combine them randomly into a list of 25 animal and name pairs
+   1. Create a list of animals
+   2. Create a list of whimsical names for those animals
+   3. Combine them randomly into a list of 25 animal and name pairs
     ```
 
 1. The model will likely respond with an answer to satisfy the prompt, split into a numbered list. This is a good response, but not what we're looking for.
@@ -64,9 +64,9 @@ Before using your app, examine how prompt engineering improves the model respons
 1. Format the instructions as python comments. Send the following prompt to the model.
 
     ```code
-    # 1. Create a list of animals
-    # 2. Create a list of whimsical names for those animals
-    # 3. Combine them randomly into a list of 25 animal and name pairs
+   # 1. Create a list of animals
+   # 2. Create a list of whimsical names for those animals
+   # 3. Combine them randomly into a list of 25 animal and name pairs
     ```
 
 1. The model should correctly respond with complete python code doing what the comments requested.
@@ -74,13 +74,13 @@ Before using your app, examine how prompt engineering improves the model respons
 1. Send the following prompt to the model.
 
     ```code
-    Severe drought likely in California
+   Severe drought likely in California
 
-    Millions of California residents are bracing for less water and dry lawns as drought threatens to leave a large swath of the region with a growing water shortage.
-    
-    In a remarkable indication of drought severity, officials in Southern California have declared a first-of-its-kind action limiting outdoor water use to one day a week for nearly 8 million residents.
-    
-    Much remains to be determined about how daily life will change as people adjust to a drier normal. But officials are warning the situation is dire and could lead to even more severe limits later in the year.
+   Millions of California residents are bracing for less water and dry lawns as drought threatens to leave a large swath of the region with a growing water shortage.
+   
+   In a remarkable indication of drought severity, officials in Southern California have declared a first-of-its-kind action limiting outdoor water use to one day a week for nearly 8 million residents.
+   
+   Much remains to be determined about how daily life will change as people adjust to a drier normal. But officials are warning the situation is dire and could lead to even more severe limits later in the year.
     ```
 
 1. The response will likely be some information about drought in California. While not a bad response, it's not the classification we're looking for.
