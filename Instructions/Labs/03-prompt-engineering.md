@@ -89,19 +89,19 @@ Before using your app, examine how prompt engineering improves the model respons
     **User:**
 
     ```code
-    New York Baseballers Wins Big Against Chicago
-    
-    New York Baseballers mounted a big 5-0 shutout against the Chicago Cyclones last night, solidifying their win with a 3 run homerun late in the bottom of the 7th inning.
-    
-    Pitcher Mario Rogers threw 96 pitches with only two hits for New York, marking his best performance this year.
-    
-    The Chicago Cyclones' two hits came in the 2nd and the 5th innings, but were unable to get the runner home to score.
+   New York Baseballers Wins Big Against Chicago
+   
+   New York Baseballers mounted a big 5-0 shutout against the Chicago Cyclones last night, solidifying their win with a 3 run homerun late in the bottom of the 7th inning.
+   
+   Pitcher Mario Rogers threw 96 pitches with only two hits for New York, marking his best performance this year.
+   
+   The Chicago Cyclones' two hits came in the 2nd and the 5th innings, but were unable to get the runner home to score.
     ```
 
     **Assistant:**
 
     ```code
-    Sports
+   Sports
     ```
 
 1. Add another example with the following text.
@@ -109,31 +109,31 @@ Before using your app, examine how prompt engineering improves the model respons
     **User:**
 
     ```code
-    Joyous moments at the Oscars
+   Joyous moments at the Oscars
 
-    The Oscars this past week where quite something!
-    
-    Though a certain scandal might have stolen the show, this year's Academy Awards were full of moments that filled us with joy and even moved us to tears.
-    These actors and actresses delivered some truly emotional performances, along with some great laughs, to get us through the winter.
-    From Robin Kline's history-making win to a full performance by none other than Casey Jensen herself, don't miss tomorrows rerun of all the festivities.
+   The Oscars this past week where quite something!
+   
+   Though a certain scandal might have stolen the show, this year's Academy Awards were full of moments that filled us with joy and even moved us to tears.
+   These actors and actresses delivered some truly emotional performances, along with some great laughs, to get us through the winter.
+   From Robin Kline's history-making win to a full performance by none other than Casey Jensen herself, don't miss tomorrows rerun of all the festivities.
     ```
 
     **Assistant:**
 
     ```code
-    Entertainment
+   Entertainment
     ```
 
 1. Save those changed to the assistant setup, and send the same prompt about California drought, provided here again for convenience.
 
     ```code
-    Severe drought likely in California
+   Severe drought likely in California
 
-    Millions of California residents are bracing for less water and dry lawns as drought threatens to leave a large swath of the region with a growing water shortage.
-    
-    In a remarkable indication of drought severity, officials in Southern California have declared a first-of-its-kind action limiting outdoor water use to one day a week for nearly 8 million residents.
-    
-    Much remains to be determined about how daily life will change as people adjust to a drier normal. But officials are warning the situation is dire and could lead to even more severe limits later in the year.
+   Millions of California residents are bracing for less water and dry lawns as drought threatens to leave a large swath of the region with a growing water shortage.
+   
+   In a remarkable indication of drought severity, officials in Southern California have declared a first-of-its-kind action limiting outdoor water use to one day a week for nearly 8 million residents.
+   
+   Much remains to be determined about how daily life will change as people adjust to a drier normal. But officials are warning the situation is dire and could lead to even more severe limits later in the year.
     ```
 
 1. This time the model should respond with an appropriate classification, even without instructions.
@@ -155,14 +155,14 @@ To show how to integrate with an Azure OpenAI model, we'll use a short command-l
 5. Once the terminal starts, enter the following command to download the sample application and save it to a folder called `azure-openai`.
 
     ```bash
-    rm -r azure-openai -f
-    git clone https://github.com/MicrosoftLearning/mslearn-openai azure-openai
+   rm -r azure-openai -f
+   git clone https://github.com/MicrosoftLearning/mslearn-openai azure-openai
     ```
 
 6. The files are downloaded to a folder named **azure-openai**. Navigate to the lab files for this exercise using the following command.
 
     ```bash
-    cd azure-openai/Labfiles/03-prompt-engineering
+   cd azure-openai/Labfiles/03-prompt-engineering
     ```
 
     Applications for both C# and Python have been provided, as well as a text files that provide the prompts. Both apps feature the same functionality.
@@ -170,7 +170,7 @@ To show how to integrate with an Azure OpenAI model, we'll use a short command-l
     Open the built-in code editor, and you can observe the prompt files that you'll be using in `prompts`. Use the following command to open the lab files in the code editor.
 
     ```bash
-    code .
+   code .
     ```
 
 ## Configure your application
@@ -191,16 +191,16 @@ For this exercise, you'll complete some key parts of the application to enable u
     **C#**
 
     ```bash
-    cd CSharp
-    dotnet add package Azure.AI.OpenAI --version 1.0.0-beta.5
+   cd CSharp
+   dotnet add package Azure.AI.OpenAI --version 1.0.0-beta.5
     ```
 
     **Python**
 
     ```bash
-    cd Python
-    pip install python-dotenv
-    pip install openai
+   cd Python
+   pip install python-dotenv
+   pip install openai
     ```
 
 5. Navigate to your preferred language folder, select the code file, and add the necessary libraries.
@@ -208,15 +208,15 @@ For this exercise, you'll complete some key parts of the application to enable u
     **C#**
 
     ```csharp
-    // Add Azure OpenAI package
-    using Azure.AI.OpenAI;
+   // Add Azure OpenAI package
+   using Azure.AI.OpenAI;
     ```
 
     **Python**
 
     ```python
-    # Add OpenAI import
-    import openai
+   # Add OpenAI import
+   import openai
     ```
 
 5. Open up the application code for your language and add the necessary code for configuring the client.
@@ -224,18 +224,18 @@ For this exercise, you'll complete some key parts of the application to enable u
     **C#**
 
     ```csharp
-    // Initialize the Azure OpenAI client
-    OpenAIClient client = new OpenAIClient(new Uri(oaiEndpoint), new AzureKeyCredential(oaiKey));
+   // Initialize the Azure OpenAI client
+   OpenAIClient client = new OpenAIClient(new Uri(oaiEndpoint), new AzureKeyCredential(oaiKey));
     ```
 
     **Python**
 
     ```python
-    # Set OpenAI configuration settings
-    openai.api_type = "azure"
-    openai.api_base = azure_oai_endpoint
-    openai.api_version = "2023-03-15-preview"
-    openai.api_key = azure_oai_key
+   # Set OpenAI configuration settings
+   openai.api_type = "azure"
+   openai.api_base = azure_oai_endpoint
+   openai.api_version = "2023-03-15-preview"
+   openai.api_key = azure_oai_key
     ```
 
 6. In the function that calls the Azure OpenAI model, add the code to format and send the request to the model.
@@ -243,44 +243,44 @@ For this exercise, you'll complete some key parts of the application to enable u
     **C#**
 
     ```csharp
-    // Create chat completion options
-    var chatCompletionsOptions = new ChatCompletionsOptions()
-    {
-        Messages =
-        {
-            new ChatMessage(ChatRole.System, systemPrompt),
-            new ChatMessage(ChatRole.User, userPrompt)
-        },
-        Temperature = 0.7f,
-        MaxTokens = 800,
-    };
+   // Create chat completion options
+   var chatCompletionsOptions = new ChatCompletionsOptions()
+   {
+       Messages =
+       {
+          new ChatMessage(ChatRole.System, systemPrompt),
+          new ChatMessage(ChatRole.User, userPrompt)
+       },
+       Temperature = 0.7f,
+       MaxTokens = 800,
+   };
 
-    // Get response from Azure OpenAI
-    Response<ChatCompletions> response = await client.GetChatCompletionsAsync(
-        oaiModelName,
-        chatCompletionsOptions
-    );
+   // Get response from Azure OpenAI
+   Response<ChatCompletions> response = await client.GetChatCompletionsAsync(
+       oaiModelName,
+       chatCompletionsOptions
+   );
 
-    ChatCompletions completions = response.Value;
-    string completion = completions.Choices[0].Message.Content;
+   ChatCompletions completions = response.Value;
+   string completion = completions.Choices[0].Message.Content;
     ```
 
     **Python**
 
     ```python
-    # Build the messages array
-    messages =[
-        {"role": "system", "content": system_message},
-        {"role": "user", "content": user_message},
-    ]
+   # Build the messages array
+   messages =[
+       {"role": "system", "content": system_message},
+       {"role": "user", "content": user_message},
+   ]
 
-    # Call the Azure OpenAI model
-    response = openai.ChatCompletion.create(
-        engine=model,
-        messages=messages,
-        temperature=0.7,
-        max_tokens=800
-    )
+   # Call the Azure OpenAI model
+   response = openai.ChatCompletion.create(
+       engine=model,
+       messages=messages,
+       temperature=0.7,
+       max_tokens=800
+   )
     ```
 
 ## Run your application
