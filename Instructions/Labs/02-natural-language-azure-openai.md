@@ -58,14 +58,14 @@ To show how to integrate with an Azure OpenAI model, we'll use a short command-l
 5. Once the terminal starts, enter the following command to download the sample application and save it to a folder called `azure-openai`.
 
     ```bash
-    rm -r azure-openai -f
-    git clone https://github.com/MicrosoftLearning/mslearn-openai azure-openai
+   rm -r azure-openai -f
+   git clone https://github.com/MicrosoftLearning/mslearn-openai azure-openai
     ```
   
 6. The files are downloaded to a folder named **azure-openai**. Navigate to the lab files for this exercise using the following command.
 
     ```bash
-    cd azure-openai/Labfiles/02-nlp-azure-openai
+   cd azure-openai/Labfiles/02-nlp-azure-openai
     ```
 
 Applications for both C# and Python have been provided, as well as a sample text file you'll use to test the summarization. Both apps feature the same functionality.
@@ -94,16 +94,16 @@ For this exercise, you'll complete some key parts of the application to enable u
     **C#**
 
     ```bash
-    cd CSharp
-    dotnet add package Azure.AI.OpenAI --prerelease
+   cd CSharp
+   dotnet add package Azure.AI.OpenAI --prerelease
     ```
 
     **Python**
 
     ```bash
-    cd Python
-    pip install python-dotenv
-    pip install openai
+   cd Python
+   pip install python-dotenv
+   pip install openai
     ```
 
 5. Navigate to your preferred language folder, select the code file, and add the necessary libraries.
@@ -111,15 +111,15 @@ For this exercise, you'll complete some key parts of the application to enable u
     **C#**
 
     ```csharp
-    // Add Azure OpenAI package
-    using Azure.AI.OpenAI;
+   // Add Azure OpenAI package
+   using Azure.AI.OpenAI;
     ```
 
     **Python**
 
     ```python
-    # Add OpenAI import
-    import openai
+   # Add OpenAI import
+   import openai
     ```
 
 5. Open up the application code for your language and add the necessary code for building the request, which specifies the various parameters for your model such as `prompt` and `temperature`.
@@ -127,52 +127,52 @@ For this exercise, you'll complete some key parts of the application to enable u
     **C#**
 
     ```csharp
-    // Initialize the Azure OpenAI client
-    OpenAIClient client = new OpenAIClient(new Uri(oaiEndpoint), new AzureKeyCredential(oaiKey));
+   // Initialize the Azure OpenAI client
+   OpenAIClient client = new OpenAIClient(new Uri(oaiEndpoint), new AzureKeyCredential(oaiKey));
 
-    // Build completion options object
-    ChatCompletionsOptions chatCompletionsOptions = new ChatCompletionsOptions()
-    {
-        Messages =
-        {
-            new ChatMessage(ChatRole.System, "You are a helpful assistant. Summarize the following text in 60 words or less."),
-            new ChatMessage(ChatRole.User, text),
-        },
-        MaxTokens = 120,
-        Temperature = 0.7f,
-    };
+   // Build completion options object
+   ChatCompletionsOptions chatCompletionsOptions = new ChatCompletionsOptions()
+   {
+       Messages =
+       {
+          new ChatMessage(ChatRole.System, "You are a helpful assistant. Summarize the following text in 60 words or less."),
+          new ChatMessage(ChatRole.User, text),
+       },
+       MaxTokens = 120,
+       Temperature = 0.7f,
+   };
 
-    // Send request to Azure OpenAI model
-    ChatCompletions response = client.GetChatCompletions(
-        deploymentOrModelName: oaiModelName, 
-        chatCompletionsOptions);
-    string completion = response.Choices[0].Message.Content;
+   // Send request to Azure OpenAI model
+   ChatCompletions response = client.GetChatCompletions(
+       deploymentOrModelName: oaiModelName, 
+       chatCompletionsOptions);
+   string completion = response.Choices[0].Message.Content;
 
-    Console.WriteLine("Summary: " + completion + "\n");
+   Console.WriteLine("Summary: " + completion + "\n");
     ```
 
     **Python**
 
     ```python
-    # Set OpenAI configuration settings
-    openai.api_type = "azure"
-    openai.api_base = azure_oai_endpoint
-    openai.api_version = "2023-03-15-preview"
-    openai.api_key = azure_oai_key
+   # Set OpenAI configuration settings
+   openai.api_type = "azure"
+   openai.api_base = azure_oai_endpoint
+   openai.api_version = "2023-03-15-preview"
+   openai.api_key = azure_oai_key
 
-    # Send request to Azure OpenAI model
-    print("Sending request for summary to Azure OpenAI endpoint...\n\n")
-    response = openai.ChatCompletion.create(
-        engine=azure_oai_model,
-        temperature=0.7,
-        max_tokens=120,
-        messages=[
-            {"role": "system", "content": "You are a helpful assistant. Summarize the following text in 60 words or less."},
-            {"role": "user", "content": text}
-        ]
-    )
+   # Send request to Azure OpenAI model
+   print("Sending request for summary to Azure OpenAI endpoint...\n\n")
+   response = openai.ChatCompletion.create(
+       engine=azure_oai_model,
+       temperature=0.7,
+       max_tokens=120,
+       messages=[
+          {"role": "system", "content": "You are a helpful assistant. Summarize the following text in 60 words or less."},
+           {"role": "user", "content": text}
+       ]
+   )
 
-    print("Summary: " + response.choices[0].message.content + "\n")
+   print("Summary: " + response.choices[0].message.content + "\n")
     ```
 
 ## Run your application
