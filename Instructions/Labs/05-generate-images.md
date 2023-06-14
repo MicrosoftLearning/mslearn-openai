@@ -11,7 +11,7 @@ This exercise will take approximately **25** minutes.
 
 ## Before you start
 
-You will need an Azure subscription that has been approved for access to the Azure OpenAI service, including DALL-E. If you have previously applied for access to the Azure openAI service, you may need to submit another application t gain access to DALL-E.
+You will need an Azure subscription that has been approved for access to the Azure OpenAI service, including DALL-E. If you have previously applied for access to the Azure openAI service, you may need to submit another application to gain access to DALL-E.
 
 - To sign up for a free Azure subscription, visit [https://azure.microsoft.com/free](https://azure.microsoft.com/free).
 - To request access to the Azure OpenAI service, visit [https://aka.ms/oaiapply](https://aka.ms/oaiapply).
