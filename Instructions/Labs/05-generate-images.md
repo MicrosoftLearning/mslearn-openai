@@ -28,7 +28,7 @@ Before you can use Azure OpenAI models, you must provision an Azure OpenAI resou
     - **Name**: A unique name of your choice.
     - **Pricing tier**: Standard S0
 3. Wait for deployment to complete. Then go to the deployed Azure OpenAI resource in the Azure portal.
-4. Navigate to **Keys and Endpoint** page. You can retrieve the unique endpoint and primary key for your service from here - you'll need these later!
+4. Navigate to **Keys and Endpoint** page. You can retrieve the unique endpoint and authentication keys for your service from here - you'll need these later!
 
 ## Explore image-generation in the DALL-E playground
 
