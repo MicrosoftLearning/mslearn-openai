@@ -64,7 +64,7 @@ In this exercise, you'll use a simple Python or Microsoft C# app to generate ima
 
 4. Make sure the type of shell indicated on the top left of the Cloud Shell pane is switched to *Bash*. If it's *PowerShell*, switch to *Bash* by using the drop-down menu.
 
-5. Once the terminal starts, enter the following command to download the sample application and save it to a folder called `azure-openai`.
+5. Once the terminal starts, enter the following command to download the application code you are going to work with.
 
     ```bash
    rm -r azure-openai -f
