@@ -5,13 +5,13 @@ lab:
 
 # Generate images with a DALL-E model
 
-The Azure OpenAI Service includes an image-generation models named DALL-E. You can use this model to submit natural language prompts that describe a desired image, and the model will generate an original image based on the description you provide.
+The Azure OpenAI Service includes an image-generation model named DALL-E. You can use this model to submit natural language prompts that describe a desired image, and the model will generate an original image based on the description you provide.
 
 This exercise will take approximately **25** minutes.
 
 ## Before you start
 
-You will need an Azure subscription that has been approved for access to the Azure OpenAI service, including DALL-E. If you have previously applied for access to the Azure openAI service, you may need to submit another application t gain access to DALL-E.
+You will need an Azure subscription that has been approved for access to the Azure OpenAI service, including DALL-E. If you have previously applied for access to the Azure openAI service, you may need to submit another application to gain access to DALL-E.
 
 - To sign up for a free Azure subscription, visit [https://azure.microsoft.com/free](https://azure.microsoft.com/free).
 - To request access to the Azure OpenAI service, visit [https://aka.ms/oaiapply](https://aka.ms/oaiapply).
