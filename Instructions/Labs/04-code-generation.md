@@ -5,7 +5,7 @@ lab:
 
 # Generate code using Azure OpenAI
 
-The Azure OpenAI Service models can generate code for you using natural language prompts, completion of partial code, and code comments. These models can also explain and simplify existing code to help you understand what it does and how to improve it.
+The Azure OpenAI Service models can generate code for you using natural language prompts, fixing bugs in completed code, and providing code comments. These models can also explain and simplify existing code to help you understand what it does and how to improve it.
 
 This exercise will take approximately **25** minutes.
 
