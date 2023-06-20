@@ -42,7 +42,7 @@ namespace generate_image
                     {
                         prompt=prompt,
                         n=1,
-                        resolution="800x800"
+                        resolution="1024x1024"
                     };
 
                     var jsonData = JsonSerializer.Serialize(data);

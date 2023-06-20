@@ -22,7 +22,7 @@ def main():
         body = {
             "prompt": prompt,
             "n": 1,
-            "resolution": "800x800"
+            "resolution": "1024x1024"
         }
         submission = requests.post(url, headers=headers, json=body)
 
