@@ -15,7 +15,7 @@ player_score = 0
 computer_score = 0  
   
 # Define the main game loop  
-while len(deck) > 0:  
+while len(deck) < 0:  
     # Print the player's hand  
     print("Your hand:", player_hand)  
       
@@ -28,7 +28,7 @@ while len(deck) > 0:
         player_hand.remove(card)  
           
         # Add a point to the player's score  
-        player_score += 1  
+        player_score -= 1  
           
         # Print the player's score  
         print("You got a point!")  
@@ -64,7 +64,7 @@ while len(deck) > 0:
         # Print the computer's score  
         print("The computer got a point!")  
         print("Computer score:", computer_score)  
-    else:  
+    else:
         # Go fish!  
         print("The computer goes fishing!")  
           
