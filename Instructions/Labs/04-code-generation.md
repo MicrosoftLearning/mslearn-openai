@@ -120,7 +120,7 @@ For this exercise, you'll complete some key parts of the application to enable u
     - **C#**: `appsettings.json`
     - **Python**: `.env`
 
-3. Update the configuration values to include the **endpoint** and **key** from the Azure OpenAI resource you created, as well as the model name that you deployed, `35turbo`. Save the file.
+3. Update the configuration values to include the **endpoint** and **key** from the Azure OpenAI resource you created, as well as the name of your deployment, `35turbo`. Save the file.
 
 4. Navigate to the folder for your preferred language and install the necessary packages.
 
@@ -139,9 +139,11 @@ For this exercise, you'll complete some key parts of the application to enable u
    pip install openai
     ```
 
-5. Select the code file for your language, and add the necessary libraries.
+5. Select the code file in this folder for your language and add the necessary libraries.
 
     **C#**
+
+    `Program.cs`
 
     ```csharp
    // Add Azure OpenAI package
@@ -150,12 +152,14 @@ For this exercise, you'll complete some key parts of the application to enable u
 
     **Python**
 
+    `code-generation.py`
+
     ```python
    # Add OpenAI import
    import openai
     ```
 
-5. Add the necessary code for configuring the client.
+6. Add the necessary code for configuring the client.
 
     **C#**
 
@@ -174,7 +178,7 @@ For this exercise, you'll complete some key parts of the application to enable u
    openai.api_key = azure_oai_key
     ```
 
-6. In the function that calls the Azure OpenAI model, add the code to format and send the request to the model.
+7. In the function that calls the Azure OpenAI model, add the code to format and send the request to the model.
 
     **C#**
 
@@ -222,6 +226,8 @@ For this exercise, you'll complete some key parts of the application to enable u
 ## Run your application
 
 Now that your app has been configured, run it to try generating code for each use case. The use case is numbered in the app, and can be run in any order.
+
+> **Note**: Some users may experience rate limiting if calling the model too frequently. If you hit an error about a token rate limit, wait for a minute then try again.
 
 1. In the code editor, expand the `sample-code` folder and briefly observe the function and the app for your language. These files will be used for the tasks in the app.
 1. In the Cloud Shell bash terminal, navigate to the folder for your preferred language.

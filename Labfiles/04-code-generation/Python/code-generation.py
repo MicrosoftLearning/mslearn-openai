@@ -2,8 +2,6 @@ import os
 from dotenv import load_dotenv
 
 # Add OpenAI import
-import openai
-
 
 # Set to True to print the full response from OpenAI for each call
 printFullResponse = False
@@ -16,20 +14,15 @@ def main():
         load_dotenv()
         azure_oai_endpoint = os.getenv("AZURE_OAI_ENDPOINT")
         azure_oai_key = os.getenv("AZURE_OAI_KEY")
-        azure_oai_model = os.getenv("AZURE_OAI_MODEL")
+        azure_oai_model = os.getenv("AZURE_OAI_DEPLOYMENT")
         
         # Set OpenAI configuration settings
-        # Set OpenAI configuration settings
-        openai.api_type = "azure"
-        openai.api_base = azure_oai_endpoint
-        openai.api_version = "2023-05-15"
-        openai.api_key = azure_oai_key
 
         while True:
             print('\n1: Add comments to my function\n' +
                 '2: Write unit tests for my function\n' +
                 '3: Fix my Go Fish game\n' +
-                '\"quit\" to exit the program\n\n')
+                '\"quit\" to exit the program\n')
             command = input('Enter a number to select a task:')
             if command == '1':
                 file = open(file="../sample-code/function/function.py", encoding="utf8").read()
@@ -58,26 +51,15 @@ def call_openai_model(prompt, model):
     user_message = prompt
 
     # Build the messages array
-    messages =[
-        {"role": "system", "content": system_message},
-        {"role": "user", "content": user_message},
-    ]
-
-    # Call the Azure OpenAI model
-    response = openai.ChatCompletion.create(
-        engine=model,
-        messages=messages,
-        temperature=0.7,
-        max_tokens=1000
-    )
-
+    
+    # Print the response to the console, if desired
     if printFullResponse:
         print(response)
 
     # Write the response to a file
     results_file = open(file="result/app.txt", mode="w", encoding="utf8")
     results_file.write(response.choices[0].message.content)
-    print("Response written to result/app.txt\n\n")
+    print("\nResponse written to result/app.txt\n\n")
 
 if __name__ == '__main__': 
     main()
