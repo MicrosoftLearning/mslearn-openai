@@ -116,7 +116,7 @@ You can use the prompt and parameters to maximize the likelihood of generating t
 In addition to generating natural language responses, you can use GPT models to generate code.
 
 1. In the **Assistant setup** pane, select the **Empty Example** template to reset the system message.
-2. Enter the following system message: `You are a Python developer.` and save the changes.
+2. Enter the system message: `You are a Python developer.` and save the changes.
 3. In the **Chat session** pane, select **Clear chat** to clear the chat history and start a new session.
 4. Submit the following user message:
 
