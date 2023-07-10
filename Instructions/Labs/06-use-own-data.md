@@ -36,16 +36,24 @@ To chat with the Azure OpenAI, you must first deploy a model to use through the 
 1. On the **Overview** page for your Azure OpenAI resource, use the **Explore** button to open Azure OpenAI Studio in a new browser tab. Alternatively, navigate to [Azure OpenAI Studio](https://oai.azure.com/?azure-portal=true) directly.
 2. In Azure OpenAI Studio, create a new deployment with the following settings:
     - **Model name**: gpt-35-turbo
-    - **Deployment name**: 35turbo
+    - **Model version**: *Use the default version*
+    - **Deployment name**: text-turbo
 
 ## Observe normal chat behavior without adding your own data
 
 Before connecting Azure OpenAI to your data, first observe how the base model responds to queries without any grounding data.
 
-1. Navigate to the **Chat** playground.
+1. Navigate to the **Chat** playground, and make sure the `gpt-35-turbo` model you deployed is selected in the **Configuration** pane (this should be the default, if you only have one deployed model).
 1. Enter the following prompts, and observe the output.
-    - *I'd like to take a trip to New York. Where should I stay?*
-    - *What are some facts about New York?*
+
+    ```code
+    I'd like to take a trip to New York. Where should I stay?
+    ```
+
+    ```code
+    What are some facts about New York?
+    ```
+
 1. Try similar questions about tourism and places to stay for other locations that will be included in our grounding data, such as London, or San Francisco. You'll likely get complete responses about areas or neighborhoods, and some general facts about the city.
 
 ## Connect your data in the chat playground
@@ -55,8 +63,15 @@ Next, add your data in the chat playground to see how it responds with your data
 1. [Download the data](https://aka.ms/own-data-brochures) that you will use from GitHub. Extract the PDFs in the `.zip` provided.
 1. Navigate to the **Chat** playground, and select *Add your data* in the Assistant setup pane.
 1. Select **Add a data source** and choose *Upload files* from the dropdown.
-1. You'll need to create a storage account and Azure Cognitive Search resource. Under the dropdow for the storage resource, select **Create a new Azure Blob storage resource** and create the resource with a globally unique name.
-1. Once the resource is being created, come back to Azure OpenAI Studio and select **Create a new Azure Cognitive Search resource** with the following settings.
+1. You'll need to create a storage account and Azure Cognitive Search resource. Under the dropdown for the storage resource, select **Create a new Azure Blob storage resource**, and create a storage account with the following settings. Anything not specified leave as the default.
+
+    - **Subscription**: *Same subscription as your Azure OpenAI resource*
+    - **Resource group**: *Same resource group as your Azure OpenAI resource*
+    - **Storage account name**: *Enter globally unique name*
+    - **Region**: *Same region as your Azure OpenAI resource*
+    - **Redundancy**: Locally-redundant storage (LRS)
+
+1. Once the resource is being created, come back to Azure OpenAI Studio and select **Create a new Azure Cognitive Search resource** with the following settings. Anything not specified leave as the default.
 
     - **Subscription**: *Same subscription as your Azure OpenAI resource*
     - **Resource group**: *Same resource group as your Azure OpenAI resource*
@@ -81,8 +96,13 @@ Next, add your data in the chat playground to see how it responds with your data
 
 Now that you've added your data, ask the same questions as you did previously, and see how the response differs.
 
-- *I'd like to take a trip to New York. Where should I stay?*
-- *What are some facts about New York?*
+```code
+I'd like to take a trip to New York. Where should I stay?
+```
+
+```code
+What are some facts about New York?
+```
 
 You'll notice a very different response this time, with specifics about certain hotels and a mention of Margie's Travel, as well as references to where the information provided came from. If you open the PDF reference listed in the response, you'll see the same hotels as the model provided.
 
