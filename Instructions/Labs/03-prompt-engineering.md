@@ -304,7 +304,7 @@ Each prompt is displayed in the console as it sends for you to see how differenc
 1. Next, choose option **3** to ask for an email similar to above, but with a formatted table with additional animals included.
 1. Observe the prompt input, and generated output. This time, you'll likely see a similar email with text formatted in a specific way (in this case, a table near the end) demonstrating how the generative AI models can format output when requested.
 1. Next, choose option **4** to ask for a similar email, but this time specifying different tone in the system message.
-1. Observe the prompt input, and generated output. This time you'll likely see the email in a similar format, but with a much less informal tone. You'll likely even see jokes included!
+1. Observe the prompt input, and generated output. This time you'll likely see the email in a similar format, but with a much more informal tone. You'll likely even see jokes included!
 
 Increasing the temperature often causes the response to vary, even when provided the same prompt, due to the increased randomness. You can run it multiple times with different temperature or top_p values to see how that impacts the response to the same prompt.
 
