@@ -88,7 +88,7 @@ You can use the prompt and parameters to maximize the likelihood of generating t
 
 1. In the **Parameters** pane, set the following parameter values:
     - **Temperature**: 0
-    - **Max length (tokens)**: 500
+    - **Max response**: 500
 
 2. Submit the following message
 
