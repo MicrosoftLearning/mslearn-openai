@@ -9,8 +9,6 @@ With the Azure OpenAI Service, developers can create chatbots, language models, 
 
 When working with the Azure OpenAI Service, how developers shape their prompt greatly impacts how the generative AI model will respond. Azure OpenAI models are able to tailor and format content, if requested in a clear and concise way. In this exercise, you'll learn how different prompts for similar content help shape the AI model's response to better satisfy your requirements.
 
-Imagine you are trying to send out information for a new wildlife rescue, and want to get assistance from a generative AI model.
-
 This exercise will take approximately **25** minutes.
 
 ## Before you start
