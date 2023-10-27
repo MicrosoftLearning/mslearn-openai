@@ -23,7 +23,7 @@ Before you can use Azure OpenAI models, you must provision an Azure OpenAI resou
 1. Sign into the [Azure portal](https://portal.azure.com?azure-portal=true).
 2. Create an **Azure OpenAI** resource with the following settings:
     - **Subscription**: An Azure subscription that has been approved for access to the Azure OpenAI service.
-    - **Resource group**: Create a new resource group with a name of your choice.
+    - **Resource group**: Choose an existing resource group, or create a new one with a name of your choice.
     - **Region**: Choose any available region.
     - **Name**: A unique name of your choice.
     - **Pricing tier**: Standard S0
@@ -98,11 +98,11 @@ Next, add your data in the chat playground to see how it responds with your data
 
 Now that you've added your data, ask the same questions as you did previously, and see how the response differs.
 
-```code
+```
 I'd like to take a trip to New York. Where should I stay?
 ```
 
-```code
+```
 What are some facts about New York?
 ```
 

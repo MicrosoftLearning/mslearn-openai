@@ -23,7 +23,7 @@ Before you can use Azure OpenAI models, you must provision an Azure OpenAI resou
 1. Sign into the [Azure portal](https://portal.azure.com).
 2. Create an **Azure OpenAI** resource with the following settings:
     - **Subscription**: An Azure subscription that has been approved for access to the Azure OpenAI service.
-    - **Resource group**: Create a new resource group with a name of your choice.
+    - **Resource group**: Choose an existing resource group, or create a new one with a name of your choice.
     - **Region**: Choose **EastUS** as region
     - **Name**: A unique name of your choice.
     - **Pricing tier**: Standard S0
@@ -58,11 +58,19 @@ In this exercise, you'll use a simple Python or Microsoft C# app to generate ima
 
 2. The first time you open the Cloud Shell, you may be prompted to choose the type of shell you want to use (*Bash* or *PowerShell*). Select **Bash**. If you don't see this option, skip the step.  
 
-3. If you're prompted to create storage for your Cloud Shell, ensure your subscription is specified and select **Create storage**. Then wait a minute or so for the storage to be created.
+3. If you're prompted to create storage for your Cloud Shell, select **Show advanced settings** and select the following settings:
+    - **Subscription**: Your subscription
+    - **Cloud shell regions**: Choose any available region
+    - **Show VNET isolation setings** Unselected
+    - **Resource group**: Use the existing resource group where you provisioned your Azure OpenAI resource
+    - **Storage account**: Create a new storage account with a unique name
+    - **File share**: Create a new file share with a unique name
+
+    Then wait a minute or so for the storage to be created.
 
     > **Note**: If you already have a cloud shell set up in your Azure subscription, you may need to use the **Reset user settings** option in the ⚙️ menu to ensure the latest versions of Python and the .NET Framework are installed.
 
-4. Make sure the type of shell indicated on the top left of the Cloud Shell pane is switched to *Bash*. If it's *PowerShell*, switch to *Bash* by using the drop-down menu.
+4. Make sure the type of shell indicated on the top left of the Cloud Shell pane is *Bash*. If it's *PowerShell*, switch to *Bash* by using the drop-down menu.
 
 5. Once the terminal starts, enter the following command to download the application code you are going to work with.
 
