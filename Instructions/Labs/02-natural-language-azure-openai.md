@@ -106,7 +106,7 @@ For this exercise, you'll complete some key parts of the application to enable u
 
     ```bash
    cd CSharp
-   dotnet add package Azure.AI.OpenAI --prerelease
+   dotnet add package Azure.AI.OpenAI --version 1.0.0-beta.5
     ```
 
     **Python**
