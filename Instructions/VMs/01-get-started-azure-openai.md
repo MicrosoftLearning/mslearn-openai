@@ -9,24 +9,20 @@ Azure OpenAI Service brings the generative AI models developed by OpenAI to the 
 
 This exercise takes approximately **30** minutes.
 
-## Before you start
-
-You'll need an Azure subscription that has been approved for access to the Azure OpenAI service.
-
-- To sign up for a free Azure subscription, visit [https://azure.microsoft.com/free](https://azure.microsoft.com/free).
-- To request access to the Azure OpenAI service, visit [https://aka.ms/oaiapply](https://aka.ms/oaiapply).
-
 ## Provision an Azure OpenAI resource
 
 Before you can use Azure OpenAI models, you must provision an Azure OpenAI resource in your Azure subscription.
 
-1. Sign into the [Azure portal](https://portal.azure.com).
+1. Sign into the [Azure portal](https://portal.azure.com) at `https://portal.azure.com`.
 2. Create an **Azure OpenAI** resource with the following settings:
     - **Subscription**: An Azure subscription that has been approved for access to the Azure OpenAI service.
     - **Resource group**: Choose an existing resource group; or if you have permission, create a new one with a name of your choice.
-    - **Region**: Choose the same region as the resource group.
+    - **Region**: Make a random choice from any of the available regions\*
     - **Name**: A unique name of your choice.
     - **Pricing tier**: Standard S0
+
+    > \* Azure OpenAI resources are constrained by regional quotas. Randomly choosing a region reduces the risk of a single region reaching its quota limit in scenarios where you are sharing a subscription with other users. In the event of a quota limit being reached later in the exercise, there's a possibility you may need to create another resource in a different region.
+
 3. Wait for deployment to complete. Then go to the deployed Azure OpenAI resource in the Azure portal.
 
 ## Deploy a model
@@ -37,35 +33,24 @@ Azure OpenAI provides a web-based portal named **Azure OpenAI Studio**, that you
 2. In Azure OpenAI Studio, create a new deployment with the following settings:
     - **Model**: gpt-35-turbo
     - **Model version**: Auto-update to default
-    - **Deployment name**: my-gpt-model
+    - **Deployment name**: *A unique name of your choice*
+    - **Advanced options**
+        - **Content filter**: Default
+        - **Tokens per minute rate limit**: 5K
+        - **Enable dynamic quota**: Enabled
 
 > **Note**: Azure OpenAI includes multiple models, each optimized for a different balance of capabilities and performance. In this exercise, you'll use the **GPT-35-Turbo** model, which is a good general model for summarizing and generating natural language and code. For more information about the available models in Azure OpenAI, see [Models](https://learn.microsoft.com/azure/cognitive-services/openai/concepts/models) in the Azure OpenAI documentation.
 
-## Explore a model in the Completions playground
-
-*Playgrounds* are useful interfaces in Azure OpenAI Studio that you can use to experiment with your deployed models without needing to develop your own client application.
-
-1. In Azure OpenAI Studio, in the left pane under **Playground**, select **Completions**.
-2. In the **Completions** page, ensure your **my-gpt-model** deployment is selected and then in the **Examples** list, select **Generate a quiz**.
-
-    The summarize text sample consists of a *prompt* that provides some text to tell the model what kind of response is required and include some contextual information.
-
-3. At the bottom of the page, note the number of *tokens* detected in the text. Tokens are the basic units of a prompt - essentially words or word-parts in the text.
-4. Use the **Generate** button to submit the prompt to the model and retrieve a response.
-
-    The response consists of a quiz based on the example in the prompt.
-
-5. Use the **Regenerate** button to resubmit the prompt, and note that the response may vary from the original one. A generative AI model can produce new language each time it's called.
-6. Use the **View Code** button to view the code that a client application would use to submit the prompt. You can select your preferred programming language. The prompt contains the text you submitted to the model. The request is submitted to the *Completions* API for your Azure OpenAI service.
-
 ## Use the Chat playground
 
-The *Chat* playground provides a chatbot interface for GPT 3.5 and higher models. It uses the *ChatCompletions* API rather than the older *Completions* API.
+The *Chat* playground provides a chatbot interface for GPT 3.5 and higher models.
+
+> **Note:** The *Chat* playground uses the *ChatCompletions* API rather than the older *Completions* API that is used by the *Completions* playground. The Completions playground is provided for compatibility with older models.
 
 1. In the **Playground** section, select the **Chat** page, and ensure that the **my-gpt-model** model is selected in the configuration pane on the right.
 2. In the **Assistant setup** section, in the **System message** box, replace the current text with the following statement: `The system is an AI teacher that helps people learn about AI`.
 
-3. Below the **System message** box, click on **Add few-shot examples**, and enter the following message and response in the designated boxes:
+3. Below the **System message** box, select **Add an example**, and type the following message and response in the designated boxes:
 
     - **User**: `What are different types of artificial intelligence?`
     - **Assistant**: `There are three main types of artificial intelligence: Narrow or Weak AI (such as virtual assistants like Siri or Alexa, image recognition software, and spam filters), General or Strong AI (AI designed to be as intelligent as a human being. This type of AI does not currently exist and is purely theoretical), and Artificial Superintelligence (AI that is more intelligent than any human being and can perform tasks that are beyond human comprehension. This type of AI is also purely theoretical and has not yet been developed).`
@@ -73,14 +58,13 @@ The *Chat* playground provides a chatbot interface for GPT 3.5 and higher models
     > **Note**: Few-shot examples are used to provide the model with examples of the types of responses that are expected. The model will attempt to reflect the tone and style of the examples in its own responses.
 
 4. Save the changes to start a new session and set the behavioral context of the chat system.
-5. In the query box at the bottom of the page, enter the text `What is artificial intelligence?`
-6. Use the **Send** button to submit the message and view the response.
+5. In the query box at the bottom of the page, enter the user query `What is artificial intelligence?`
 
     > **Note**: You may receive a response that the API deployment is not yet ready. If so, wait for a few minutes and try again.
 
-7. Review the response and then submit the following message to continue the conversation: `How is it related to machine learning?`
-8. Review the response, noting that context from the previous interaction is retained (so the model understands that "it" refers to artificial intelligence).
-9. Use the **View Code** button to view the code for the interaction. The prompt consists of the *system* message, the few-shot examples of *user* and *assistant* messages, and the sequence of *user* and *assistant* messages in the chat session so far.
+6. Review the response and then submit the following message to continue the conversation: `How is it related to machine learning?`
+7. Review the response, noting that context from the previous interaction is retained (so the model understands that "it" refers to artificial intelligence).
+8. Use the **View Code** button to view the code for the interaction. The prompt consists of the *system* message, the few-shot examples of *user* and *assistant* messages, and the sequence of *user* and *assistant* messages in the chat session so far.
 
 ## Explore prompts and parameters
 
@@ -93,7 +77,7 @@ You can use the prompt and parameters to maximize the likelihood of generating t
 2. Submit the following message
 
     ```
-    Write three multiple choice questions based on the following text.
+    Write three multiple choice questions based on the following text, indcating the correct answers.
 
     Most computer vision solutions are based on machine learning models that can be applied to visual input from cameras, videos, or images.*
 
