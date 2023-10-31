@@ -9,38 +9,37 @@ With the Azure OpenAI Service, developers can create chatbots, language models, 
 
 This exercise will take approximately **30** minutes.
 
-## Before you start
-
-You will need an Azure subscription that has been approved for access to the Azure OpenAI service.
-
-- To sign up for a free Azure subscription, visit [https://azure.microsoft.com/free](https://azure.microsoft.com/free).
-- To request access to the Azure OpenAI service, visit [https://aka.ms/oaiapply](https://aka.ms/oaiapply).
-
 ## Provision an Azure OpenAI resource
 
-Before you can use Azure OpenAI models, you must provision an Azure OpenAI resource in your Azure subscription.
+If you don't already have one, provision an Azure OpenAI resource in your Azure subscription.
 
-1. Sign into the [Azure portal](https://portal.azure.com).
+1. Sign into the [Azure portal](https://portal.azure.com) at `https://portal.azure.com`.
 2. Create an **Azure OpenAI** resource with the following settings:
-    - **Subscription**: An Azure subscription that has been approved for access to the Azure OpenAI service.
-    - **Resource group**: Choose an existing resource group, or create a new one with a name of your choice.
-    - **Region**: Choose any available region.
-    - **Name**: A unique name of your choice.
+    - **Subscription**: *Select an Azure subscription that has been approved for access to the Azure OpenAI service*
+    - **Resource group**: *Choose or create a resource group*
+    - **Region**: *Make a random choice from any of the available regions*\*
+    - **Name**: *A unique name of your choice*
     - **Pricing tier**: Standard S0
+
+    > \* Azure OpenAI resources are constrained by regional quotas. Randomly choosing a region reduces the risk of a single region reaching its quota limit in scenarios where you are sharing a subscription with other users. In the event of a quota limit being reached later in the exercise, there's a possibility you may need to create another resource in a different region.
+
 3. Wait for deployment to complete. Then go to the deployed Azure OpenAI resource in the Azure portal.
-4. Navigate to **Keys and Endpoint** page, and save those to a text file to use later.
 
 ## Deploy a model
 
-To use the Azure OpenAI API, you must first deploy a model to use through the **Azure OpenAI Studio**. Once deployed, we will reference that model in our app.
+Azure OpenAI provides a web-based portal named **Azure OpenAI Studio**, that you can use to deploy, manage, and explore models. You'll start your exploration of Azure OpenAI by using Azure OpenAI Studio to deploy a model.
 
-1. On the **Overview** page for your Azure OpenAI resource, use the **Explore** button to open Azure OpenAI Studio in a new browser tab.
-2. In Azure OpenAI Studio, create a new deployment with the following settings:
+1. On the **Overview** page for your Azure OpenAI resource, use the **Go to Azure OpenAI Studio** button to open Azure OpenAI Studio in a new browser tab.
+2. In Azure OpenAI Studio, on the **Deployments** page, view your existing model deployments. If you don't already have one, create a new deployment of the **gpt-35-turbo** model with the following settings:
     - **Model**: gpt-35-turbo
-    - **Model version**: *Use the default version*
-    - **Deployment name**: text-turbo
+    - **Model version**: Auto-update to default
+    - **Deployment name**: *A unique name of your choice*
+    - **Advanced options**
+        - **Content filter**: Default
+        - **Tokens per minute rate limit**: 5K\*
+        - **Enable dynamic quota**: Enabled
 
-> **Note**: Each Azure OpenAI model is optimized for a different balance of capabilities and performance. We'll use the **3.5 Turbo** model series in the **GPT-3** model family in this exercise, which is highly capable for language understanding. This exercise only uses a single model, however deployment and usage of other models you deploy will work in the same way.
+    > \* A rate limit of 5,000 tokens per minute is more than adequate to complete this exercise while leaving capacity for other people using the same subscription.
 
 ## Set up an application in Cloud Shell
 
