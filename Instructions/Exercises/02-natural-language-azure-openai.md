@@ -96,7 +96,7 @@ Applications for both C# and Python have been provided, as well as a sample text
    import openai
     ```
 
-6. In the application code for your language, replace the comment ***Add code to build request...*** with the necessary code for building the request; which specifying the various parameters for your model such as `prompt` and `temperature`.
+6. In the application code for your language, replace the comment ***Add code to build request...*** with the necessary code for building the request; specifying the various parameters for your model such as `prompt` and `temperature`.
 
     **C#**: Program.cs
 
