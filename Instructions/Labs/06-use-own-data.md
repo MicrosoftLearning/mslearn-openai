@@ -39,6 +39,8 @@ To chat with the Azure OpenAI, you must first deploy a model to use through the 
     - **Model version**: *Use the default version*
     - **Deployment name**: text-turbo
 
+> **Note**: In some regions, the new model deployment interface doesn't show the **Model version** option. In this case, don't worry and continue without setting the option
+
 ## Observe normal chat behavior without adding your own data
 
 Before connecting Azure OpenAI to your data, first observe how the base model responds to queries without any grounding data.
