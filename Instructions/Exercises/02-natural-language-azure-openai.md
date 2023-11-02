@@ -70,16 +70,15 @@ Applications for both C# and Python have been provided, as well as a sample text
     **Python**:
 
     ```
-    pip install python-dotenv
     pip install openai==0.28.1
     ```
 
 3. In the **Explorer** pane, in the **CSharp** or **Python** folder, open the configuration file for your preferred language
 
-    - C#: `appsettings.json`
-    - Python: `.env`
+    - **C#**: appsettings.json
+    - **Python**: .env
     
-4. Update the configuration values to include the **endpoint** and **key** from the Azure OpenAI resource you created, as well as the name you specified for your model deployment. Save the file.
+4. Update the configuration values to include the **endpoint** and **key** from the Azure OpenAI resource you created (available on the **Keys and Endpoint** page for your Azure OpenAI resource in the Azure portal), as well as the name you specified for your model deployment (available in the **Deployments** page in Azure OpenAI Studio). Save the file.
 
 5. In the **Explorer** pane, in the **CSharp** or **Python** folder, open the code file for your preferred language, and replace the comment ***Add Azure OpenAI package*** with code to add the Azure OpenAI SDK library:
 
@@ -110,8 +109,8 @@ Applications for both C# and Python have been provided, as well as a sample text
    {
        Messages =
        {
-          new ChatMessage(ChatRole.System, "You are a helpful assistant. Summarize the following text in 60 words or less."),
-          new ChatMessage(ChatRole.User, text),
+          new ChatMessage(ChatRole.System, "You are a helpful assistant."),
+          new ChatMessage(ChatRole.User, "Summarize the following text in 20 words or less:\n" + text),
        },
        MaxTokens = 120,
        Temperature = 0.7f,
@@ -142,8 +141,8 @@ Applications for both C# and Python have been provided, as well as a sample text
        temperature=0.7,
        max_tokens=120,
        messages=[
-          {"role": "system", "content": "You are a helpful assistant. Summarize the following text in 60 words or less."},
-           {"role": "user", "content": text}
+          {"role": "system", "content": "You are a helpful assistant."},
+           {"role": "user", "content": "Summarize the following text in 20 words or less:\n" + text}
        ]
    )
 
@@ -152,18 +151,21 @@ Applications for both C# and Python have been provided, as well as a sample text
 
 7. Save the changes to your code file.
 
-## Run your application
+## Test your application
 
 Now that your app has been configured, run it to send your request to your model and observe the response.
 
-1. In the interactive terminal pane, ensure the folder context is the folder for your preferred language. Then enter the following command to run the application.
+1. In the **Explorer** pane, expand the **Labfiles/02-nlp-azure-openai/text-files** folder and open the **sample-text.txt** file. This text file contains the text you will submit to the model to be summarized.
+
+2. In the interactive terminal pane, ensure the folder context is the folder for your preferred language. Then enter the following command to run the application.
 
     - **C#**: `dotnet run`
     - **Python**: `python test-openai-model.py`
 
-2. Observe the summarization of the sample text file.
-3. In the code file for your preferred language, and change the *temperature* parameter value in your request to **1.0** and save the file.
-4. Run the application again, and observe the output.
+3. Observe the summarization of the sample text file.
+4. In the code file for your preferred language, and change the *temperature* parameter value in your request to **1.0** and save the file.
+5. Run the application again, and observe the output.
+6. Re-run the app a few times, noting the output each time - it may vary.
 
 Increasing the temperature often causes the summary to vary, even when provided the same text, due to the increased randomness. You can run it several times to see how the output may change. Try using different values for your temperature with the same input.
 
