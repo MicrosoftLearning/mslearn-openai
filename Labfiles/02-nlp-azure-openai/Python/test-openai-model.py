@@ -1,7 +1,7 @@
 import os
 from dotenv import load_dotenv
 
-# Add OpenAI import
+# Add Azure OpenAI package
 
 
 def main(): 
@@ -17,7 +17,7 @@ def main():
         # Read text from file
         text = open(file="../text-files/sample-text.txt", encoding="utf8").read()
         
-        # Set OpenAI configuration settings
+        # Add code to build request...
         
 
     except Exception as ex:

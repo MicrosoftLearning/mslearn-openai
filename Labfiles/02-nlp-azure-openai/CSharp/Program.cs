@@ -32,6 +32,6 @@ void GetSummaryFromOpenAI(string text)
         return;
     }
 
-    // Initialize the Azure OpenAI client
+    // Add code to build request...
     
 }  
