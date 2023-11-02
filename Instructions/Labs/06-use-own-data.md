@@ -112,6 +112,115 @@ Try asking it about other cities included in the grounding data, which are Dubai
 
 > **Note**: **Add your data** is still in preview and might not always behave as expected for this feature, such as giving the incorrect reference for a city not included in the grounding data.
 
+## Connect your app to your own data
+
+Next, explore how to connect your app to use your own data.
+
+### Set up an application in Cloud Shell
+
+To show how to connect an Azure OpenAI app to your own data, we'll use a short command-line application that runs in Cloud Shell on Azure. Open up a new browser tab to work with Cloud Shell.
+
+1. In the [Azure portal](https://portal.azure.com?azure-portal=true), select the **[>_]** (*Cloud Shell*) button at the top of the page to the right of the search box. A Cloud Shell pane will open at the bottom of the portal.
+
+    ![Screenshot of starting Cloud Shell by clicking on the icon to the right of the top search box.](../media/cloudshell-launch-portal.png#lightbox)
+
+2. The first time you open the Cloud Shell, you may be prompted to choose the type of shell you want to use (*Bash* or *PowerShell*). Select **Bash**. If you don't see this option, skip the step.  
+
+3. If you're prompted to create storage for your Cloud Shell, select **Show advanced settings** and select the following settings:
+    - **Subscription**: Your subscription
+    - **Cloud shell regions**: Choose any available region
+    - **Show VNET isolation setings** Unselected
+    - **Resource group**: Use the existing resource group where you provisioned your Azure OpenAI resource
+    - **Storage account**: Create a new storage account with a unique name
+    - **File share**: Create a new file share with a unique name
+
+    Then wait a minute or so for the storage to be created.
+
+    > **Note**: If you already have a cloud shell set up in your Azure subscription, you may need to use the **Reset user settings** option in the ⚙️ menu to ensure the latest versions of Python and the .NET Framework are installed.
+
+4. Make sure the type of shell indicated on the top left of the Cloud Shell pane is *Bash*. If it's *PowerShell*, switch to *Bash* by using the drop-down menu.
+
+5. Once the terminal starts, enter the following command to download the sample application and save it to a folder called `azure-openai`.
+
+    ```bash
+   rm -r azure-openai -f
+   git clone https://github.com/MicrosoftLearning/mslearn-openai azure-openai
+    ```
+
+6. The files are downloaded to a folder named **azure-openai**. Navigate to the lab files for this exercise using the following command.
+
+    ```bash
+   cd azure-openai/Labfiles/06-use-own-data
+    ```
+
+    Applications for both C# and Python have been provided. Both apps feature the same functionality.
+
+    Open the built-in code editor, and you can observe the code files in the code editor.
+
+    ```bash
+    code .
+    ```
+
+## Configure your application
+
+For this exercise, you'll complete some key parts of the application to enable using your Azure OpenAI resource.
+
+1. In the code editor, expand the **CSharp** or **Python** folder, depending on your language preference.
+
+2. Open the configuration file for your language.
+
+    - C#: `appsettings.json`
+    - Python: `.env`
+    
+3. Update the configuration values to include the **endpoint** and **key** from the Azure OpenAI resource you created, as well as the model name that you deployed, `text-turbo`. Save the file.
+
+4. Navigate to the folder for your preferred language and install the necessary packages.
+
+    **C#**
+
+    ```bash
+    cd CSharp
+    dotnet add package Azure.AI.OpenAI --version 1.0.0-beta.8
+    ```
+
+    **Python**
+
+    ```bash
+    cd Python
+    pip install python-dotenv
+    pip install openai==0.28.1
+    ```
+
+5. Navigate to your preferred language folder, select the code file, and add the necessary libraries.
+
+    **C#**
+
+    ```csharp
+   // Add Azure OpenAI package
+   using Azure.AI.OpenAI;
+    ```
+
+    **Python**
+
+    ```python
+   # Add OpenAI import
+   import openai
+    ```
+
+6. Review the code file, specifically where the search values are used when completing the parameters for the API call.
+
+## Run your application
+
+Now that your app has been configured, run it to send your request to your model and observe the response. You'll notice the response is now grounded in your data similarly to the studio experience.
+
+1. In the Cloud Shell bash terminal, navigate to the folder for your preferred language.
+1. Expand the terminal to take up most of your browser window and run the application.
+
+    - **C#**: `dotnet run`
+    - **Python**: `python prompt-engineering.py`
+
+1. You'll see it send the prompt `What are some facts about New York?`, and you should see the response referencing your data.
+
 ## Clean up
 
 When you're done with your Azure OpenAI resource, remember to delete the resource in the [Azure portal](https://portal.azure.com/?azure-portal=true). Be sure to also include the storage account and search resource, as those can incur a relatively large cost.

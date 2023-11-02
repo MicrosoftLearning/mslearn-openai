@@ -210,7 +210,7 @@ For this exercise, you'll complete some key parts of the application to enable u
     ```bash
     cd Python
     pip install python-dotenv
-    ppip install openai==0.28.1
+    pip install openai==0.28.1
     ```
 
 5. Navigate to your preferred language folder, select the code file, and add the necessary libraries.
