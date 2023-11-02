@@ -108,20 +108,20 @@ Before using your app, examine how prompt engineering improves the model respons
     **User:**
 
     ```code
-   Joyous moments at the Oscars
-
-   The Oscars this past week where quite something!
-   
-   Though a certain scandal might have stolen the show, this year's Academy Awards were full of moments that filled us with joy and even moved us to tears.
-   These actors and actresses delivered some truly emotional performances, along with some great laughs, to get us through the winter.
-   
-   From Robin Kline's history-making win to a full performance by none other than Casey Jensen herself, don't miss tomorrows rerun of all the festivities.
+    Joyous moments at the Oscars
+    
+    The Oscars this past week where quite something!
+    
+    Though a certain scandal might have stolen the show, this year's Academy Awards were full of moments that filled us with joy and even moved us to tears.
+    These actors and actresses delivered some truly emotional performances, along with some great laughs, to get us through the winter.
+    
+    From Robin Kline's history-making win to a full performance by none other than Casey Jensen herself, don't miss tomorrows rerun of all the festivities.
     ```
 
     **Assistant:**
 
     ```code
-   Entertainment
+    Entertainment
     ```
 
 1. Save those changed to the assistant setup, and send the same prompt about California drought, provided here again for convenience.
@@ -208,9 +208,9 @@ For this exercise, you'll complete some key parts of the application to enable u
     **Python**
 
     ```bash
-   cd Python
-   pip install python-dotenv
-   pip install openai
+    cd Python
+    pip install python-dotenv
+    ppip install openai==0.28.1
     ```
 
 5. Navigate to your preferred language folder, select the code file, and add the necessary libraries.
