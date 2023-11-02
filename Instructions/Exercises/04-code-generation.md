@@ -145,9 +145,9 @@ For this exercise, you'll complete some key parts of the application to enable u
     **Python**
 
     ```bash
-    cd Python
-    pip install python-dotenv
-    pip install openai==0.28.1
+   cd Python
+   pip install python-dotenv
+   pip install openai
     ```
 
 5. Select the code file in this folder for your language and add the necessary libraries.
