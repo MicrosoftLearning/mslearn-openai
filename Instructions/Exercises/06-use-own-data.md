@@ -9,74 +9,81 @@ The Azure OpenAI Service enables you to use your own data with the intelligence 
 
 This exercise will take approximately **20** minutes.
 
-## Before you start
-
-You will need an Azure subscription that has been approved for access to the Azure OpenAI service. 
-
-- To sign up for a free Azure subscription, visit [https://azure.microsoft.com/free](https://azure.microsoft.com/free).
-- To request access to the Azure OpenAI service, visit [https://aka.ms/oaiapply](https://aka.ms/oaiapply).
-
 ## Provision an Azure OpenAI resource
 
-Before you can use Azure OpenAI models, you must provision an Azure OpenAI resource in your Azure subscription.
+If you don't already have one, provision an Azure OpenAI resource in your Azure subscription.
 
-1. Sign into the [Azure portal](https://portal.azure.com?azure-portal=true).
+1. Sign into the [Azure portal](https://portal.azure.com) at `https://portal.azure.com`.
 2. Create an **Azure OpenAI** resource with the following settings:
-    - **Subscription**: An Azure subscription that has been approved for access to the Azure OpenAI service.
-    - **Resource group**: Choose an existing resource group, or create a new one with a name of your choice.
-    - **Region**: Choose any available region.
-    - **Name**: A unique name of your choice.
+    - **Subscription**: *Select an Azure subscription that has been approved for access to the Azure OpenAI service*
+    - **Resource group**: *Choose or create a resource group*
+    - **Region**: *Make a random choice from any of the available regions*\*
+    - **Name**: *A unique name of your choice*
     - **Pricing tier**: Standard S0
+
+    > \* Azure OpenAI resources are constrained by regional quotas. Randomly choosing a region reduces the risk of a single region reaching its quota limit in scenarios where you are sharing a subscription with other users. In the event of a quota limit being reached later in the exercise, there's a possibility you may need to create another resource in a different region.
+
 3. Wait for deployment to complete. Then go to the deployed Azure OpenAI resource in the Azure portal.
 
 ## Deploy a model
 
-To chat with the Azure OpenAI, you must first deploy a model to use through the **Azure OpenAI Studio**. Once deployed, we will use the model with the playground and use our data to ground its responses.
+Azure OpenAI provides a web-based portal named **Azure OpenAI Studio**, that you can use to deploy, manage, and explore models. You'll start your exploration of Azure OpenAI by using Azure OpenAI Studio to deploy a model.
 
-1. On the **Overview** page for your Azure OpenAI resource, use the **Explore** button to open Azure OpenAI Studio in a new browser tab. Alternatively, navigate to [Azure OpenAI Studio](https://oai.azure.com/?azure-portal=true) directly.
-2. In Azure OpenAI Studio, create a new deployment with the following settings:
-    - **Model name**: gpt-35-turbo
-    - **Model version**: *Use the default version*
-    - **Deployment name**: text-turbo
+1. On the **Overview** page for your Azure OpenAI resource, use the **Go to Azure OpenAI Studio** button to open Azure OpenAI Studio in a new browser tab.
+2. In Azure OpenAI Studio, on the **Deployments** page, view your existing model deployments. If you don't already have one, create a new deployment of the **gpt-35-turbo** model with the following settings:
+    - **Model**: gpt-35-turbo
+    - **Model version**: Auto-update to default
+    - **Deployment name**: *A unique name of your choice*
+    - **Advanced options**
+        - **Content filter**: Default
+        - **Tokens per minute rate limit**: 5K\*
+        - **Enable dynamic quota**: Enabled
+
+    > \* A rate limit of 5,000 tokens per minute is more than adequate to complete this exercise while leaving capacity for other people using the same subscription.
 
 ## Observe normal chat behavior without adding your own data
 
-Before connecting Azure OpenAI to your data, first observe how the base model responds to queries without any grounding data.
+Before connecting Azure OpenAI to your data, let's first observe how the base model responds to queries without any grounding data.
 
-1. Navigate to the **Chat** playground, and make sure the `gpt-35-turbo` model you deployed is selected in the **Configuration** pane (this should be the default, if you only have one deployed model).
-1. Enter the following prompts, and observe the output.
+1. In [Azure OpenAI Studio](https://oai.azure.com), in the **Playground** section, select the **Chat** page. The **Chat** playground page consists of three main sections:
+    - **Assistant setup** - used to set the context for the model's responses.
+    - **Chat session** - used to submit chat messages and view responses.
+    - **Configuration** - used to configure settings for the model deployment.
+2. In the **Configuration** section, ensure that your model deployment is selected.
+3. In the **Assistant setup** area, review the default system message, which should be *You are an AI assistant that helps people find information*.
+4. In the **Chat session**, submit the following queries, and review the responses:
 
-    ```code
+    ```
     I'd like to take a trip to New York. Where should I stay?
     ```
 
-    ```code
+    ```
     What are some facts about New York?
     ```
 
-1. Try similar questions about tourism and places to stay for other locations that will be included in our grounding data, such as London, or San Francisco. You'll likely get complete responses about areas or neighborhoods, and some general facts about the city.
+    Try similar questions about tourism and places to stay for other locations that will be included in our grounding data, such as London, or San Francisco. You'll likely get complete responses about areas or neighborhoods, and some general facts about the city.
 
 ## Connect your data in the chat playground
 
 Next, add your data in the chat playground to see how it responds with your data as grounding
 
-1. [Download the data](https://aka.ms/own-data-brochures) that you will use from GitHub. Extract the PDFs in the `.zip` provided.
-1. Navigate to the **Chat** playground, and select *Add your data* in the Assistant setup pane.
+1. In a new browser tab, download an archive of brochure data from `https://aka.ms/own-data-brochures`. Extract the brochures to a folder on your PC.
+1. In Azure OpenAI Studio, in the **Chat** playground, in the **Assistant setup** section, select **Add your data**.
 1. Select **Add a data source** and choose *Upload files* from the dropdown.
 1. You'll need to create a storage account and Azure Cognitive Search resource. Under the dropdown for the storage resource, select **Create a new Azure Blob storage resource**, and create a storage account with the following settings. Anything not specified leave as the default.
 
-    - **Subscription**: *Same subscription as your Azure OpenAI resource*
-    - **Resource group**: *Same resource group as your Azure OpenAI resource*
-    - **Storage account name**: *Enter globally unique name*
-    - **Region**: *Same region as your Azure OpenAI resource*
+    - **Subscription**: *Your Azure subscription*
+    - **Resource group**: *Select the same resource group as your Azure OpenAI resource*
+    - **Storage account name**: *Enter a unique name*
+    - **Region**: *Select the same region as your Azure OpenAI resource*
     - **Redundancy**: Locally-redundant storage (LRS)
 
-1. Once the resource is being created, come back to Azure OpenAI Studio and select **Create a new Azure Cognitive Search resource** with the following settings. Anything not specified leave as the default.
+1. When the resource is created, return to Azure OpenAI Studio and select **Create a new Azure Cognitive Search resource** with the following settings. Anything not specified leave as the default.
 
-    - **Subscription**: *Same subscription as your Azure OpenAI resource*
-    - **Resource group**: *Same resource group as your Azure OpenAI resource*
-    - **Service name**: *Enter globally unique name*
-    - **Location**: *Same location as your Azure OpenAI resource*
+    - **Subscription**: *Your Azure subscription*
+    - **Resource group**: *Select the same resource group as your Azure OpenAI resource*
+    - **Service name**: *Enter a unique name*
+    - **Location**: *Select the same location as your Azure OpenAI resource*
     - **Pricing tier**: Basic
 
 1. Wait until your search resource has been deployed, then switch back to the Azure AI Studio and refresh the page.
@@ -92,7 +99,7 @@ Next, add your data in the chat playground to see how it responds with your data
 
 1. On the **Upload files** page, upload the PDFs you downloaded, and then select **Next**.
 1. On the **Data management** page select the **Keyword** search type from the drop-down, and then select **Next**.
-1. On the **Review and finish** page select **Save and close**, which will add your data. This may take a few minutes, during which you need to leave your window open. Once complete, you'll see the data source, search resource, and index specified in the **Assistant setup** pane.
+1. On the **Review and finish** page select **Save and close**, which will add your data. This may take a few minutes, during which you need to leave your window open. Once complete, you'll see the data source, search resource, and index specified in the **Assistant setup** section.
 
 ## Chat with a model grounded in your data
 
@@ -114,4 +121,4 @@ Try asking it about other cities included in the grounding data, which are Dubai
 
 ## Clean up
 
-When you're done with your Azure OpenAI resource, remember to delete the resource in the [Azure portal](https://portal.azure.com/?azure-portal=true). Be sure to also include the storage account and search resource, as those can incur a relatively large cost.
+When you're done with your Azure OpenAI resource, remember to delete the resource in the [Azure portal](https://portal.azure.com). Be sure to also include the storage account and search resource, as those can incur a relatively large cost.
