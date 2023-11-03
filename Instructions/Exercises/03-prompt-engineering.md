@@ -301,7 +301,7 @@ Each prompt is displayed in the console as it sends for you to see how differenc
 5. Next, choose option **3** to ask for an email similar to the previous one, but with a formatted table with additional animals included.
 6. Next, choose option **4** to ask for another email, but this time specifying different tone in the system message. This time you'll likely see the email in a similar format, but with a much more informal tone. You'll likely even see jokes included!
 
-    > **Tip**: If you would like to see the full response from Azure OpenAI, you can set the `printFullResponse` variable to `True`, and rerun the app.
+    > **Tip**: If you would like to see the full response from Azure OpenAI, you can set the **printFullResponse** variable to `True`, and rerun the app.
 
 ## Clean up
 
