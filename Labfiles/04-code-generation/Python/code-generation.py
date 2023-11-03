@@ -1,7 +1,7 @@
 import os
 from dotenv import load_dotenv
 
-# Add OpenAI import
+# Add Azure OpenAI package
 
 # Set to True to print the full response from OpenAI for each call
 printFullResponse = False
@@ -16,7 +16,7 @@ def main():
         azure_oai_key = os.getenv("AZURE_OAI_KEY")
         azure_oai_model = os.getenv("AZURE_OAI_DEPLOYMENT")
         
-        # Set OpenAI configuration settings
+        # Configure the Azure OpenAI client
 
         while True:
             print('\n1: Add comments to my function\n' +
@@ -50,7 +50,7 @@ def call_openai_model(prompt, model):
     system_message = "You are a helpful AI assistant that helps programmers write code."
     user_message = prompt
 
-    # Build the messages array
+    # Format and send the request to the model
     
     # Print the response to the console, if desired
     if printFullResponse:

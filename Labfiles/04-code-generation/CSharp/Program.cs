@@ -65,13 +65,13 @@ async Task GetResponseFromOpenAI(string prompt)
         return;
     }
     
-    // Initialize the Azure OpenAI client
+    // Configure the Azure OpenAI client
     
     // Define chat prompts
     string systemPrompt = "You are a helpful AI assistant that helps programmers write code.";
     string userPrompt = prompt;
 
-    // Create chat completion options
+    // Format and send the request to the model
     
 
     // Write full response to console, if requested
