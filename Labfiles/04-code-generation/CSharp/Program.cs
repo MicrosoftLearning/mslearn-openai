@@ -84,5 +84,5 @@ async Task GetResponseFromOpenAI(string prompt)
     System.IO.File.WriteAllText("result/app.txt", completion);
 
     // Write response to console
-    Console.WriteLine($"\nResponse written to results/app.txt\n\n");
+    Console.WriteLine($"\nResponse written to result/app.txt\n\n");
 }  

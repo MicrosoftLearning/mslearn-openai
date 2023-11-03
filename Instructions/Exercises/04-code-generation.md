@@ -140,7 +140,8 @@ Applications for both C# and Python have been provided, as well as a sample text
     - **C#**: appsettings.json
     - **Python**: .env
     
-4. Update the configuration values to include the **endpoint** and **key** from the Azure OpenAI resource you created (available on the **Keys and Endpoint** page for your Azure OpenAI resource in the Azure portal), as well as the name you specified for your model deployment (available in the **Deployments** page in Azure OpenAI Studio). Save the file.
+4. Update the configuration values to include the **endpoint** and **key** from the Azure OpenAI resource you created (available on the **Keys and Endpoint** page for your Azure OpenAI resource in the Azure portal), as well as the name you specified for your model deployment (available in the **Deployments** page in Azure OpenAI Studio).
+5. Save the configuration file.
 
 ## Add code to use your Azure OpenAI service model
 
@@ -167,14 +168,14 @@ Now you're ready to use the Azure OpenAI SDK to consume your deployed model.
     **C#**: Program.cs
 
     ```csharp
-    // Initialize the Azure OpenAI client
+    // Configure the Azure OpenAI client
     OpenAIClient client = new OpenAIClient(new Uri(oaiEndpoint), new AzureKeyCredential(oaiKey));
     ```
 
     **Python**: code-generation.py
 
     ```python
-    # Set OpenAI configuration settings
+    # Configure the Azure OpenAI client
     openai.api_type = "azure"
     openai.api_base = azure_oai_endpoint
     openai.api_version = "2023-05-15"
@@ -208,9 +209,9 @@ Now you're ready to use the Azure OpenAI SDK to consume your deployed model.
     string completion = completions.Choices[0].Message.Content;
     ```
 
-    **Python**
+    **Python**: code-generation.py
 
-    ```python: code-generation.py
+    ```python
     # Format and send the request to the model
     messages =[
         {"role": "system", "content": system_message},
@@ -244,24 +245,24 @@ Now that your app has been configured, run it to try generating code for each us
 
 3. Choose option **1** to add comments to your code. Note, the response might take a few seconds for each of these tasks.
 
-    The results will be put into `result/app.txt`. Open that file up, and compare it to the function file in `sample-code`.
+    The results will be put into **result/app.txt**. Open that file up, and compare it to the function file in **sample-code**.
 
 4. Next, choose option **2** to write unit tests for that same function.
 
-    The results will replace what was in `result/app.txt`, and details four unit tests for that function.
+    The results will replace what was in **result/app.txt**, and details four unit tests for that function.
 
 5. Next, choose option **3** to fix bugs in an app for playing Go Fish.
 
-    The results will replace what was in `result/app.txt`, and should have very similar code with a few things corrected.
+    The results will replace what was in **result/app.txt**, and should have very similar code with a few things corrected.
 
     - **C#**: Fixes are made on line 30 and 59
     - **Python**: Fixes are made on line 18 and 31
 
-    The app for Go Fish in `sample-code` can be run if you replace the lines that contain bugs with the response from Azure OpenAI. If you run it without the fixes, it will not work correctly.
+    The app for Go Fish in **sample-code** can be run if you replace the lines that contain bugs with the response from Azure OpenAI. If you run it without the fixes, it will not work correctly.
     
     > **Note**: It's important to note that even though the code for this Go Fish app was corrected for some syntax, it's not a strictly accurate representation of the game. If you look closely, there are issues with not checking if the deck is empty when drawing cards, not removing pairs from the players hand when they get a pair, and a few other bugs that require understanding of card games to realize. This is a great example of how useful generative AI models can be to assist with code generation, but can't be trusted as correct and need to be verified by the developer.
 
-    If you would like to see the full response from Azure OpenAI, you can set the `printFullResponse` variable to `True`, and rerun the app.
+    If you would like to see the full response from Azure OpenAI, you can set the **printFullResponse** variable to `True`, and rerun the app.
 
 ## Clean up
 
