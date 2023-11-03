@@ -30,7 +30,7 @@ Before you can use Azure OpenAI models, you must provision an Azure OpenAI resou
 You can use the DALL-E playground in **Azure OpenAI Studio** to experiment with image-generation.
 
 1. In the Azure portal, on the **Overview** page for your Azure OpenAI resource, use the **Explore** button to open Azure OpenAI Studio in a new browser tab. Alternatively, navigate to [Azure OpenAI Studio](https://oai.azure.com) directly.
-2. Select the **DALL-E Playground**.
+2. In the **Playground** section, select the **DALL-E** playground.
 3. In the **Prompt** box, enter a description of an image you'd like to generate. For example, `An elephant on a skateboard` Then select **Generate** and view the image that is generated.
 
     ![The DALL-E Playground in Azure OpenAI Studio with a generated image.](../media/dall-e-playground.png)
@@ -47,7 +47,7 @@ The Azure OpenAI service provides a REST API that you can use to submit prompts 
 
 Now let's explore how you could build a custom app that uses Azure OpenAI service to generate code. You'll develop your app using Visual Studio Code. The code files for your app have been provided in a GitHub repo.
 
-> **Tip**: If you have aleady cloned the **mslearn-openai** repo, open it in Visual Studio code. Othewise, follow these steps to clone it to your development environment.
+> **Tip**: If you have already cloned the **mslearn-openai** repo, open it in Visual Studio code. Othewise, follow these steps to clone it to your development environment.
 
 1. Start Visual Studio Code.
 2. Open the palette (SHIFT+CTRL+P) and run a **Git: Clone** command to clone the `https://github.com/MicrosoftLearning/mslearn-openai` repository to a local folder (it doesn't matter which folder).
@@ -97,11 +97,11 @@ Now that you've reviewed the code, it's time to run it and generate some images.
     - **C#**: `dotnet run`
     - **Python**: `python generate-image.py`
 
-2. When prompted, enter a description for an image. For example, `A giraffe flying a kite`.
+2. When prompted, enter a description for an image. For example, *A giraffe flying a kite*.
 
 3. Wait for the image to be generated - a hyperlink will be displayed in the terminal pane. Then select the hyperlink to open a new browser tab and review the image that was generated.
 
-4. Close the tab containing the generated image and re-run the app to generate a new image with a different prompt.
+4. Close the browser tab containing the generated image and re-run the app to generate a new image with a different prompt.
 
 ## Clean up
 

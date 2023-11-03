@@ -13,8 +13,7 @@ def main():
         api_version = '2023-06-01-preview'
         
         # Get prompt for image to be generated
-        os.system('clear')
-        prompt = input("Enter a prompt to request an image: ")
+        prompt = input("\nEnter a prompt to request an image: ")
 
         # Make the initial call to start the job
         url = "{}openai/images/generations:submit?api-version={}".format(api_base, api_version)
@@ -32,7 +31,7 @@ def main():
         # Poll the callback URL until the job has succeeeded
         status = ""
         while (status != "succeeded"):
-            time.sleep(3)
+            time.sleep(3) # wait 3 seconds to avoid rate limit
             response = requests.get(operation_location, headers=headers)
             status = response.json()['status']
 

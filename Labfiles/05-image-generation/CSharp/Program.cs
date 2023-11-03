@@ -59,6 +59,7 @@ namespace generate_image
                     var tries = 1;
                     while (status.ToString() != "succeeded" && tries < 101)
                     {
+                        Thread.Sleep (3000); // wait 3 seconds to avoid rate limit
                         tries ++;
                         response = await client.GetAsync(callback_url);
                         stringResponse = await response.Content.ReadAsStringAsync();
