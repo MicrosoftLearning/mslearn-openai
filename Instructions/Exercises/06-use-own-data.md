@@ -65,11 +65,11 @@ Before connecting Azure OpenAI to your data, let's first observe how the base mo
 
 ## Connect your data in the chat playground
 
-Next, add your data in the chat playground to see how it responds with your data as grounding
+Bow you'll add some data for a fictional travel agent company named *Margie's Travel*. Then you'll see how the Azure openAI model responds when using the brochures from Margie's Travel as grounding data.
 
 1. In a new browser tab, download an archive of brochure data from `https://aka.ms/own-data-brochures`. Extract the brochures to a folder on your PC.
 1. In Azure OpenAI Studio, in the **Chat** playground, in the **Assistant setup** section, select **Add your data**.
-1. Select **Add a data source** and choose *Upload files* from the dropdown.
+1. Select **Add a data source** and choose **Upload files**.
 1. You'll need to create a storage account and Azure Cognitive Search resource. Under the dropdown for the storage resource, select **Create a new Azure Blob storage resource**, and create a storage account with the following settings. Anything not specified leave as the default.
 
     - **Subscription**: *Your Azure subscription*
@@ -78,7 +78,7 @@ Next, add your data in the chat playground to see how it responds with your data
     - **Region**: *Select the same region as your Azure OpenAI resource*
     - **Redundancy**: Locally-redundant storage (LRS)
 
-1. When the resource is created, return to Azure OpenAI Studio and select **Create a new Azure Cognitive Search resource** with the following settings. Anything not specified leave as the default.
+1. While the storage account resource is being created, return to Azure OpenAI Studio and select **Create a new Azure Cognitive Search resource** with the following settings. Anything not specified leave as the default.
 
     - **Subscription**: *Your Azure subscription*
     - **Resource group**: *Select the same resource group as your Azure OpenAI resource*
@@ -86,13 +86,13 @@ Next, add your data in the chat playground to see how it responds with your data
     - **Location**: *Select the same location as your Azure OpenAI resource*
     - **Pricing tier**: Basic
 
-1. Wait until your search resource has been deployed, then switch back to the Azure AI Studio and refresh the page.
+1. Wait until your search resource has been deployed, then switch back to the Azure AI Studio.
 1. In the **Add data**, enter the following values for your data source, then select **Next**.
 
     - **Select data source**: Upload files
-    - **Select Azure Blob storage resouce**: *Choose the storage resource you created*
+    - **Select Azure Blob storage resource**: *Use the **Refresh** button to repopulate the list, and then choose the storage resource you created*
         - Turn on CORS when prompted
-    - **Select Azure Cognitive Search resource**: *Choose the search resource you created*
+    - **Select Azure Cognitive Search resource**: *Use the **Refresh** button to repopulate the list, and then choose the search resource you created*
     - **Enter the index name**: margiestravel
     - **Add vector search to this search resource**: unchecked
     - **I acknowledge that connecting to an Azure Cognitive Search account will incur usage to my account** : checked
