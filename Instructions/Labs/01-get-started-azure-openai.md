@@ -41,6 +41,8 @@ Azure OpenAI provides a web-based portal named **Azure OpenAI Studio**, that you
 
 > **Note**: Azure OpenAI includes multiple models, each optimized for a different balance of capabilities and performance. In this exercise, you'll use the **GPT-35-Turbo** model, which is a good general model for summarizing and generating natural language and code. For more information about the available models in Azure OpenAI, see [Models](https://learn.microsoft.com/azure/cognitive-services/openai/concepts/models) in the Azure OpenAI documentation.
 
+> **Note**: In some regions, the new model deployment interface doesn't show the **Model version** option. In this case, don't worry and continue without setting the option.
+
 ## Explore a model in the Completions playground
 
 *Playgrounds* are useful interfaces in Azure OpenAI Studio that you can use to experiment with your deployed models without needing to develop your own client application.
@@ -88,7 +90,7 @@ You can use the prompt and parameters to maximize the likelihood of generating t
 
 1. In the **Parameters** pane, set the following parameter values:
     - **Temperature**: 0
-    - **Max length (tokens)**: 500
+    - **Max response**: 500
 
 2. Submit the following message
 

@@ -3,7 +3,7 @@ import requests
 from dotenv import load_dotenv
 
 # Add OpenAI import. 
-import openai 
+
 
 def main(): 
         
