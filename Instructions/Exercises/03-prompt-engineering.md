@@ -45,9 +45,13 @@ Azure OpenAI provides a web-based portal named **Azure OpenAI Studio**, that you
 
 Let's start by exploring some prompt engineering techniques in the Chat playground.
 
-1. In [Azure OpenAI Studio](https://oai.azure.com/?azure-portal=true), navigate to the **Chat** playground in the left pane.
-2. In the **Assistant setup** area, review the default system message, which should be "You are an AI assistant that helps people find information.".
-3. In the **Chat session**, submit the following prompt:
+1. In [Azure OpenAI Studio](https://oai.azure.com), in the **Playground** section, select the **Chat** page. The **Chat** playground page consists of three main sections:
+    - **Assistant setup** - used to set the context for the model's responses.
+    - **Chat session** - used to submit chat messages and view responses.
+    - **Configuration** - used to configure settings for the model deployment.
+2. In the **Configuration** section, ensure that your model deployment is selected.
+3. In the **Assistant setup** area, review the default system message, which should be *You are an AI assistant that helps people find information*.
+4. In the **Chat session**, submit the following query:
 
     ```
     What kind of article is this?
@@ -63,9 +67,9 @@ Let's start by exploring some prompt engineering techniques in the Chat playgrou
 
     The response provides a description of the article. However, suppose you want a more specific format for article categorization.
 
-4. In the **Assistant setup** section change the system message to `You are a news aggregator that categorizes news articles.`
+5. In the **Assistant setup** section change the system message to `You are a news aggregator that categorizes news articles.`
 
-5. Under the new system message, select the **Add an example** button. Add the following example.
+6. Under the new system message, select the **Add an example** button. Add the following example.
 
     **User:**
     
@@ -87,7 +91,7 @@ Let's start by exploring some prompt engineering techniques in the Chat playgrou
     Sports
       ```
 
-6. Add another example with the following text.
+7. Add another example with the following text.
 
     **User:**
     
@@ -110,9 +114,9 @@ Let's start by exploring some prompt engineering techniques in the Chat playgrou
     Entertainment
     ```
 
-7. Use the **Save changes** button at the top of the **Assistent setup** section to update the system message.
+8. Use the **Save changes** button at the top of the **Assistent setup** section to update the system message.
 
-8. In the **Chat session** section, resubmit the following prompt:
+9. In the **Chat session** section, resubmit the following prompt:
 
     ```
     What kind of article is this?
@@ -128,9 +132,9 @@ Let's start by exploring some prompt engineering techniques in the Chat playgrou
 
     The combination of a more specific system message and some examples of expected queries and responses results in a consistant format for the results.
 
-9. In the **Assistant setup** section, change the system message back to `You are an AI assistant that helps people find information.` and delete the two examples. Then save the changes.
+10. In the **Assistant setup** section, change the system message back to `You are an AI assistant that helps people find information.` and delete the two examples. Then save the changes.
 
-10. In the **Chat session** section, submit the following prompt:
+11. In the **Chat session** section, submit the following prompt:
 
     ```
     # 1. Create a list of animals
@@ -141,7 +145,7 @@ Let's start by exploring some prompt engineering techniques in the Chat playgrou
     The model will likely respond with an answer to satisfy the prompt, split into a numbered list. This is an appropriate response, but suppose what you actually wanted was for the model to write a Python program that performs the tasks you described?
 
 12. Change the system message to `You are a coding assistant helping write python code.` and click **Save changes**
-12. Resubmit the following prompt to the model:
+13. Resubmit the following prompt to the model:
 
     ```
     # 1. Create a list of animals

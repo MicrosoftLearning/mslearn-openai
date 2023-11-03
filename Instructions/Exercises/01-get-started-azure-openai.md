@@ -47,8 +47,12 @@ The *Chat* playground provides a chatbot interface for GPT 3.5 and higher models
 
 > **Note:** The *Chat* playground uses the *ChatCompletions* API rather than the older *Completions* API that is used by the *Completions* playground. The Completions playground is provided for compatibility with older models.
 
-1. In the **Playground** section, select the **Chat** page, and ensure that the **my-gpt-model** model is selected in the configuration pane on the right.
-2. In the **Assistant setup** section, in the **System message** box, replace the current text with the following statement: `The system is an AI teacher that helps people learn about AI`.
+1. In the **Playground** section, select the **Chat** page. The **Chat** playground page consists of three main sections:
+    - **Assistant setup** - used to set the context for the model's responses.
+    - **Chat session** - used to submit chat messages and view responses.
+    - **Configuration** - used to configure settings for the model deployment.
+1. In the **Configuration** section, ensure that your model deployment is selected.
+1. In the **Assistant setup** section, in the **System message** box, replace the current text with the following statement: `The system is an AI teacher that helps people learn about AI`.
 
 3. Below the **System message** box, select **Add an example**, and type the following message and response in the designated boxes:
 
@@ -58,7 +62,7 @@ The *Chat* playground provides a chatbot interface for GPT 3.5 and higher models
     > **Note**: Few-shot examples are used to provide the model with examples of the types of responses that are expected. The model will attempt to reflect the tone and style of the examples in its own responses.
 
 4. Save the changes to start a new session and set the behavioral context of the chat system.
-5. In the query box at the bottom of the page, enter the user query `What is artificial intelligence?`
+5. In the **Chat session** section, enter the user query `What is artificial intelligence?`
 
     > **Note**: You may receive a response that the API deployment is not yet ready. If so, wait for a few minutes and try again.
 
