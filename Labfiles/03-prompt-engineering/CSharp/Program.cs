@@ -60,7 +60,7 @@ async Task GetResponseFromOpenAI(string fileText)
         return;
     }
     
-    // Initialize the Azure OpenAI client
+    // Configure the Azure OpenAI client
     
     // Read text file into system and user prompts
     string[] prompts = System.IO.File.ReadAllLines(fileText);
@@ -71,7 +71,7 @@ async Task GetResponseFromOpenAI(string fileText)
     Console.WriteLine("System prompt: " + systemPrompt);
     Console.WriteLine("User prompt: " + userPrompt);
     
-    // Create chat completion options
+    // Format and send the request to the model
     
 
     

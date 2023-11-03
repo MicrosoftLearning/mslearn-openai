@@ -1,7 +1,7 @@
 import os
 from dotenv import load_dotenv
 
-# Add OpenAI import
+# Add Azure OpenAI package
 
 # Set to True to print the full response from OpenAI for each call
 printFullResponse = False
@@ -16,7 +16,7 @@ def main():
         azure_oai_key = os.getenv("AZURE_OAI_KEY")
         azure_oai_model = os.getenv("AZURE_OAI_MODEL")
         
-        # Set OpenAI configuration settings
+        # Configure the Azure OpenAI client
         
 
         while True:
@@ -54,7 +54,7 @@ def call_openai_model(messages, model):
     print("System message: " + system_message)
     print("User message: " + user_message)
 
-    # Build the messages array
+    # Format and send the request to the model
     
 
 

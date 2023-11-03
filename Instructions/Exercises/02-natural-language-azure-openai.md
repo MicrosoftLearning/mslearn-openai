@@ -80,7 +80,11 @@ Applications for both C# and Python have been provided, as well as a sample text
     
 4. Update the configuration values to include the **endpoint** and **key** from the Azure OpenAI resource you created (available on the **Keys and Endpoint** page for your Azure OpenAI resource in the Azure portal), as well as the name you specified for your model deployment (available in the **Deployments** page in Azure OpenAI Studio). Save the file.
 
-5. In the **Explorer** pane, in the **CSharp** or **Python** folder, open the code file for your preferred language, and replace the comment ***Add Azure OpenAI package*** with code to add the Azure OpenAI SDK library:
+## Add code to use the Azure OpenAI service
+
+Now you're ready to use the Azure OpenAI SDK to consume your deployed model.
+
+1. In the **Explorer** pane, in the **CSharp** or **Python** folder, open the code file for your preferred language, and replace the comment ***Add Azure OpenAI package*** with code to add the Azure OpenAI SDK library:
 
     **C#**: Program.cs
 
@@ -96,7 +100,7 @@ Applications for both C# and Python have been provided, as well as a sample text
    import openai
     ```
 
-6. In the application code for your language, replace the comment ***Add code to build request...*** with the necessary code for building the request; specifying the various parameters for your model such as `prompt` and `temperature`.
+2. In the application code for your language, replace the comment ***Add code to build request...*** with the necessary code for building the request; specifying the various parameters for your model such as `prompt` and `temperature`.
 
     **C#**: Program.cs
 
@@ -149,7 +153,7 @@ Applications for both C# and Python have been provided, as well as a sample text
    print("Summary: " + response.choices[0].message.content + "\n")
     ```
 
-7. Save the changes to your code file.
+3. Save the changes to your code file.
 
 ## Test your application
 
@@ -171,4 +175,4 @@ Increasing the temperature often causes the summary to vary, even when provided 
 
 ## Clean up
 
-When you're done with your Azure OpenAI resource, remember to delete the deployment or the entire resource in the [Azure portal](https://portal.azure.com?azure-portal=true).
+When you're done with your Azure OpenAI resource, remember to delete the deployment or the entire resource in the [Azure portal](https://portal.azure.com).
