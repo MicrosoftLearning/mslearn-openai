@@ -278,6 +278,8 @@ Now you're ready to use the Azure OpenAI SDK to consume your deployed model.
     )
     ```
 
+4. Save the changes to the code file.
+
 ## Run your application
 
 Now that your app has been configured, run it to send your request to your model and observe the response. You'll notice the only difference between the different options is the content of the prompt, all other parameters (such as token count and temperature) remain the same for each request.
@@ -290,6 +292,8 @@ Each prompt is displayed in the console as it sends for you to see how differenc
 
     - **C#**: `dotnet run`
     - **Python**: `python prompt-engineering.py`
+
+    > **Tip**: You can use the **Maximize panel size** (**^**) icon in the terminal toolbar to see more of the console text.
 
 3. Choose option **1** for the most basic prompt. Then observe the prompt input, and generated output. The AI model will likely produce a good generic introduction to a wildlife rescue.
 4. Next, choose option **2** to give it a prompt asking for an intro email, along with some details about the wildlife rescue. This time, you'll likely see the format of an email with the specific animals included, as well as the call for donations.

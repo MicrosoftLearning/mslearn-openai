@@ -166,6 +166,8 @@ Now that your app has been configured, run it to send your request to your model
     - **C#**: `dotnet run`
     - **Python**: `python test-openai-model.py`
 
+    > **Tip**: You can use the **Maximize panel size** (**^**) icon in the terminal toolbar to see more of the console text.
+
 3. Observe the summarization of the sample text file.
 4. In the code file for your preferred language, and change the *temperature* parameter value in your request to **1.0** and save the file.
 5. Run the application again, and observe the output.
