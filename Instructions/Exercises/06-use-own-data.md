@@ -198,16 +198,14 @@ Now that your app has been configured, run it to send your request to your model
 
 Each prompt is displayed in the console as it sends for you to see how differences in prompts produce different responses.
 
-1. In the **Explorer** pane, expand the **Labfiles/03-prompt-engineering/prompts** folder, and view each of the text files it contains. These text files contains various prompts that the app can send to the model.
-
-2. In the interactive terminal pane, ensure the folder context is the folder for your preferred language. Then enter the following command to run the application.
+1. In the interactive terminal pane, ensure the folder context is the folder for your preferred language. Then enter the following command to run the application.
 
     - **C#**: `dotnet run`
     - **Python**: `python prompt-engineering.py`
 
     > **Tip**: You can use the **Maximize panel size** (**^**) icon in the terminal toolbar to see more of the console text.
 
-3. You'll see it send the prompt `What are some facts about New York?`, and you should see the response referencing your data.
+2. You'll see it send the prompt `What are some facts about New York?`, and you should see the response referencing your data.
 
 ## Clean up
 
