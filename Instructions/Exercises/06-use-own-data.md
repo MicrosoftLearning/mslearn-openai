@@ -125,9 +125,9 @@ Next, let's explore how to connect your app to use your own data.
 
 ### Prepare to develop an app in Visual Studio Code
 
-Now let's explore the use of prompt engineering in an app that uses the Azure openAI service SDK. You'll develop your app using Visual Studio Code. The code files for your app have been provided in a GitHub repo.
+Now let's explore the use of your own data in an app that uses the Azure OpenAI service SDK. You'll develop your app using Visual Studio Code. The code files for your app have been provided in a GitHub repo.
 
-> **Tip**: If you have already cloned the **mslearn-openai** repo, open it in Visual Studio code. Othewise, follow these steps to clone it to your development environment.
+> **Tip**: If you have already cloned the **mslearn-openai** repo, open it in Visual Studio code. Otherwise, follow these steps to clone it to your development environment.
 
 1. Start Visual Studio Code.
 2. Open the palette (SHIFT+CTRL+P) and run a **Git: Clone** command to clone the `https://github.com/MicrosoftLearning/mslearn-openai` repository to a local folder (it doesn't matter which folder).
