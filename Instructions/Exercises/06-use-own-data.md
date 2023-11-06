@@ -119,6 +119,96 @@ Try asking it about other cities included in the grounding data, which are Dubai
 
 > **Note**: **Add your data** is still in preview and might not always behave as expected for this feature, such as giving the incorrect reference for a city not included in the grounding data.
 
+## Connect your app to your own data
+
+Next, let's explore how to connect your app to use your own data.
+
+### Prepare to develop an app Visual Studio Code
+
+Now let's explore the use of prompt engineering in an app that uses the Azure openAI service SDK. You'll develop your app using Visual Studio Code. The code files for your app have been provided in a GitHub repo.
+
+> **Tip**: If you have already cloned the **mslearn-openai** repo, open it in Visual Studio code. Othewise, follow these steps to clone it to your development environment.
+
+1. Start Visual Studio Code.
+2. Open the palette (SHIFT+CTRL+P) and run a **Git: Clone** command to clone the `https://github.com/MicrosoftLearning/mslearn-openai` repository to a local folder (it doesn't matter which folder).
+3. When the repository has been cloned, open the folder in Visual Studio Code.
+4. Wait while additional files are installed to support the C# code projects in the repo.
+
+    > **Note**: If you are prompted to add required assets to build and debug, select **Not Now**.
+
+## Configure your application
+
+Applications for both C# and Python have been provided, as well as a sample text file you'll use to test the summarization. Both apps feature the same functionality. First, you'll complete some key parts of the application to enable using your Azure OpenAI resource.
+
+1. In Visual Studio Code, in the **Explorer** pane, browse to the **Labfiles/06-use-own-data** folder and expand the **CSharp** or **Python** folder depending on your language preference. Each folder contains the language-specific files for an app into which you're you're going to integrate Azure OpenAI functionality.
+2. Right-click the **CSharp** or **Python** folder containing your code files and open an integrated terminal. Then install the Azure AI Vision SDK package by running the appropriate command for your language preference:
+
+    **C#**:
+
+    ```
+    dotnet add package Azure.AI.OpenAI --prerelease
+    ```
+
+    **Python**:
+
+    ```
+    pip install openai==0.28.1
+    ```
+
+3. In the **Explorer** pane, in the **CSharp** or **Python** folder, open the configuration file for your preferred language
+
+    - **C#**: appsettings.json
+    - **Python**: .env
+    
+4. Update the configuration values to include:
+    - The  **endpoint** and **key** from the Azure OpenAI resource you created (available on the **Keys and Endpoint** page for your Azure OpenAI resource in the Azure portal)
+    - The name you specified for your model deployment (available in the **Deployments** page in Azure OpenAI Studio).
+    - The endpoint for your search service (the **URL** value on the overview page for your search resource in the Azure portal).
+    - The **Query key** for your search resource (available in the **Keys** page for your search resource in the Azure portal - be sure to use the *query* key and not an admin key)
+    - The name of the search index (which should be **margiestravel**).
+1. Save the configuration file.
+
+### Add code to use the Azure OpenAI service
+
+Now you're ready to use the Azure OpenAI SDK to consume your deployed model.
+
+1. In the **Explorer** pane, in the **CSharp** or **Python** folder, open the code file for your preferred language, and replace the comment ***Add Azure OpenAI package*** with code to add the Azure OpenAI SDK library:
+
+    **C#**: ownData.cs
+
+    ```csharp
+    // Add Azure OpenAI package
+    using Azure.AI.OpenAI;
+    ```
+
+    **Python**: prompt-engineering.py
+
+    ```python
+    # Add Azure OpenAI package
+    import openai
+    ```
+
+2. Review the rest of the code, noting the use of *extensions* (C#) or *datasources* (Python) to provide information about the data source in the request body.
+
+3. Save the changes to the code file.
+
+## Run your application
+
+Now that your app has been configured, run it to send your request to your model and observe the response. You'll notice the only difference between the different options is the content of the prompt, all other parameters (such as token count and temperature) remain the same for each request.
+
+Each prompt is displayed in the console as it sends for you to see how differences in prompts produce different responses.
+
+1. In the **Explorer** pane, expand the **Labfiles/03-prompt-engineering/prompts** folder, and view each of the text files it contains. These text files contains various prompts that the app can send to the model.
+
+2. In the interactive terminal pane, ensure the folder context is the folder for your preferred language. Then enter the following command to run the application.
+
+    - **C#**: `dotnet run`
+    - **Python**: `python prompt-engineering.py`
+
+    > **Tip**: You can use the **Maximize panel size** (**^**) icon in the terminal toolbar to see more of the console text.
+
+3. You'll see it send the prompt `What are some facts about New York?`, and you should see the response referencing your data.
+
 ## Clean up
 
 When you're done with your Azure OpenAI resource, remember to delete the resource in the [Azure portal](https://portal.azure.com). Be sure to also include the storage account and search resource, as those can incur a relatively large cost.

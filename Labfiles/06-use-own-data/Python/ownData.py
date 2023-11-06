@@ -2,7 +2,7 @@ import os
 import requests
 from dotenv import load_dotenv
 
-# Add OpenAI import. 
+# Add Azure OpenAI package
 
 
 def main(): 
