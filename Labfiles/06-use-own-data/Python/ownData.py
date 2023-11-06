@@ -54,6 +54,9 @@ def main():
 
         # Print response
         print("Response: " + response.choices[0].message.content + "\n")
+
+        # print data context
+        print("\nContext information:\n", response.choices[0].message.context)
         
     except Exception as ex:
         print(ex)
