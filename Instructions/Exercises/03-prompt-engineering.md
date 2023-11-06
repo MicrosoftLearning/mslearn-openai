@@ -155,7 +155,7 @@ Let's start by exploring some prompt engineering techniques in the Chat playgrou
 
     The model should correctly respond with python code doing what the comments requested.
 
-## Prepare to develop an app Visual Studio Code
+## Prepare to develop an app in Visual Studio Code
 
 Now let's explore the use of prompt engineering in an app that uses the Azure openAI service SDK. You'll develop your app using Visual Studio Code. The code files for your app have been provided in a GitHub repo.
 

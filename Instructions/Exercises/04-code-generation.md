@@ -103,7 +103,7 @@ Before using in your app, examine how Azure OpenAI can generate and explain code
 
     The model adds comments to the code.
 
-## Prepare to develop an app Visual Studio Code
+## Prepare to develop an app in Visual Studio Code
 
 Now let's explore how you could build a custom app that uses Azure OpenAI service to generate code. You'll develop your app using Visual Studio Code. The code files for your app have been provided in a GitHub repo.
 

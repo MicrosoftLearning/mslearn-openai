@@ -123,7 +123,7 @@ Try asking it about other cities included in the grounding data, which are Dubai
 
 Next, let's explore how to connect your app to use your own data.
 
-### Prepare to develop an app Visual Studio Code
+### Prepare to develop an app in Visual Studio Code
 
 Now let's explore the use of prompt engineering in an app that uses the Azure openAI service SDK. You'll develop your app using Visual Studio Code. The code files for your app have been provided in a GitHub repo.
 

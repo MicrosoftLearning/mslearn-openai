@@ -41,7 +41,7 @@ Azure OpenAI provides a web-based portal named **Azure OpenAI Studio**, that you
 
     > \* A rate limit of 5,000 tokens per minute is more than adequate to complete this exercise while leaving capacity for other people using the same subscription.
 
-## Prepare to develop an app Visual Studio Code
+## Prepare to develop an app in Visual Studio Code
 
 You'll develop your Azure OpenAI app using Visual Studio Code. The code files for your app have been provided in a GitHub repo.
 
