@@ -61,7 +61,7 @@ In this exercise, you'll use a simple Python or Microsoft C# app to generate ima
 3. If you're prompted to create storage for your Cloud Shell, select **Show advanced settings** and select the following settings:
     - **Subscription**: Your subscription
     - **Cloud shell regions**: Choose any available region
-    - **Show VNET isolation setings** Unselected
+    - **Show VNET isolation settings** Unselected
     - **Resource group**: Use the existing resource group where you provisioned your Azure OpenAI resource
     - **Storage account**: Create a new storage account with a unique name
     - **File share**: Create a new file share with a unique name

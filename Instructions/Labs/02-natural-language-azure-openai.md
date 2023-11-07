@@ -146,19 +146,18 @@ For this exercise, you'll complete some key parts of the application to enable u
    // Build completion options object
    ChatCompletionsOptions chatCompletionsOptions = new ChatCompletionsOptions()
    {
-       Messages =
-       {
-          new ChatMessage(ChatRole.System, "You are a helpful assistant. Summarize the following text in 60 words or less."),
-          new ChatMessage(ChatRole.User, text),
-       },
-       MaxTokens = 120,
-       Temperature = 0.7f,
+        Messages =
+        {
+            new ChatMessage(ChatRole.System, "You are a helpful assistant. Summarize the following text in 60 words or less."),
+            new ChatMessage(ChatRole.User, text),
+        },
+        MaxTokens = 120,
+        Temperature = 0.7f,
+        DeploymentName = oaiModelName
    };
 
    // Send request to Azure OpenAI model
-   ChatCompletions response = client.GetChatCompletions(
-       deploymentOrModelName: oaiModelName, 
-       chatCompletionsOptions);
+   ChatCompletions response = client.GetChatCompletions(chatCompletionsOptions);
    string completion = response.Choices[0].Message.Content;
 
    Console.WriteLine("Summary: " + completion + "\n");

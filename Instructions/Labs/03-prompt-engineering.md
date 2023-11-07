@@ -258,20 +258,18 @@ For this exercise, you'll complete some key parts of the application to enable u
    // Create chat completion options
    var chatCompletionsOptions = new ChatCompletionsOptions()
    {
-       Messages =
-       {
-          new ChatMessage(ChatRole.System, systemPrompt),
-          new ChatMessage(ChatRole.User, userPrompt)
-       },
-       Temperature = 0.7f,
-       MaxTokens = 800,
+        Messages =
+        {
+            new ChatMessage(ChatRole.System, systemPrompt),
+            new ChatMessage(ChatRole.User, userPrompt)
+        },
+        Temperature = 0.7f,
+        MaxTokens = 800,
+        DeploymentName = oaiModelName
    };
 
    // Get response from Azure OpenAI
-   Response<ChatCompletions> response = await client.GetChatCompletionsAsync(
-       oaiModelName,
-       chatCompletionsOptions
-   );
+   Response<ChatCompletions> response = await client.GetChatCompletionsAsync(chatCompletionsOptions);
 
    ChatCompletions completions = response.Value;
    string completion = completions.Choices[0].Message.Content;
