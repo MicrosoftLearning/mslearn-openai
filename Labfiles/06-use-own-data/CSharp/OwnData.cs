@@ -36,6 +36,7 @@ ChatCompletionsOptions chatCompletionsOptions = new ChatCompletionsOptions()
     },
     MaxTokens = 600,
     Temperature = 0.9f,
+    DeploymentName = oaiModelName
     AzureExtensionsOptions = new AzureChatExtensionsOptions()
     {
         Extensions =
@@ -51,9 +52,7 @@ ChatCompletionsOptions chatCompletionsOptions = new ChatCompletionsOptions()
 };
 
 // Send request to Azure OpenAI model (Add code here)
-ChatCompletions response = client.GetChatCompletions(
-    deploymentOrModelName: oaiModelName, 
-    chatCompletionsOptions);
+ChatCompletions response = client.GetChatCompletions(chatCompletionsOptions);
 
 ChatMessage responseMessage = response.Choices[0].Message;
 

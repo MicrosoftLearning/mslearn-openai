@@ -249,13 +249,11 @@ Now you're ready to use the Azure OpenAI SDK to consume your deployed model.
         },
         Temperature = 0.7f,
         MaxTokens = 800,
+        DeploymentName = oaiModelName
     };
     
     // Get response from Azure OpenAI
-    Response<ChatCompletions> response = await client.GetChatCompletionsAsync(
-        oaiModelName,
-        chatCompletionsOptions
-    );
+    Response<ChatCompletions> response = await client.GetChatCompletionsAsync(chatCompletionsOptions);
     
     ChatCompletions completions = response.Value;
     string completion = completions.Choices[0].Message.Content;

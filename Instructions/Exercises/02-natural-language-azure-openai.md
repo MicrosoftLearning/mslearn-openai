@@ -112,19 +112,18 @@ Now you're ready to use the Azure OpenAI SDK to consume your deployed model.
    // Build completion options object
    ChatCompletionsOptions chatCompletionsOptions = new ChatCompletionsOptions()
    {
-       Messages =
-       {
-          new ChatMessage(ChatRole.System, "You are a helpful assistant."),
-          new ChatMessage(ChatRole.User, "Summarize the following text in 20 words or less:\n" + text),
-       },
-       MaxTokens = 120,
-       Temperature = 0.7f,
+        Messages =
+        {
+            new ChatMessage(ChatRole.System, "You are a helpful assistant."),
+            new ChatMessage(ChatRole.User, "Summarize the following text in 20 words or less:\n" + text),
+        },
+        MaxTokens = 120,
+        Temperature = 0.7f,
+        DeploymentName = oaiModelName
    };
 
    // Send request to Azure OpenAI model
-   ChatCompletions response = client.GetChatCompletions(
-       deploymentOrModelName: oaiModelName, 
-       chatCompletionsOptions);
+   ChatCompletions response = client.GetChatCompletions(chatCompletionsOptions);
    string completion = response.Choices[0].Message.Content;
 
    Console.WriteLine("Summary: " + completion + "\n");
