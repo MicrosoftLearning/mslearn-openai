@@ -47,23 +47,6 @@ Azure OpenAI provides a web-based portal named **Azure OpenAI Studio**, that you
 
 > **Note**: In some regions, the new model deployment interface doesn't show the **Model version** option. In this case, don't worry and continue without setting the option.
 
-## Explore a model in the Completions playground
-
-*Playgrounds* are useful interfaces in Azure OpenAI Studio that you can use to experiment with your deployed models without needing to develop your own client application.
-
-1. In Azure OpenAI Studio, in the left pane under **Playground**, select **Completions**.
-2. In the **Completions** page, ensure your model deployment is selected and then in the **Examples** list, select **Generate a quiz**.
-
-    The summarize text sample consists of a *prompt* that provides some text to tell the model what kind of response is required and include some contextual information.
-
-3. At the bottom of the page, note the number of *tokens* detected in the text. Tokens are the basic units of a prompt - essentially words or word-parts in the text.
-4. Use the **Generate** button to submit the prompt to the model and retrieve a response.
-
-    The response consists of a quiz based on the example in the prompt.
-
-5. Use the **Regenerate** button to resubmit the prompt, and note that the response may vary from the original one. A generative AI model can produce new language each time it's called.
-6. Use the **View Code** button to view the code that a client application would use to submit the prompt. You can select your preferred programming language. The prompt contains the text you submitted to the model. The request is submitted to the *Completions* API for your Azure OpenAI service.
-
 ## Use the Chat playground
 
 The *Chat* playground provides a chatbot interface for GPT 3.5 and higher models. It uses the *ChatCompletions* API rather than the older *Completions* API.
