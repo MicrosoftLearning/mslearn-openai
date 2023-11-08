@@ -185,8 +185,8 @@ For this exercise, you'll complete some key parts of the application to enable u
        temperature=0.7,
        max_tokens=120,
        messages=[
-           {"role": "system", "content": "You are a helpful assistant. Summarize the following text in 60 words or less."},
-           {"role": "user", "content": text}
+           {"role": "system", "content": "You are a helpful assistant."},
+           {"role": "user", "content": "Summarize the following text in 20 words or less:\n" + text}
        ]
    )
 
