@@ -30,8 +30,8 @@ If you don't already have one, provision an Azure OpenAI resource in your Azure 
 Azure OpenAI provides a web-based portal named **Azure OpenAI Studio**, that you can use to deploy, manage, and explore models. You'll start your exploration of Azure OpenAI by using Azure OpenAI Studio to deploy a model.
 
 1. On the **Overview** page for your Azure OpenAI resource, use the **Go to Azure OpenAI Studio** button to open Azure OpenAI Studio in a new browser tab.
-2. In Azure OpenAI Studio, on the **Deployments** page, view your existing model deployments. If you don't already have one, create a new deployment of the **gpt-35-turbo** model with the following settings:
-    - **Model**: gpt-35-turbo
+2. In Azure OpenAI Studio, on the **Deployments** page, view your existing model deployments. If you don't already have one, create a new deployment of the **gpt-35-turbo-16k** model with the following settings:
+    - **Model**: gpt-35-turbo-16k
     - **Model version**: Auto-update to default
     - **Deployment name**: *A unique name of your choice*
     - **Advanced options**
@@ -50,7 +50,7 @@ Let's start by exploring some prompt engineering techniques in the Chat playgrou
     - **Chat session** - used to submit chat messages and view responses.
     - **Configuration** - used to configure settings for the model deployment.
 2. In the **Configuration** section, ensure that your model deployment is selected.
-3. In the **Assistant setup** area, review the default system message, which should be *You are an AI assistant that helps people find information*.
+3. In the **Assistant setup** area, select the default system message template to set the context for the chat session. The default system message is *You are an AI assistant that helps people find information*.
 4. In the **Chat session**, submit the following query:
 
     ```
@@ -132,7 +132,7 @@ Let's start by exploring some prompt engineering techniques in the Chat playgrou
 
     The combination of a more specific system message and some examples of expected queries and responses results in a consistant format for the results.
 
-10. In the **Assistant setup** section, change the system message back to `You are an AI assistant that helps people find information.` and delete the two examples. Then save the changes.
+10. In the **Assistant setup** section, change the system message back to the default template, which should be `You are an AI assistant that helps people find information.` with no examples. Then save the changes.
 
 11. In the **Chat session** section, submit the following prompt:
 
@@ -178,13 +178,13 @@ Applications for both C# and Python have been provided, as well as a sample text
     **C#**:
 
     ```
-    dotnet add package Azure.AI.OpenAI --prerelease
+    dotnet add package Azure.AI.OpenAI --version 1.0.0-beta.9
     ```
 
     **Python**:
 
     ```
-    pip install openai==0.28.1
+    pip install openai==1.1.1
     ```
 
 3. In the **Explorer** pane, in the **CSharp** or **Python** folder, open the configuration file for your preferred language
@@ -229,7 +229,7 @@ Now you're ready to use the Azure OpenAI SDK to consume your deployed model.
     ```python
     # Configure the Azure OpenAI client
     openai.api_type = "azure"
-    openai.api_base = azure_oai_endpoint
+    openai.azure_endpoint = azure_oai_endpoint
     openai.api_version = "2023-03-15-preview"
     openai.api_key = azure_oai_key
     ```
@@ -269,8 +269,8 @@ Now you're ready to use the Azure OpenAI SDK to consume your deployed model.
     ]
     
     # Call the Azure OpenAI model
-    response = openai.ChatCompletion.create(
-        engine=model,
+    response = openai.chat.completions.create(
+        model=model,
         messages=messages,
         temperature=0.7,
         max_tokens=800

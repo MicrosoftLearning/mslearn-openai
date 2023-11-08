@@ -26,7 +26,7 @@ def main():
         # Set up the OpenAI Python SDK to use your own data for the chat endpoint.
         setup_byod(azure_oai_model)
 
-        text = "Where should I stay in London?"
+        text = input('\nEnter a question:\n')
 
         print("...Sending the following request to Azure OpenAI endpoint...")
         print("Request: " + text + "\n")

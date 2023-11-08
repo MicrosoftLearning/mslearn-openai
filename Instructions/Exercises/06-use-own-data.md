@@ -30,8 +30,8 @@ If you don't already have one, provision an Azure OpenAI resource in your Azure 
 Azure OpenAI provides a web-based portal named **Azure OpenAI Studio**, that you can use to deploy, manage, and explore models. You'll start your exploration of Azure OpenAI by using Azure OpenAI Studio to deploy a model.
 
 1. On the **Overview** page for your Azure OpenAI resource, use the **Go to Azure OpenAI Studio** button to open Azure OpenAI Studio in a new browser tab.
-2. In Azure OpenAI Studio, on the **Deployments** page, view your existing model deployments. If you don't already have one, create a new deployment of the **gpt-35-turbo** model with the following settings:
-    - **Model**: gpt-35-turbo
+2. In Azure OpenAI Studio, on the **Deployments** page, view your existing model deployments. If you don't already have one, create a new deployment of the **gpt-35-turbo-16k** model with the following settings:
+    - **Model**: gpt-35-turbo-16k
     - **Model version**: Auto-update to default
     - **Deployment name**: *A unique name of your choice*
     - **Advanced options**
@@ -50,7 +50,7 @@ Before connecting Azure OpenAI to your data, let's first observe how the base mo
     - **Chat session** - used to submit chat messages and view responses.
     - **Configuration** - used to configure settings for the model deployment.
 2. In the **Configuration** section, ensure that your model deployment is selected.
-3. In the **Assistant setup** area, review the default system message, which should be *You are an AI assistant that helps people find information*.
+3. In the **Assistant setup** area, select the default system message template to set the context for the chat session. The default system message is *You are an AI assistant that helps people find information*.
 4. In the **Chat session**, submit the following queries, and review the responses:
 
     ```
@@ -90,10 +90,11 @@ Bow you'll add some data for a fictional travel agent company named *Margie's Tr
 1. In the **Add data**, enter the following values for your data source, then select **Next**.
 
     - **Select data source**: Upload files
+    - **Subscription**: Your Azure subscription
     - **Select Azure Blob storage resource**: *Use the **Refresh** button to repopulate the list, and then choose the storage resource you created*
         - Turn on CORS when prompted
     - **Select Azure Cognitive Search resource**: *Use the **Refresh** button to repopulate the list, and then choose the search resource you created*
-    - **Enter the index name**: margiestravel
+    - **Enter the index name**: `margiestravel`
     - **Add vector search to this search resource**: unchecked
     - **I acknowledge that connecting to an Azure Cognitive Search account will incur usage to my account** : checked
 
@@ -146,13 +147,13 @@ Applications for both C# and Python have been provided, as well as a sample text
     **C#**:
 
     ```
-    dotnet add package Azure.AI.OpenAI --prerelease
+    dotnet add package Azure.AI.OpenAI --version 1.0.0-beta.9
     ```
 
     **Python**:
 
     ```
-    pip install openai==0.28.1
+     pip install openai==0.28.1
     ```
 
 3. In the **Explorer** pane, in the **CSharp** or **Python** folder, open the configuration file for your preferred language
@@ -165,7 +166,7 @@ Applications for both C# and Python have been provided, as well as a sample text
     - The name you specified for your model deployment (available in the **Deployments** page in Azure OpenAI Studio).
     - The endpoint for your search service (the **Url** value on the overview page for your search resource in the Azure portal).
     - A **key** for your search resource (available in the **Keys** page for your search resource in the Azure portal - you can use either of the admin keys)
-    - The name of the search index (which should be **margiestravel**).
+    - The name of the search index (which should be `margiestravel`).
 1. Save the configuration file.
 
 ### Add code to use the Azure OpenAI service
@@ -196,8 +197,6 @@ Now you're ready to use the Azure OpenAI SDK to consume your deployed model.
 
 Now that your app has been configured, run it to send your request to your model and observe the response. You'll notice the only difference between the different options is the content of the prompt, all other parameters (such as token count and temperature) remain the same for each request.
 
-Each prompt is displayed in the console as it sends for you to see how differences in prompts produce different responses.
-
 1. In the interactive terminal pane, ensure the folder context is the folder for your preferred language. Then enter the following command to run the application.
 
     - **C#**: `dotnet run`
@@ -205,7 +204,7 @@ Each prompt is displayed in the console as it sends for you to see how differenc
 
     > **Tip**: You can use the **Maximize panel size** (**^**) icon in the terminal toolbar to see more of the console text.
 
-2. Review the response to the prompt *What are some facts about New York?*, which includes an answer as well as some details of the data used to ground the prompt, which was obtained from your search service.
+2. Review the response to the prompt `Tell me about New York?`, which should includes an answer as well as some details of the data used to ground the prompt, which was obtained from your search service.
 
 ## Clean up
 

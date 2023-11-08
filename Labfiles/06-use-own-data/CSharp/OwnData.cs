@@ -18,40 +18,43 @@ string azureSearchEndpoint = config["AzureSearchEndpoint"] ?? "";
 string azureSearchKey = config["AzureSearchKey"] ?? "";
 string azureSearchIndex = config["AzureSearchIndex"] ?? "";
 
-// Initialize the Azure OpenAI client (Add code here)
+// Initialize the Azure OpenAI client
 OpenAIClient client = new OpenAIClient(new Uri(oaiEndpoint), new AzureKeyCredential(oaiKey));
 
-string text = "Where should I stay in London?";
 
-// Send request to Azure OpenAI model  
-Console.WriteLine("...Sending the following request to Azure OpenAI endpoint...");  
-Console.WriteLine("Request: " + text + "\n");  
+// Get the prompt text
+Console.WriteLine("Enter a question:");
+string? text = Console.ReadLine();
+
+// Create extension config for own data
+AzureCognitiveSearchChatExtensionConfiguration ownDataConfig = new()
+{
+        SearchEndpoint = new Uri(azureSearchEndpoint),
+        IndexName = azureSearchIndex
+};
+ownDataConfig.SetSearchKey(azureSearchKey);
 
 // Build completion options object
 ChatCompletionsOptions chatCompletionsOptions = new ChatCompletionsOptions()
 {
     Messages =
     {
-        new ChatMessage(ChatRole.User, text),
+        new ChatMessage(ChatRole.User, text)
     },
     MaxTokens = 600,
     Temperature = 0.9f,
-    DeploymentName = oaiModelName
+    DeploymentName = oaiModelName,
+    // Specify extension options
     AzureExtensionsOptions = new AzureChatExtensionsOptions()
     {
-        Extensions =
-        {
-            new AzureCognitiveSearchChatExtensionConfiguration()
-            {
-                SearchEndpoint = new Uri(azureSearchEndpoint),
-                SearchKey = new AzureKeyCredential(azureSearchKey),
-                IndexName = azureSearchIndex,
-            },
-        }
+        Extensions = {ownDataConfig}
     }
 };
 
-// Send request to Azure OpenAI model (Add code here)
+// Send request to Azure OpenAI model  
+Console.WriteLine("...Sending the following request to Azure OpenAI endpoint...");  
+Console.WriteLine("Request: " + text + "\n");
+
 ChatCompletions response = client.GetChatCompletions(chatCompletionsOptions);
 
 ChatMessage responseMessage = response.Choices[0].Message;

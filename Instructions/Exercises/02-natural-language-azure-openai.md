@@ -30,8 +30,8 @@ If you don't already have one, provision an Azure OpenAI resource in your Azure 
 Azure OpenAI provides a web-based portal named **Azure OpenAI Studio**, that you can use to deploy, manage, and explore models. You'll start your exploration of Azure OpenAI by using Azure OpenAI Studio to deploy a model.
 
 1. On the **Overview** page for your Azure OpenAI resource, use the **Go to Azure OpenAI Studio** button to open Azure OpenAI Studio in a new browser tab.
-2. In Azure OpenAI Studio, on the **Deployments** page, view your existing model deployments. If you don't already have one, create a new deployment of the **gpt-35-turbo** model with the following settings:
-    - **Model**: gpt-35-turbo
+2. In Azure OpenAI Studio, on the **Deployments** page, view your existing model deployments. If you don't already have one, create a new deployment of the **gpt-35-turbo-16k** model with the following settings:
+    - **Model**: gpt-35-turbo-16k
     - **Model version**: Auto-update to default
     - **Deployment name**: *A unique name of your choice*
     - **Advanced options**
@@ -64,13 +64,13 @@ Applications for both C# and Python have been provided, as well as a sample text
     **C#**:
 
     ```
-    dotnet add package Azure.AI.OpenAI --prerelease
+    dotnet add package Azure.AI.OpenAI --version 1.0.0-beta.9
     ```
 
     **Python**:
 
     ```
-    pip install openai==0.28.1
+    pip install openai==1.1.1
     ```
 
 3. In the **Explorer** pane, in the **CSharp** or **Python** folder, open the configuration file for your preferred language
@@ -134,19 +134,19 @@ Now you're ready to use the Azure OpenAI SDK to consume your deployed model.
     ```python
    # Set OpenAI configuration settings
    openai.api_type = "azure"
-   openai.api_base = azure_oai_endpoint
+   openai.azure_endpoint = azure_oai_endpoint
    openai.api_version = "2023-03-15-preview"
    openai.api_key = azure_oai_key
 
    # Send request to Azure OpenAI model
    print("Sending request for summary to Azure OpenAI endpoint...\n\n")
-   response = openai.ChatCompletion.create(
-       engine=azure_oai_model,
+   response = openai.chat.completions.create(
+       model=azure_oai_model,
        temperature=0.7,
        max_tokens=120,
        messages=[
           {"role": "system", "content": "You are a helpful assistant."},
-           {"role": "user", "content": "Summarize the following text in 20 words or less:\n" + text}
+          {"role": "user", "content": "Summarize the following text in 20 words or less:\n" + text}
        ]
    )
 
