@@ -182,17 +182,17 @@ To show how to integrate with an Azure OpenAI model, we'll use a short command-l
    cd azure-openai/Labfiles/03-prompt-engineering
     ```
 
-    Applications for both C# and Python have been provided, as well as a text files that provide the prompts. Both apps feature the same functionality.
-
-    Open the built-in code editor, and you can observe the prompt files that you'll be using in `prompts`. Use the following command to open the lab files in the code editor.
+7. Open the built-in code editor by running the following command:
 
     ```bash
-   code .
+    code .
     ```
+
+8. In the code editor, expand the **prompts** folder and review text files containing the the prompts that your application will submit to the model.
 
 ## Configure your application
 
-For this exercise, you'll complete some key parts of the application to enable using your Azure OpenAI resource.
+For this exercise, you'll complete some key parts of the application to enable using your Azure OpenAI resource. Applications for both C# and Python have been provided. Both apps feature the same functionality.
 
 1. In the code editor, expand the **CSharp** or **Python** folder, depending on your language preference.
 
@@ -203,13 +203,13 @@ For this exercise, you'll complete some key parts of the application to enable u
     
 3. Update the configuration values to include the **endpoint** and **key** from the Azure OpenAI resource you created, as well as the model name that you deployed. Save the file.
 
-4. Navigate to the folder for your preferred language and install the necessary packages.
+4. In the console pane, enter the following commands to navigate to the folder for your preferred language and install the necessary packages.
 
     **C#**
 
     ```bash
-   cd CSharp
-   dotnet add package Azure.AI.OpenAI --version 1.0.0-beta.9
+    cd CSharp
+    dotnet add package Azure.AI.OpenAI --version 1.0.0-beta.9
     ```
 
     **Python**
@@ -217,7 +217,7 @@ For this exercise, you'll complete some key parts of the application to enable u
     ```bash
     cd Python
     pip install python-dotenv
-    pip install openai==0.28.1
+    pip install openai==1.1.1
     ```
 
 5. Navigate to your preferred language folder, select the code file, and add the necessary libraries.
@@ -225,44 +225,44 @@ For this exercise, you'll complete some key parts of the application to enable u
     **C#**
 
     ```csharp
-   // Add Azure OpenAI package
-   using Azure.AI.OpenAI;
+    // Add Azure OpenAI package
+    using Azure.AI.OpenAI;
     ```
 
     **Python**
 
     ```python
-   # Add OpenAI import
-   import openai
+    # Add OpenAI import
+    import openai
     ```
 
-5. Open up the application code for your language and add the necessary code for configuring the client.
+6. Open up the application code for your language and add the necessary code for configuring the client.
 
     **C#**
 
     ```csharp
-   // Initialize the Azure OpenAI client
-   OpenAIClient client = new OpenAIClient(new Uri(oaiEndpoint), new AzureKeyCredential(oaiKey));
+    // Initialize the Azure OpenAI client
+    OpenAIClient client = new OpenAIClient(new Uri(oaiEndpoint), new AzureKeyCredential(oaiKey));
     ```
 
     **Python**
 
     ```python
-   # Set OpenAI configuration settings
-   openai.api_type = "azure"
-   openai.api_base = azure_oai_endpoint
-   openai.api_version = "2023-03-15-preview"
-   openai.api_key = azure_oai_key
+    # Set OpenAI configuration settings
+    openai.api_type = "azure"
+    openai.azure_endpoint = azure_oai_endpoint
+    openai.api_version = "2023-03-15-preview"
+    openai.api_key = azure_oai_key
     ```
 
-6. In the function that calls the Azure OpenAI model, add the code to format and send the request to the model.
+7. In the function that calls the Azure OpenAI model, add the code to format and send the request to the model.
 
     **C#**
 
     ```csharp
-   // Create chat completion options
-   var chatCompletionsOptions = new ChatCompletionsOptions()
-   {
+    // Create chat completion options
+    var chatCompletionsOptions = new ChatCompletionsOptions()
+    {
         Messages =
         {
             new ChatMessage(ChatRole.System, systemPrompt),
@@ -271,31 +271,31 @@ For this exercise, you'll complete some key parts of the application to enable u
         Temperature = 0.7f,
         MaxTokens = 800,
         DeploymentName = oaiModelName
-   };
-
-   // Get response from Azure OpenAI
-   Response<ChatCompletions> response = await client.GetChatCompletionsAsync(chatCompletionsOptions);
-
-   ChatCompletions completions = response.Value;
-   string completion = completions.Choices[0].Message.Content;
+    };
+    
+    // Get response from Azure OpenAI
+    Response<ChatCompletions> response = await client.GetChatCompletionsAsync(chatCompletionsOptions);
+    
+    ChatCompletions completions = response.Value;
+    string completion = completions.Choices[0].Message.Content;
     ```
 
     **Python**
 
     ```python
-   # Build the messages array
-   messages =[
-       {"role": "system", "content": system_message},
-       {"role": "user", "content": user_message},
-   ]
-
-   # Call the Azure OpenAI model
-   response = openai.ChatCompletion.create(
-       engine=model,
-       messages=messages,
-       temperature=0.7,
-       max_tokens=800
-   )
+    # Build the messages array
+    messages =[
+        {"role": "system", "content": system_message},
+        {"role": "user", "content": user_message},
+    ]
+    
+    # Call the Azure OpenAI model
+    response = openai.chat.completions.create(
+        model=model,
+        messages=messages,
+        temperature=0.7,
+        max_tokens=800
+    )
     ```
 
 ## Run your application

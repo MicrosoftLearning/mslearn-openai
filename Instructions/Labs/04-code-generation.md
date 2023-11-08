@@ -109,27 +109,27 @@ To show how to integrate with an Azure OpenAI model, we'll use a short command-l
 5. Once the terminal starts, enter the following command to download the sample application and save it to a folder called `azure-openai`.
 
     ```bash
-   rm -r azure-openai -f
-   git clone https://github.com/MicrosoftLearning/mslearn-openai azure-openai
+    rm -r azure-openai -f
+    git clone https://github.com/MicrosoftLearning/mslearn-openai azure-openai
     ```
 
 6. The files are downloaded to a folder named **azure-openai**. Navigate to the lab files for this exercise using the following command.
 
     ```bash
-   cd azure-openai/Labfiles/04-code-generation
+    cd azure-openai/Labfiles/04-code-generation
     ```
 
-    Applications for both C# and Python have been provided, as well as sample code we'll be using in this lab.
-
-    Open the built-in code editor, and you can observe the code files we'll be using in `sample-code`. Use the following command to open the lab files in the code editor.
+7. Open the built-in code editor by running the following command:
 
     ```bash
-   code .
+    code .
     ```
+
+8. In the code editor, expand the **sample-code** folder and review the code files that your application will use the model to improve.
 
 ## Configure your application
 
-For this exercise, you'll complete some key parts of the application to enable using your Azure OpenAI resource.
+For this exercise, you'll complete some key parts of the application to enable using your Azure OpenAI resource. Applications for both C# and Python have been provided.
 
 1. In the code editor, expand the language folder for your preferred language.
 
@@ -140,13 +140,13 @@ For this exercise, you'll complete some key parts of the application to enable u
 
 3. Update the configuration values to include the **endpoint** and **key** from the Azure OpenAI resource you created, as well as the name of your deployment. Save the file.
 
-4. Navigate to the folder for your preferred language and install the necessary packages.
+4. In the console pane, enter the following commands to navigate to the folder for your preferred language and install the necessary packages.
 
     **C#**
 
     ```bash
-   cd CSharp
-   dotnet add package Azure.AI.OpenAI --version 1.0.0-beta.9
+    cd CSharp
+    dotnet add package Azure.AI.OpenAI --version 1.0.0-beta.9
     ```
 
     **Python**
@@ -154,51 +154,47 @@ For this exercise, you'll complete some key parts of the application to enable u
     ```bash
     cd Python
     pip install python-dotenv
-    pip install openai==0.28.1
+    pip install openai==1.1.1
     ```
 
 5. Select the code file in this folder for your language and add the necessary libraries.
 
-    **C#**
-
-    `Program.cs`
+    **C#**: Program.cs
 
     ```csharp
-   // Add Azure OpenAI package
-   using Azure.AI.OpenAI;
+    // Add Azure OpenAI package
+    using Azure.AI.OpenAI;
     ```
 
-    **Python**
-
-    `code-generation.py`
+    **Python**: code-generation.py
 
     ```python
-   # Add OpenAI import
-   import openai
+    # Add OpenAI import
+    import openai
     ```
 
 6. Add the necessary code for configuring the client.
 
-    **C#**
+    **C#**: Program.cs
 
     ```csharp
-   // Initialize the Azure OpenAI client
-   OpenAIClient client = new OpenAIClient(new Uri(oaiEndpoint), new AzureKeyCredential(oaiKey));
+    // Initialize the Azure OpenAI client
+    OpenAIClient client = new OpenAIClient(new Uri(oaiEndpoint), new AzureKeyCredential(oaiKey));
     ```
 
-    **Python**
+    **Python**: code-generation.py
 
     ```python
-   # Set OpenAI configuration settings
-   openai.api_type = "azure"
-   openai.api_base = azure_oai_endpoint
-   openai.api_version = "2023-05-15"
-   openai.api_key = azure_oai_key
+    # Set OpenAI configuration settings
+    openai.api_type = "azure"
+    openai.azure_endpoint = azure_oai_endpoint
+    openai.api_version = "2023-05-15"
+    openai.api_key = azure_oai_key
     ```
 
 7. In the function that calls the Azure OpenAI model, add the code to format and send the request to the model.
 
-    **C#**
+    **C#**: Program.cs
 
     ```csharp
     // Create chat completion options
@@ -221,22 +217,22 @@ For this exercise, you'll complete some key parts of the application to enable u
     string completion = completions.Choices[0].Message.Content;
     ```
 
-    **Python**
+    **Python**: code-generation.py
 
     ```python
-   # Build the messages array
-   messages =[
-       {"role": "system", "content": system_message},
-       {"role": "user", "content": user_message},
-   ]
-
-   # Call the Azure OpenAI model
-   response = openai.ChatCompletion.create(
-       engine=model,
-       messages=messages,
-       temperature=0.7,
-       max_tokens=1000
-   )
+    # Build the messages array
+    messages =[
+        {"role": "system", "content": system_message},
+        {"role": "user", "content": user_message},
+    ]
+    
+    # Call the Azure OpenAI model
+    response = openai.chat.completions.create(
+        model=model,
+        messages=messages,
+        temperature=0.7,
+        max_tokens=1000
+    )
     ```
 
 ## Run your application

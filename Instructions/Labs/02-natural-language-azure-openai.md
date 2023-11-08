@@ -85,17 +85,17 @@ To show how to integrate with an Azure OpenAI model, we'll use a short command-l
    cd azure-openai/Labfiles/02-nlp-azure-openai
     ```
 
-Applications for both C# and Python have been provided, as well as a sample text file you'll use to test the summarization. Both apps feature the same functionality.
+7. Open the built-in code editor by running the following command:
 
-Open the built-in code editor, and observe the text file that you'll be summarizing with your model located at `text-files/sample-text.txt`. Use the following command to open the lab files in the code editor.
+    ```bash
+    code .
+    ```
 
-```bash
-code .
-```
+8. In the code editor, expand the **text-files** folder and select **sample-text.txt** to see the text that you will use your model to summarize.
 
 ## Configure your application
 
-For this exercise, you'll complete some key parts of the application to enable using your Azure OpenAI resource.
+For this exercise, you'll complete some key parts of the application to enable using your Azure OpenAI resource. Applications for both C# and Python have been provided. Both apps feature the same functionality.
 
 1. In the code editor, expand the **CSharp** or **Python** folder, depending on your language preference.
 
@@ -106,7 +106,7 @@ For this exercise, you'll complete some key parts of the application to enable u
     
 3. Update the configuration values to include the **endpoint** and **key** from the Azure OpenAI resource you created, as well as the model name that you deployed. Save the file.
 
-4. Navigate to the folder for your preferred language and install the necessary packages
+4. In the console pane, enter the following commands to navigate to the folder for your preferred language and install the necessary packages
 
     **C#**
 
@@ -120,7 +120,7 @@ For this exercise, you'll complete some key parts of the application to enable u
     ```bash
     cd Python
     pip install python-dotenv
-    pip install openai==0.28.1
+    pip install openai==1.1.1
     ```
 
 5. Navigate to your preferred language folder, select the code file, and add the necessary libraries.
@@ -139,7 +139,7 @@ For this exercise, you'll complete some key parts of the application to enable u
    import openai
     ```
 
-5. Open up the application code for your language and add the necessary code for building the request, which specifies the various parameters for your model such as `prompt` and `temperature`.
+6. Open up the application code for your language and add the necessary code for building the request, which specifies the various parameters for your model such as `prompt` and `temperature`.
 
     **C#**
 
@@ -172,18 +172,18 @@ For this exercise, you'll complete some key parts of the application to enable u
     ```python
    # Set OpenAI configuration settings
    openai.api_type = "azure"
-   openai.api_base = azure_oai_endpoint
+   openai.azure_endpoint = azure_oai_endpoint
    openai.api_version = "2023-03-15-preview"
    openai.api_key = azure_oai_key
 
    # Send request to Azure OpenAI model
    print("Sending request for summary to Azure OpenAI endpoint...\n\n")
-   response = openai.ChatCompletion.create(
-       engine=azure_oai_model,
+   response = openai.chat.completions.create(
+       model=azure_oai_model,
        temperature=0.7,
        max_tokens=120,
        messages=[
-          {"role": "system", "content": "You are a helpful assistant. Summarize the following text in 60 words or less."},
+           {"role": "system", "content": "You are a helpful assistant. Summarize the following text in 60 words or less."},
            {"role": "user", "content": text}
        ]
    )

@@ -204,7 +204,7 @@ Now that your app has been configured, run it to send your request to your model
 
     > **Tip**: You can use the **Maximize panel size** (**^**) icon in the terminal toolbar to see more of the console text.
 
-2. Review the response to the prompt `Tell me about New York?`, which should includes an answer as well as some details of the data used to ground the prompt, which was obtained from your search service.
+2. Review the response to the prompt `Tell me about New York`, which should includes an answer as well as some details of the data used to ground the prompt, which was obtained from your search service.
 
 ## Clean up
 

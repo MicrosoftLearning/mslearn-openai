@@ -75,8 +75,8 @@ In this exercise, you'll use a simple Python or Microsoft C# app to generate ima
 5. Once the terminal starts, enter the following command to download the application code you are going to work with.
 
     ```bash
-   rm -r azure-openai -f
-   git clone https://github.com/MicrosoftLearning/mslearn-openai azure-openai
+    rm -r azure-openai -f
+    git clone https://github.com/MicrosoftLearning/mslearn-openai azure-openai
     ```
 
     The files are downloaded to a folder named **azure-openai**. Applications for both C# and Python have been provided. Both apps feature the same functionality.
@@ -86,19 +86,19 @@ In this exercise, you'll use a simple Python or Microsoft C# app to generate ima
     **Python**
 
     ```bash
-   cd azure-openai/Labfiles/05-image-generation/Python
+    cd azure-openai/Labfiles/05-image-generation/Python
     ```
 
     **C#**
 
     ```bash
-   cd azure-openai/Labfiles/05-image-generation/CSharp
+    cd azure-openai/Labfiles/05-image-generation/CSharp
     ```
 
 7. Use the following command to open the built-in code editor and see the code files you will be working with.
 
     ```bash
-   code .
+    code .
     ```
 
 ### Configure your application
@@ -117,7 +117,7 @@ The application uses a configuration file to store the details needed to connect
 3. If you are using **Python**, you'll also need to install the **python-dotenv** package used to read the configuration file. In the console prompt pane, ensure the current folder is **~/azure-openai/Labfiles/05-image-generation/Python**. Then enter this command:
 
     ```bash
-   pip install python-dotenv
+    pip install python-dotenv
     ```
 
 ### View application code
@@ -148,13 +148,13 @@ Now that you've reviewed the code, it's time to run it and generate some images.
     **Python**
 
     ```bash
-   python generate-image.py
+    python generate-image.py
     ```
 
     **C#**
 
     ```bash
-   dotnet run
+    dotnet run
     ```
 
 2. When prompted, enter a description for an image. For example, *A giraffe flying a kite*.

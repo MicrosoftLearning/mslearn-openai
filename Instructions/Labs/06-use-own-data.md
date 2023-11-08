@@ -151,19 +151,17 @@ To show how to connect an Azure OpenAI app to your own data, we'll use a short c
 5. Once the terminal starts, enter the following command to download the sample application and save it to a folder called `azure-openai`.
 
     ```bash
-   rm -r azure-openai -f
-   git clone https://github.com/MicrosoftLearning/mslearn-openai azure-openai
+    rm -r azure-openai -f
+    git clone https://github.com/MicrosoftLearning/mslearn-openai azure-openai
     ```
 
 6. The files are downloaded to a folder named **azure-openai**. Navigate to the lab files for this exercise using the following command.
 
     ```bash
-   cd azure-openai/Labfiles/06-use-own-data
+    cd azure-openai/Labfiles/06-use-own-data
     ```
 
-    Applications for both C# and Python have been provided. Both apps feature the same functionality.
-
-    Open the built-in code editor, and you can observe the code files in the code editor.
+7. Open the built-in code editor by running the following command:
 
     ```bash
     code .
@@ -171,7 +169,7 @@ To show how to connect an Azure OpenAI app to your own data, we'll use a short c
 
 ## Configure your application
 
-For this exercise, you'll complete some key parts of the application to enable using your Azure OpenAI resource.
+For this exercise, you'll complete some key parts of the application to enable using your Azure OpenAI resource. Applications for both C# and Python have been provided. Both apps feature the same functionality.
 
 1. In the code editor, expand the **CSharp** or **Python** folder, depending on your language preference.
 
@@ -180,9 +178,16 @@ For this exercise, you'll complete some key parts of the application to enable u
     - C#: `appsettings.json`
     - Python: `.env`
     
-3. Update the configuration values to include the **endpoint** and **key** from the Azure OpenAI resource you created, as well as the model name that you deployed. Save the file.
+3. Update the configuration values to include:
+    - The  **endpoint** and a **key** from the Azure OpenAI resource you created (available on the **Keys and Endpoint** page for your Azure OpenAI resource in the Azure portal)
+    - The name you specified for your model deployment (available in the **Deployments** page in Azure OpenAI Studio).
+    - The endpoint for your search service (the **Url** value on the overview page for your search resource in the Azure portal).
+    - A **key** for your search resource (available in the **Keys** page for your search resource in the Azure portal - you can use either of the admin keys)
+    - The name of the search index (which should be `margiestravel`).
+    
+4. Save the updated configuration file.
 
-4. Navigate to the folder for your preferred language and install the necessary packages.
+5. In the console pane, enter the following commands to navigate to the folder for your preferred language and install the necessary packages.
 
     **C#**
 
@@ -199,23 +204,23 @@ For this exercise, you'll complete some key parts of the application to enable u
     pip install openai==0.28.1
     ```
 
-5. Navigate to your preferred language folder, select the code file, and add the necessary libraries.
+6. In the code editor, navigate to your preferred language folder, select the code file, and add the necessary libraries.
 
-    **C#**
+    **C#**: OwnData.cs
 
     ```csharp
    // Add Azure OpenAI package
    using Azure.AI.OpenAI;
     ```
 
-    **Python**
+    **Python**: ownData.py
 
     ```python
    # Add OpenAI import
    import openai
     ```
 
-6. Review the code file, specifically where the search values are used when completing the parameters for the API call.
+7. Review the code file, specifically where the search values are used when completing the parameters for the API call.
 
 ## Run your application
 
@@ -225,9 +230,9 @@ Now that your app has been configured, run it to send your request to your model
 1. Expand the terminal to take up most of your browser window and run the application.
 
     - **C#**: `dotnet run`
-    - **Python**: `python prompt-engineering.py`
+    - **Python**: `python ownData.py`
 
-1. You'll see it send the prompt `What are some facts about New York?`, and you should see the response referencing your data.
+1. You'll see it send the prompt `Tell me about New York`, and you should see the response referencing your data.
 
 ## Clean up
 
