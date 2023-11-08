@@ -101,6 +101,8 @@ In this exercise, you'll use a simple Python or Microsoft C# app to generate ima
     code .
     ```
 
+    > **Tip**: Consult the [documentation for the Azure cloud shell code editor](https://learn.microsoft.com/azure/cloud-shell/using-cloud-shell-editor) for more details about using it to work with files in the Azure cloud shell environment.
+
 ### Configure your application
 
 The application uses a configuration file to store the details needed to connect to your Azure OpenAI service account.

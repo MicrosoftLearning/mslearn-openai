@@ -93,6 +93,8 @@ To show how to integrate with an Azure OpenAI model, we'll use a short command-l
 
 8. In the code editor, expand the **text-files** folder and select **sample-text.txt** to see the text that you will use your model to summarize.
 
+    > **Tip**: Consult the [documentation for the Azure cloud shell code editor](https://learn.microsoft.com/azure/cloud-shell/using-cloud-shell-editor) for more details about using it to work with files in the Azure cloud shell environment.
+
 ## Configure your application
 
 For this exercise, you'll complete some key parts of the application to enable using your Azure OpenAI resource. Applications for both C# and Python have been provided. Both apps feature the same functionality.

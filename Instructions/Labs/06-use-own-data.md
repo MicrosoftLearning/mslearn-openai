@@ -167,6 +167,8 @@ To show how to connect an Azure OpenAI app to your own data, we'll use a short c
     code .
     ```
 
+    > **Tip**: Consult the [documentation for the Azure cloud shell code editor](https://learn.microsoft.com/azure/cloud-shell/using-cloud-shell-editor) for more details about using it to work with files in the Azure cloud shell environment.
+
 ## Configure your application
 
 For this exercise, you'll complete some key parts of the application to enable using your Azure OpenAI resource. Applications for both C# and Python have been provided. Both apps feature the same functionality.
