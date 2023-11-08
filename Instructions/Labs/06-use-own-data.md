@@ -34,10 +34,16 @@ Before you can use Azure OpenAI models, you must provision an Azure OpenAI resou
 To chat with the Azure OpenAI, you must first deploy a model to use through the **Azure OpenAI Studio**. Once deployed, we will use the model with the playground and use our data to ground its responses.
 
 1. On the **Overview** page for your Azure OpenAI resource, use the **Explore** button to open Azure OpenAI Studio in a new browser tab. Alternatively, navigate to [Azure OpenAI Studio](https://oai.azure.com/?azure-portal=true) directly.
-2. In Azure OpenAI Studio, create a new deployment with the following settings:
-    - **Model name**: gpt-35-turbo
-    - **Model version**: *Use the default version*
-    - **Deployment name**: text-turbo
+2. In Azure OpenAI Studio, on the **Deployments** page, view your existing model deployments. If you don't already have one, create a new deployment of the **gpt-35-turbo-16k** model with the following settings:
+    - **Model**: gpt-35-turbo-16k
+    - **Model version**: Auto-update to default
+    - **Deployment name**: *A unique name of your choice*
+    - **Advanced options**
+        - **Content filter**: Default
+        - **Tokens per minute rate limit**: 5K\*
+        - **Enable dynamic quota**: Enabled
+
+    > \* A rate limit of 5,000 tokens per minute is more than adequate to complete this exercise while leaving capacity for other people using the same subscription.
 
 > **Note**: In some regions, the new model deployment interface doesn't show the **Model version** option. In this case, don't worry and continue without setting the option
 
@@ -45,7 +51,7 @@ To chat with the Azure OpenAI, you must first deploy a model to use through the 
 
 Before connecting Azure OpenAI to your data, first observe how the base model responds to queries without any grounding data.
 
-1. Navigate to the **Chat** playground, and make sure the `gpt-35-turbo` model you deployed is selected in the **Configuration** pane (this should be the default, if you only have one deployed model).
+1. Navigate to the **Chat** playground, and make sure the model you deployed is selected in the **Configuration** pane (this should be the default, if you only have one deployed model).
 1. Enter the following prompts, and observe the output.
 
     ```code
@@ -174,7 +180,7 @@ For this exercise, you'll complete some key parts of the application to enable u
     - C#: `appsettings.json`
     - Python: `.env`
     
-3. Update the configuration values to include the **endpoint** and **key** from the Azure OpenAI resource you created, as well as the model name that you deployed, `text-turbo`. Save the file.
+3. Update the configuration values to include the **endpoint** and **key** from the Azure OpenAI resource you created, as well as the model name that you deployed. Save the file.
 
 4. Navigate to the folder for your preferred language and install the necessary packages.
 

@@ -35,12 +35,16 @@ Before you can use Azure OpenAI models, you must provision an Azure OpenAI resou
 To use the Azure OpenAI API for code generation, you must first deploy a model to use through the **Azure OpenAI Studio**. Once deployed, we will use the model with the playground and reference that model in our app.
 
 1. On the **Overview** page for your Azure OpenAI resource, use the **Explore** button to open Azure OpenAI Studio in a new browser tab. Alternatively, navigate to [Azure OpenAI Studio](https://oai.azure.com/?azure-portal=true) directly.
-2. In Azure OpenAI Studio, create a new deployment with the following settings:
-    - **Model**: gpt-35-turbo
-    - **Model version**: *Use the default version*
-    - **Deployment name**: 35turbo
+2. In Azure OpenAI Studio, on the **Deployments** page, view your existing model deployments. If you don't already have one, create a new deployment of the **gpt-35-turbo-16k** model with the following settings:
+    - **Model**: gpt-35-turbo-16k
+    - **Model version**: Auto-update to default
+    - **Deployment name**: *A unique name of your choice*
+    - **Advanced options**
+        - **Content filter**: Default
+        - **Tokens per minute rate limit**: 5K\*
+        - **Enable dynamic quota**: Enabled
 
-> **Note**: Each Azure OpenAI model is optimized for a different balance of capabilities and performance. We'll use the **3.5 Turbo** model series in the **GPT-3** model family in this exercise, which is highly capable for both language and code understanding.
+    > \* A rate limit of 5,000 tokens per minute is more than adequate to complete this exercise while leaving capacity for other people using the same subscription.
 
 > **Note**: In some regions, the new model deployment interface doesn't show the **Model version** option. In this case, don't worry and continue without setting the option
 
@@ -49,6 +53,7 @@ To use the Azure OpenAI API for code generation, you must first deploy a model t
 Before using in your app, examine how Azure OpenAI can generate and explain code in the chat playground.
 
 1. In [Azure OpenAI Studio](https://oai.azure.com/?azure-portal=true), navigate to the **Chat** playground in the left pane.
+1. 1. In the **Configuration**, nsure your model deployment is selected.
 1. In the **Assistant setup** section at the top, select the **Default** system message template.
 1. In the **Chat session** section, enter the following prompt and press *Enter*.
 
@@ -133,7 +138,7 @@ For this exercise, you'll complete some key parts of the application to enable u
     - **C#**: `appsettings.json`
     - **Python**: `.env`
 
-3. Update the configuration values to include the **endpoint** and **key** from the Azure OpenAI resource you created, as well as the name of your deployment, `35turbo`. Save the file.
+3. Update the configuration values to include the **endpoint** and **key** from the Azure OpenAI resource you created, as well as the name of your deployment. Save the file.
 
 4. Navigate to the folder for your preferred language and install the necessary packages.
 

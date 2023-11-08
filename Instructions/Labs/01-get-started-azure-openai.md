@@ -34,12 +34,16 @@ Before you can use Azure OpenAI models, you must provision an Azure OpenAI resou
 Azure OpenAI provides a web-based portal named **Azure OpenAI Studio**, that you can use to deploy, manage, and explore models. You'll start your exploration of Azure OpenAI by using Azure OpenAI Studio to deploy a model.
 
 1. On the **Overview** page for your Azure OpenAI resource, use the **Go to Azure OpenAI Studio** button to open Azure OpenAI Studio in a new browser tab.
-2. In Azure OpenAI Studio, create a new deployment with the following settings:
-    - **Model**: gpt-35-turbo
+2. In Azure OpenAI Studio, on the **Deployments** page, view your existing model deployments. If you don't already have one, create a new deployment of the **gpt-35-turbo-16k** model with the following settings:
+    - **Model**: gpt-35-turbo-16k
     - **Model version**: Auto-update to default
-    - **Deployment name**: my-gpt-model
+    - **Deployment name**: *A unique name of your choice*
+    - **Advanced options**
+        - **Content filter**: Default
+        - **Tokens per minute rate limit**: 5K\*
+        - **Enable dynamic quota**: Enabled
 
-> **Note**: Azure OpenAI includes multiple models, each optimized for a different balance of capabilities and performance. In this exercise, you'll use the **GPT-35-Turbo** model, which is a good general model for summarizing and generating natural language and code. For more information about the available models in Azure OpenAI, see [Models](https://learn.microsoft.com/azure/cognitive-services/openai/concepts/models) in the Azure OpenAI documentation.
+    > \* A rate limit of 5,000 tokens per minute is more than adequate to complete this exercise while leaving capacity for other people using the same subscription.
 
 > **Note**: In some regions, the new model deployment interface doesn't show the **Model version** option. In this case, don't worry and continue without setting the option.
 
@@ -48,7 +52,7 @@ Azure OpenAI provides a web-based portal named **Azure OpenAI Studio**, that you
 *Playgrounds* are useful interfaces in Azure OpenAI Studio that you can use to experiment with your deployed models without needing to develop your own client application.
 
 1. In Azure OpenAI Studio, in the left pane under **Playground**, select **Completions**.
-2. In the **Completions** page, ensure your **my-gpt-model** deployment is selected and then in the **Examples** list, select **Generate a quiz**.
+2. In the **Completions** page, ensure your model deployment is selected and then in the **Examples** list, select **Generate a quiz**.
 
     The summarize text sample consists of a *prompt* that provides some text to tell the model what kind of response is required and include some contextual information.
 
@@ -64,7 +68,7 @@ Azure OpenAI provides a web-based portal named **Azure OpenAI Studio**, that you
 
 The *Chat* playground provides a chatbot interface for GPT 3.5 and higher models. It uses the *ChatCompletions* API rather than the older *Completions* API.
 
-1. In the **Playground** section, select the **Chat** page, and ensure that the **my-gpt-model** model is selected in the configuration pane on the right.
+1. In the **Playground** section, select the **Chat** page, and ensure that your model is selected in the configuration pane.
 2. In the **Assistant setup** section, in the **System message** box, replace the current text with the following statement: `The system is an AI teacher that helps people learn about AI`.
 
 3. Below the **System message** box, click on **Add few-shot examples**, and enter the following message and response in the designated boxes:
