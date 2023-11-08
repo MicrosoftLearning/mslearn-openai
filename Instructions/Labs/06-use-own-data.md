@@ -232,7 +232,7 @@ Now that your app has been configured, run it to send your request to your model
     - **C#**: `dotnet run`
     - **Python**: `python ownData.py`
 
-1. You'll see it send the prompt `Tell me about New York`, and you should see the response referencing your data.
+1. Submit the prompt `Tell me about New York`, and you should see the response referencing your data.
 
 ## Clean up
 
