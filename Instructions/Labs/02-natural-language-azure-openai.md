@@ -154,8 +154,8 @@ For this exercise, you'll complete some key parts of the application to enable u
    {
         Messages =
         {
-            new ChatMessage(ChatRole.System, "You are a helpful assistant. Summarize the following text in 60 words or less."),
-            new ChatMessage(ChatRole.User, text),
+            new ChatMessage(ChatRole.System, "You are a helpful assistant."),
+            new ChatMessage(ChatRole.User, "Summarize the following text in 20 words or less:\n" + text),
         },
         MaxTokens = 120,
         Temperature = 0.7f,
