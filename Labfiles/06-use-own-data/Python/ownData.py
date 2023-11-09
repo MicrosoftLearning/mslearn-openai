@@ -58,10 +58,11 @@ def main():
         print("Response: " + response.choices[0].message.content + "\n")
 
         # print data context
-        print("\nContext information:\n") #, response.choices[0].message.context)
+        print("\nContext information:\n")
         context = response.choices[0].message.context
         for context_message in context["messages"]:
-            print(json.loads(context_message["content"]))
+            context_json = json.loads(context_message["content"])
+            print(json.dumps(context_json, indent=2))
         
     except Exception as ex:
         print(ex)
