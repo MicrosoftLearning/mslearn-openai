@@ -17,7 +17,7 @@ If you don't already have one, provision an Azure OpenAI resource in your Azure 
 2. Create an **Azure OpenAI** resource with the following settings:
     - **Subscription**: *Select an Azure subscription that has been approved for access to the Azure OpenAI service*
     - **Resource group**: *Choose or create a resource group*
-    - **Region**: *Make a random choice from any of the available regions*\*
+    - **Region**: *Make a **random** choice from any of the available regions*\*
     - **Name**: *A unique name of your choice*
     - **Pricing tier**: Standard S0
 
