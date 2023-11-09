@@ -189,7 +189,7 @@ Now you're ready to use the Azure OpenAI SDK to consume your deployed model.
     import openai
     ```
 
-2. Review the rest of the code, noting the use of *extensions* (C#) or *datasources* (Python) to provide information about the data source in the request body.
+2. Review the rest of the code, noting the use of the *extensions* to the request body that are used to provide information about the data source settings.
 
 3. Save the changes to the code file.
 
