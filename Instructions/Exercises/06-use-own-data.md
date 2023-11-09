@@ -182,7 +182,7 @@ Now you're ready to use the Azure OpenAI SDK to consume your deployed model.
     using Azure.AI.OpenAI;
     ```
 
-    **Python**: prompt-engineering.py
+    **Python**: ownData.py
 
     ```python
     # Add Azure OpenAI package
