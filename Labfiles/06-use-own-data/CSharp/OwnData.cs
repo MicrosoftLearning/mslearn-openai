@@ -34,7 +34,10 @@ AzureCognitiveSearchChatExtensionConfiguration ownDataConfig = new()
 };
 ownDataConfig.SetSearchKey(azureSearchKey);
 
-// Build completion options object
+// Send request to Azure OpenAI model  
+Console.WriteLine("...Sending the following request to Azure OpenAI endpoint...");  
+Console.WriteLine("Request: " + text + "\n");
+
 ChatCompletionsOptions chatCompletionsOptions = new ChatCompletionsOptions()
 {
     Messages =
@@ -51,12 +54,7 @@ ChatCompletionsOptions chatCompletionsOptions = new ChatCompletionsOptions()
     }
 };
 
-// Send request to Azure OpenAI model  
-Console.WriteLine("...Sending the following request to Azure OpenAI endpoint...");  
-Console.WriteLine("Request: " + text + "\n");
-
 ChatCompletions response = client.GetChatCompletions(chatCompletionsOptions);
-
 ChatMessage responseMessage = response.Choices[0].Message;
 
 // Print response
