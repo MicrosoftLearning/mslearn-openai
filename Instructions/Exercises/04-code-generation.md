@@ -132,7 +132,7 @@ Applications for both C# and Python have been provided, as well as a sample text
     **Python**:
 
     ```
-    pip install openai==1.1.1
+    pip install openai==1.2.0
     ```
 
 3. In the **Explorer** pane, in the **CSharp** or **Python** folder, open the configuration file for your preferred language
@@ -160,7 +160,7 @@ Now you're ready to use the Azure OpenAI SDK to consume your deployed model.
 
     ```python
     # Add Azure OpenAI package
-    import openai
+    from openai import AzureOpenAI
     ```
 
 2. In the code file, find the comment ***Configure the Azure OpenAI client***, and add code to configure the Azure OpenAI client:
@@ -176,10 +176,11 @@ Now you're ready to use the Azure OpenAI SDK to consume your deployed model.
 
     ```python
     # Configure the Azure OpenAI client
-    openai.api_type = "azure"
-    openai.azure_endpoint = azure_oai_endpoint
-    openai.api_version = "2023-05-15"
-    openai.api_key = azure_oai_key
+    client = AzureOpenAI(
+            azure_endpoint = azure_oai_endpoint, 
+            api_key=azure_oai_key,  
+            api_version="2023-05-15"
+            )
     ```
 
 3. In the function that calls the Azure OpenAI model, under the comment ***Format and send the request to the model***, add the code to format and send the request to the model.
@@ -217,7 +218,7 @@ Now you're ready to use the Azure OpenAI SDK to consume your deployed model.
     ]
     
     # Call the Azure OpenAI model
-    response = openai.chat.completions.create(
+    response = client.chat.completions.create(
         model=model,
         messages=messages,
         temperature=0.7,

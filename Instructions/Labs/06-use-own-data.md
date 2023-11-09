@@ -203,7 +203,7 @@ For this exercise, you'll complete some key parts of the application to enable u
     ```bash
     cd Python
     pip install python-dotenv
-    pip install openai==1.1.1
+    pip install openai==1.2.0
     ```
 
 6. In the code editor, navigate to your preferred language folder, select the code file, and add the necessary libraries.
@@ -211,15 +211,15 @@ For this exercise, you'll complete some key parts of the application to enable u
     **C#**: OwnData.cs
 
     ```csharp
-   // Add Azure OpenAI package
-   using Azure.AI.OpenAI;
+    // Add Azure OpenAI package
+    using Azure.AI.OpenAI;
     ```
 
     **Python**: ownData.py
 
     ```python
-   # Add OpenAI import
-   import openai
+    # Add OpenAI import
+    from openai import AzureOpenAI
     ```
 
 7. Review the code file, specifically where the search values are used when completing the parameters for the API call.
@@ -234,7 +234,7 @@ Now that your app has been configured, run it to send your request to your model
     - **C#**: `dotnet run`
     - **Python**: `python ownData.py`
 
-1. Submit the prompt `Tell me about New York`, and you should see the response referencing your data.
+1. Submit the prompt `Tell me about London`, and you should see the response referencing your data.
 
 ## Clean up
 

@@ -153,7 +153,7 @@ Applications for both C# and Python have been provided, as well as a sample text
     **Python**:
 
     ```
-     pip install openai==1.1.1
+     pip install openai==1.2.0
     ```
 
 3. In the **Explorer** pane, in the **CSharp** or **Python** folder, open the configuration file for your preferred language
@@ -186,7 +186,7 @@ Now you're ready to use the Azure OpenAI SDK to consume your deployed model.
 
     ```python
     # Add Azure OpenAI package
-    import openai
+    from openai import AzureOpenAI
     ```
 
 2. Review the rest of the code, noting the use of the *extensions* to the request body that are used to provide information about the data source settings.
@@ -204,7 +204,7 @@ Now that your app has been configured, run it to send your request to your model
 
     > **Tip**: You can use the **Maximize panel size** (**^**) icon in the terminal toolbar to see more of the console text.
 
-2. Review the response to the prompt `Tell me about New York`, which should includes an answer as well as some details of the data used to ground the prompt, which was obtained from your search service.
+2. Review the response to the prompt `Tell me about London`, which should includes an answer as well as some details of the data used to ground the prompt, which was obtained from your search service.
 
 ## Clean up
 

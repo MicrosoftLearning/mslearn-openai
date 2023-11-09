@@ -27,15 +27,15 @@ def main():
             if command == '1':
                 file = open(file="../sample-code/function/function.py", encoding="utf8").read()
                 prompt = "Add comments to the following function. Return only the commented code.\n---\n" + file
-                call_openai_model(prompt, model=azure_oai_model)
+                call_openai_model(prompt, model=azure_oai_model, client=client)
             elif command =='2':
                 file = open(file="../sample-code/function/function.py", encoding="utf8").read()
                 prompt = "Write four unit tests for the following function.\n---\n" + file
-                call_openai_model(prompt, model=azure_oai_model)
+                call_openai_model(prompt, model=azure_oai_model, client=client)
             elif command =='3':
                 file = open(file="../sample-code/go-fish/go-fish.py", encoding="utf8").read()
                 prompt = "Fix the code below for an app to play Go Fish with the user. Return only the corrected code.\n---\n" + file
-                call_openai_model(prompt, model=azure_oai_model)
+                call_openai_model(prompt, model=azure_oai_model, client=client)
             elif command.lower() == 'quit':
                 print('Exiting program...')
                 break
@@ -45,7 +45,7 @@ def main():
     except Exception as ex:
         print(ex)
 
-def call_openai_model(prompt, model):
+def call_openai_model(prompt, model, client):
     # Provide a basic user message, and use the prompt content as the user message
     system_message = "You are a helpful AI assistant that helps programmers write code."
     user_message = prompt

@@ -27,13 +27,13 @@ def main():
                   '\'quit\' to exit the program\n')
             command = input('Enter a number:')
             if command == '1':
-                call_openai_model(messages="../prompts/basic.txt", model=azure_oai_model)
+                call_openai_model(messages="../prompts/basic.txt", model=azure_oai_model, client=client)
             elif command =='2':
-                call_openai_model(messages="../prompts/email-format.txt", model=azure_oai_model)
+                call_openai_model(messages="../prompts/email-format.txt", model=azure_oai_model, client=client)
             elif command =='3':
-                call_openai_model(messages="../prompts/specify-content.txt", model=azure_oai_model)
+                call_openai_model(messages="../prompts/specify-content.txt", model=azure_oai_model, client=client)
             elif command =='4':
-                call_openai_model(messages="../prompts/specify-tone.txt", model=azure_oai_model)
+                call_openai_model(messages="../prompts/specify-tone.txt", model=azure_oai_model, client=client)
             elif command.lower() == 'quit':
                 print('Exiting program...')
                 break
@@ -43,7 +43,7 @@ def main():
     except Exception as ex:
         print(ex)
 
-def call_openai_model(messages, model):
+def call_openai_model(messages, model, client):
     # In this sample, each file contains both the system and user messages
     # First, read them into variables, strip whitespace, then build the messages array
     file = open(file=messages, encoding="utf8")

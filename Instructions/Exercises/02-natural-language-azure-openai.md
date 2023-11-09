@@ -70,7 +70,7 @@ Applications for both C# and Python have been provided, as well as a sample text
     **Python**:
 
     ```
-    pip install openai==1.1.1
+    pip install openai==1.2.0
     ```
 
 3. In the **Explorer** pane, in the **CSharp** or **Python** folder, open the configuration file for your preferred language
@@ -98,7 +98,7 @@ Now you're ready to use the Azure OpenAI SDK to consume your deployed model.
 
     ```python
    # Add Azure OpenAI package
-   import openai
+   from openai import AzureOpenAI
     ```
 
 2. In the application code for your language, replace the comment ***Add code to build request...*** with the necessary code for building the request; specifying the various parameters for your model such as `prompt` and `temperature`.
@@ -132,25 +132,25 @@ Now you're ready to use the Azure OpenAI SDK to consume your deployed model.
     **Python**: test-openai-model.py
 
     ```python
-   # Set OpenAI configuration settings
-   openai.api_type = "azure"
-   openai.azure_endpoint = azure_oai_endpoint
-   openai.api_version = "2023-03-15-preview"
-   openai.api_key = azure_oai_key
+   # Initialize the Azure OpenAI client
+   client = AzureOpenAI(
+            azure_endpoint = azure_oai_endpoint, 
+            api_key=azure_oai_key,  
+            api_version="2023-05-15"
+            )
 
    # Send request to Azure OpenAI model
-   print("Sending request for summary to Azure OpenAI endpoint...\n\n")
-   response = openai.chat.completions.create(
+   response = client.chat.completions.create(
        model=azure_oai_model,
        temperature=0.7,
        max_tokens=120,
        messages=[
-          {"role": "system", "content": "You are a helpful assistant."},
-          {"role": "user", "content": "Summarize the following text in 20 words or less:\n" + text}
+           {"role": "system", "content": "You are a helpful assistant."},
+           {"role": "user", "content": "Summarize the following text in 20 words or less:\n" + text}
        ]
-   )
-
-   print("Summary: " + response.choices[0].message.content + "\n")
+    )
+    
+    print("Summary: " + response.choices[0].message.content + "\n")
     ```
 
 3. Save the changes to your code file.

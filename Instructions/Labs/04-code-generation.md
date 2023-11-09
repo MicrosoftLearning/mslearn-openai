@@ -156,7 +156,7 @@ For this exercise, you'll complete some key parts of the application to enable u
     ```bash
     cd Python
     pip install python-dotenv
-    pip install openai==1.1.1
+    pip install openai==1.2.0
     ```
 
 5. Select the code file in this folder for your language and add the necessary libraries.
@@ -172,7 +172,7 @@ For this exercise, you'll complete some key parts of the application to enable u
 
     ```python
     # Add OpenAI import
-    import openai
+    from openai import AzureOpenAI
     ```
 
 6. Add the necessary code for configuring the client.
@@ -188,10 +188,11 @@ For this exercise, you'll complete some key parts of the application to enable u
 
     ```python
     # Set OpenAI configuration settings
-    openai.api_type = "azure"
-    openai.azure_endpoint = azure_oai_endpoint
-    openai.api_version = "2023-05-15"
-    openai.api_key = azure_oai_key
+    client = AzureOpenAI(
+            azure_endpoint = azure_oai_endpoint, 
+            api_key=azure_oai_key,  
+            api_version="2023-05-15"
+            )
     ```
 
 7. In the function that calls the Azure OpenAI model, add the code to format and send the request to the model.
@@ -229,7 +230,7 @@ For this exercise, you'll complete some key parts of the application to enable u
     ]
     
     # Call the Azure OpenAI model
-    response = openai.chat.completions.create(
+    response = client.chat.completions.create(
         model=model,
         messages=messages,
         temperature=0.7,

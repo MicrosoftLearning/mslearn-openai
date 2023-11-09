@@ -17,6 +17,8 @@ def main():
         # Read text from file
         text = open(file="../text-files/sample-text.txt", encoding="utf8").read()
         
+        print("\nSending request for summary to Azure OpenAI endpoint...\n\n")
+        
         # Add code to build request...
         
 

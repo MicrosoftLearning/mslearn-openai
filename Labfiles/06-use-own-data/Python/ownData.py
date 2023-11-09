@@ -1,9 +1,9 @@
 import os
 import requests
+import json
 from dotenv import load_dotenv
 
 # Add OpenAI import
-
 
 
 def main(): 
@@ -19,7 +19,7 @@ def main():
         azure_search_index = os.getenv("AZURE_SEARCH_INDEX")
         
         # Initialize the Azure OpenAI client
-        aoai_client = openai.AzureOpenAI(
+        client = AzureOpenAI(
             base_url=f"{azure_oai_endpoint}/openai/deployments/{azure_oai_model}/extensions",
             api_key=azure_oai_key,
             api_version="2023-09-01-preview")
@@ -43,7 +43,7 @@ def main():
         print("...Sending the following request to Azure OpenAI endpoint...")
         print("Request: " + text + "\n")
 
-        response = aoai_client.chat.completions.create(
+        response = client.chat.completions.create(
             model = azure_oai_model,
             temperature = 0.5,
             max_tokens = 1000,
@@ -58,7 +58,10 @@ def main():
         print("Response: " + response.choices[0].message.content + "\n")
 
         # print data context
-        print("\nContext information:\n", response.choices[0].message.context)
+        print("\nContext information:\n") #, response.choices[0].message.context)
+        context = response.choices[0].message.context
+        for context_message in context["messages"]:
+            print(json.loads(context_message["content"]))
         
     except Exception as ex:
         print(ex)
