@@ -13,7 +13,7 @@ IConfiguration config = new ConfigurationBuilder()
     .Build();
 string? oaiEndpoint = config["AzureOAIEndpoint"];
 string? oaiKey = config["AzureOAIKey"];
-string? oaiModelName = config["AzureOAIDeploymentName"];
+string? oaiModelName = config["AzureOAIModelName"];
 
 string command;
 bool printFullResponse = false;
