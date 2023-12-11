@@ -17,7 +17,17 @@ If you don't already have one, provision an Azure OpenAI resource in your Azure 
 2. Create an **Azure OpenAI** resource with the following settings:
     - **Subscription**: *Select an Azure subscription that has been approved for access to the Azure OpenAI service*
     - **Resource group**: *Choose or create a resource group*
-    - **Region**: *Make a **random** choice from any of the available regions*\*
+    - **Region**: *Make a **random** choice from any of the following regions*\*:
+        - Australia East
+        - Canada East
+        - East US
+        - East US 2
+        - France Central
+        - Japan East
+        - North Central US
+        - Sweden Central
+        - Switzerland North
+        - UK South
     - **Name**: *A unique name of your choice*
     - **Pricing tier**: Standard S0
 
@@ -31,7 +41,7 @@ Azure OpenAI provides a web-based portal named **Azure OpenAI Studio**, that you
 
 1. On the **Overview** page for your Azure OpenAI resource, use the **Go to Azure OpenAI Studio** button to open Azure OpenAI Studio in a new browser tab.
 2. In Azure OpenAI Studio, on the **Deployments** page, view your existing model deployments. If you don't already have one, create a new deployment of the **gpt-35-turbo-16k** model with the following settings:
-    - **Model**: gpt-35-turbo-16k
+    - **Model**: gpt-35-turbo-16k *(must be this model to to use the features in this exercise)*
     - **Model version**: Auto-update to default
     - **Deployment name**: *A unique name of your choice*
     - **Advanced options**
