@@ -55,7 +55,7 @@ To use the Azure OpenAI API, you must first deploy a model to use through the **
 Before using your app, examine how prompt engineering improves the model response in the playground. In this first example, imagine you are trying to write a python app of animals with fun names.
 
 1. In [Azure OpenAI Studio](https://oai.azure.com/?azure-portal=true), navigate to the **Chat** playground in the left pane.
-1. In the **Configuration**, nsure your model deployment is selected.
+1. In the **Configuration**, ensure your model deployment is selected.
 1. In the **Assistant setup** section at the top, enter `You are a helpful AI assistant` as the system message.
 1. In the **Chat session** section, enter the following prompt and press *Enter*.
 
