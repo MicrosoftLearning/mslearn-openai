@@ -71,7 +71,7 @@ Next, add your data in the chat playground to see how it responds with your data
 1. [Download the data](https://aka.ms/own-data-brochures) that you will use from GitHub. Extract the PDFs in the `.zip` provided.
 1. Navigate to the **Chat** playground, and select *Add your data* in the Assistant setup pane.
 1. Select **Add a data source** and choose *Upload files* from the dropdown.
-1. You'll need to create a storage account and Azure Cognitive Search resource. Under the dropdown for the storage resource, select **Create a new Azure Blob storage resource**, and create a storage account with the following settings. Anything not specified leave as the default.
+1. You'll need to create a storage account and Azure AI Search resource. Under the dropdown for the storage resource, select **Create a new Azure Blob storage resource**, and create a storage account with the following settings. Anything not specified leave as the default.
 
     - **Subscription**: *Same subscription as your Azure OpenAI resource*
     - **Resource group**: *Same resource group as your Azure OpenAI resource*
@@ -79,7 +79,7 @@ Next, add your data in the chat playground to see how it responds with your data
     - **Region**: *Same region as your Azure OpenAI resource*
     - **Redundancy**: Locally-redundant storage (LRS)
 
-1. Once the resource is being created, come back to Azure OpenAI Studio and select **Create a new Azure Cognitive Search resource** with the following settings. Anything not specified leave as the default.
+1. Once the resource is being created, come back to Azure OpenAI Studio and select **Create a new Azure AI Search resource** with the following settings. Anything not specified leave as the default.
 
     - **Subscription**: *Same subscription as your Azure OpenAI resource*
     - **Resource group**: *Same resource group as your Azure OpenAI resource*
@@ -93,10 +93,10 @@ Next, add your data in the chat playground to see how it responds with your data
     - **Select data source**: Upload files
     - **Select Azure Blob storage resouce**: *Choose the storage resource you created*
         - Turn on CORS when prompted
-    - **Select Azure Cognitive Search resource**: *Choose the search resource you created*
+    - **Select Azure AI Search resource**: *Choose the search resource you created*
     - **Enter the index name**: margiestravel
     - **Add vector search to this search resource**: unchecked
-    - **I acknowledge that connecting to an Azure Cognitive Search account will incur usage to my account** : checked
+    - **I acknowledge that connecting to an Azure AI Search account will incur usage to my account** : checked
 
 1. On the **Upload files** page, upload the PDFs you downloaded, and then select **Next**.
 1. On the **Data management** page select the **Keyword** search type from the drop-down, and then select **Next**.
