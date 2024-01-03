@@ -1,9 +1,7 @@
 ﻿// Implicit using statements are included
-using System.Text;
-using System.Text.Json;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Configuration.Json;
 using Azure;
+using Azure.AI.OpenAI;
 
 // Add Azure OpenAI package
 
@@ -17,12 +15,12 @@ string? oaiKey = config["AzureOAIKey"];
 string? oaiModelName = config["AzureOAIModelName"];
 
 // Read sample text file into a string
-string textToSummarize = System.IO.File.ReadAllText(@"sample-text.txt");
+string textToSummarize = File.ReadAllText(@"sample-text.txt");
 
 // Generate summary from Azure OpenAI
-GetSummaryFromOpenAI(textToSummarize);
+GetSummaryFromOpenAi(textToSummarize);
     
-void GetSummaryFromOpenAI(string text)  
+void GetSummaryFromOpenAi(string text)  
 {   
     Console.WriteLine("\nSending request for summary to Azure OpenAI endpoint...\n\n");
 
