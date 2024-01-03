@@ -17,7 +17,7 @@ string? oaiKey = config["AzureOAIKey"];
 string? oaiModelName = config["AzureOAIModelName"];
 
 // Read sample text file into a string
-string textToSummarize = System.IO.File.ReadAllText(@"../text-files/sample-text.txt");
+string textToSummarize = System.IO.File.ReadAllText(@"sample-text.txt");
 
 // Generate summary from Azure OpenAI
 GetSummaryFromOpenAI(textToSummarize);
