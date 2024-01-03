@@ -114,8 +114,8 @@ Now you're ready to use the Azure OpenAI SDK to consume your deployed model.
    {
         Messages =
         {
-            new ChatMessage(ChatRole.System, "You are a helpful assistant."),
-            new ChatMessage(ChatRole.User, "Summarize the following text in 20 words or less:\n" + text),
+            new ChatRequestSystemMessage("You are a helpful assistant."),
+            new ChatRequestUserMessage("Summarize the following text in 20 words or less:\n" + text),
         },
         MaxTokens = 120,
         Temperature = 0.7f,
