@@ -109,7 +109,9 @@ Now that you've reviewed the code, it's time to run it and generate some images.
 
 4. Wait for the image to be generated - a hyperlink will be displayed in the terminal pane. Then select the hyperlink to open a new browser tab and review the image that was generated.
 
-5. Close the browser tab containing the generated image and re-run the app to generate a new image with a different prompt.
+   > **TIP**: If the app can't find the header, wait a minute and try again. Newly deployed resources can take up to 5 minutes to become available.
+
+6. Close the browser tab containing the generated image and re-run the app to generate a new image with a different prompt.
 
 ## Clean up
 
