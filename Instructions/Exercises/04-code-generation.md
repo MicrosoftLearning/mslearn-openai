@@ -71,7 +71,7 @@ Before using in your app, examine how Azure OpenAI can generate and explain code
     def multiply(a, b):  
         result = 0  
         negative = False  
-          
+   
         if a < 0 and b > 0:  
             a = -a  
             negative = True  
