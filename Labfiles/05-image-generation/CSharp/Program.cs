@@ -26,7 +26,6 @@ namespace generate_image
 
                 // Get prompt for image to be generated
                 Console.Clear();
-                string prompt = "";
                 Console.WriteLine("Enter a prompt to request an image:");
                 string prompt = Console.ReadLine() ?? "";
 
