@@ -71,7 +71,6 @@ Before using in your app, examine how Azure OpenAI can generate and explain code
     def multiply(a, b):  
         result = 0  
         negative = False  
-          
         if a < 0 and b > 0:  
             a = -a  
             negative = True  
@@ -81,16 +80,13 @@ Before using in your app, examine how Azure OpenAI can generate and explain code
         elif a < 0 and b < 0:  
             a = -a  
             b = -b  
-           
         while b > 0:  
             result += a  
-            b -= 1  
-            
+            b -= 1      
         if negative:  
             return -result  
         else:  
             return result  
-    
     ```
 
     The model should describe what the function does, which is to multiply two numbers together by using a loop.
@@ -156,7 +152,7 @@ Now you're ready to use the Azure OpenAI SDK to consume your deployed model.
     using Azure.AI.OpenAI;
     ```
 
-    **Python**: prompt-engineering.py
+    **Python**: code-generation.py
 
     ```python
     # Add Azure OpenAI package

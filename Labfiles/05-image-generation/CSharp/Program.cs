@@ -12,8 +12,8 @@ namespace generate_image
 {
     class Program
     {
-        private static string aoaiEndpoint;
-        private static string aoaiKey;
+        private static string? aoaiEndpoint;
+        private static string? aoaiKey;
         static async Task Main(string[] args)
         {
             try
@@ -21,14 +21,13 @@ namespace generate_image
                 // Get config settings from AppSettings
                 IConfigurationBuilder builder = new ConfigurationBuilder().AddJsonFile("appsettings.json");
                 IConfigurationRoot configuration = builder.Build();
-                aoaiEndpoint = configuration["AzureOAIEndpoint"];
-                aoaiKey = configuration["AzureOAIKey"];
+                aoaiEndpoint = configuration["AzureOAIEndpoint"] ?? "";
+                aoaiKey = configuration["AzureOAIKey"] ?? "";
 
                 // Get prompt for image to be generated
                 Console.Clear();
-                string prompt = "";
                 Console.WriteLine("Enter a prompt to request an image:");
-                prompt = Console.ReadLine();
+                string prompt = Console.ReadLine() ?? "";
 
                 // Make the initial call to start the job
                 using (var client = new HttpClient())
