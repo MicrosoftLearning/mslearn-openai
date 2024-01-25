@@ -116,4 +116,4 @@ In addition to generating natural language responses, you can use GPT models to 
 
 ## Clean up
 
-When you're done with your Azure OpenAI resource, remember to delete the deployment or the entire resource in the [Azure portal](https://portal.azure.com?azure-portal=true).
+When you're done with your Azure OpenAI resource, remember to delete the deployment or the entire resource in the **Azure portal** at `https://portal.azure.com`.

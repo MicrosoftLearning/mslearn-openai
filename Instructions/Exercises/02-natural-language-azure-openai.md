@@ -13,7 +13,7 @@ This exercise will take approximately **30** minutes.
 
 If you don't already have one, provision an Azure OpenAI resource in your Azure subscription.
 
-1. Sign into the [Azure portal](https://portal.azure.com) at `https://portal.azure.com`.
+1. Sign into the **Azure portal** at `https://portal.azure.com`.
 2. Create an **Azure OpenAI** resource with the following settings:
     - **Subscription**: *Select an Azure subscription that has been approved for access to the Azure OpenAI service*
     - **Resource group**: *Choose or create a resource group*
@@ -59,7 +59,7 @@ You'll develop your Azure OpenAI app using Visual Studio Code. The code files fo
 Applications for both C# and Python have been provided, as well as a sample text file you'll use to test the summarization. Both apps feature the same functionality. First, you'll complete some key parts of the application to enable using your Azure OpenAI resource.
 
 1. In Visual Studio Code, in the **Explorer** pane, browse to the **Labfiles/02-nlp-azure-openai** folder and expand the **CSharp** or **Python** folder depending on your language preference. Each folder contains the language-specific files for an app into which you're you're going to integrate Azure OpenAI functionality.
-2. Right-click the **CSharp** or **Python** folder containing your code files and open an integrated terminal. Then install the Azure AI Vision SDK package by running the appropriate command for your language preference:
+2. Right-click the **CSharp** or **Python** folder containing your code files and open an integrated terminal. Then install the Azure OpenAI SDK package by running the appropriate command for your language preference:
 
     **C#**:
 
@@ -78,7 +78,9 @@ Applications for both C# and Python have been provided, as well as a sample text
     - **C#**: appsettings.json
     - **Python**: .env
     
-4. Update the configuration values to include the **endpoint** and **key** from the Azure OpenAI resource you created (available on the **Keys and Endpoint** page for your Azure OpenAI resource in the Azure portal), as well as the name you specified for your model deployment (available in the **Deployments** page in Azure OpenAI Studio).
+4. Update the configuration values to include:
+    - The  **endpoint** and a **key** from the Azure OpenAI resource you created (available on the **Keys and Endpoint** page for your Azure OpenAI resource in the Azure portal)
+    - The **model name** you specified for your model deployment (available in the **Deployments** page in Azure OpenAI Studio).
 5. Save the configuration file.
 
 ## Add code to use the Azure OpenAI service
@@ -177,4 +179,4 @@ Increasing the temperature often causes the summary to vary, even when provided 
 
 ## Clean up
 
-When you're done with your Azure OpenAI resource, remember to delete the deployment or the entire resource in the [Azure portal](https://portal.azure.com).
+When you're done with your Azure OpenAI resource, remember to delete the deployment or the entire resource in the **Azure portal** at `https://portal.azure.com`.

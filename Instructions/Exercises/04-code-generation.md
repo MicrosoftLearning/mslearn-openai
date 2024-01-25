@@ -13,7 +13,7 @@ This exercise will take approximately **25** minutes.
 
 If you don't already have one, provision an Azure OpenAI resource in your Azure subscription.
 
-1. Sign into the [Azure portal](https://portal.azure.com) at `https://portal.azure.com`.
+1. Sign into the **Azure portal** at `https://portal.azure.com`.
 2. Create an **Azure OpenAI** resource with the following settings:
     - **Subscription**: *Select an Azure subscription that has been approved for access to the Azure OpenAI service*
     - **Resource group**: *Choose or create a resource group*
@@ -45,7 +45,7 @@ Azure OpenAI provides a web-based portal named **Azure OpenAI Studio**, that you
 
 Before using in your app, examine how Azure OpenAI can generate and explain code in the chat playground.
 
-1. In [Azure OpenAI Studio](https://oai.azure.com), in the **Playground** section, select the **Chat** page. The **Chat** playground page consists of three main sections:
+1. In the **Azure OpenAI Studio** at `https://oai.azure.com`, in the **Playground** section, select the **Chat** page. The **Chat** playground page consists of three main sections:
     - **Assistant setup** - used to set the context for the model's responses.
     - **Chat session** - used to submit chat messages and view responses.
     - **Configuration** - used to configure settings for the model deployment.
@@ -117,7 +117,7 @@ Now let's explore how you could build a custom app that uses Azure OpenAI servic
 Applications for both C# and Python have been provided, as well as a sample text file you'll use to test the summarization. Both apps feature the same functionality. First, you'll complete some key parts of the application to enable using your Azure OpenAI resource.
 
 1. In Visual Studio Code, in the **Explorer** pane, browse to the **Labfiles/04-code-generation** folder and expand the **CSharp** or **Python** folder depending on your language preference. Each folder contains the language-specific files for an app into which you're you're going to integrate Azure OpenAI functionality.
-2. Right-click the **CSharp** or **Python** folder containing your code files and open an integrated terminal. Then install the Azure AI Vision SDK package by running the appropriate command for your language preference:
+2. Right-click the **CSharp** or **Python** folder containing your code files and open an integrated terminal. Then install the Azure OpenAI SDK package by running the appropriate command for your language preference:
 
     **C#**:
 
@@ -136,7 +136,9 @@ Applications for both C# and Python have been provided, as well as a sample text
     - **C#**: appsettings.json
     - **Python**: .env
     
-4. Update the configuration values to include the **endpoint** and **key** from the Azure OpenAI resource you created (available on the **Keys and Endpoint** page for your Azure OpenAI resource in the Azure portal), as well as the name you specified for your model deployment (available in the **Deployments** page in Azure OpenAI Studio).
+4. Update the configuration values to include:
+    - The  **endpoint** and a **key** from the Azure OpenAI resource you created (available on the **Keys and Endpoint** page for your Azure OpenAI resource in the Azure portal)
+    - The **model name** you specified for your model deployment (available in the **Deployments** page in Azure OpenAI Studio).
 5. Save the configuration file.
 
 ## Add code to use your Azure OpenAI service model
@@ -261,4 +263,4 @@ Now that your app has been configured, run it to try generating code for each us
 
 ## Clean up
 
-When you're done with your Azure OpenAI resource, remember to delete the deployment or the entire resource in the [Azure portal](https://portal.azure.com).
+When you're done with your Azure OpenAI resource, remember to delete the deployment or the entire resource in the **Azure portal** at `https://portal.azure.com`.

@@ -13,7 +13,7 @@ This exercise will take approximately **25** minutes.
 
 Before you can use Azure OpenAI models, you must provision an Azure OpenAI resource in your Azure subscription.
 
-1. Sign into the [Azure portal](https://portal.azure.com) at `https://portal.azure.com`.
+1. Sign into the **Azure portal** at `https://portal.azure.com`.
 2. Create an **Azure OpenAI** resource with the following settings:
     - **Subscription**: *Select an Azure subscription that has been approved for access to the Azure OpenAI service, including DALL-E*
     - **Resource group**: *Choose or create a resource group*
@@ -115,4 +115,4 @@ Now that you've reviewed the code, it's time to run it and generate some images.
 
 ## Clean up
 
-When you're done with your Azure OpenAI resource, remember to delete the resource in the [Azure portal](https://portal.azure.com).
+When you're done with your Azure OpenAI resource, remember to delete the resource in the **Azure portal** at `https://portal.azure.com`.
