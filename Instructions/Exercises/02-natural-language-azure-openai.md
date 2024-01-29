@@ -18,7 +18,7 @@ If you don't already have one, provision an Azure OpenAI resource in your Azure 
     - **Subscription**: *Select an Azure subscription that has been approved for access to the Azure OpenAI service*
     - **Resource group**: *Choose or create a resource group*
     - **Region**: *Make a **random** choice from any of the available regions*\*
-    - **Name**: *A unique name of your choice*
+    - **Name**: *A unique name of your choice* 
     - **Pricing tier**: Standard S0
 
     > \* Azure OpenAI resources are constrained by regional quotas. Randomly choosing a region reduces the risk of a single region reaching its quota limit in scenarios where you are sharing a subscription with other users. In the event of a quota limit being reached later in the exercise, there's a possibility you may need to create another resource in a different region.
@@ -33,7 +33,7 @@ Azure OpenAI provides a web-based portal named **Azure OpenAI Studio**, that you
 2. In Azure OpenAI Studio, on the **Deployments** page, view your existing model deployments. If you don't already have one, create a new deployment of the **gpt-35-turbo-16k** model with the following settings:
     - **Model**: gpt-35-turbo-16k *(if the 16k model isn't available, choose gpt-35-turbo)*
     - **Model version**: Auto-update to default
-    - **Deployment name**: *A unique name of your choice*
+    - **Deployment name**: *A unique name of your choice* (make a note of this name, you will use this name again later in this lab)
     - **Advanced options**
         - **Content filter**: Default
         - **Tokens per minute rate limit**: 5K\*
