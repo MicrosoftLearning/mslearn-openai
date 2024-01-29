@@ -33,7 +33,7 @@ Azure OpenAI provides a web-based portal named **Azure OpenAI Studio**, that you
 2. In Azure OpenAI Studio, on the **Deployments** page, view your existing model deployments. If you don't already have one, create a new deployment of the **gpt-35-turbo-16k** model with the following settings:
     - **Model**: gpt-35-turbo-16k *(if the 16k model isn't available, choose gpt-35-turbo)*
     - **Model version**: Auto-update to default
-    - **Deployment name**: *A unique name of your choice*
+    - **Deployment name**: *A unique name of your choice* (make a note of this name, you will use this name again later in this lab)
     - **Advanced options**
         - **Content filter**: Default
         - **Tokens per minute rate limit**: 5K\*
