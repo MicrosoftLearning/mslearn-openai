@@ -1,45 +1,44 @@
-import requests
 import time
+import asyncio
+import json
 import os
+from openai import AsyncAzureOpenAI
 from dotenv import load_dotenv
 
 def main(): 
         
     try:
-        # Get Azure OpenAI Service settings
+        # Get Azure OpenAI Service settings        
         load_dotenv()
-        api_base = os.getenv("AZURE_OAI_ENDPOINT")
-        api_key = os.getenv("AZURE_OAI_KEY")
-        api_version = '2023-06-01-preview'
+        azure_oai_endpoint = os.getenv("AZURE_OAI_ENDPOINT")
+        azure_oai_key = os.getenv("AZURE_OAI_KEY")
+        azure_oai_model = os.getenv("AZURE_OAI_MODEL")
+        
+        api_version = '2023-12-01-preview'
         
         # Get prompt for image to be generated
-        prompt = input("\nEnter a prompt to request an image: ")
+        prompt = input("\nEnter a subject prompt to request an image: ")
 
-        # Make the initial call to start the job
-        url = "{}openai/images/generations:submit?api-version={}".format(api_base, api_version)
-        headers= { "api-key": api_key, "Content-Type": "application/json" }
-        body = {
-            "prompt": prompt,
-            "n": 1,
-            "size": "512x512"
-        }
-        submission = requests.post(url, headers=headers, json=body)
+        # Init async client
+        client = AsyncAzureOpenAI(
+            azure_endpoint=azure_oai_endpoint,
+            api_key=azure_oai_key,
+            api_version=api_version
+        )
 
-        # Get the operation-location URL for the callback
-        operation_location = submission.headers['Operation-Location']
+        # Async method to generate the image
+        async def dall_e(client):
+            image = await client.images.generate(
+                model=azure_oai_model,
+                n=1,
+                size="1024x1024",
+                prompt=prompt,
+            )
 
-        # Poll the callback URL until the job has succeeeded
-        status = ""
-        while (status != "succeeded"):
-            time.sleep(3) # wait 3 seconds to avoid rate limit
-            response = requests.get(operation_location, headers=headers)
-            status = response.json()['status']
+            print(image.data[0].url)
 
-        # Get the results
-        image_url = response.json()['result']['data'][0]['url']
-
-        # Display the URL for the generated image
-        print(image_url)
+        # Run async call
+        asyncio.run(dall_e(client))
         
 
     except Exception as ex:
