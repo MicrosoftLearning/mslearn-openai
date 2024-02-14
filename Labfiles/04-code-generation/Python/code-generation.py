@@ -14,7 +14,7 @@ def main():
         load_dotenv()
         azure_oai_endpoint = os.getenv("AZURE_OAI_ENDPOINT")
         azure_oai_key = os.getenv("AZURE_OAI_KEY")
-        azure_oai_model = os.getenv("AZURE_OAI_MODEL")
+        azure_oai_deployment = os.getenv("AZURE_OAI_DEPLOYMENT")
         
         # Configure the Azure OpenAI client
 
@@ -27,15 +27,15 @@ def main():
             if command == '1':
                 file = open(file="../sample-code/function/function.py", encoding="utf8").read()
                 prompt = "Add comments to the following function. Return only the commented code.\n---\n" + file
-                call_openai_model(prompt, model=azure_oai_model, client=client)
+                call_openai_model(prompt, model=azure_oai_deployment, client=client)
             elif command =='2':
                 file = open(file="../sample-code/function/function.py", encoding="utf8").read()
                 prompt = "Write four unit tests for the following function.\n---\n" + file
-                call_openai_model(prompt, model=azure_oai_model, client=client)
+                call_openai_model(prompt, model=azure_oai_deployment, client=client)
             elif command =='3':
                 file = open(file="../sample-code/go-fish/go-fish.py", encoding="utf8").read()
                 prompt = "Fix the code below for an app to play Go Fish with the user. Return only the corrected code.\n---\n" + file
-                call_openai_model(prompt, model=azure_oai_model, client=client)
+                call_openai_model(prompt, model=azure_oai_deployment, client=client)
             elif command.lower() == 'quit':
                 print('Exiting program...')
                 break

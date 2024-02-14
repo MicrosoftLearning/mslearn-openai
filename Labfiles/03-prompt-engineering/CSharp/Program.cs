@@ -13,7 +13,7 @@ IConfiguration config = new ConfigurationBuilder()
     .Build();
 string? oaiEndpoint = config["AzureOAIEndpoint"];
 string? oaiKey = config["AzureOAIKey"];
-string? oaiModelName = config["AzureOAIModelName"];
+string? oaiDeploymentName = config["AzureOAIDeploymentName"];
 
 string command;
 bool printFullResponse = false;
@@ -54,7 +54,7 @@ async Task GetResponseFromOpenAI(string fileText)
 {   
     Console.WriteLine("\nSending prompt to Azure OpenAI endpoint...\n\n");
 
-    if(string.IsNullOrEmpty(oaiEndpoint) || string.IsNullOrEmpty(oaiKey) || string.IsNullOrEmpty(oaiModelName) )
+    if(string.IsNullOrEmpty(oaiEndpoint) || string.IsNullOrEmpty(oaiKey) || string.IsNullOrEmpty(oaiDeploymentName) )
     {
         Console.WriteLine("Please check your appsettings.json file for missing or incorrect values.");
         return;

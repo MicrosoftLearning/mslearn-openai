@@ -14,7 +14,7 @@ IConfiguration config = new ConfigurationBuilder()
     .Build();
 string? oaiEndpoint = config["AzureOAIEndpoint"];
 string? oaiKey = config["AzureOAIKey"];
-string? oaiModelName = config["AzureOAIModelName"];
+string? oaiDeploymentName = config["AzureOAIDeploymentName"];
 
 // Read sample text file into a string
 string textToSummarize = System.IO.File.ReadAllText(@"../text-files/sample-text.txt");
@@ -26,7 +26,7 @@ void GetSummaryFromOpenAI(string text)
 {   
     Console.WriteLine("\nSending request for summary to Azure OpenAI endpoint...\n\n");
 
-    if(string.IsNullOrEmpty(oaiEndpoint) || string.IsNullOrEmpty(oaiKey) || string.IsNullOrEmpty(oaiModelName) )
+    if(string.IsNullOrEmpty(oaiEndpoint) || string.IsNullOrEmpty(oaiKey) || string.IsNullOrEmpty(oaiDeploymentName) )
     {
         Console.WriteLine("Please check your appsettings.json file for missing or incorrect values.");
         return;
