@@ -14,7 +14,7 @@ def main():
         load_dotenv()
         azure_oai_endpoint = os.getenv("AZURE_OAI_ENDPOINT")
         azure_oai_key = os.getenv("AZURE_OAI_KEY")
-        azure_oai_model = os.getenv("AZURE_OAI_MODEL")
+        azure_oai_deployment = os.getenv("AZURE_OAI_DEPLOYMENT")
         
         # Configure the Azure OpenAI client
         
@@ -27,13 +27,13 @@ def main():
                   '\'quit\' to exit the program\n')
             command = input('Enter a number:')
             if command == '1':
-                call_openai_model(messages="../prompts/basic.txt", model=azure_oai_model, client=client)
+                call_openai_model(messages="../prompts/basic.txt", model=azure_oai_deployment, client=client)
             elif command =='2':
-                call_openai_model(messages="../prompts/email-format.txt", model=azure_oai_model, client=client)
+                call_openai_model(messages="../prompts/email-format.txt", model=azure_oai_deployment, client=client)
             elif command =='3':
-                call_openai_model(messages="../prompts/specify-content.txt", model=azure_oai_model, client=client)
+                call_openai_model(messages="../prompts/specify-content.txt", model=azure_oai_deployment, client=client)
             elif command =='4':
-                call_openai_model(messages="../prompts/specify-tone.txt", model=azure_oai_model, client=client)
+                call_openai_model(messages="../prompts/specify-tone.txt", model=azure_oai_deployment, client=client)
             elif command.lower() == 'quit':
                 print('Exiting program...')
                 break

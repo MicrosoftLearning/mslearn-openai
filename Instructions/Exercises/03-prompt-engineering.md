@@ -194,7 +194,7 @@ Applications for both C# and Python have been provided, as well as a sample text
     
 4. Update the configuration values to include:
     - The  **endpoint** and a **key** from the Azure OpenAI resource you created (available on the **Keys and Endpoint** page for your Azure OpenAI resource in the Azure portal)
-    - The **model name** you specified for your model deployment (available in the **Deployments** page in Azure OpenAI Studio).
+    - The **deployment name** you specified for your model deployment (available in the **Deployments** page in Azure OpenAI Studio).
 5. Save the configuration file.
 
 ## Add code to use the Azure OpenAI service

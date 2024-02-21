@@ -12,7 +12,7 @@ def main():
         load_dotenv()
         azure_oai_endpoint = os.getenv("AZURE_OAI_ENDPOINT")
         azure_oai_key = os.getenv("AZURE_OAI_KEY")
-        azure_oai_model = os.getenv("AZURE_OAI_MODEL")
+        azure_oai_deployment = os.getenv("AZURE_OAI_DEPLOYMENT")
         
         # Read text from file
         text = open(file="../text-files/sample-text.txt", encoding="utf8").read()

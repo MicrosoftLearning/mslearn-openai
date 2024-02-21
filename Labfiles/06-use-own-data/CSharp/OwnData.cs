@@ -13,7 +13,7 @@ IConfiguration config = new ConfigurationBuilder()
     .Build();
 string oaiEndpoint = config["AzureOAIEndpoint"] ?? "";
 string oaiKey = config["AzureOAIKey"] ?? "";
-string oaiModelName = config["AzureOAIModelName"] ?? "";
+string oaiDeploymentName = config["AzureOAIDeploymentName"] ?? "";
 string azureSearchEndpoint = config["AzureSearchEndpoint"] ?? "";
 string azureSearchKey = config["AzureSearchKey"] ?? "";
 string azureSearchIndex = config["AzureSearchIndex"] ?? "";
@@ -46,7 +46,7 @@ ChatCompletionsOptions chatCompletionsOptions = new ChatCompletionsOptions()
     },
     MaxTokens = 600,
     Temperature = 0.9f,
-    DeploymentName = oaiModelName,
+    DeploymentName = oaiDeploymentName,
     // Specify extension options
     AzureExtensionsOptions = new AzureChatExtensionsOptions()
     {
