@@ -112,6 +112,8 @@ Bow you'll add some data for a fictional travel agent company named *Margie's Tr
 1. On the **Data management** page select the **Keyword** search type from the drop-down, and then select **Next**.
 1. On the **Review and finish** page select **Save and close**, which will add your data. This may take a few minutes, during which you need to leave your window open. Once complete, you'll see the data source, search resource, and index specified in the **Assistant setup** section.
 
+    > **Tip**: Occasionally the connection between your new search index and Azure OpenAI Studio takes too long. If you've waited for a few minutes and it still hasn't connected, check your AI Search resources in Azure portal. If you see the completed index, you can disconnect the data connection in Azure OpenAI Studio and re-add it by specifying an Azure AI Search data source and selecting your new index.
+
 ## Chat with a model grounded in your data
 
 Now that you've added your data, ask the same questions as you did previously, and see how the response differs.
