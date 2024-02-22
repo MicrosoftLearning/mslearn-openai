@@ -196,7 +196,7 @@ Now you're ready to use the Azure OpenAI SDK to consume your deployed model.
         },
         Temperature = 0.7f,
         MaxTokens = 1000,
-        DeploymentName = oaiModelName
+        DeploymentName = oaiDeploymentNameoaiDeploymentName
     };
 
     // Get response from Azure OpenAI
