@@ -1,2 +1,5 @@
 bin
 obj
+Labfiles/02-nlp-azure-openai/Python/.env
+.vscode/launch.json
+.vscode/tasks.json
