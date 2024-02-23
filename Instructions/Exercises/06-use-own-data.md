@@ -46,6 +46,7 @@ Azure OpenAI provides a web-based portal named **Azure OpenAI Studio**, that you
     - **Deployment name**: *A unique name of your choice. You'll use this name later in the lab.*
     - **Advanced options**
         - **Content filter**: Default
+        - **Deployment type**: Standard
         - **Tokens per minute rate limit**: 5K\*
         - **Enable dynamic quota**: Enabled
 

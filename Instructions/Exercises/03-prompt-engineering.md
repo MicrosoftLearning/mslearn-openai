@@ -36,6 +36,7 @@ Azure OpenAI provides a web-based portal named **Azure OpenAI Studio**, that you
     - **Deployment name**: *A unique name of your choice. You'll use this name later in the lab.*
     - **Advanced options**
         - **Content filter**: Default
+        - **Deployment type**: Standard
         - **Tokens per minute rate limit**: 5K\*
         - **Enable dynamic quota**: Enabled
 
@@ -69,7 +70,7 @@ Let's start by exploring some prompt engineering techniques in the Chat playgrou
 
 5. In the **Assistant setup** section change the system message to `You are a news aggregator that categorizes news articles.`
 
-6. Under the new system message, select the **Add an example** button. Add the following example.
+6. Under the new system message, in the **Examples** section, select the **Add** button. Then add the following example.
 
     **User:**
     
@@ -114,7 +115,7 @@ Let's start by exploring some prompt engineering techniques in the Chat playgrou
     Entertainment
     ```
 
-8. Use the **Save changes** button at the top of the **Assistent setup** section to update the system message.
+8. Use the **Apply changes** button at the top of the **Assistent setup** section to update the system message.
 
 9. In the **Chat session** section, resubmit the following prompt:
 
@@ -132,7 +133,7 @@ Let's start by exploring some prompt engineering techniques in the Chat playgrou
 
     The combination of a more specific system message and some examples of expected queries and responses results in a consistant format for the results.
 
-10. In the **Assistant setup** section, change the system message back to the default template, which should be `You are an AI assistant that helps people find information.` with no examples. Then save the changes.
+10. In the **Assistant setup** section, change the system message back to the default template, which should be `You are an AI assistant that helps people find information.` with no examples. Then apply the changes.
 
 11. In the **Chat session** section, submit the following prompt:
 
@@ -144,7 +145,7 @@ Let's start by exploring some prompt engineering techniques in the Chat playgrou
 
     The model will likely respond with an answer to satisfy the prompt, split into a numbered list. This is an appropriate response, but suppose what you actually wanted was for the model to write a Python program that performs the tasks you described?
 
-12. Change the system message to `You are a coding assistant helping write python code.` and click **Save changes**
+12. Change the system message to `You are a coding assistant helping write python code.` and apply the changes.
 13. Resubmit the following prompt to the model:
 
     ```

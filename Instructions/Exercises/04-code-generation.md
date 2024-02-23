@@ -36,6 +36,7 @@ Azure OpenAI provides a web-based portal named **Azure OpenAI Studio**, that you
     - **Deployment name**: *A unique name of your choice. You'll use this name later in the lab.*
     - **Advanced options**
         - **Content filter**: Default
+        - **Deployment type**: Standard
         - **Tokens per minute rate limit**: 5K\*
         - **Enable dynamic quota**: Enabled
 
@@ -50,7 +51,7 @@ Before using in your app, examine how Azure OpenAI can generate and explain code
     - **Chat session** - used to submit chat messages and view responses.
     - **Configuration** - used to configure settings for the model deployment.
 2. In the **Configuration** section, ensure that your model deployment is selected.
-3. In the **Assistant setup** area, set the system message to `You are a programming assistant helping write code` and save the changes.
+3. In the **Assistant setup** area, set the system message to `You are a programming assistant helping write code` and apply the changes.
 4. In the **Chat session**, submit the following query:
 
     ```
