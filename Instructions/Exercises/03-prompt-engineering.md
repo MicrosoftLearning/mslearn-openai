@@ -17,11 +17,21 @@ If you don't already have one, provision an Azure OpenAI resource in your Azure 
 2. Create an **Azure OpenAI** resource with the following settings:
     - **Subscription**: *Select an Azure subscription that has been approved for access to the Azure OpenAI service*
     - **Resource group**: *Choose or create a resource group*
-    - **Region**: *Make a **random** choice from any of the available regions*\*
+    - **Region**: *Make a **random** choice from any of the following regions*\*
+        - Australia East
+        - Canada East
+        - East US
+        - East US 2
+        - France Central
+        - Japan East
+        - North Central US
+        - Sweden Central
+        - Switzerland North
+        - UK South
     - **Name**: *A unique name of your choice*
     - **Pricing tier**: Standard S0
 
-    > \* Azure OpenAI resources are constrained by regional quotas. Randomly choosing a region reduces the risk of a single region reaching its quota limit in scenarios where you are sharing a subscription with other users. In the event of a quota limit being reached later in the exercise, there's a possibility you may need to create another resource in a different region.
+    > \* Azure OpenAI resources are constrained by regional quotas. The listed regions include default quota for the model type(s) used in this exercise. Randomly choosing a region reduces the risk of a single region reaching its quota limit in scenarios where you are sharing a subscription with other users. In the event of a quota limit being reached later in the exercise, there's a possibility you may need to create another resource in a different region.
 
 3. Wait for deployment to complete. Then go to the deployed Azure OpenAI resource in the Azure portal.
 
