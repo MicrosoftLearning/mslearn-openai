@@ -140,7 +140,7 @@ You've explored how the system message, examples, and prompts can help refine th
 
 ## Deploy your model to a web app
 
-Now that you've explored some of the capabilities of a generative AI model in the Azure OpenAI Studio playground, you can deploy an Azure web app to provide a basic AI agent interface through which users can chat with your model.
+Now that you've explored some of the capabilities of a generative AI model in the Azure OpenAI Studio playground, you can deploy an Azure web app to provide a basic AI agent interface through which users can chat with the model.
 
 1. At the top right of the **Chat** playground page, in the **Deploy to** menu, select **A new web app**.
 1. In the **Deploy to a web app** dialog box, create a new web app with the following settings:
@@ -160,7 +160,10 @@ Now that you've explored some of the capabilities of a generative AI model in th
     ```
 
 1. Review the response.
-1. Close the web app tab in your browser to return to Azure OpenAI Studio.
+
+    > **Note**: You deployed the *model* to a web app, but this deployment doesn't include the system settings and parameters you set in the playground; so the response may not reflect the examples you specified in the playground. In a real scenario, you would add logic to your application to modify the prompt so that it includes the appropriate contextual data for the kinds of response you want to generate. This kind of customization is beyond the scope of this introductory-level exercise, but you can learn about prompt engineering techniques and Azure OpenAI APIs in other exercises and product documentation.
+
+1. When you have finished experimenting with your model in the web app, close the web app tab in your browser to return to Azure OpenAI Studio.
 
 ## Clean up
 
