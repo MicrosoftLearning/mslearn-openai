@@ -97,16 +97,16 @@ Now that you've reviewed the code, it's time to run it and generate some images.
 
 1. Right-click the **CSharp** or **Python** folder containing your code files and open an integrated terminal. Then enter the appropriate command to run your application:
 
-   **C#**
-   ```
-   dotnet run
-   ```
-   
-   **Python**
-   ```
-   pip install requests
-   python generate-image.py
-   ```
+    **C#**
+    ```
+    dotnet run
+    ```
+
+    **Python**
+    ```
+    pip install requests python-dotenv
+    python generate-image.py
+    ```
 
 3. When prompted, enter a description for an image. For example, *A giraffe flying a kite*.
 

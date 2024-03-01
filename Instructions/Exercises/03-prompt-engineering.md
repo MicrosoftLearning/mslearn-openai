@@ -306,8 +306,16 @@ Each prompt is displayed in the console as it sends for you to see how differenc
 
 2. In the interactive terminal pane, ensure the folder context is the folder for your preferred language. Then enter the following command to run the application.
 
-    - **C#**: `dotnet run`
-    - **Python**: `python prompt-engineering.py`
+    **C#**
+    ```
+    dotnet run
+    ```
+
+    **Python**
+    ```
+    pip install python-dotenv
+    python prompt-engineering.py
+    ```
 
     > **Tip**: You can use the **Maximize panel size** (**^**) icon in the terminal toolbar to see more of the console text.
 

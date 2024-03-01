@@ -249,8 +249,16 @@ Now that your app has been configured, run it to try generating code for each us
 1. In the **Explorer** pane, expand the **Labfiles/04-code-generation/sample-code** folder and review the function and the *go-fish* app for your language. These files will be used for the tasks in the app.
 2. In the interactive terminal pane, ensure the folder context is the folder for your preferred language. Then enter the following command to run the application.
 
-    - **C#**: `dotnet run`
-    - **Python**: `python code-generation.py`
+    **C#**
+    ```
+    dotnet run
+    ```
+
+    **Python**
+    ```
+    pip install python-dotenv
+    python code-generation.py
+    ```
 
     > **Tip**: You can use the **Maximize panel size** (**^**) icon in the terminal toolbar to see more of the console text.
 

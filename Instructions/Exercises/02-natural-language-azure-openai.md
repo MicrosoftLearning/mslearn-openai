@@ -179,8 +179,16 @@ Now that your app has been configured, run it to send your request to your model
 
 2. In the interactive terminal pane, ensure the folder context is the folder for your preferred language. Then enter the following command to run the application.
 
-    - **C#**: `dotnet run`
-    - **Python**: `python test-openai-model.py`
+    **C#**
+    ```
+    dotnet run
+    ```
+
+    **Python**
+    ```
+    pip install python-dotenv
+    python test-openai-model.py
+    ```
 
     > **Tip**: You can use the **Maximize panel size** (**^**) icon in the terminal toolbar to see more of the console text.
 
