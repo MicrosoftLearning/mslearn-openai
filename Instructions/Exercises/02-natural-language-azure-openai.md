@@ -61,6 +61,9 @@ You'll develop your Azure OpenAI app using Visual Studio Code. The code files fo
 1. Start Visual Studio Code.
 2. Open the palette (SHIFT+CTRL+P) and run a **Git: Clone** command to clone the `https://github.com/MicrosoftLearning/mslearn-openai` repository to a local folder (it doesn't matter which folder).
 3. When the repository has been cloned, open the folder in Visual Studio Code.
+
+    > **Note**: If Visual Studio Code shows you a pop-up message to prompt you to trust the code you are opening, click on **Yes, I trust the authors** option in the pop-up.
+
 4. Wait while additional files are installed to support the C# code projects in the repo.
 
     > **Note**: If you are prompted to add required assets to build and debug, select **Not Now**.
@@ -132,7 +135,7 @@ Now you're ready to use the Azure OpenAI SDK to consume your deployed model.
         },
         MaxTokens = 120,
         Temperature = 0.7f,
-        DeploymentName = oaiModelName
+        DeploymentName = oaiDeploymentName
    };
 
    // Send request to Azure OpenAI model
@@ -154,7 +157,7 @@ Now you're ready to use the Azure OpenAI SDK to consume your deployed model.
 
    # Send request to Azure OpenAI model
    response = client.chat.completions.create(
-       model=azure_oai_model,
+       model=azure_oai_deployment,
        temperature=0.7,
        max_tokens=120,
        messages=[

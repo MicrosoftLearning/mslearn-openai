@@ -66,7 +66,7 @@ Now that you've deployed a model, you can use it to generate responses based on 
 > **Note:** The *Chat* playground uses the *ChatCompletions* API rather than the older *Completions* API that is used by the *Completions* playground. The Completions playground is provided for compatibility with older models.
 
 1. In the **Playground** section, select the **Chat** page. The **Chat** playground page consists of three main panels (which may be arranged right-to-left horizontally, or top-to-bottom vertically depending on your screen resolution):
-    - **Assistant setup** - used to set the context for the model's responses.
+    - **Setup** - used to set the context for the model's responses.
     - **Chat session** - used to submit chat messages and view responses.
     - **Configuration** - used to configure settings for the model deployment.
 1. In the **Configuration** panel, ensure that your gpt-35-turbo-16k model deployment is selected.
@@ -97,7 +97,11 @@ So far, you've engaged in a chat conversation with your model based on the defau
 
     The response should now be more useful, but to have even more control over the output from the model, you can provide one or more *few-shot* examples on which responses should be based.
 
-1. In the **Assistant setup** panel, under **Examples**, select **Add**. Then type the following message and response in the designated boxes:
+1. In the **Configuration** > **Parameters** pane, set the following parameter values:
+    - **Temperature**: 0
+    - **Max response**: 500
+
+1. In the **Setup** panel, under **Examples**, select **Add**. Then type the following message and response in the designated boxes:
 
     **User**:
     
