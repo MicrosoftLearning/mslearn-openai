@@ -14,12 +14,15 @@ def main():
         azure_oai_key = os.getenv("AZURE_OAI_KEY")
         azure_oai_deployment = os.getenv("AZURE_OAI_DEPLOYMENT")
         
-        # Read text from file
-        text = open(file="../text-files/sample-text.txt", encoding="utf8").read()
-        
-        print("\nSending request for summary to Azure OpenAI endpoint...\n\n")
-        
-        # Add code to build request...
+        while True:
+            # Get input text
+            input_text = input("Enter the prompt (or type 'quit' to exit): ")
+            if input_text.lower() == "quit":
+                break
+
+            print("\nSending request for summary to Azure OpenAI endpoint...\n\n")
+            
+            # Add code to send request...
         
 
     except Exception as ex:

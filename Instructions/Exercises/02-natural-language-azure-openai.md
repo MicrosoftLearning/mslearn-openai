@@ -1,13 +1,15 @@
 ---
 lab:
-    title: 'Integrate Azure OpenAI into your app'
+    title: 'Use Azure OpenAI SDKs in your app'
 ---
 
-# Integrate Azure OpenAI into your app
+# Use Azure OpenAI SDKs in your app
 
-With the Azure OpenAI Service, developers can create chatbots, language models, and other applications that excel at understanding natural human language. The Azure OpenAI provides access to pre-trained AI models, as well as a suite of APIs and tools for customizing and fine-tuning these models to meet the specific requirements of your application. In this exercise, you'll learn how to deploy a model in Azure OpenAI and use it in your own application to summarize text.
+With the Azure OpenAI Service, developers can create chatbots, language models, and other applications that excel at understanding natural human language. The Azure OpenAI provides access to pre-trained AI models, as well as a suite of APIs and tools for customizing and fine-tuning these models to meet the specific requirements of your application. In this exercise, you'll learn how to deploy a model in Azure OpenAI and use it in your own application.
 
-This exercise will take approximately **30** minutes.
+In scenario for this exercise, you will perform the role of a software developer who has been tasked to implement an app that can use generative AI to help a marketing organization, similar to the first lab but now using the API. The techniques used in the exercise can be applied to any app that wants to use Azure OpenAI APIs.
+
+This exercise will take approximately **25** minutes.
 
 ## Provision an Azure OpenAI resource
 
@@ -70,21 +72,21 @@ You'll develop your Azure OpenAI app using Visual Studio Code. The code files fo
 
 ## Configure your application
 
-Applications for both C# and Python have been provided, as well as a sample text file you'll use to test the summarization. Both apps feature the same functionality. First, you'll complete some key parts of the application to enable using your Azure OpenAI resource.
+Applications for both C# and Python have been provided. Both apps feature the same functionality. First, you'll complete some key parts of the application to enable using your Azure OpenAI resource.
 
-1. In Visual Studio Code, in the **Explorer** pane, browse to the **Labfiles/02-nlp-azure-openai** folder and expand the **CSharp** or **Python** folder depending on your language preference. Each folder contains the language-specific files for an app into which you're you're going to integrate Azure OpenAI functionality.
+1. In Visual Studio Code, in the **Explorer** pane, browse to the **Labfiles/02-azure-openai-api** folder and expand the **CSharp** or **Python** folder depending on your language preference. Each folder contains the language-specific files for an app into which you're going to integrate Azure OpenAI functionality.
 2. Right-click the **CSharp** or **Python** folder containing your code files and open an integrated terminal. Then install the Azure OpenAI SDK package by running the appropriate command for your language preference:
 
     **C#**:
 
     ```
-    dotnet add package Azure.AI.OpenAI --version 1.0.0-beta.9
+    dotnet add package Azure.AI.OpenAI --version 1.0.0-beta.14
     ```
 
     **Python**:
 
     ```
-    pip install openai==1.2.0
+    pip install openai==1.13.3
     ```
 
 3. In the **Explorer** pane, in the **CSharp** or **Python** folder, open the configuration file for your preferred language
@@ -117,7 +119,7 @@ Now you're ready to use the Azure OpenAI SDK to consume your deployed model.
    from openai import AzureOpenAI
     ```
 
-2. In the application code for your language, replace the comment ***Add code to build request...*** with the necessary code for building the request; specifying the various parameters for your model such as `prompt` and `temperature`.
+2. In the application code for your language, replace the comment ***Add code to send request...*** with the necessary code for building the request; specifying the various parameters for your model such as `messages` and `temperature`.
 
     **C#**: Program.cs
 
@@ -130,10 +132,10 @@ Now you're ready to use the Azure OpenAI SDK to consume your deployed model.
    {
         Messages =
         {
-            new ChatMessage(ChatRole.System, "You are a helpful assistant."),
-            new ChatMessage(ChatRole.User, "Summarize the following text in 20 words or less:\n" + text),
+            new new ChatRequestSystemMessage("You are a marketing writing assistant. You help come up with creative content ideas and content like marketing emails, blog posts, tweets, ad copy and product descriptions. You write in a friendly yet professional tone but can tailor your writing style that best works for a user-specified audience. If you do not know the answer to a question, respond by saying 'I don't know the answer to your question.'"),
+            new ChatMessage(inputText),
         },
-        MaxTokens = 120,
+        MaxTokens = 400,
         Temperature = 0.7f,
         DeploymentName = oaiDeploymentName
    };
@@ -161,8 +163,8 @@ Now you're ready to use the Azure OpenAI SDK to consume your deployed model.
        temperature=0.7,
        max_tokens=120,
        messages=[
-           {"role": "system", "content": "You are a helpful assistant."},
-           {"role": "user", "content": "Summarize the following text in 20 words or less:\n" + text}
+           {"role": "system", "content": "You are a marketing writing assistant. You help come up with creative content ideas and content like marketing emails, blog posts, tweets, ad copy and product descriptions. You write in a friendly yet professional tone but can tailor your writing style that best works for a user-specified audience. If you do not know the answer to a question, respond by saying 'I do not know the answer to your question.'"},
+           {"role": "user", "content": input_text}
        ]
     )
     
@@ -175,21 +177,20 @@ Now you're ready to use the Azure OpenAI SDK to consume your deployed model.
 
 Now that your app has been configured, run it to send your request to your model and observe the response.
 
-1. In the **Explorer** pane, expand the **Labfiles/02-nlp-azure-openai/text-files** folder and open the **sample-text.txt** file. This text file contains the text you will submit to the model to be summarized.
-
-2. In the interactive terminal pane, ensure the folder context is the folder for your preferred language. Then enter the following command to run the application.
+1. In the interactive terminal pane, ensure the folder context is the folder for your preferred language. Then enter the following command to run the application.
 
     - **C#**: `dotnet run`
     - **Python**: `python test-openai-model.py`
 
     > **Tip**: You can use the **Maximize panel size** (**^**) icon in the terminal toolbar to see more of the console text.
 
-3. Observe the summarization of the sample text file.
-4. In the code file for your preferred language, and change the *temperature* parameter value in your request to **1.0** and save the file.
-5. Run the application again, and observe the output.
-6. Re-run the app a few times, noting the output each time - it may vary.
+1. When prompted, enter the text `Create an advertisement for a new scrubbing brush`.
+1. Observe the output, taking note that the response follows the guidelines provided in the system message you added to the *messages* array.
+1. Provide the prompt `Create an advertisement for a scrubbing brush named "Scrubadub 2000", which is made of carbon fiber and reduces cleaning times by half compared to ordinary scrubbing brushes` and observe the output.
+1. In the code file for your preferred language, and change the *temperature* parameter value in your request to **1.0** and save the file.
+1. Run the application again using the prompts above, and observe the output.
 
-Increasing the temperature often causes the summary to vary, even when provided the same text, due to the increased randomness. You can run it several times to see how the output may change. Try using different values for your temperature with the same input.
+Increasing the temperature often causes the response to vary, even when provided the same text, due to the increased randomness. You can run it several times to see how the output may change. Try using different values for your temperature with the same input.
 
 ## Clean up
 

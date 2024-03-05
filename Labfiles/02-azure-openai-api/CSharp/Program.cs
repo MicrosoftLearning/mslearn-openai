@@ -16,12 +16,16 @@ string? oaiEndpoint = config["AzureOAIEndpoint"];
 string? oaiKey = config["AzureOAIKey"];
 string? oaiDeploymentName = config["AzureOAIDeploymentName"];
 
-// Read sample text file into a string
-string textToSummarize = System.IO.File.ReadAllText(@"../text-files/sample-text.txt");
+do {
+    Console.WriteLine("Enter your prompt text (or type 'quit' to exit): ");
+    string? inputText = Console.ReadLine();
+    if (inputText == "quit") break;
 
-// Generate summary from Azure OpenAI
-GetSummaryFromOpenAI(textToSummarize);
-    
+    // Generate summary from Azure OpenAI
+    GetSummaryFromOpenAI(inputText);
+} while (true);
+
+// Function to send request to Azure OpenAI endpoint
 void GetSummaryFromOpenAI(string text)  
 {   
     Console.WriteLine("\nSending request for summary to Azure OpenAI endpoint...\n\n");
@@ -32,6 +36,6 @@ void GetSummaryFromOpenAI(string text)
         return;
     }
 
-    // Add code to build request...
+    // Add code to send request...
     
 }  
