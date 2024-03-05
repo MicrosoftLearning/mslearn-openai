@@ -124,48 +124,48 @@ Now you're ready to use the Azure OpenAI SDK to consume your deployed model.
     **C#**: Program.cs
 
     ```csharp
-   // Initialize the Azure OpenAI client
-   OpenAIClient client = new OpenAIClient(new Uri(oaiEndpoint), new AzureKeyCredential(oaiKey));
+        // Initialize the Azure OpenAI client
+    OpenAIClient client = new OpenAIClient(new Uri(oaiEndpoint), new AzureKeyCredential(oaiKey));
 
-   // Build completion options object
-   ChatCompletionsOptions chatCompletionsOptions = new ChatCompletionsOptions()
-   {
+    // Build completion options object
+    ChatCompletionsOptions chatCompletionsOptions = new ChatCompletionsOptions()
+    {
         Messages =
         {
-            new new ChatRequestSystemMessage("You are a marketing writing assistant. You help come up with creative content ideas and content like marketing emails, blog posts, tweets, ad copy and product descriptions. You write in a friendly yet professional tone but can tailor your writing style that best works for a user-specified audience. If you do not know the answer to a question, respond by saying 'I don't know the answer to your question.'"),
-            new ChatMessage(inputText),
+            new ChatRequestSystemMessage("You are a marketing writing assistant. You help come up with creative content ideas and content like marketing emails, blog posts, tweets, ad copy and product descriptions. You write in a friendly yet professional tone but can tailor your writing style that best works for a user-specified audience. If you do not know the answer to a question, respond by saying 'I don't know the answer to your question.'"),
+            new ChatRequestUserMessage(inputText),
         },
         MaxTokens = 400,
         Temperature = 0.7f,
         DeploymentName = oaiDeploymentName
-   };
+    };
 
-   // Send request to Azure OpenAI model
-   ChatCompletions response = client.GetChatCompletions(chatCompletionsOptions);
-   string completion = response.Choices[0].Message.Content;
+    // Send request to Azure OpenAI model
+    ChatCompletions response = client.GetChatCompletions(chatCompletionsOptions);
+    string completion = response.Choices[0].Message.Content;
 
-   Console.WriteLine("Summary: " + completion + "\n");
+    Console.WriteLine("Summary: " + completion + "\n");
     ```
 
     **Python**: test-openai-model.py
 
     ```python
-   # Initialize the Azure OpenAI client
-   client = AzureOpenAI(
+    # Initialize the Azure OpenAI client
+    client = AzureOpenAI(
             azure_endpoint = azure_oai_endpoint, 
             api_key=azure_oai_key,  
             api_version="2023-05-15"
             )
-
-   # Send request to Azure OpenAI model
-   response = client.chat.completions.create(
-       model=azure_oai_deployment,
-       temperature=0.7,
-       max_tokens=120,
-       messages=[
-           {"role": "system", "content": "You are a marketing writing assistant. You help come up with creative content ideas and content like marketing emails, blog posts, tweets, ad copy and product descriptions. You write in a friendly yet professional tone but can tailor your writing style that best works for a user-specified audience. If you do not know the answer to a question, respond by saying 'I do not know the answer to your question.'"},
-           {"role": "user", "content": input_text}
-       ]
+    
+    # Send request to Azure OpenAI model
+    response = client.chat.completions.create(
+        model=azure_oai_deployment,
+        temperature=0.7,
+        max_tokens=400,
+        messages=[
+            {"role": "system", "content": "You are a marketing writing assistant. You help come up with creative content ideas and content like marketing emails, blog posts, tweets, ad copy and product descriptions. You write in a friendly yet professional tone but can tailor your writing style that best works for a user-specified audience. If you do not know the answer to a question, respond by saying 'I do not know the answer to your question.'"},
+            {"role": "user", "content": input_text}
+        ]
     )
     
     print("Summary: " + response.choices[0].message.content + "\n")

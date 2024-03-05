@@ -19,11 +19,14 @@ def main():
             input_text = input("Enter the prompt (or type 'quit' to exit): ")
             if input_text.lower() == "quit":
                 break
+            if len(input_text) == 0:
+                print("Please enter a prompt.")
+                continue
 
             print("\nSending request for summary to Azure OpenAI endpoint...\n\n")
             
             # Add code to send request...
-        
+            
 
     except Exception as ex:
         print(ex)

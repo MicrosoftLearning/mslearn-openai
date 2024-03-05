@@ -22,11 +22,12 @@ do {
     if (inputText == "quit") break;
 
     // Generate summary from Azure OpenAI
-    GetSummaryFromOpenAI(inputText);
+    if (inputText != null && inputText.Length > 0)
+        GetSummaryFromOpenAI(inputText);
 } while (true);
 
 // Function to send request to Azure OpenAI endpoint
-void GetSummaryFromOpenAI(string text)  
+void GetSummaryFromOpenAI(string inputText)  
 {   
     Console.WriteLine("\nSending request for summary to Azure OpenAI endpoint...\n\n");
 
@@ -37,5 +38,5 @@ void GetSummaryFromOpenAI(string text)
     }
 
     // Add code to send request...
-    
+
 }  
