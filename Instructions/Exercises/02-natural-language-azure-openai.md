@@ -7,7 +7,7 @@ lab:
 
 With the Azure OpenAI Service, developers can create chatbots, language models, and other applications that excel at understanding natural human language. The Azure OpenAI provides access to pre-trained AI models, as well as a suite of APIs and tools for customizing and fine-tuning these models to meet the specific requirements of your application. In this exercise, you'll learn how to deploy a model in Azure OpenAI and use it in your own application.
 
-In scenario for this exercise, you will perform the role of a software developer who has been tasked to implement an app that can use generative AI to help a marketing organization, similar to the first lab but now using the API. The techniques used in the exercise can be applied to any app that wants to use Azure OpenAI APIs.
+In the scenario for this exercise, you will perform the role of a software developer who has been tasked to implement an app that can use generative AI to help a marketing organization, similar to the first lab but now using the API. The techniques used in the exercise can be applied to any app that wants to use Azure OpenAI APIs.
 
 This exercise will take approximately **25** minutes.
 
@@ -154,7 +154,7 @@ Now you're ready to use the Azure OpenAI SDK to consume your deployed model.
     client = AzureOpenAI(
             azure_endpoint = azure_oai_endpoint, 
             api_key=azure_oai_key,  
-            api_version="2023-05-15"
+            api_version="2024-02-15-preview"
             )
     
     # Send request to Azure OpenAI model
