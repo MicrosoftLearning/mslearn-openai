@@ -7,21 +7,23 @@ lab:
 
 The Azure OpenAI Service includes an image-generation model named DALL-E. You can use this model to submit natural language prompts that describe a desired image, and the model will generate an original image based on the description you provide.
 
+In this exercise, you'll use a DALL-E version 3 model to generate images based on natural language prompts.
+
 This exercise will take approximately **25** minutes.
 
 ## Provision an Azure OpenAI resource
 
-Before you can use Azure OpenAI models, you must provision an Azure OpenAI resource in your Azure subscription.
+Before you can use Azure OpenAI to generate images, you must provision an Azure OpenAI resource in your Azure subscription. The resource must be in a region where DALL-E models are supported.
 
 1. Sign into the **Azure portal** at `https://portal.azure.com`.
 2. Create an **Azure OpenAI** resource with the following settings:
     - **Subscription**: *Select an Azure subscription that has been approved for access to the Azure OpenAI service, including DALL-E*
     - **Resource group**: *Choose or create a resource group*
-    - **Region**: **East US**\*
+    - **Region**: *Choose either **East US** or **Sweden Central***\*
     - **Name**: *A unique name of your choice*
     - **Pricing tier**: Standard S0
 
-    > \* DALL-E models are only available in Azure OpenAI service resources in the **East US** region.
+    > \* DALL-E 3 models are only available in Azure OpenAI service resources in the **East US** and **Sweden Central** regions.
 
 3. Wait for deployment to complete. Then go to the deployed Azure OpenAI resource in the Azure portal.
 
@@ -29,8 +31,8 @@ Before you can use Azure OpenAI models, you must provision an Azure OpenAI resou
 
 You can use the DALL-E playground in **Azure OpenAI Studio** to experiment with image-generation.
 
-1. In the Azure portal, on the **Overview** page for your Azure OpenAI resource, use the **Explore** button to open Azure OpenAI Studio in a new browser tab. Alternatively, navigate to [Azure OpenAI Studio](https://oai.azure.com) directly.
-2. In the **Playground** section, select the **DALL-E** playground.
+1. In the Azure portal, on the **Overview** page for your Azure OpenAI resource, use the **Explore** button to open Azure OpenAI Studio in a new browser tab. Alternatively, navigate to [Azure OpenAI Studio](https://oai.azure.com) directly at `https://oai.azure.com`.
+2. In the **Playground** section, select the **DALL-E** playground. A deployment of the DALL-E model named *Dalle3* will be created automatically.
 3. In the **Prompt** box, enter a description of an image you'd like to generate. For example, `An elephant on a skateboard` Then select **Generate** and view the image that is generated.
 
     ![The DALL-E Playground in Azure OpenAI Studio with a generated image.](../media/dall-e-playground.png)
@@ -61,7 +63,7 @@ Now let's explore how you could build a custom app that uses Azure OpenAI servic
 
 ### Configure your application
 
-Applications for both C# and Python have been provided. Both apps feature the same functionality. First, you'll complete some key parts of the application to enable using your Azure OpenAI resource.
+Applications for both C# and Python have been provided. Both apps feature the same functionality. First, you'll add the endpoint and key for your Azure OpenAI resource to the app's configuration file.
 
 1. In Visual Studio Code, in the **Explorer** pane, browse to the **Labfiles/05-image-generation** folder and expand the **CSharp** or **Python** folder depending on your language preference. Each folder contains the language-specific files for an app into which you're you're going to integrate Azure OpenAI functionality.
 2. In the **Explorer** pane, in the **CSharp** or **Python** folder, open the configuration file for your preferred language
@@ -82,14 +84,9 @@ Now you're ready to explore the code used to call the REST API and generate an i
     - Python: `generate-image.py`
 
 2. Review the code that the file contains, noting the following key features:
-    - The code makes https requests to the endpoint for your service, including the key for your service in the header. Both of these values are obtained from the configuration file.
-    - The process consists of <u>two</u> REST requests: One to initiate the image-generation request, and another to retrieve the results.
-    The initial request includes the following data:
-        - The user-provided prompt that describes the image to be generated
-        - The number of images to be generated (in this case, 1)
-        - The resolution (size) of the image to be generated.
-    - The response header from the initial request includes an **operation-location** value that is used for the subsequent callback to get the results.
-    - The code polls the callback URL until the status of the image-generation task is *succeeded*, and then extracts and displays a URL for the generated image.
+    - The code makes an https request to the endpoint for your service, including the key for your service in the header. Both of these values are obtained from the configuration file.
+    - The request includes some parameters, including the prompt from on the image should be based, the number of images to generate, and the size of the generated image(s).
+    - The response includes a revised prompt that the DALL-E model extrapolated from the user-provided prompt to make it more descriptive, and the URL for the generated image.
 
 ### Run the app
 
@@ -112,9 +109,9 @@ Now that you've reviewed the code, it's time to run it and generate some images.
 
 4. Wait for the image to be generated - a hyperlink will be displayed in the terminal pane. Then select the hyperlink to open a new browser tab and review the image that was generated.
 
-   > **TIP**: If the app can't find the header, wait a minute and try again. Newly deployed resources can take up to 5 minutes to become available.
+   > **TIP**: If the app doesn't return a response, wait a minute and try again. Newly deployed resources can take up to 5 minutes to become available.
 
-6. Close the browser tab containing the generated image and re-run the app to generate a new image with a different prompt.
+5. Close the browser tab containing the generated image and re-run the app to generate a new image with a different prompt.
 
 ## Clean up
 

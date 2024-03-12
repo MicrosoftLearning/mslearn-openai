@@ -29,11 +29,11 @@ namespace generate_image
                 Console.WriteLine("Enter a prompt to request an image:");
                 string prompt = Console.ReadLine() ?? "";
 
-                // Make the initial call to start the job
+                // Call the DALL-E model
                 using (var client = new HttpClient())
                 {
                     var contentType = new MediaTypeWithQualityHeaderValue("application/json");
-                    var api = "openai/images/generations:submit?api-version=2023-06-01-preview";
+                    var api = "openai/deployments/dalle3/images/generations?api-version=2024-02-15-preview";
                     client.BaseAddress = new Uri(aoaiEndpoint);
                     client.DefaultRequestHeaders.Accept.Add(contentType);
                     client.DefaultRequestHeaders.Add("api-key", aoaiKey);
@@ -41,40 +41,21 @@ namespace generate_image
                     {
                         prompt=prompt,
                         n=1,
-                        size="512x512"
+                        size="1024x1024"
                     };
 
                     var jsonData = JsonSerializer.Serialize(data);
                     var contentData = new StringContent(jsonData, Encoding.UTF8, "application/json");
-                    var init_response = await client.PostAsync(api, contentData); 
+                    var response = await client.PostAsync(api, contentData); 
 
-                    // Get the operation-location URL for the callback
-                    var callback_url = init_response.Headers.GetValues("operation-location").FirstOrDefault();
-
-                    // Poll the callback URL until the job has succeeeded (or 100 attempts)
-                    var response = await client.GetAsync(callback_url); 
+                    // Get the revised prompt and image URL from the response
                     var stringResponse = await response.Content.ReadAsStringAsync();
-                    var status = JsonSerializer.Deserialize<Dictionary<string,object>>(stringResponse)["status"];
-                    var tries = 1;
-                    while (status.ToString() != "succeeded" && tries < 101)
-                    {
-                        Thread.Sleep (3000); // wait 3 seconds to avoid rate limit
-                        tries ++;
-                        response = await client.GetAsync(callback_url);
-                        stringResponse = await response.Content.ReadAsStringAsync();
-                        status = JsonSerializer.Deserialize<Dictionary<string,object>>(stringResponse)["status"];
-                        Console.WriteLine(tries.ToString() + ": " + status);
-                    }
-
-                    // Get the results
-                    stringResponse = await response.Content.ReadAsStringAsync();
                     JsonNode contentNode = JsonNode.Parse(stringResponse)!;
-                    JsonNode resultNode = contentNode!["result"];
-                    JsonNode dataNode = resultNode!["data"];
-                    JsonNode urlNode = dataNode[0]!;
-                    JsonNode url = urlNode!["url"];
-
-                    // Display the URL for the generated image
+                    JsonNode dataCollectionNode = contentNode!["data"];
+                    JsonNode dataNode = dataCollectionNode[0]!;
+                    JsonNode revisedPrompt = dataNode!["revised_prompt"];
+                    JsonNode url = dataNode!["url"];
+                    Console.WriteLine(revisedPrompt.ToJsonString());
                     Console.WriteLine(url.ToJsonString().Replace(@"\u0026", "&"));
 
                 }
