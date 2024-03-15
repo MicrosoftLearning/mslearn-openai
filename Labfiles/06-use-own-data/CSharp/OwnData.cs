@@ -5,8 +5,9 @@ using Microsoft.Extensions.Configuration.Json;
 using Azure;
 
 // Add Azure OpenAI package
+using Azure.AI.OpenAI;
 
-  
+
 // Get configuration settings  
 IConfiguration config = new ConfigurationBuilder()
     .AddJsonFile("appsettings.json")
@@ -29,13 +30,13 @@ string? text = Console.ReadLine();
 // Create extension config for own data
 AzureCognitiveSearchChatExtensionConfiguration ownDataConfig = new()
 {
-        SearchEndpoint = new Uri(azureSearchEndpoint),
-        IndexName = azureSearchIndex
+    SearchEndpoint = new Uri(azureSearchEndpoint),
+    IndexName = azureSearchIndex
 };
 ownDataConfig.SetSearchKey(azureSearchKey);
 
 // Send request to Azure OpenAI model  
-Console.WriteLine("...Sending the following request to Azure OpenAI endpoint...");  
+Console.WriteLine("...Sending the following request to Azure OpenAI endpoint...");
 Console.WriteLine("Request: " + text + "\n");
 
 ChatCompletionsOptions chatCompletionsOptions = new ChatCompletionsOptions()
@@ -50,7 +51,7 @@ ChatCompletionsOptions chatCompletionsOptions = new ChatCompletionsOptions()
     // Specify extension options
     AzureExtensionsOptions = new AzureChatExtensionsOptions()
     {
-        Extensions = {ownDataConfig}
+        Extensions = { ownDataConfig }
     }
 };
 
@@ -72,6 +73,6 @@ foreach (ChatMessage contextMessage in responseMessage.AzureExtensionsContext.Me
         });
     }
     catch (JsonException)
-    {}
+    { }
     Console.WriteLine($"{contextMessage.Role}: {contextContent}");
 }

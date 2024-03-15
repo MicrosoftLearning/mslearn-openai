@@ -1,0 +1,19 @@
+1. Test case where both num1 and num2 are positive integers: 
+   Input: num1 = 5, num2 = 3
+   Expected output: 4
+   Reasoning: The absolute difference between 5 and 3 is 2. Squaring 2 gives us 4.
+
+2. Test case where num1 is a negative integer and num2 is a positive integer: 
+   Input: num1 = -5, num2 = 3
+   Expected output: 64
+   Reasoning: The absolute difference between -5 and 3 is 8. Squaring 8 gives us 64.
+
+3. Test case where num1 is a positive integer and num2 is a negative integer: 
+   Input: num1 = 5, num2 = -3
+   Expected output: 64
+   Reasoning: The absolute difference between 5 and -3 is 8. Squaring 8 gives us 64.
+
+4. Test case where both num1 and num2 are negative integers: 
+   Input: num1 = -5, num2 = -3
+   Expected output: 4
+   Reasoning: The absolute difference between -5 and -3 is 2. Squaring 2 gives us 4.

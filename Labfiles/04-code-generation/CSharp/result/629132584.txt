@@ -1,0 +1,10 @@
+```csharp
+// This function calculates the absolute square of the difference between two numbers.
+
+public static int AbsoluteSquare(int num1, int num2)
+{
+    int result = Math.Abs(num1 - num2); // Calculate the absolute difference between num1 and num2
+    result *= result; // Calculate the square of the result
+    return result; // Return the absolute square
+}
+```

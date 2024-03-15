@@ -39,30 +39,30 @@ namespace generate_image
                     client.DefaultRequestHeaders.Add("api-key", aoaiKey);
                     var data = new
                     {
-                        prompt=prompt,
-                        n=1,
-                        size="512x512"
+                        prompt = prompt,
+                        n = 1,
+                        size = "512x512"
                     };
 
                     var jsonData = JsonSerializer.Serialize(data);
                     var contentData = new StringContent(jsonData, Encoding.UTF8, "application/json");
-                    var init_response = await client.PostAsync(api, contentData); 
+                    var init_response = await client.PostAsync(api, contentData);
 
                     // Get the operation-location URL for the callback
                     var callback_url = init_response.Headers.GetValues("operation-location").FirstOrDefault();
 
                     // Poll the callback URL until the job has succeeeded (or 100 attempts)
-                    var response = await client.GetAsync(callback_url); 
+                    var response = await client.GetAsync(callback_url);
                     var stringResponse = await response.Content.ReadAsStringAsync();
-                    var status = JsonSerializer.Deserialize<Dictionary<string,object>>(stringResponse)["status"];
+                    var status = JsonSerializer.Deserialize<Dictionary<string, object>>(stringResponse)["status"];
                     var tries = 1;
                     while (status.ToString() != "succeeded" && tries < 101)
                     {
-                        Thread.Sleep (3000); // wait 3 seconds to avoid rate limit
-                        tries ++;
+                        Thread.Sleep(3000); // wait 3 seconds to avoid rate limit
+                        tries++;
                         response = await client.GetAsync(callback_url);
                         stringResponse = await response.Content.ReadAsStringAsync();
-                        status = JsonSerializer.Deserialize<Dictionary<string,object>>(stringResponse)["status"];
+                        status = JsonSerializer.Deserialize<Dictionary<string, object>>(stringResponse)["status"];
                         Console.WriteLine(tries.ToString() + ": " + status);
                     }
 
