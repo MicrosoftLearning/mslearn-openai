@@ -3,13 +3,13 @@ lab:
     title: 'Use Azure OpenAI SDKs in your app'
 ---
 
-# Use Azure OpenAI SDKs in your app
+# Use Azure OpenAI APIs in your app
 
 With the Azure OpenAI Service, developers can create chatbots, language models, and other applications that excel at understanding natural human language. The Azure OpenAI provides access to pre-trained AI models, as well as a suite of APIs and tools for customizing and fine-tuning these models to meet the specific requirements of your application. In this exercise, you'll learn how to deploy a model in Azure OpenAI and use it in your own application.
 
-In the scenario for this exercise, you will perform the role of a software developer who has been tasked to implement an app that can use generative AI to help a marketing organization, similar to the first lab but now using the API. The techniques used in the exercise can be applied to any app that wants to use Azure OpenAI APIs.
+In the scenario for this exercise, you will perform the role of a software developer who has been tasked to implement an app that can use generative AI to help provide hiking recommendations. The techniques used in the exercise can be applied to any app that wants to use Azure OpenAI APIs.
 
-This exercise will take approximately **25** minutes.
+This exercise will take approximately **30** minutes.
 
 ## Provision an Azure OpenAI resource
 
@@ -108,43 +108,27 @@ Now you're ready to use the Azure OpenAI SDK to consume your deployed model.
     **C#**: Program.cs
 
     ```csharp
-   // Add Azure OpenAI package
-   using Azure.AI.OpenAI;
+    // Add Azure OpenAI package
+    using Azure.AI.OpenAI;
     ```
-
+    
     **Python**: test-openai-model.py
-
+    
     ```python
-   # Add Azure OpenAI package
-   from openai import AzureOpenAI
+    # Add Azure OpenAI package
+    from openai import AzureOpenAI
     ```
 
-2. In the application code for your language, replace the comment ***Add code to send request...*** with the necessary code for building the request; specifying the various parameters for your model such as `messages` and `temperature`.
+1. In the application code for your language, replace the comment ***Initialize the Azure OpenAI client...*** with the following code to initialize the client and define our system message.
 
     **C#**: Program.cs
 
     ```csharp
-        // Initialize the Azure OpenAI client
+    // Initialize the Azure OpenAI client
     OpenAIClient client = new OpenAIClient(new Uri(oaiEndpoint), new AzureKeyCredential(oaiKey));
-
-    // Build completion options object
-    ChatCompletionsOptions chatCompletionsOptions = new ChatCompletionsOptions()
-    {
-        Messages =
-        {
-            new ChatRequestSystemMessage("You are a marketing writing assistant. You help come up with creative content ideas and content like marketing emails, blog posts, tweets, ad copy and product descriptions. You write in a friendly yet professional tone but can tailor your writing style that best works for a user-specified audience. If you do not know the answer to a question, respond by saying 'I don't know the answer to your question.'"),
-            new ChatRequestUserMessage(inputText),
-        },
-        MaxTokens = 400,
-        Temperature = 0.7f,
-        DeploymentName = oaiDeploymentName
-    };
-
-    // Send request to Azure OpenAI model
-    ChatCompletions response = client.GetChatCompletions(chatCompletionsOptions);
-    string completion = response.Choices[0].Message.Content;
-
-    Console.WriteLine("Summary: " + completion + "\n");
+    
+    // System message to provide context to the model
+    string systemMessage = "I am a hiking enthusiast named Forest who helps people discover hikes in their area. If no area is specified, I will default to near Rainier National Park. I will then provide three suggestions for nearby hikes that vary in length. I will also share an interesting fact about the local nature on the hikes when making a recommendation.";
     ```
 
     **Python**: test-openai-model.py
@@ -157,21 +141,62 @@ Now you're ready to use the Azure OpenAI SDK to consume your deployed model.
             api_version="2024-02-15-preview"
             )
     
+    # Create a system message
+    system_message = """I am a hiking enthusiast named Forest who helps people discover hikes in their area. 
+        If no area is specified, I will default to near Rainier National Park. 
+        I will then provide three suggestions for nearby hikes that vary in length. 
+        I will also share an interesting fact about the local nature on the hikes when making a recommendation.
+        """
+    ```
+
+1. Replace the comment ***Add code to send request...*** with the necessary code for building the request; specifying the various parameters for your model such as `messages` and `temperature`.
+
+    **C#**: Program.cs
+
+    ```csharp
+    // Add code to send request...
+    // Build completion options object
+    ChatCompletionsOptions chatCompletionsOptions = new ChatCompletionsOptions()
+    {
+        Messages =
+        {
+            new ChatRequestSystemMessage(systemMessage),
+            new ChatRequestUserMessage(inputText),
+        },
+        MaxTokens = 400,
+        Temperature = 0.7f,
+        DeploymentName = oaiDeploymentName
+    };
+
+    // Send request to Azure OpenAI model
+    ChatCompletions response = client.GetChatCompletions(chatCompletionsOptions);
+
+    // Print the response
+    string completion = response.Choices[0].Message.Content;
+    Console.WriteLine("Response: " + completion + "\n");
+    ```
+
+    **Python**: test-openai-model.py
+
+    ```python
+    # Add code to send request...
     # Send request to Azure OpenAI model
     response = client.chat.completions.create(
         model=azure_oai_deployment,
         temperature=0.7,
         max_tokens=400,
         messages=[
-            {"role": "system", "content": "You are a marketing writing assistant. You help come up with creative content ideas and content like marketing emails, blog posts, tweets, ad copy and product descriptions. You write in a friendly yet professional tone but can tailor your writing style that best works for a user-specified audience. If you do not know the answer to a question, respond by saying 'I do not know the answer to your question.'"},
+            {"role": "system", "content": system_message},
             {"role": "user", "content": input_text}
         ]
     )
-    
-    print("Summary: " + response.choices[0].message.content + "\n")
+    generated_text = response.choices[0].message.content
+
+    # Print the response
+    print("Response: " + generated_text + "\n")
     ```
 
-3. Save the changes to your code file.
+1. Save the changes to your code file.
 
 ## Test your application
 
@@ -184,13 +209,106 @@ Now that your app has been configured, run it to send your request to your model
 
     > **Tip**: You can use the **Maximize panel size** (**^**) icon in the terminal toolbar to see more of the console text.
 
-1. When prompted, enter the text `Create an advertisement for a new scrubbing brush`.
+1. When prompted, enter the text `What hike should I do near Rainier?`.
 1. Observe the output, taking note that the response follows the guidelines provided in the system message you added to the *messages* array.
-1. Provide the prompt `Create an advertisement for a scrubbing brush named "Scrubadub 2000", which is made of carbon fiber and reduces cleaning times by half compared to ordinary scrubbing brushes` and observe the output.
+1. Provide the prompt `Where should I hike near Boise? I'm looking for something of easy difficulty, between 2 to 3 miles, with moderate elevation gain.` and observe the output.
 1. In the code file for your preferred language, and change the *temperature* parameter value in your request to **1.0** and save the file.
 1. Run the application again using the prompts above, and observe the output.
 
 Increasing the temperature often causes the response to vary, even when provided the same text, due to the increased randomness. You can run it several times to see how the output may change. Try using different values for your temperature with the same input.
+
+## Maintain conversation history
+
+In most real-world applications, the ability to reference previous parts of the conversation allows for a more realistic interaction with an AI agent. The Azure OpenAI API is stateless by design, but by providing a history of the conversation in your prompt you enable the AI model to reference past messages.
+
+1. Run the app again and provide the prompt `Where is a good hike near Boise?`.
+1. Observe the output, and then prompt `How difficult is the second hike you suggested?`.
+1. The response from the model will likely indicate can't understand the hike you're referring to. To fix that, we can enable the model to have the past conversation messages for reference.
+1. In your application, we need to add the previous prompt and response to the future prompt we are sending. Below the definition of the **system message**, add the following code.
+
+    **C#**: Program.cs
+
+    ```csharp
+    // Initialize messages list
+    var messagesList = new List<ChatRequestMessage>()
+    {
+        new ChatRequestSystemMessage(systemMessage),
+    };
+    ```
+
+    **Python**: test-openai-model.py
+
+    ```python
+    # Initialize messages array
+    messages_array = [{"role": "system", "content": system_message}]
+    ```
+
+1. Under the comment ***Add code to send request...***, replace all the code from the comment to the end of the **while** loop with the following code then save the file. The code is mostly the same, but now using the messages array to store the conversation history.
+
+    **C#**: Program.cs
+
+    ```csharp
+    // Add code to send request...
+    // Build completion options object
+    messagesList.Add(new ChatRequestUserMessage(inputText));
+
+    ChatCompletionsOptions chatCompletionsOptions = new ChatCompletionsOptions()
+    {
+        MaxTokens = 1200,
+        Temperature = 0.7f,
+        DeploymentName = oaiDeploymentName
+    };
+
+    // Add messages to the completion options
+    foreach (ChatRequestMessage chatMessage in messagesList)
+    {
+        chatCompletionsOptions.Messages.Add(chatMessage);
+    }
+
+    // Send request to Azure OpenAI model
+    ChatCompletions response = client.GetChatCompletions(chatCompletionsOptions);
+
+    // Return the response
+    string completion = response.Choices[0].Message.Content;
+
+    // Add generated text to messages list
+    messagesList.Add(new ChatRequestAssistantMessage(completion));
+
+    Console.WriteLine("Response: " + completion + "\n");
+    ```
+
+    **Python**: test-openai-model.py
+
+    ```python
+    # Add code to send request...
+    # Send request to Azure OpenAI model
+    messages_array.append({"role": "user", "content": input_text})
+
+    response = client.chat.completions.create(
+        model=azure_oai_deployment,
+        temperature=0.7,
+        max_tokens=1200,
+        messages=messages_array
+    )
+    generated_text = response.choices[0].message.content
+    # Add generated text to messages array
+    messages_array.append({"role": "system", "content": generated_text})
+
+    # Print generated text
+    print("Summary: " + generated_text + "\n")
+    ```
+
+1. Save the file. In the code you added, notice we now append the previous input and response to the prompt array which allows the model to understand the history of our conversation.
+1. In the terminal pane, enter the following command to run the application.
+
+    - **C#**: `dotnet run`
+    - **Python**: `python test-openai-model.py`
+
+1. Run the app again and provide the prompt `Where is a good hike near Boise?`.
+1. Observe the output, and then prompt `How difficult is the second hike you suggested?`.
+1. You'll likely get a response about the second hike the model suggested, which provides a much more realistic conversation. You can ask additional follow up questions referencing previous answers, and each time the history provides context for the model to answer.
+
+    > **Tip**: The token count is only set to 1200, so if the conversation continues too long the application will run out of available tokens, resulting in an incomplete prompt. In production uses, limiting the length of the history to the most recent inputs and responses will help control the number of required tokens.
 
 ## Clean up
 

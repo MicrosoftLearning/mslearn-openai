@@ -16,27 +16,31 @@ string? oaiEndpoint = config["AzureOAIEndpoint"];
 string? oaiKey = config["AzureOAIKey"];
 string? oaiDeploymentName = config["AzureOAIDeploymentName"];
 
+if(string.IsNullOrEmpty(oaiEndpoint) || string.IsNullOrEmpty(oaiKey) || string.IsNullOrEmpty(oaiDeploymentName) )
+{
+    Console.WriteLine("Please check your appsettings.json file for missing or incorrect values.");
+    return;
+}
+
+// Initialize the Azure OpenAI client...
+
+
+
 do {
     Console.WriteLine("Enter your prompt text (or type 'quit' to exit): ");
     string? inputText = Console.ReadLine();
     if (inputText == "quit") break;
 
     // Generate summary from Azure OpenAI
-    if (inputText != null && inputText.Length > 0)
-        GetSummaryFromOpenAI(inputText);
-} while (true);
-
-// Function to send request to Azure OpenAI endpoint
-void GetSummaryFromOpenAI(string inputText)  
-{   
-    Console.WriteLine("\nSending request for summary to Azure OpenAI endpoint...\n\n");
-
-    if(string.IsNullOrEmpty(oaiEndpoint) || string.IsNullOrEmpty(oaiKey) || string.IsNullOrEmpty(oaiDeploymentName) )
-    {
-        Console.WriteLine("Please check your appsettings.json file for missing or incorrect values.");
-        return;
+    if (inputText == null) {
+        Console.WriteLine("Please enter a prompt.");
+        continue;
     }
+    
+    Console.WriteLine("\nSending request for summary to Azure OpenAI endpoint...\n\n");
 
     // Add code to send request...
 
-}  
+
+
+} while (true);

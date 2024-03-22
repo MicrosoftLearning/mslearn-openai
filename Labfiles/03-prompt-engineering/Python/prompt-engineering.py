@@ -22,8 +22,12 @@ async def main():
         
 
         while True:
-            # Prompt for system and user message
-            system_text = input("\nEnter system message or type 'quit' to exit: ")
+            # Pause the app to allow the user to enter the system prompt
+            print("Pausing the app to allow you to change the system prompt.\nPress anything then enter to continue...")
+            input()
+
+            # Read in system message and prompt for user message
+            system_text = open(file="system.txt", encoding="utf8").read().strip()
             user_text = input("Enter user message: ")
             if user_text.lower() == 'quit' or system_text.lower() == 'quit':
                 print('Exiting program...')
