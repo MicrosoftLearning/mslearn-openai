@@ -3,11 +3,14 @@ import json
 from dotenv import load_dotenv
 
 # Add OpenAI import
-
+from openai import AzureOpenAI
 
 def main(): 
         
-    try:     
+    try:
+        # Flag to show citations
+        show_citations = False
+
         # Get configuration settings 
         load_dotenv()
         azure_oai_endpoint = os.getenv("AZURE_OAI_ENDPOINT")
@@ -26,17 +29,8 @@ def main():
         # Get the prompt
         text = input('\nEnter a question:\n')
 
-        # Create extension config for own data
-        extension_config = dict(dataSources = [  
-                { 
-                    "type": "AzureCognitiveSearch", 
-                    "parameters": { 
-                        "endpoint":azure_search_endpoint, 
-                        "key": azure_search_key, 
-                        "indexName": azure_search_index,
-                    }
-                }]
-                )
+        # Configure your data source
+
 
         # Send request to Azure OpenAI model
         print("...Sending the following request to Azure OpenAI endpoint...")
@@ -56,12 +50,15 @@ def main():
         # Print response
         print("Response: " + response.choices[0].message.content + "\n")
 
-        # print data context
-        print("\nContext information:\n")
-        context = response.choices[0].message.context
-        for context_message in context["messages"]:
-            context_json = json.loads(context_message["content"])
-            print(json.dumps(context_json, indent=2))
+        if (show_citations):
+            # Print citations
+            print("Citations:")
+            citations = response.choices[0].message.context["messages"][0]["content"]
+            citation_json = json.loads(citations)
+            for c in citation_json["citations"]:
+                print("  Title: " + c['title'] + "\n    URL: " + c['url'])
+
+
         
     except Exception as ex:
         print(ex)

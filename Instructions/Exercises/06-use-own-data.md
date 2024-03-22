@@ -7,6 +7,8 @@ lab:
 
 The Azure OpenAI Service enables you to use your own data with the intelligence of the underlying LLM. You can limit the model to only use your data for pertinent topics, or blend it with results from the pre-trained model.
 
+In scenario for this exercise, you will perform the role of a software developer working for Margie's Travel Agency. You exploring how to use generative AI to make coding tasks easier and more efficient. The techniques used in the exercise can be applied to other code files, programming languages, and use cases.
+
 This exercise will take approximately **20** minutes.
 
 ## Provision an Azure OpenAI resource
@@ -163,13 +165,13 @@ Applications for both C# and Python have been provided, as well as a sample text
     **C#**:
 
     ```
-    dotnet add package Azure.AI.OpenAI --version 1.0.0-beta.9
+    dotnet add package Azure.AI.OpenAI --version 1.0.0-beta.14
     ```
 
     **Python**:
 
     ```
-     pip install openai==1.2.0
+    pip install openai==1.13.3
     ```
 
 3. In the **Explorer** pane, in the **CSharp** or **Python** folder, open the configuration file for your preferred language
@@ -189,23 +191,37 @@ Applications for both C# and Python have been provided, as well as a sample text
 
 Now you're ready to use the Azure OpenAI SDK to consume your deployed model.
 
-1. In the **Explorer** pane, in the **CSharp** or **Python** folder, open the code file for your preferred language, and replace the comment ***Add Azure OpenAI package*** with code to add the Azure OpenAI SDK library:
+1. In the **Explorer** pane, in the **CSharp** or **Python** folder, open the code file for your preferred language, and replace the comment ***Configure your data source*** with code to add the Azure OpenAI SDK library:
 
     **C#**: ownData.cs
 
     ```csharp
-    // Add Azure OpenAI package
-    using Azure.AI.OpenAI;
+    // Configure your data source
+    AzureSearchChatExtensionConfiguration ownDataConfig = new()
+    {
+            SearchEndpoint = new Uri(azureSearchEndpoint),
+            Authentication = new OnYourDataApiKeyAuthenticationOptions(azureSearchKey),
+            IndexName = azureSearchIndex
+    };
     ```
 
     **Python**: ownData.py
 
     ```python
-    # Add Azure OpenAI package
-    from openai import AzureOpenAI
+    # Configure your data source
+    extension_config = dict(dataSources = [  
+            { 
+                "type": "AzureCognitiveSearch", 
+                "parameters": { 
+                    "endpoint":azure_search_endpoint, 
+                    "key": azure_search_key, 
+                    "indexName": azure_search_index,
+                }
+            }]
+        )
     ```
 
-2. Review the rest of the code, noting the use of the *extensions* to the request body that are used to provide information about the data source settings.
+2. Review the rest of the code, noting the use of the *extensions* in the request body that is used to provide information about the data source settings.
 
 3. Save the changes to the code file.
 
@@ -221,6 +237,8 @@ Now that your app has been configured, run it to send your request to your model
     > **Tip**: You can use the **Maximize panel size** (**^**) icon in the terminal toolbar to see more of the console text.
 
 2. Review the response to the prompt `Tell me about London`, which should includes an answer as well as some details of the data used to ground the prompt, which was obtained from your search service.
+
+    > **Tip**: If you want to see the citations from your search index, set the variable ***show citations*** near the top of the code file to **true**.
 
 ## Clean up
 
