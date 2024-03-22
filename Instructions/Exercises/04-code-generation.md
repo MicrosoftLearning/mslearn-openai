@@ -7,6 +7,8 @@ lab:
 
 The Azure OpenAI Service models can generate code for you using natural language prompts, fixing bugs in completed code, and providing code comments. These models can also explain and simplify existing code to help you understand what it does and how to improve it.
 
+In scenario for this exercise, you will perform the role of a software developer exploring how to use generative AI to make coding tasks easier and more efficient. The techniques used in the exercise can be applied to other code files, programming languages, and use cases.
+
 This exercise will take approximately **25** minutes.
 
 ## Provision an Azure OpenAI resource
@@ -57,11 +59,11 @@ Azure OpenAI provides a web-based portal named **Azure OpenAI Studio**, that you
 Before using in your app, examine how Azure OpenAI can generate and explain code in the chat playground.
 
 1. In the **Azure OpenAI Studio** at `https://oai.azure.com`, in the **Playground** section, select the **Chat** page. The **Chat** playground page consists of three main sections:
-    - **Assistant setup** - used to set the context for the model's responses.
+    - **Setup** - used to set the context for the model's responses.
     - **Chat session** - used to submit chat messages and view responses.
     - **Configuration** - used to configure settings for the model deployment.
 2. In the **Configuration** section, ensure that your model deployment is selected.
-3. In the **Assistant setup** area, set the system message to `You are a programming assistant helping write code` and apply the changes.
+3. In the **Setup** area, set the system message to `You are a programming assistant helping write code` and apply the changes.
 4. In the **Chat session**, submit the following query:
 
     ```
@@ -136,13 +138,13 @@ Applications for both C# and Python have been provided, as well as a sample text
     **C#**:
 
     ```
-    dotnet add package Azure.AI.OpenAI --version 1.0.0-beta.9
+    dotnet add package Azure.AI.OpenAI --version 1.0.0-beta.14
     ```
 
     **Python**:
 
     ```
-    pip install openai==1.2.0
+    pip install openai==1.13.3
     ```
 
 3. In the **Explorer** pane, in the **CSharp** or **Python** folder, open the configuration file for your preferred language
@@ -159,43 +161,7 @@ Applications for both C# and Python have been provided, as well as a sample text
 
 Now you're ready to use the Azure OpenAI SDK to consume your deployed model.
 
-1. In the **Explorer** pane, in the **CSharp** or **Python** folder, open the code file for your preferred language, and replace the comment ***Add Azure OpenAI package*** with code to add the Azure OpenAI SDK library:
-
-    **C#**: Program.cs
-
-    ```csharp
-    // Add Azure OpenAI package
-    using Azure.AI.OpenAI;
-    ```
-
-    **Python**: code-generation.py
-
-    ```python
-    # Add Azure OpenAI package
-    from openai import AzureOpenAI
-    ```
-
-2. In the code file, find the comment ***Configure the Azure OpenAI client***, and add code to configure the Azure OpenAI client:
-
-    **C#**: Program.cs
-
-    ```csharp
-    // Configure the Azure OpenAI client
-    OpenAIClient client = new OpenAIClient(new Uri(oaiEndpoint), new AzureKeyCredential(oaiKey));
-    ```
-
-    **Python**: code-generation.py
-
-    ```python
-    # Configure the Azure OpenAI client
-    client = AzureOpenAI(
-            azure_endpoint = azure_oai_endpoint, 
-            api_key=azure_oai_key,  
-            api_version="2023-05-15"
-            )
-    ```
-
-3. In the function that calls the Azure OpenAI model, under the comment ***Format and send the request to the model***, add the code to format and send the request to the model.
+1. In the **Explorer** pane, in the **CSharp** or **Python** folder, open the code file for your preferred language. In the function that calls the Azure OpenAI model, under the comment ***Format and send the request to the model***, add the code to format and send the request to the model.
 
     **C#**: Program.cs
 
@@ -205,8 +171,8 @@ Now you're ready to use the Azure OpenAI SDK to consume your deployed model.
     {
         Messages =
         {
-            new ChatMessage(ChatRole.System, systemPrompt),
-            new ChatMessage(ChatRole.User, userPrompt)
+            new ChatRequestSystemMessage(systemPrompt),
+            new ChatRequestUserMessage(userPrompt)
         },
         Temperature = 0.7f,
         MaxTokens = 1000,
@@ -254,15 +220,27 @@ Now that your app has been configured, run it to try generating code for each us
 
     > **Tip**: You can use the **Maximize panel size** (**^**) icon in the terminal toolbar to see more of the console text.
 
-3. Choose option **1** to add comments to your code. Note, the response might take a few seconds for each of these tasks.
+3. Choose option **1** to add comments to your code and enter the following prompt. Note, the response might take a few seconds for each of these tasks.
+
+    ```prompt
+    Add comments to the following function. Return only the commented code.\n---\n
+    ```
 
     The results will be put into **result/app.txt**. Open that file up, and compare it to the function file in **sample-code**.
 
-4. Next, choose option **2** to write unit tests for that same function.
+4. Next, choose option **2** to write unit tests for that same function and enter the following prompt.
+
+    ```prompt
+    Write four unit tests for the following function.\n---\n
+    ```
 
     The results will replace what was in **result/app.txt**, and details four unit tests for that function.
 
-5. Next, choose option **3** to fix bugs in an app for playing Go Fish.
+5. Next, choose option **3** to fix bugs in an app for playing Go Fish. Enter the following prompt.
+
+    ```prompt
+    Fix the code below for an app to play Go Fish with the user. Return only the corrected code.\n---\n
+    ```
 
     The results will replace what was in **result/app.txt**, and should have very similar code with a few things corrected.
 

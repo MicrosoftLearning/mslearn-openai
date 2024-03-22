@@ -57,11 +57,11 @@ Azure OpenAI provides a web-based portal named **Azure OpenAI Studio**, that you
 Before connecting Azure OpenAI to your data, let's first observe how the base model responds to queries without any grounding data.
 
 1. In **Azure OpenAI Studio** at `https://oai.azure.com`, in the **Playground** section, select the **Chat** page. The **Chat** playground page consists of three main sections:
-    - **Assistant setup** - used to set the context for the model's responses.
+    - **Setup** - used to set the context for the model's responses.
     - **Chat session** - used to submit chat messages and view responses.
     - **Configuration** - used to configure settings for the model deployment.
 2. In the **Configuration** section, ensure that your model deployment is selected.
-3. In the **Assistant setup** area, select the default system message template to set the context for the chat session. The default system message is *You are an AI assistant that helps people find information*.
+3. In the **Setup** area, select the default system message template to set the context for the chat session. The default system message is *You are an AI assistant that helps people find information*.
 4. In the **Chat session**, submit the following queries, and review the responses:
 
     ```
@@ -79,7 +79,7 @@ Before connecting Azure OpenAI to your data, let's first observe how the base mo
 Bow you'll add some data for a fictional travel agent company named *Margie's Travel*. Then you'll see how the Azure openAI model responds when using the brochures from Margie's Travel as grounding data.
 
 1. In a new browser tab, download an archive of brochure data from `https://aka.ms/own-data-brochures`. Extract the brochures to a folder on your PC.
-1. In Azure OpenAI Studio, in the **Chat** playground, in the **Assistant setup** section, select **Add your data**.
+1. In Azure OpenAI Studio, in the **Chat** playground, in the **Setup** section, select **Add your data**.
 1. Select **Add a data source** and choose **Upload files**.
 1. You'll need to create a storage account and Azure AI Search resource. Under the dropdown for the storage resource, select **Create a new Azure Blob storage resource**, and create a storage account with the following settings. Anything not specified leave as the default.
 
@@ -111,7 +111,7 @@ Bow you'll add some data for a fictional travel agent company named *Margie's Tr
 
 1. On the **Upload files** page, upload the PDFs you downloaded, and then select **Next**.
 1. On the **Data management** page select the **Keyword** search type from the drop-down, and then select **Next**.
-1. On the **Review and finish** page select **Save and close**, which will add your data. This may take a few minutes, during which you need to leave your window open. Once complete, you'll see the data source, search resource, and index specified in the **Assistant setup** section.
+1. On the **Review and finish** page select **Save and close**, which will add your data. This may take a few minutes, during which you need to leave your window open. Once complete, you'll see the data source, search resource, and index specified in the **Setup** section.
 
     > **Tip**: Occasionally the connection between your new search index and Azure OpenAI Studio takes too long. If you've waited for a few minutes and it still hasn't connected, check your AI Search resources in Azure portal. If you see the completed index, you can disconnect the data connection in Azure OpenAI Studio and re-add it by specifying an Azure AI Search data source and selecting your new index.
 

@@ -28,6 +28,11 @@ do {
 
     command = Console.ReadLine() ?? "";
 
+    if(command == "quit") {
+        Console.WriteLine("Exiting program...");
+        break;
+    }
+
     Console.WriteLine("\nEnter a prompt: ");
     string userPrompt = Console.ReadLine() ?? "";
     string codeFile = "";
@@ -36,10 +41,6 @@ do {
         codeFile = System.IO.File.ReadAllText("../sample-code/function/function.cs");
     else if(command == "3")
         codeFile = System.IO.File.ReadAllText("../sample-code/go-fish/go-fish.cs");
-    else if(command == "quit") {
-        Console.WriteLine("Exiting program...");
-        break;
-    }
     else {
         Console.WriteLine("Invalid input. Please try again.");
         continue;

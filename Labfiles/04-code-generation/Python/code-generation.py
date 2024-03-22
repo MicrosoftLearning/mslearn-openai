@@ -30,14 +30,16 @@ def main():
                 '3: Fix my Go Fish game\n' +
                 '\"quit\" to exit the program\n')
             command = input('Enter a number to select a task:')
+
+            if command.lower() == 'quit':
+                print('Exiting program...')
+                break
+            
             user_input = input('\nEnter a prompt: ')
             if command == '1' or command == '2':
                 file = open(file="../sample-code/function/function.py", encoding="utf8").read()                
             elif command =='3':
                 file = open(file="../sample-code/go-fish/go-fish.py", encoding="utf8").read()
-            elif command.lower() == 'quit':
-                print('Exiting program...')
-                break
             else :
                 print("Invalid input. Please try again.")
                 continue
@@ -54,7 +56,7 @@ def call_openai_model(prompt, model, client):
     user_message = prompt
 
     # Format and send the request to the model
-    
+
 
     # Print the response to the console, if desired
     if printFullResponse:

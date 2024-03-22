@@ -70,7 +70,7 @@ Now that you've deployed a model, you can use it to generate responses based on 
     - **Chat session** - used to submit chat messages and view responses.
     - **Configuration** - used to configure settings for the model deployment.
 1. In the **Configuration** panel, ensure that your gpt-35-turbo-16k model deployment is selected.
-1. In the **Assistant setup** panel, review the default **System message**, which should be *You are an AI assistant that helps people find information.* The system message is included in prompts submitted to the model, and provides context for the model's responses; setting expectations about how an AI agent based on the model should interact with the user.
+1. In the **Setup** panel, review the default **System message**, which should be *You are an AI assistant that helps people find information.* The system message is included in prompts submitted to the model, and provides context for the model's responses; setting expectations about how an AI agent based on the model should interact with the user.
 1. In the **Chat session** panel, enter the user query `How can I use generative AI to help me market a new product?`
 
     > **Note**: You may receive a response that the API deployment is not yet ready. If so, wait for a few minutes and try again.

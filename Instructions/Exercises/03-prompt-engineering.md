@@ -59,11 +59,11 @@ Azure OpenAI provides a web-based portal named **Azure OpenAI Studio**, that you
 Let's start by exploring some prompt engineering techniques in the Chat playground.
 
 1. In **Azure OpenAI Studio** at `https://oai.azure.com`, in the **Playground** section, select the **Chat** page. The **Chat** playground page consists of three main sections:
-    - **Assistant setup** - used to set the context for the model's responses.
+    - **Setup** - used to set the context for the model's responses.
     - **Chat session** - used to submit chat messages and view responses.
     - **Configuration** - used to configure settings for the model deployment.
 2. In the **Configuration** section, ensure that your model deployment is selected.
-3. In the **Assistant setup** area, select the default system message template to set the context for the chat session. The default system message is *You are an AI assistant that helps people find information*.
+3. In the **Setup** area, select the default system message template to set the context for the chat session. The default system message is *You are an AI assistant that helps people find information*.
 4. In the **Chat session**, submit the following query:
 
     ```
@@ -80,7 +80,7 @@ Let's start by exploring some prompt engineering techniques in the Chat playgrou
 
     The response provides a description of the article. However, suppose you want a more specific format for article categorization.
 
-5. In the **Assistant setup** section change the system message to `You are a news aggregator that categorizes news articles.`
+5. In the **Setup** section change the system message to `You are a news aggregator that categorizes news articles.`
 
 6. Under the new system message, in the **Examples** section, select the **Add** button. Then add the following example.
 
@@ -145,7 +145,7 @@ Let's start by exploring some prompt engineering techniques in the Chat playgrou
 
     The combination of a more specific system message and some examples of expected queries and responses results in a consistent format for the results.
 
-10. In the **Assistant setup** section, change the system message back to the default template, which should be `You are an AI assistant that helps people find information.` with no examples. Then apply the changes.
+10. In the **Setup** section, change the system message back to the default template, which should be `You are an AI assistant that helps people find information.` with no examples. Then apply the changes.
 
 11. In the **Chat session** section, submit the following prompt:
 
@@ -301,6 +301,7 @@ Now you're ready to use the Azure OpenAI SDK to consume your deployed model.
 
 Now that your app has been configured, run it to send your request to your model and observe the response. You'll notice the only difference between the different options is the content of the prompt, all other parameters (such as token count and temperature) remain the same for each request.
 
+1. In the folder of your preferred language, open `system.txt` in Visual Studio Code. For each of the interations, you'll enter the **System message** in this file and save it. Each iteration will pause first for you to change the system message.
 1. In the interactive terminal pane, ensure the folder context is the folder for your preferred language. Then enter the following command to run the application.
 
     - **C#**: `dotnet run`
@@ -379,25 +380,35 @@ Now that your app has been configured, run it to send your request to your model
     ```
 
 1. Observe the output. This time you'll likely see the email in a similar format, but with a much more informal tone. You'll likely even see jokes included!
-1. For the final iteration, we're deviating from email generation and exploring *grounding context*. Here you provide grounding context in the long system prompt, and extract information from it to answer our user prompt.
+1. For the final iteration, we're deviating from email generation and exploring *grounding context*. Here you provide a simple system message, and change the app to provide the grounding context as the beginning of the user prompt. The app will then append the user input, and extract information from the grounding context to answer our user prompt.
+1. Open the file `grounding.txt` and briefly read the grounding context you'll be inserting.
+1. In your app immediately after the comment ***Format and send the request to the model*** and before any existing code, add the following code snippet to read text in from `grounding.txt` to augment the user prompt with the grounding context.
+
+    **C#**: Program.cs
+
+    ```csharp
+    // Format and send the request to the model
+    Console.WriteLine("\nAdding grounding context from grounding.txt");
+    string groundingText = System.IO.File.ReadAllText("grounding.txt");
+    userMessage = groundingText + userMessage;
+    ```
+
+    **Python**: prompt-engineering.py
+
+    ```python
+    # Format and send the request to the model
+    print("\nAdding grounding context from grounding.txt")
+    grounding_text = open(file="grounding.txt", encoding="utf8").read().strip()
+    user_message = grounding_text + user_message
+    ```
+
+1. Save the file and rerun your app.
+1. Enter the following prompts (with the **system message** still being entered and saved in `system.txt`).
 
     **System message**
 
     ```prompt
-    You're an AI assistant who helps people find information. You'll provide answers from the text below, and respond concisely.
-    ---
-
-    Contoso is a wildlife rescue organization that has dedicated itself to the protection and preservation of animals and their habitats. The organization has been working tirelessly to protect the wildlife and their habitats from the threat of extinction. Contoso's mission is to provide a safe and healthy environment for all animals in their care.
-
-    One of the most popular animals that Contoso rescues and cares for is the red panda. Known for their fluffy tails and adorable faces, red pandas have captured the hearts of children all over the world. These playful creatures are native to the Himalayas and are listed as endangered due to habitat loss and poaching.
-    
-    Contoso's red panda rescue program is one of their most successful initiatives. The organization works with local communities to protect the red panda's natural habitat and provides medical care for those that are rescued. Contoso's team of experts works tirelessly to ensure that all rescued red pandas receive the best possible care and are eventually released back into the wild.
-    
-    Children, in particular, have a soft spot for red pandas. These playful creatures are often featured in children's books, cartoons, and movies. With their fluffy tails and bright eyes, it's easy to see why children are drawn to them. Contoso understands this and has made it their mission to educate children about the importance of wildlife conservation and the role they can play in protecting these endangered species.
-    
-    Contoso's red panda rescue program is not only helping to save these adorable creatures from extinction but is also providing a unique opportunity for children to learn about wildlife conservation. The organization offers educational programs and tours that allow children to get up close and personal with the red pandas. These programs are designed to teach children about the importance of protecting wildlife and their habitats.
-    
-    In addition to their red panda rescue program, Contoso also rescues and cares for a variety of other animals, including elephants, tigers, and rhinoceros. The organization is committed to protecting all animals in their care and works tirelessly to provide them with a safe and healthy environment
+    You're an AI assistant who helps people find information. You'll provide answers from the text provided in the prompt, and respond concisely.
     ```
 
     **User message:**
