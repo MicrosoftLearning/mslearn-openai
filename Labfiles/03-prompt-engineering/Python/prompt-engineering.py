@@ -23,7 +23,7 @@ async def main():
 
         while True:
             # Pause the app to allow the user to enter the system prompt
-            print("Pausing the app to allow you to change the system prompt.\nPress anything then enter to continue...")
+            print("------------------\nPausing the app to allow you to change the system prompt.\nPress anything then enter to continue...")
             input()
 
             # Read in system message and prompt for user message
@@ -50,7 +50,7 @@ async def call_openai_model(system_message, user_message, model, client):
     if printFullResponse:
         print(response)
 
-    print("Response: \n\n" + response.choices[0].message.content + "\n")
+    print("Response:\n" + response.choices[0].message.content + "\n")
 
 if __name__ == '__main__': 
     asyncio.run(main())

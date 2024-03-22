@@ -20,7 +20,7 @@ bool printFullResponse = false;
 
 do {
     // Pause for system message update
-    Console.WriteLine("Pausing the app to allow you to change the system prompt.\nPress any key to continue...");
+    Console.WriteLine("-----------\nPausing the app to allow you to change the system prompt.\nPress any key to continue...");
     Console.ReadKey();
     
     Console.WriteLine("\nUsing system message from system.txt");
@@ -72,5 +72,5 @@ async Task GetResponseFromOpenAI(string systemMessage, string userMessage)
     }
 
     // Write response to console
-    Console.WriteLine($"\nResponse: {completion}\n\n");
+    Console.WriteLine($"\nResponse:\n{completion}\n\n");
 }  
