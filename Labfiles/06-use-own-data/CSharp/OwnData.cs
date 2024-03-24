@@ -5,8 +5,11 @@ using Microsoft.Extensions.Configuration.Json;
 using Azure;
 
 // Add Azure OpenAI package
+using Azure.AI.OpenAI;
 
-  
+// Flag to show citations
+bool showCitations = false;
+
 // Get configuration settings  
 IConfiguration config = new ConfigurationBuilder()
     .AddJsonFile("appsettings.json")
@@ -21,18 +24,12 @@ string azureSearchIndex = config["AzureSearchIndex"] ?? "";
 // Initialize the Azure OpenAI client
 OpenAIClient client = new OpenAIClient(new Uri(oaiEndpoint), new AzureKeyCredential(oaiKey));
 
-
 // Get the prompt text
 Console.WriteLine("Enter a question:");
-string? text = Console.ReadLine();
+string text = Console.ReadLine() ?? "";
 
-// Create extension config for own data
-AzureCognitiveSearchChatExtensionConfiguration ownDataConfig = new()
-{
-        SearchEndpoint = new Uri(azureSearchEndpoint),
-        IndexName = azureSearchIndex
-};
-ownDataConfig.SetSearchKey(azureSearchKey);
+// Configure your data source
+
 
 // Send request to Azure OpenAI model  
 Console.WriteLine("...Sending the following request to Azure OpenAI endpoint...");  
@@ -42,7 +39,7 @@ ChatCompletionsOptions chatCompletionsOptions = new ChatCompletionsOptions()
 {
     Messages =
     {
-        new ChatMessage(ChatRole.User, text)
+        new ChatRequestUserMessage(text)
     },
     MaxTokens = 600,
     Temperature = 0.9f,
@@ -55,23 +52,19 @@ ChatCompletionsOptions chatCompletionsOptions = new ChatCompletionsOptions()
 };
 
 ChatCompletions response = client.GetChatCompletions(chatCompletionsOptions);
-ChatMessage responseMessage = response.Choices[0].Message;
+ChatResponseMessage responseMessage = response.Choices[0].Message;
 
 // Print response
 Console.WriteLine("Response: " + responseMessage.Content + "\n");
-Console.WriteLine($"Context information from chat extensions:");
-foreach (ChatMessage contextMessage in responseMessage.AzureExtensionsContext.Messages)
+Console.WriteLine("  Intent: " + responseMessage.AzureExtensionsContext.Intent);
+
+if (showCitations)
 {
-    string contextContent = contextMessage.Content;
-    try
+    Console.WriteLine($"\n  Citations of data used:");
+
+    foreach (AzureChatExtensionDataSourceResponseCitation citation in responseMessage.AzureExtensionsContext.Citations)
     {
-        var contextMessageJson = JsonDocument.Parse(contextMessage.Content);
-        contextContent = JsonSerializer.Serialize(contextMessageJson, new JsonSerializerOptions()
-        {
-            WriteIndented = true,
-        });
+        Console.WriteLine($"    Citation: {citation.Title} - {citation.Url}");
     }
-    catch (JsonException)
-    {}
-    Console.WriteLine($"{contextMessage.Role}: {contextContent}");
 }
+

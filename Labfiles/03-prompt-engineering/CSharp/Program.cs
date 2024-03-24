@@ -7,6 +7,7 @@ using Azure;
 
 // Add Azure OpenAI package
 
+
 // Build a config object and retrieve user settings.
 IConfiguration config = new ConfigurationBuilder()
     .AddJsonFile("appsettings.json")
@@ -15,42 +16,37 @@ string? oaiEndpoint = config["AzureOAIEndpoint"];
 string? oaiKey = config["AzureOAIKey"];
 string? oaiDeploymentName = config["AzureOAIDeploymentName"];
 
-string command;
 bool printFullResponse = false;
 
 do {
-    Console.WriteLine("\n1: Basic prompt (no prompt engineering)\n" +
-    "2: Prompt with email formatting and basic system message\n" +
-    "3: Prompt with formatting and specifying content\n" +
-    "4: Prompt adjusting system message to be light and use jokes\n" +
-    "\"quit\" to exit the program\n\n" + 
-    "Enter a number to select a prompt:");
-
-    command = Console.ReadLine() ?? "";
+    // Pause for system message update
+    Console.WriteLine("-----------\nPausing the app to allow you to change the system prompt.\nPress any key to continue...");
+    Console.ReadKey();
     
-    switch (command) {
-        case "1":
-            await GetResponseFromOpenAI("../prompts/basic.txt");
-            break;
-        case "2":
-            await GetResponseFromOpenAI("../prompts/email-format.txt");
-            break;
-        case "3":
-            await GetResponseFromOpenAI("../prompts/specify-content.txt");
-            break;
-        case "4":
-            await GetResponseFromOpenAI("../prompts/specify-tone.txt");
-            break;
-        case "quit":
-            Console.WriteLine("Exiting program...");
-            break;
-        default:
-            Console.WriteLine("Invalid input. Please try again.");
-            break;
-    }
-} while (command != "quit");
+    Console.WriteLine("\nUsing system message from system.txt");
+    string systemMessage = System.IO.File.ReadAllText("system.txt"); 
+    systemMessage = systemMessage.Trim();
 
-async Task GetResponseFromOpenAI(string fileText)  
+    Console.WriteLine("\nEnter user message or type 'quit' to exit:");
+    string userMessage = Console.ReadLine() ?? "";
+    userMessage = userMessage.Trim();
+    
+    if (systemMessage.ToLower() == "quit" || userMessage.ToLower() == "quit")
+    {
+        break;
+    }
+    else if (string.IsNullOrEmpty(systemMessage) || string.IsNullOrEmpty(userMessage))
+    {
+        Console.WriteLine("Please enter a system and user message.");
+        continue;
+    }
+    else
+    {
+        await GetResponseFromOpenAI(systemMessage, userMessage);
+    }
+} while (true);
+
+async Task GetResponseFromOpenAI(string systemMessage, string userMessage)  
 {   
     Console.WriteLine("\nSending prompt to Azure OpenAI endpoint...\n\n");
 
@@ -61,19 +57,13 @@ async Task GetResponseFromOpenAI(string fileText)
     }
     
     // Configure the Azure OpenAI client
-    
-    // Read text file into system and user prompts
-    string[] prompts = System.IO.File.ReadAllLines(fileText);
-    string systemPrompt = prompts[0].Split(":", 2)[1].Trim();
-    string userPrompt = prompts[1].Split(":", 2)[1].Trim();
 
-    // Write prompts to console
-    Console.WriteLine("System prompt: " + systemPrompt);
-    Console.WriteLine("User prompt: " + userPrompt);
-    
+
     // Format and send the request to the model
-    
 
+    
+    ChatCompletions completions = response.Value;
+    string completion = completions.Choices[0].Message.Content;
     
     // Write response full response to console, if requested
     if (printFullResponse)
@@ -82,5 +72,5 @@ async Task GetResponseFromOpenAI(string fileText)
     }
 
     // Write response to console
-    Console.WriteLine($"\nResponse: {completion}\n\n");
+    Console.WriteLine($"\nResponse:\n{completion}\n\n");
 }  

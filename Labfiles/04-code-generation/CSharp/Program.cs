@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration.Json;
 using Azure;
 
 // Add Azure OpenAI package
+using Azure.AI.OpenAI;
 
 // Build a config object and retrieve user settings.
 IConfiguration config = new ConfigurationBuilder()
@@ -26,34 +27,29 @@ do {
     "Enter a number to select a task:");
 
     command = Console.ReadLine() ?? "";
-    
-    switch (command) {
-        case "1":
-            string functionFile = System.IO.File.ReadAllText("../sample-code/function/function.cs");
-            string commentPrompt = "Add comments to the following function. Return only the commented code.\n---\n" + functionFile;
-            
-            await GetResponseFromOpenAI(commentPrompt);
-            break;
-        case "2":
-            functionFile = System.IO.File.ReadAllText("../sample-code/function/function.cs");
-            string unitTestPrompt = "Write four unit tests for the following function.\n---\n" + functionFile;
-            
-            await GetResponseFromOpenAI(unitTestPrompt);
-            break;
-        case "3":
-            string goFishFile = System.IO.File.ReadAllText("../sample-code/go-fish/go-fish.cs");
-            string goFishPrompt = "Fix the code below for an app to play Go Fish with the user. Return only the corrected code.\n---\n" + goFishFile;
-            
-            await GetResponseFromOpenAI(goFishPrompt);
-            break;
-        case "quit":
-            Console.WriteLine("Exiting program...");
-            break;
-        default:
-            Console.WriteLine("Invalid input. Please try again.");
-            break;
+
+    if(command == "quit") {
+        Console.WriteLine("Exiting program...");
+        break;
     }
-} while (command != "quit");
+
+    Console.WriteLine("\nEnter a prompt: ");
+    string userPrompt = Console.ReadLine() ?? "";
+    string codeFile = "";
+    
+    if(command == "1" || command == "2")
+        codeFile = System.IO.File.ReadAllText("../sample-code/function/function.cs");
+    else if(command == "3")
+        codeFile = System.IO.File.ReadAllText("../sample-code/go-fish/go-fish.cs");
+    else {
+        Console.WriteLine("Invalid input. Please try again.");
+        continue;
+    }
+
+    userPrompt += codeFile;
+            
+    await GetResponseFromOpenAI(userPrompt);
+} while (true);
 
 async Task GetResponseFromOpenAI(string prompt)  
 {   
@@ -66,13 +62,14 @@ async Task GetResponseFromOpenAI(string prompt)
     }
     
     // Configure the Azure OpenAI client
-    
+    OpenAIClient client = new OpenAIClient(new Uri(oaiEndpoint), new AzureKeyCredential(oaiKey));
+
     // Define chat prompts
     string systemPrompt = "You are a helpful AI assistant that helps programmers write code.";
     string userPrompt = prompt;
 
     // Format and send the request to the model
-    
+
 
     // Write full response to console, if requested
     if (printFullResponse)

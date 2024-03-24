@@ -7,6 +7,8 @@ lab:
 
 The Azure OpenAI Service enables you to use your own data with the intelligence of the underlying LLM. You can limit the model to only use your data for pertinent topics, or blend it with results from the pre-trained model.
 
+In scenario for this exercise, you will perform the role of a software developer working for Margie's Travel Agency. You exploring how to use generative AI to make coding tasks easier and more efficient. The techniques used in the exercise can be applied to other code files, programming languages, and use cases.
+
 This exercise will take approximately **20** minutes.
 
 ## Provision an Azure OpenAI resource
@@ -57,11 +59,11 @@ Azure OpenAI provides a web-based portal named **Azure OpenAI Studio**, that you
 Before connecting Azure OpenAI to your data, let's first observe how the base model responds to queries without any grounding data.
 
 1. In **Azure OpenAI Studio** at `https://oai.azure.com`, in the **Playground** section, select the **Chat** page. The **Chat** playground page consists of three main sections:
-    - **Assistant setup** - used to set the context for the model's responses.
+    - **Setup** - used to set the context for the model's responses.
     - **Chat session** - used to submit chat messages and view responses.
     - **Configuration** - used to configure settings for the model deployment.
 2. In the **Configuration** section, ensure that your model deployment is selected.
-3. In the **Assistant setup** area, select the default system message template to set the context for the chat session. The default system message is *You are an AI assistant that helps people find information*.
+3. In the **Setup** area, select the default system message template to set the context for the chat session. The default system message is *You are an AI assistant that helps people find information*.
 4. In the **Chat session**, submit the following queries, and review the responses:
 
     ```
@@ -79,7 +81,7 @@ Before connecting Azure OpenAI to your data, let's first observe how the base mo
 Now you'll add some data for a fictional travel agent company named *Margie's Travel*. Then you'll see how the Azure openAI model responds when using the brochures from Margie's Travel as grounding data.
 
 1. In a new browser tab, download an archive of brochure data from `https://aka.ms/own-data-brochures`. Extract the brochures to a folder on your PC.
-1. In Azure OpenAI Studio, in the **Chat** playground, in the **Assistant setup** section, select **Add your data**.
+1. In Azure OpenAI Studio, in the **Chat** playground, in the **Setup** section, select **Add your data**.
 1. Select **Add a data source** and choose **Upload files**.
 1. You'll need to create a storage account and Azure AI Search resource. Under the dropdown for the storage resource, select **Create a new Azure Blob storage resource**, and create a storage account with the following settings. Anything not specified leave as the default.
 
@@ -111,7 +113,7 @@ Now you'll add some data for a fictional travel agent company named *Margie's Tr
 
 1. On the **Upload files** page, upload the PDFs you downloaded, and then select **Next**.
 1. On the **Data management** page select the **Keyword** search type from the drop-down, and then select **Next**.
-1. On the **Review and finish** page select **Save and close**, which will add your data. This may take a few minutes, during which you need to leave your window open. Once complete, you'll see the data source, search resource, and index specified in the **Assistant setup** section.
+1. On the **Review and finish** page select **Save and close**, which will add your data. This may take a few minutes, during which you need to leave your window open. Once complete, you'll see the data source, search resource, and index specified in the **Setup** section.
 
     > **Tip**: Occasionally the connection between your new search index and Azure OpenAI Studio takes too long. If you've waited for a few minutes and it still hasn't connected, check your AI Search resources in Azure portal. If you see the completed index, you can disconnect the data connection in Azure OpenAI Studio and re-add it by specifying an Azure AI Search data source and selecting your new index.
 
@@ -163,13 +165,13 @@ Applications for both C# and Python have been provided, as well as a sample text
     **C#**:
 
     ```
-    dotnet add package Azure.AI.OpenAI --version 1.0.0-beta.9
+    dotnet add package Azure.AI.OpenAI --version 1.0.0-beta.14
     ```
 
     **Python**:
 
     ```
-     pip install openai==1.2.0
+    pip install openai==1.13.3
     ```
 
 3. In the **Explorer** pane, in the **CSharp** or **Python** folder, open the configuration file for your preferred language
@@ -189,23 +191,37 @@ Applications for both C# and Python have been provided, as well as a sample text
 
 Now you're ready to use the Azure OpenAI SDK to consume your deployed model.
 
-1. In the **Explorer** pane, in the **CSharp** or **Python** folder, open the code file for your preferred language, and replace the comment ***Add Azure OpenAI package*** with code to add the Azure OpenAI SDK library:
+1. In the **Explorer** pane, in the **CSharp** or **Python** folder, open the code file for your preferred language, and replace the comment ***Configure your data source*** with code to add the Azure OpenAI SDK library:
 
     **C#**: ownData.cs
 
     ```csharp
-    // Add Azure OpenAI package
-    using Azure.AI.OpenAI;
+    // Configure your data source
+    AzureSearchChatExtensionConfiguration ownDataConfig = new()
+    {
+            SearchEndpoint = new Uri(azureSearchEndpoint),
+            Authentication = new OnYourDataApiKeyAuthenticationOptions(azureSearchKey),
+            IndexName = azureSearchIndex
+    };
     ```
 
     **Python**: ownData.py
 
     ```python
-    # Add Azure OpenAI package
-    from openai import AzureOpenAI
+    # Configure your data source
+    extension_config = dict(dataSources = [  
+            { 
+                "type": "AzureCognitiveSearch", 
+                "parameters": { 
+                    "endpoint":azure_search_endpoint, 
+                    "key": azure_search_key, 
+                    "indexName": azure_search_index,
+                }
+            }]
+        )
     ```
 
-2. Review the rest of the code, noting the use of the *extensions* to the request body that are used to provide information about the data source settings.
+2. Review the rest of the code, noting the use of the *extensions* in the request body that is used to provide information about the data source settings.
 
 3. Save the changes to the code file.
 
@@ -221,6 +237,8 @@ Now that your app has been configured, run it to send your request to your model
     > **Tip**: You can use the **Maximize panel size** (**^**) icon in the terminal toolbar to see more of the console text.
 
 2. Review the response to the prompt `Tell me about London`, which should includes an answer as well as some details of the data used to ground the prompt, which was obtained from your search service.
+
+    > **Tip**: If you want to see the citations from your search index, set the variable ***show citations*** near the top of the code file to **true**.
 
 ## Clean up
 

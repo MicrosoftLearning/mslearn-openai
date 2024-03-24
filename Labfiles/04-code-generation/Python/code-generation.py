@@ -2,6 +2,7 @@ import os
 from dotenv import load_dotenv
 
 # Add Azure OpenAI package
+from openai import AzureOpenAI
 
 # Set to True to print the full response from OpenAI for each call
 printFullResponse = False
@@ -17,6 +18,11 @@ def main():
         azure_oai_deployment = os.getenv("AZURE_OAI_DEPLOYMENT")
         
         # Configure the Azure OpenAI client
+        client = AzureOpenAI(
+            azure_endpoint = azure_oai_endpoint, 
+            api_key=azure_oai_key,  
+            api_version="2024-02-15-preview"
+            )
 
         while True:
             print('\n1: Add comments to my function\n' +
@@ -24,23 +30,22 @@ def main():
                 '3: Fix my Go Fish game\n' +
                 '\"quit\" to exit the program\n')
             command = input('Enter a number to select a task:')
-            if command == '1':
-                file = open(file="../sample-code/function/function.py", encoding="utf8").read()
-                prompt = "Add comments to the following function. Return only the commented code.\n---\n" + file
-                call_openai_model(prompt, model=azure_oai_deployment, client=client)
-            elif command =='2':
-                file = open(file="../sample-code/function/function.py", encoding="utf8").read()
-                prompt = "Write four unit tests for the following function.\n---\n" + file
-                call_openai_model(prompt, model=azure_oai_deployment, client=client)
-            elif command =='3':
-                file = open(file="../sample-code/go-fish/go-fish.py", encoding="utf8").read()
-                prompt = "Fix the code below for an app to play Go Fish with the user. Return only the corrected code.\n---\n" + file
-                call_openai_model(prompt, model=azure_oai_deployment, client=client)
-            elif command.lower() == 'quit':
+
+            if command.lower() == 'quit':
                 print('Exiting program...')
                 break
+            
+            user_input = input('\nEnter a prompt: ')
+            if command == '1' or command == '2':
+                file = open(file="../sample-code/function/function.py", encoding="utf8").read()                
+            elif command =='3':
+                file = open(file="../sample-code/go-fish/go-fish.py", encoding="utf8").read()
             else :
                 print("Invalid input. Please try again.")
+                continue
+
+            prompt = user_input + file
+            call_openai_model(prompt, model=azure_oai_deployment, client=client)
 
     except Exception as ex:
         print(ex)
@@ -51,7 +56,8 @@ def call_openai_model(prompt, model, client):
     user_message = prompt
 
     # Format and send the request to the model
-    
+
+
     # Print the response to the console, if desired
     if printFullResponse:
         print(response)

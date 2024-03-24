@@ -7,7 +7,7 @@ lab:
 
 Azure OpenAI Service brings the generative AI models developed by OpenAI to the Azure platform, enabling you to develop powerful AI solutions that benefit from the security, scalability, and integration of services provided by the Azure cloud platform. In this exercise, you'll learn how to get started with Azure OpenAI by provisioning the service as an Azure resource and using Azure OpenAI Studio to deploy and explore generative AI models.
 
-In scenario for this exercise, you will perform the role of a software developer who has been tasked to implement an AI agent that can use generative AI to help a marketing organization improve its effectiveness at reaching customers and advertising new products. The techniques used in the exercise can be applied to any scenario where an organization wants to use generative AI models to help employees be more effective and productive.
+In the scenario for this exercise, you will perform the role of a software developer who has been tasked to implement an AI agent that can use generative AI to help a marketing organization improve its effectiveness at reaching customers and advertising new products. The techniques used in the exercise can be applied to any scenario where an organization wants to use generative AI models to help employees be more effective and productive.
 
 This exercise takes approximately **30** minutes.
 
@@ -70,7 +70,7 @@ Now that you've deployed a model, you can use it to generate responses based on 
     - **Chat session** - used to submit chat messages and view responses.
     - **Configuration** - used to configure settings for the model deployment.
 1. In the **Configuration** panel, ensure that your gpt-35-turbo-16k model deployment is selected.
-1. In the **Assistant setup** panel, review the default **System message**, which should be *You are an AI assistant that helps people find information.* The system message is included in prompts submitted to the model, and provides context for the model's responses; setting expectations about how an AI agent based on the model should interact with the user.
+1. In the **Setup** panel, review the default **System message**, which should be *You are an AI assistant that helps people find information.* The system message is included in prompts submitted to the model, and provides context for the model's responses; setting expectations about how an AI agent based on the model should interact with the user.
 1. In the **Chat session** panel, enter the user query `How can I use generative AI to help me market a new product?`
 
     > **Note**: You may receive a response that the API deployment is not yet ready. If so, wait for a few minutes and try again.

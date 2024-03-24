@@ -1,12 +1,14 @@
 import os
+import asyncio
 from dotenv import load_dotenv
 
 # Add Azure OpenAI package
 
+
 # Set to True to print the full response from OpenAI for each call
 printFullResponse = False
 
-def main(): 
+async def main(): 
         
     try: 
     
@@ -20,40 +22,27 @@ def main():
         
 
         while True:
-            print('1: Basic prompt (no prompt engineering)\n' +
-                  '2: Prompt with email formatting and basic system message\n' +
-                  '3: Prompt with formatting and specifying content\n' +
-                  '4: Prompt adjusting system message to be light and use jokes\n' +
-                  '\'quit\' to exit the program\n')
-            command = input('Enter a number:')
-            if command == '1':
-                call_openai_model(messages="../prompts/basic.txt", model=azure_oai_deployment, client=client)
-            elif command =='2':
-                call_openai_model(messages="../prompts/email-format.txt", model=azure_oai_deployment, client=client)
-            elif command =='3':
-                call_openai_model(messages="../prompts/specify-content.txt", model=azure_oai_deployment, client=client)
-            elif command =='4':
-                call_openai_model(messages="../prompts/specify-tone.txt", model=azure_oai_deployment, client=client)
-            elif command.lower() == 'quit':
+            # Pause the app to allow the user to enter the system prompt
+            print("------------------\nPausing the app to allow you to change the system prompt.\nPress anything then enter to continue...")
+            input()
+
+            # Read in system message and prompt for user message
+            system_text = open(file="system.txt", encoding="utf8").read().strip()
+            user_text = input("Enter user message: ")
+            if user_text.lower() == 'quit' or system_text.lower() == 'quit':
                 print('Exiting program...')
                 break
-            else :
-                print("Invalid input. Please try again.")
+            
+            await call_openai_model(system_message = system_text, 
+                                    user_message = user_text, 
+                                    model=azure_oai_deployment, 
+                                    client=client
+                                    )
 
     except Exception as ex:
         print(ex)
 
-def call_openai_model(messages, model, client):
-    # In this sample, each file contains both the system and user messages
-    # First, read them into variables, strip whitespace, then build the messages array
-    file = open(file=messages, encoding="utf8")
-    system_message = file.readline().split(':', 1)[1].strip()
-    user_message = file.readline().split(':', 1)[1].strip()
-
-    # Print the messages to the console
-    print("System message: " + system_message)
-    print("User message: " + user_message)
-
+async def call_openai_model(system_message, user_message, model, client):
     # Format and send the request to the model
     
 
@@ -61,7 +50,7 @@ def call_openai_model(messages, model, client):
     if printFullResponse:
         print(response)
 
-    print("Completion: \n\n" + response.choices[0].message.content + "\n")
+    print("Response:\n" + response.choices[0].message.content + "\n")
 
 if __name__ == '__main__': 
-    main()
+    asyncio.run(main())
