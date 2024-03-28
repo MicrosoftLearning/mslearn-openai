@@ -81,8 +81,10 @@ Let's start by exploring some prompt engineering techniques in the Chat playgrou
     The response provides a description of the article. However, suppose you want a more specific format for article categorization.
 
 5. In the **Setup** section change the system message to `You are a news aggregator that categorizes news articles.`
+  
+7. Use the **Apply changes** button at the top of the **Assistent setup** section to update the system message.
 
-6. Under the new system message, in the **Examples** section, select the **Add** button. Then add the following example.
+8. Under the new system message, in the **Examples** section, select the **Add** button. Then add the following example.
 
     **User:**
     
@@ -104,7 +106,7 @@ Let's start by exploring some prompt engineering techniques in the Chat playgrou
     Sports
       ```
 
-7. Add another example with the following text.
+9. Add another example with the following text.
 
     **User:**
     
@@ -127,9 +129,7 @@ Let's start by exploring some prompt engineering techniques in the Chat playgrou
     Entertainment
     ```
 
-8. Use the **Apply changes** button at the top of the **Assistent setup** section to update the system message.
-
-9. In the **Chat session** section, resubmit the following prompt:
+10. In the **Chat session** section, resubmit the following prompt:
 
     ```
     What kind of article is this?
@@ -145,9 +145,9 @@ Let's start by exploring some prompt engineering techniques in the Chat playgrou
 
     The combination of a more specific system message and some examples of expected queries and responses results in a consistent format for the results.
 
-10. In the **Setup** section, change the system message back to the default template, which should be `You are an AI assistant that helps people find information.` with no examples. Then apply the changes.
+11. In the **Setup** section, change the system message back to the default template, which should be `You are an AI assistant that helps people find information.` with no examples. Then apply the changes.
 
-11. In the **Chat session** section, submit the following prompt:
+12. In the **Chat session** section, submit the following prompt:
 
     ```
     # 1. Create a list of animals
@@ -157,8 +157,8 @@ Let's start by exploring some prompt engineering techniques in the Chat playgrou
 
     The model will likely respond with an answer to satisfy the prompt, split into a numbered list. This is an appropriate response, but suppose what you actually wanted was for the model to write a Python program that performs the tasks you described?
 
-12. Change the system message to `You are a coding assistant helping write python code.` and apply the changes.
-13. Resubmit the following prompt to the model:
+13. Change the system message to `You are a coding assistant helping write python code.` and apply the changes.
+14. Resubmit the following prompt to the model:
 
     ```
     # 1. Create a list of animals
