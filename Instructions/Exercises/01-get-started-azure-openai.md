@@ -35,7 +35,8 @@ If you don't already have one, provision an Azure OpenAI resource in your Azure 
 
     > \* Azure OpenAI resources are constrained by regional quotas. The listed regions include default quota for the model type(s) used in this exercise. Randomly choosing a region reduces the risk of a single region reaching its quota limit in scenarios where you are sharing a subscription with other users. In the event of a quota limit being reached later in the exercise, there's a possibility you may need to create another resource in a different region.
 
-3. Wait for deployment to complete. Then go to the deployed Azure OpenAI resource in the Azure portal.
+3. Press the **Next** button at the bottom of the page (leaving the default settings) until you reach the **Review + submit** tab and press the **Create** button
+4. Wait for deployment to complete. Then go to the deployed Azure OpenAI resource in the Azure portal.
 
 ## Deploy a model
 

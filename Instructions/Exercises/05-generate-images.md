@@ -25,7 +25,8 @@ Before you can use Azure OpenAI to generate images, you must provision an Azure 
 
     > \* DALL-E 3 models are only available in Azure OpenAI service resources in the **East US** and **Sweden Central** regions.
 
-3. Wait for deployment to complete. Then go to the deployed Azure OpenAI resource in the Azure portal.
+3. Press the **Next** button at the bottom of the page (leaving the default settings) until you reach the **Review + submit** tab and press the **Create** button
+4. Wait for deployment to complete. Then go to the deployed Azure OpenAI resource in the Azure portal.
 
 ## Explore image-generation in the DALL-E playground
 
