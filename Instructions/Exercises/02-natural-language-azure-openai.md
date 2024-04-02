@@ -212,7 +212,7 @@ Now that your app has been configured, run it to send your request to your model
 1. When prompted, enter the text `What hike should I do near Rainier?`.
 1. Observe the output, taking note that the response follows the guidelines provided in the system message you added to the *messages* array.
 1. Provide the prompt `Where should I hike near Boise? I'm looking for something of easy difficulty, between 2 to 3 miles, with moderate elevation gain.` and observe the output.
-1. In the code file for your preferred language, and change the *temperature* parameter value in your request to **1.0** and save the file.
+1. In the code file for your preferred language, change the *temperature* parameter value in your request to **1.0** and save the file.
 1. Run the application again using the prompts above, and observe the output.
 
 Increasing the temperature often causes the response to vary, even when provided the same text, due to the increased randomness. You can run it several times to see how the output may change. Try using different values for your temperature with the same input.
