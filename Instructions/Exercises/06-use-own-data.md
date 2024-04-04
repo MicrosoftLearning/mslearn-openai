@@ -43,7 +43,7 @@ Azure OpenAI provides a web-based portal named **Azure OpenAI Studio**, that you
 
 1. On the **Overview** page for your Azure OpenAI resource, use the **Go to Azure OpenAI Studio** button to open Azure OpenAI Studio in a new browser tab.
 2. In Azure OpenAI Studio, on the **Deployments** page, view your existing model deployments. If you don't already have one, create a new deployment of the **gpt-35-turbo-16k** model with the following settings:
-    - **Model**: gpt-35-turbo-16k *(must be this model to to use the features in this exercise)*
+    - **Model**: gpt-35-turbo-16k *(must be this model to use the features in this exercise)*
     - **Model version**: Auto-update to default
     - **Deployment name**: *A unique name of your choice. You'll use this name later in the lab.*
     - **Advanced options**
@@ -78,7 +78,7 @@ Before connecting Azure OpenAI to your data, let's first observe how the base mo
 
 ## Connect your data in the chat playground
 
-Now you'll add some data for a fictional travel agent company named *Margie's Travel*. Then you'll see how the Azure openAI model responds when using the brochures from Margie's Travel as grounding data.
+Now you'll add some data for a fictional travel agent company named *Margie's Travel*. Then you'll see how the Azure OpenAI model responds when using the brochures from Margie's Travel as grounding data.
 
 1. In a new browser tab, download an archive of brochure data from `https://aka.ms/own-data-brochures`. Extract the brochures to a folder on your PC.
 1. In Azure OpenAI Studio, in the **Chat** playground, in the **Setup** section, select **Add your data**.
