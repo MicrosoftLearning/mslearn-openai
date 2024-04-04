@@ -127,7 +127,7 @@ Let's start by exploring some prompt engineering techniques in the Chat playgrou
     Entertainment
     ```
 
-8. Use the **Apply changes** button at the top of the **Assistent setup** section to update the system message.
+8. Use the **Apply changes** button at the top of the **Setup** section to update the system message.
 
 9. In the **Chat session** section, resubmit the following prompt:
 
