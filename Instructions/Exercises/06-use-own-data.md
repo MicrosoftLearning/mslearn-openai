@@ -1,9 +1,9 @@
 ---
 lab:
-    title: 'Use your own data with Azure OpenAI'
+    title: 'Implement Retrieval Augmented Generation (RAG) with Azure OpenAI Service'
 ---
 
-# Use your own data with Azure OpenAI
+# Implement Retrieval Augmented Generation (RAG) with Azure OpenAI Service
 
 The Azure OpenAI Service enables you to use your own data with the intelligence of the underlying LLM. You can limit the model to only use your data for pertinent topics, or blend it with results from the pre-trained model.
 
