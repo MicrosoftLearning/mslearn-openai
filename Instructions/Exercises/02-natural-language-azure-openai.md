@@ -292,7 +292,7 @@ In most real-world applications, the ability to reference previous parts of the 
     )
     generated_text = response.choices[0].message.content
     # Add generated text to messages array
-    messages_array.append({"role": "system", "content": generated_text})
+    messages_array.append({"role": "assistant", "content": generated_text})
 
     # Print generated text
     print("Summary: " + generated_text + "\n")
