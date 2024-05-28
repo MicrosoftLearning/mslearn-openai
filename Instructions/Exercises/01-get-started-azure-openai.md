@@ -101,13 +101,13 @@ So far, you've engaged in a chat conversation with your model based on the defau
 
     **User**:
     
-    ```
+    ```prompt
     Write an advertisement for the lightweight "Ultramop" mop, which uses patented absorbent materials to clean floors.
     ```
     
     **Assistant**:
     
-    ```
+    ```prompt
     Welcome to the future of cleaning!
     
     The Ultramop makes light work of even the dirtiest of floors. Thanks to its patented absorbent materials, it ensures a brilliant shine. Just look at these features:
@@ -155,7 +155,7 @@ Now that you've explored some of the capabilities of a generative AI model in th
 1. After your web app has deployed successfully, use the button at the top right of the **Chat** playground page to launch the web app. The app may take a few minutes to launch. If prompted, accept the permissions request.
 1. In the web app, enter the following chat message:
 
-    ```
+    ```prompt
     Write an advertisement for the new "WonderWipe" cloth that attracts dust particulates and can be used to clean any household surface.
     ```
 
