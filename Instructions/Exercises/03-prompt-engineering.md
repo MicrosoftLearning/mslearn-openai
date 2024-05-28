@@ -66,7 +66,7 @@ Let's start by exploring some prompt engineering techniques in the Chat playgrou
 3. In the **Setup** area, select the default system message template to set the context for the chat session. The default system message is *You are an AI assistant that helps people find information*.
 4. In the **Chat session**, submit the following query:
 
-    ```
+    ```prompt
     What kind of article is this?
     ---
     Severe drought likely in California
@@ -86,7 +86,7 @@ Let's start by exploring some prompt engineering techniques in the Chat playgrou
 
     **User:**
     
-    ```
+    ```prompt
     What kind of article is this?
     ---
     New York Baseballers Wins Big Against Chicago
@@ -100,7 +100,7 @@ Let's start by exploring some prompt engineering techniques in the Chat playgrou
     
     **Assistant:**
     
-    ```
+    ```prompt
     Sports
       ```
 
@@ -108,7 +108,7 @@ Let's start by exploring some prompt engineering techniques in the Chat playgrou
 
     **User:**
     
-    ```
+    ```prompt
     Categorize this article:
     ---
     Joyous moments at the Oscars
@@ -123,7 +123,7 @@ Let's start by exploring some prompt engineering techniques in the Chat playgrou
     
     **Assistant:**
     
-    ```
+    ```prompt
     Entertainment
     ```
 
@@ -131,7 +131,7 @@ Let's start by exploring some prompt engineering techniques in the Chat playgrou
 
 9. In the **Chat session** section, resubmit the following prompt:
 
-    ```
+    ```prompt
     What kind of article is this?
     ---
     Severe drought likely in California
@@ -149,7 +149,7 @@ Let's start by exploring some prompt engineering techniques in the Chat playgrou
 
 11. In the **Chat session** section, submit the following prompt:
 
-    ```
+    ```prompt
     # 1. Create a list of animals
     # 2. Create a list of whimsical names for those animals
     # 3. Combine them randomly into a list of 25 animal and name pairs
