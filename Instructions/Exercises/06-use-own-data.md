@@ -66,11 +66,11 @@ Before connecting Azure OpenAI to your data, let's first observe how the base mo
 3. In the **Setup** area, select the default system message template to set the context for the chat session. The default system message is *You are an AI assistant that helps people find information*.
 4. In the **Chat session**, submit the following queries, and review the responses:
 
-    ```
+    ```prompt
     I'd like to take a trip to New York. Where should I stay?
     ```
 
-    ```
+    ```prompt
     What are some facts about New York?
     ```
 
@@ -121,11 +121,11 @@ Now you'll add some data for a fictional travel agent company named *Margie's Tr
 
 Now that you've added your data, ask the same questions as you did previously, and see how the response differs.
 
-```
+```prompt
 I'd like to take a trip to New York. Where should I stay?
 ```
 
-```
+```prompt
 What are some facts about New York?
 ```
 
