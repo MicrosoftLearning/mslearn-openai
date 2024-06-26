@@ -30,7 +30,16 @@ def main():
         text = input('\nEnter a question:\n')
 
         # Configure your data source
-
+        extension_config = dict(dataSources = [
+            {
+                "type": "AzureCognitiveSearch",
+                "parameters": {
+                    "endpoint":azure_search_endpoint,
+                    "key": azure_search_key,
+                    "indexName": azure_search_index,
+                }
+            }]
+        )
 
         # Send request to Azure OpenAI model
         print("...Sending the following request to Azure OpenAI endpoint...")
