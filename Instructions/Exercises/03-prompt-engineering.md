@@ -287,7 +287,7 @@ Now you're ready to use the Azure OpenAI SDK to consume your deployed model.
     print("\nSending request to Azure OpenAI model...\n")
 
     # Call the Azure OpenAI model
-    response = await client.chat.completions.create(
+    response = client.chat.completions.create(
         model=model,
         messages=messages,
         temperature=0.7,
