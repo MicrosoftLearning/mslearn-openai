@@ -44,7 +44,7 @@ Azure provides a web-based portal named **Azure AI Studio**, that you can use to
 > **Note**: As you use Azure AI Studio, message boxes suggesting tasks for you to perform may be displayed. You can close these and follow the steps in this exercise.
 
 1. In the Azure portal, on the **Overview** page for your Azure OpenAI resource, scroll down to the **Get Started** section and select the button to go to **AI Studio**.
-1. In Azure AI Studio, in the pane on the left, select the **Deployments** page and view your existing model deployments. If you don't already have one, select **Create deployment** and create a new deployment of the **gpt-35-turbo-16k** model with the following settings:
+1. In Azure AI Studio, in the pane on the left, select the **Deployments** page and view your existing model deployments. If you don't already have one, create a new deployment of the **gpt-35-turbo-16k** model with the following settings:
     - **Deployment name**: *A unique name of your choice*
     - **Model version**: *Use default version*
     - **Deployment type**: Standard

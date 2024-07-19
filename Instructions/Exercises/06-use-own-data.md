@@ -99,7 +99,7 @@ To make it easy to use your own data in a prompt, you'll index it using Azure AI
 
 1. In the Azure portal, navigate to your Azure AI Search resource.
 1. On the **Overview** page, select **Import and vectorize data**.
-1. In the **Setp your data connection** page, select **Azure Blob Storage** and configure the data source with the following settings:
+1. In the **Setup your data connection** page, select **Azure Blob Storage** and configure the data source with the following settings:
     - **Subscription**: The Azure subscription in which you provisioned your storage account.
     - **Blob storage account**: The storage account you created previously.
     - **Blob container**: margies-travel
@@ -159,7 +159,7 @@ Applications for both C# and Python have been provided, and both apps feature th
     
 4. Update the configuration values to include:
     - The  **endpoint** and a **key** from the Azure OpenAI resource you created (available on the **Keys and Endpoint** page for your Azure OpenAI resource in the Azure portal)
-    - The **deployment name** you specified for your model deployment (available in the **Deployments** page in Azure OpenAI Studio).
+    - The **deployment name** you specified for your model deployment (available in the **Deployments** page in Azure AI Studio).
     - The endpoint for your search service (the **Url** value on the overview page for your search resource in the Azure portal).
     - A **key** for your search resource (available in the **Keys** page for your search resource in the Azure portal - you can use either of the admin keys)
     - The name of the search index (which should be `margies-index`).

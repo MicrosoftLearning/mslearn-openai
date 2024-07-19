@@ -39,18 +39,18 @@ If you don't already have one, provision an Azure OpenAI resource in your Azure 
 
 ## Deploy a model
 
-Azure OpenAI provides a web-based portal named **Azure OpenAI Studio**, that you can use to deploy, manage, and explore models. You'll start your exploration of Azure OpenAI by using Azure OpenAI Studio to deploy a model.
+Azure provides a web-based portal named **Azure AI Studio**, that you can use to deploy, manage, and explore models. You'll start your exploration of Azure OpenAI by using Azure AI Studio to deploy a model.
 
-1. On the **Overview** page for your Azure OpenAI resource, use the **Go to Azure OpenAI Studio** button to open Azure OpenAI Studio in a new browser tab.
-2. In Azure OpenAI Studio, on the **Deployments** page, view your existing model deployments. If you don't already have one, create a new deployment of the **gpt-35-turbo-16k** model with the following settings:
-    - **Model**: gpt-35-turbo-16k *(if the 16k model isn't available, choose gpt-35-turbo)*
-    - **Model version**: Auto-update to default
-    - **Deployment name**: *A unique name of your choice. You'll use this name later in the lab.*
-    - **Advanced options**
-        - **Content filter**: Default
-        - **Deployment type**: Standard
-        - **Tokens per minute rate limit**: 5K\*
-        - **Enable dynamic quota**: Enabled
+> **Note**: As you use Azure AI Studio, message boxes suggesting tasks for you to perform may be displayed. You can close these and follow the steps in this exercise.
+
+1. In the Azure portal, on the **Overview** page for your Azure OpenAI resource, scroll down to the **Get Started** section and select the button to go to **AI Studio**.
+1. In Azure AI Studio, in the pane on the left, select the **Deployments** page and view your existing model deployments. If you don't already have one, create a new deployment of the **gpt-35-turbo-16k** model with the following settings:
+    - **Deployment name**: *A unique name of your choice*
+    - **Model version**: *Use default version*
+    - **Deployment type**: Standard
+    - **Tokens per minute rate limit**: 5K\*
+    - **Content filter**: Default
+    - **Enable dynamic quota**: Disabled
 
     > \* A rate limit of 5,000 tokens per minute is more than adequate to complete this exercise while leaving capacity for other people using the same subscription.
 
@@ -58,13 +58,12 @@ Azure OpenAI provides a web-based portal named **Azure OpenAI Studio**, that you
 
 Before using in your app, examine how Azure OpenAI can generate and explain code in the chat playground.
 
-1. In the **Azure OpenAI Studio** at `https://oai.azure.com`, in the **Playground** section, select the **Chat** page. The **Chat** playground page consists of three main sections:
-    - **Setup** - used to set the context for the model's responses.
+1. In the **Playground** section, select the **Chat** page. The **Chat** playground page consists of a row of buttons and two main panels (which may be arranged right-to-left horizontally, or top-to-bottom vertically depending on your screen resolution):
+    - **Configuration** - used to select your deployment, define system message, and set parameters for interacting with your deployment.
     - **Chat session** - used to submit chat messages and view responses.
-    - **Configuration** - used to configure settings for the model deployment.
-2. In the **Configuration** section, ensure that your model deployment is selected.
-3. In the **Setup** area, set the system message to `You are a programming assistant helping write code` and apply the changes.
-4. In the **Chat session**, submit the following query:
+1. Under **Deployments**, ensure that your model deployment is selected.
+1. In the **System message** area, set the system message to `You are a programming assistant helping write code` and apply the changes.
+1. In the **Chat session**, submit the following query:
 
     ```
     Write a function in python that takes a character and a string as input, and returns how many times the character appears in the string
@@ -72,11 +71,11 @@ Before using in your app, examine how Azure OpenAI can generate and explain code
 
     The model will likely respond with a function, with some explanation of what the function does and how to call it.
 
-5. Next, send the prompt `Do the same thing, but this time write it in C#`.
+1. Next, send the prompt `Do the same thing, but this time write it in C#`.
 
     The model likely responded very similarly as the first time, but this time coding in C#. You can ask it again for a different language of your choice, or a function to complete a different task such as reversing the input string.
 
-6. Next, let's explore using AI to understand code. Submit the following prompt as the user message.
+1. Next, let's explore using AI to understand code. Submit the following prompt as the user message.
 
     ```
     What does the following function do?  
@@ -154,7 +153,7 @@ Applications for both C# and Python have been provided, as well as a sample text
     
 4. Update the configuration values to include:
     - The  **endpoint** and a **key** from the Azure OpenAI resource you created (available on the **Keys and Endpoint** page for your Azure OpenAI resource in the Azure portal)
-    - The **deployment name** you specified for your model deployment (available in the **Deployments** page in Azure OpenAI Studio).
+    - The **deployment name** you specified for your model deployment (available in the **Deployments** page in Azure AI Studio).
 5. Save the configuration file.
 
 ## Add code to use your Azure OpenAI service model

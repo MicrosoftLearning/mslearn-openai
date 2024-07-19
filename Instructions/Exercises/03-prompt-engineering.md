@@ -39,18 +39,18 @@ If you don't already have one, provision an Azure OpenAI resource in your Azure 
 
 ## Deploy a model
 
-Azure OpenAI provides a web-based portal named **Azure OpenAI Studio**, that you can use to deploy, manage, and explore models. You'll start your exploration of Azure OpenAI by using Azure OpenAI Studio to deploy a model.
+Azure provides a web-based portal named **Azure AI Studio**, that you can use to deploy, manage, and explore models. You'll start your exploration of Azure OpenAI by using Azure AI Studio to deploy a model.
 
-1. On the **Overview** page for your Azure OpenAI resource, use the **Go to Azure OpenAI Studio** button to open Azure OpenAI Studio in a new browser tab.
-2. In Azure OpenAI Studio, on the **Deployments** page, view your existing model deployments. If you don't already have one, create a new deployment of the **gpt-35-turbo-16k** model with the following settings:
-    - **Model**: gpt-35-turbo-16k *(if the 16k model isn't available, choose gpt-35-turbo)*
-    - **Model version**: Auto-update to default
-    - **Deployment name**: *A unique name of your choice. You'll use this name later in the lab.*
-    - **Advanced options**
-        - **Content filter**: Default
-        - **Deployment type**: Standard
-        - **Tokens per minute rate limit**: 5K\*
-        - **Enable dynamic quota**: Enabled
+> **Note**: As you use Azure AI Studio, message boxes suggesting tasks for you to perform may be displayed. You can close these and follow the steps in this exercise.
+
+1. In the Azure portal, on the **Overview** page for your Azure OpenAI resource, scroll down to the **Get Started** section and select the button to go to **AI Studio**.
+1. In Azure AI Studio, in the pane on the left, select the **Deployments** page and view your existing model deployments. If you don't already have one, create a new deployment of the **gpt-35-turbo-16k** model with the following settings:
+    - **Deployment name**: *A unique name of your choice*
+    - **Model version**: *Use default version*
+    - **Deployment type**: Standard
+    - **Tokens per minute rate limit**: 5K\*
+    - **Content filter**: Default
+    - **Enable dynamic quota**: Disabled
 
     > \* A rate limit of 5,000 tokens per minute is more than adequate to complete this exercise while leaving capacity for other people using the same subscription.
 
@@ -58,12 +58,11 @@ Azure OpenAI provides a web-based portal named **Azure OpenAI Studio**, that you
 
 Let's start by exploring some prompt engineering techniques in the Chat playground.
 
-1. In **Azure OpenAI Studio** at `https://oai.azure.com`, in the **Playground** section, select the **Chat** page. The **Chat** playground page consists of three main sections:
-    - **Setup** - used to set the context for the model's responses.
+1. In the **Playground** section, select the **Chat** page. The **Chat** playground page consists of a row of buttons and two main panels (which may be arranged right-to-left horizontally, or top-to-bottom vertically depending on your screen resolution):
+    - **Configuration** - used to select your deployment, define system message, and set parameters for interacting with your deployment.
     - **Chat session** - used to submit chat messages and view responses.
-    - **Configuration** - used to configure settings for the model deployment.
-2. In the **Configuration** section, ensure that your model deployment is selected.
-3. In the **Setup** area, select the default system message template to set the context for the chat session. The default system message is *You are an AI assistant that helps people find information*.
+2. Under **Deployments**, ensure that your gpt-35-turbo-16k model deployment is selected.
+1. Review the default **System message**, which should be *You are an AI assistant that helps people find information.*
 4. In the **Chat session**, submit the following query:
 
     ```prompt
@@ -80,9 +79,9 @@ Let's start by exploring some prompt engineering techniques in the Chat playgrou
 
     The response provides a description of the article. However, suppose you want a more specific format for article categorization.
 
-5. In the **Setup** section change the system message to `You are a news aggregator that categorizes news articles.`
+5. In the **Configuration** section change the system message to `You are a news aggregator that categorizes news articles.`
 
-6. Under the new system message, in the **Examples** section, select the **Add** button. Then add the following example.
+6. Under the new system message, select the **Add section** button, and choose **Examples**. Then add the following example.
 
     **User:**
     
@@ -127,7 +126,7 @@ Let's start by exploring some prompt engineering techniques in the Chat playgrou
     Entertainment
     ```
 
-8. Use the **Apply changes** button at the top of the **Setup** section to update the system message.
+8. Use the **Apply changes** button at the top of the **Configuration** section to save your changes.
 
 9. In the **Chat session** section, resubmit the following prompt:
 
@@ -145,7 +144,7 @@ Let's start by exploring some prompt engineering techniques in the Chat playgrou
 
     The combination of a more specific system message and some examples of expected queries and responses results in a consistent format for the results.
 
-10. In the **Setup** section, change the system message back to the default template, which should be `You are an AI assistant that helps people find information.` with no examples. Then apply the changes.
+10. Change the system message back to the default template, which should be `You are an AI assistant that helps people find information.` with no examples. Then apply the changes.
 
 11. In the **Chat session** section, submit the following prompt:
 
@@ -210,7 +209,7 @@ Applications for both C# and Python have been provided, and both apps feature th
     
 4. Update the configuration values to include:
     - The  **endpoint** and a **key** from the Azure OpenAI resource you created (available on the **Keys and Endpoint** page for your Azure OpenAI resource in the Azure portal)
-    - The **deployment name** you specified for your model deployment (available in the **Deployments** page in Azure OpenAI Studio).
+    - The **deployment name** you specified for your model deployment (available in the **Deployments** page in Azure AI Studio).
 5. Save the configuration file.
 
 ## Add code to use the Azure OpenAI service
@@ -301,7 +300,7 @@ Now you're ready to use the Azure OpenAI SDK to consume your deployed model.
 
 Now that your app has been configured, run it to send your request to your model and observe the response. You'll notice the only difference between the different options is the content of the prompt, all other parameters (such as token count and temperature) remain the same for each request.
 
-1. In the folder of your preferred language, open `system.txt` in Visual Studio Code. For each of the interations, you'll enter the **System message** in this file and save it. Each iteration will pause first for you to change the system message.
+1. In the folder of your preferred language, open `system.txt` in Visual Studio Code. For each of the interactions, you'll enter the **System message** in this file and save it. Each iteration will pause first for you to change the system message.
 1. In the interactive terminal pane, ensure the folder context is the folder for your preferred language. Then enter the following command to run the application.
 
     - **C#**: `dotnet run`
