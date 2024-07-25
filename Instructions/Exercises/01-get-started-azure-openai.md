@@ -48,14 +48,13 @@ Azure OpenAI service provides a web-based portal named **Azure OpenAI Studio**, 
     After the new tab opens, you can close any banner notifications for new preview services that are displayed at the top of the Azure OpenAI Studio page.
 
 1. In Azure OpenAI Studio, in the pane on the left, select the **Deployments** page and view your existing model deployments. If you don't already have one, create a new deployment of the **gpt-35-turbo-16k** model with the following settings:
+    - **Deployment name**: *A unique name of your choice*
     - **Model**: gpt-35-turbo-16k *(if the 16k model isn't available, choose gpt-35-turbo)*
     - **Model version**: Auto-update to default
-    - **Deployment name**: *A unique name of your choice*
-    - **Advanced options**
-        - **Content filter**: Default
-        - **Deployment type**: Standard
-        - **Tokens per minute rate limit**: 5K\*
-        - **Enable dynamic quota**: Enabled
+    - **Deployment type**: Standard
+    - **Tokens per minute rate limit**: 5K\*
+    - **Content filter**: Default
+    - **Enable dynamic quota**: Enabled
 
     > \* A rate limit of 5,000 tokens per minute is more than adequate to complete this exercise while leaving capacity for other people using the same subscription.
 
