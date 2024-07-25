@@ -43,14 +43,13 @@ Azure OpenAI provides a web-based portal named **Azure OpenAI Studio**, that you
 
 1. On the **Overview** page for your Azure OpenAI resource, use the **Go to Azure OpenAI Studio** button to open Azure OpenAI Studio in a new browser tab.
 2. In Azure OpenAI Studio, on the **Deployments** page, view your existing model deployments. If you don't already have one, create a new deployment of the **gpt-35-turbo-16k** model with the following settings:
-    - **Model**: gpt-35-turbo-16k *(must be this model to use the features in this exercise)*
+    - **Deployment name**: *A unique name of your choice*
+    - **Model**: gpt-35-turbo-16k *(if the 16k model isn't available, choose gpt-35-turbo)*
     - **Model version**: Auto-update to default
-    - **Deployment name**: *A unique name of your choice. You'll use this name later in the lab.*
-    - **Advanced options**
-        - **Content filter**: Default
-        - **Deployment type**: Standard
-        - **Tokens per minute rate limit**: 5K\*
-        - **Enable dynamic quota**: Enabled
+    - **Deployment type**: Standard
+    - **Tokens per minute rate limit**: 5K\*
+    - **Content filter**: Default
+    - **Enable dynamic quota**: Enabled
 
     > \* A rate limit of 5,000 tokens per minute is more than adequate to complete this exercise while leaving capacity for other people using the same subscription.
 
