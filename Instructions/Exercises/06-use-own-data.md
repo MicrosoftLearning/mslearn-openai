@@ -85,6 +85,7 @@ To deploy these models, you'll use AI Studio.
     - **Enable dynamic quota**: Enabled
 1. After the text embedding model has been deployed, return to the **Deployments** page and create a new deployment of the **gpt-35-turbo-16k** model with the following settings:
     - **Deployment name**: gpt-35-turbo-16k
+    - **Model**: gpt-35-turbo-16k *(if the 16k model isn't available, choose gpt-35-turbo)*
     - **Model version**: *The default version*
     - **Deployment type**: Standard
     - **Tokens per minute rate limit**: 5K\*
