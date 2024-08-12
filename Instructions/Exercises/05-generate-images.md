@@ -16,7 +16,7 @@ This exercise will take approximately **25** minutes.
 Before you can use Azure OpenAI to generate images, you must provision an Azure OpenAI resource in your Azure subscription. The resource must be in a region where DALL-E models are supported.
 
 1. Sign into the **Azure portal** at `https://portal.azure.com`.
-2. Create an **Azure OpenAI** resource with the following settings:
+1. Create an **Azure OpenAI** resource with the following settings:
     - **Subscription**: *Select an Azure subscription that has been approved for access to the Azure OpenAI service, including DALL-E*
     - **Resource group**: *Choose or create a resource group*
     - **Region**: *Choose either **East US** or **Sweden Central***\*
@@ -25,21 +25,29 @@ Before you can use Azure OpenAI to generate images, you must provision an Azure 
 
     > \* DALL-E 3 models are only available in Azure OpenAI service resources in the **East US** and **Sweden Central** regions.
 
-3. Wait for deployment to complete. Then go to the deployed Azure OpenAI resource in the Azure portal.
+1. Wait for deployment to complete. Then go to the deployed Azure OpenAI resource in the Azure portal.
+1. On the **Overview** page for your Azure OpenAI resource, scroll down to the **Get Started** section and select the button to go to **AI Studio**.
+1. In Azure AI Studio, in the pane on the left, select the **Deployments** page and view your existing model deployments. If you don't already have one for DALL-E 3, create a new deployment of the **dall-e-3** model with the following settings:
+    - **Deployment name**: dalle3
+    - **Model version**: *Use default version*
+    - **Deployment type**: Standard
+    - **Capacity units**: 1K
+    - **Content filter**: Default
+    - **Enable dynamic quota**: Disabled
+1. One deployed, navigate back to the **Images** page in the left pane.
 
-## Explore image-generation in the DALL-E playground
+## Explore image-generation in the images playground
 
-You can use the DALL-E playground in **Azure OpenAI Studio** to experiment with image-generation.
+You can use the Images playground in **Azure AI Studio** to experiment with image generation.
 
-1. In the Azure portal, on the **Overview** page for your Azure OpenAI resource, use the **Explore** button to open Azure OpenAI Studio in a new browser tab. Alternatively, navigate to [Azure OpenAI Studio](https://oai.azure.com) directly at `https://oai.azure.com`.
-2. In the **Playground** section, select the **DALL-E** playground. A deployment of the DALL-E model named *Dalle3* will be created automatically.
-3. In the **Prompt** box, enter a description of an image you'd like to generate. For example, `An elephant on a skateboard` Then select **Generate** and view the image that is generated.
+1. In the **Images playground** section, your deployment of DALL-E 3 should be automatically selected. If not, select it from the deployment dropdown.
+1. In the **Prompt** box, enter a description of an image you'd like to generate. For example, `An elephant on a skateboard` Then select **Generate** and view the image that is generated.
 
-    ![The DALL-E Playground in Azure OpenAI Studio with a generated image.](../media/dall-e-playground.png)
+    ![The Images Playground in Azure AI Studio with a generated image.](../media/images-playground.png)
 
-4. Modify the prompt to provide a more specific description. For example `An elephant on a skateboard in the style of Picasso`. Then generate the new image and review the results.
+1. Modify the prompt to provide a more specific description. For example `An elephant on a skateboard in the style of Picasso`. Then generate the new image and review the results.
 
-    ![The DALL-E Playground in Azure OpenAI Studio with two generated images.](../media/dall-e-playground-new-image.png)
+    ![The Images Playground in Azure AI Studio with two generated images.](../media/images-playground-new-style.png)
 
 ## Use the REST API to generate images
 
@@ -87,6 +95,8 @@ Now you're ready to explore the code used to call the REST API and generate an i
     - The code makes an https request to the endpoint for your service, including the key for your service in the header. Both of these values are obtained from the configuration file.
     - The request includes some parameters, including the prompt from on the image should be based, the number of images to generate, and the size of the generated image(s).
     - The response includes a revised prompt that the DALL-E model extrapolated from the user-provided prompt to make it more descriptive, and the URL for the generated image.
+    
+    > **Important**: If you named your deployment anything other than the recommended *dalle3*, you'll need to update the code to use the name of your deployment.
 
 ### Run the app
 
