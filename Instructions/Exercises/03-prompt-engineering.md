@@ -341,6 +341,8 @@ Now that your app has been configured, run it to send your request to your model
     - Call for donations to be given at our website
     ```
 
+    > **Tip**: You may find the automatic typing in the VM doesn't work well with multiline prompts. If that is your issue, copy the entire prompt then paste it into Visual Studio Code.
+
 1. Observe the output. This time, you'll likely see the format of an email with the specific animals included, as well as the call for donations.
 1. Next, enter the following prompts that additionally specify the content:
 
