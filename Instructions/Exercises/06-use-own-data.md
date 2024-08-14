@@ -78,6 +78,7 @@ To deploy these models, you'll use AI Studio.
 1. In the Azure portal, navigate to your Azure OpenAI resource. Then use the link to open your resource in **Azure AI Studio**..
 1. In Azure AI Studio, on the **Deployments** page, view your existing model deployments. Then create a new base model deployment of the **text-embedding-ada-002** model with the following settings:
     - **Deployment name**: text-embedding-ada-002
+    - **Model**: text-embedding-ada-002
     - **Model version**: *The default version*
     - **Deployment type**: Standard
     - **Tokens per minute rate limit**: 5K\*
