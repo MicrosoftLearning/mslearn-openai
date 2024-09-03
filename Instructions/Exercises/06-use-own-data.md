@@ -115,7 +115,7 @@ To make it easy to use your own data in a prompt, you'll index it using Azure AI
     - **Model deployment**: text-embedding-ada-002
     - **Authentication type**: API key
     - **I acknowledge that connecting to an Azure OpenAI service will incur additional costs to my account**: Selected
-1. On the next page, do <u>not</u> select the toptions to vectorize images or extract data with AI skills.
+1. On the next page, do <u>not</u> select the option to vectorize images or extract data with AI skills.
 1. On the next page, enable semantic ranking and schedule the indexer to run once.
 1. On the final page, set the **Objects name prefix** to `margies-index` and then create the index.
 
