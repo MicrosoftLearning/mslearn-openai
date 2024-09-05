@@ -137,6 +137,8 @@ You've explored how the system message, examples, and prompts can help refine th
 
 Now that you've explored some of the capabilities of a generative AI model in the Azure AI Studio playground, you can deploy an Azure web app to provide a basic AI agent interface through which users can chat with the model.
 
+> **Note**: Azure AI Studio is still in preview. For some users, deploying to the web app cannot be deployed due to a bug in the template in the studio. If that's the case, skip this section.
+
 1. At the top right of the **Chat** playground page, in the **Deploy to** menu, select **A new web app**.
 1. In the **Deploy to a web app** dialog box, create a new web app with the following settings:
     - **Name**: *A unique name*
