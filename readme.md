@@ -1,3 +1,5 @@
+**This course will be retiring on  **2024/10/31**.  Once course is retired, all GitHub repos will be removed. Thank you.**
+
 # Develop AI solutions with Azure OpenAI
 
 This repo contains the instructions and assets required to complete the exercises in the [Develop AI solutions with Azure OpenAI](https://learn.microsoft.com/training/paths/develop-ai-solutions-azure-openai/) learning path on Microsoft Learn.
