@@ -145,7 +145,7 @@ Applications for both C# and Python have been provided, and both apps feature th
     **C#**:
 
     ```
-    dotnet add package Azure.AI.OpenAI --version 1.0.0-beta.14
+    dotnet add package Azure.AI.OpenAI --version 2.0.0
     ```
 
     **Python**:
@@ -177,12 +177,18 @@ Now you're ready to use the Azure OpenAI SDK to consume your deployed model.
 
     ```csharp
     // Configure your data source
-    AzureSearchChatExtensionConfiguration ownDataConfig = new()
+   ChatClient chatClient = oaiClient.GetChatClient(oaiDeploymentName);
+ChatCompletionOptions chatCompletionOptions = new ChatCompletionOptions();
+chatCompletionOptions.MaxOutputTokenCount = 600;
+chatCompletionOptions.Temperature = 0.9F;
+#pragma warning disable AOAI001
+chatCompletionOptions.AddDataSource(new AzureSearchChatDataSource()
     {
-            SearchEndpoint = new Uri(azureSearchEndpoint),
-            Authentication = new OnYourDataApiKeyAuthenticationOptions(azureSearchKey),
-            IndexName = azureSearchIndex
-    };
+        Endpoint = new Uri(azureSearchEndpoint),
+        Authentication = DataSourceAuthentication.FromApiKey(azureSearchKey),
+        IndexName = azureSearchIndex,
+    }
+);
     ```
 
     **Python**: ownData.py

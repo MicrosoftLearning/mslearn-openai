@@ -6,6 +6,8 @@ using Azure;
 
 // Add Azure OpenAI package
 using Azure.AI.OpenAI;
+using Azure.AI.OpenAI.Chat;
+using OpenAI.Chat;
 
 // Flag to show citations
 bool showCitations = false;
@@ -22,7 +24,7 @@ string azureSearchKey = config["AzureSearchKey"] ?? "";
 string azureSearchIndex = config["AzureSearchIndex"] ?? "";
 
 // Initialize the Azure OpenAI client
-OpenAIClient client = new OpenAIClient(new Uri(oaiEndpoint), new AzureKeyCredential(oaiKey));
+AzureOpenAIClient oaiClient = new AzureOpenAIClient(new Uri(oaiEndpoint), new ApiKeyCredential(oaiKey));
 
 // Get the prompt text
 Console.WriteLine("Enter a question:");
@@ -32,39 +34,33 @@ string text = Console.ReadLine() ?? "";
 
 
 // Send request to Azure OpenAI model  
-Console.WriteLine("...Sending the following request to Azure OpenAI endpoint...");  
+Console.WriteLine("...Sending the following request to Azure OpenAI endpoint...");
 Console.WriteLine("Request: " + text + "\n");
 
-ChatCompletionsOptions chatCompletionsOptions = new ChatCompletionsOptions()
-{
-    Messages =
-    {
-        new ChatRequestUserMessage(text)
-    },
-    MaxTokens = 600,
-    Temperature = 0.9f,
-    DeploymentName = oaiDeploymentName,
-    // Specify extension options
-    AzureExtensionsOptions = new AzureChatExtensionsOptions()
-    {
-        Extensions = {ownDataConfig}
-    }
-};
+ChatCompletion response = chatClient.CompleteChat(
+    [
+    new UserChatMessage(text)],
+    chatCompletionOptions);
+string responseMessage = response.Content[0].Text;
+
 
 ChatCompletions response = client.GetChatCompletions(chatCompletionsOptions);
 ChatResponseMessage responseMessage = response.Choices[0].Message;
 
 // Print response
-Console.WriteLine("Response: " + responseMessage.Content + "\n");
-Console.WriteLine("  Intent: " + responseMessage.AzureExtensionsContext.Intent);
-
+ChatMessageContext onYourOwnDataContext = response.GetMessageContext();
 if (showCitations)
 {
-    Console.WriteLine($"\n  Citations of data used:");
+    Console.WriteLine($"\n          Citations of data used:");
 
-    foreach (AzureChatExtensionDataSourceResponseCitation citation in responseMessage.AzureExtensionsContext.Citations)
+    if (onYourOwnDataContext?.Intent is not null)
     {
-        Console.WriteLine($"    Citation: {citation.Title} - {citation.Url}");
+        Console.WriteLine($"Intent: {onYourOwnDataContext.Intent}");
+    }
+
+    foreach (ChatCitation citation in onYourOwnDataContext?.Citations ?? [])
+    {
+        Console.WriteLine(($"                Citation: {citation.Content} - {citation.Uri}"));
     }
 }
 
