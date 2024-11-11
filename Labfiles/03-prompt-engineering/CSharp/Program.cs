@@ -18,19 +18,20 @@ string? oaiDeploymentName = config["AzureOAIDeploymentName"];
 
 bool printFullResponse = false;
 
-do {
+do
+{
     // Pause for system message update
     Console.WriteLine("-----------\nPausing the app to allow you to change the system prompt.\nPress any key to continue...");
     Console.ReadKey();
-    
+
     Console.WriteLine("\nUsing system message from system.txt");
-    string systemMessage = System.IO.File.ReadAllText("system.txt"); 
+    string systemMessage = System.IO.File.ReadAllText("system.txt");
     systemMessage = systemMessage.Trim();
 
     Console.WriteLine("\nEnter user message or type 'quit' to exit:");
     string userMessage = Console.ReadLine() ?? "";
     userMessage = userMessage.Trim();
-    
+
     if (systemMessage.ToLower() == "quit" || userMessage.ToLower() == "quit")
     {
         break;
@@ -46,25 +47,24 @@ do {
     }
 } while (true);
 
-async Task GetResponseFromOpenAI(string systemMessage, string userMessage)  
-{   
+async Task GetResponseFromOpenAI(string systemMessage, string userMessage)
+{
     Console.WriteLine("\nSending prompt to Azure OpenAI endpoint...\n\n");
 
-    if(string.IsNullOrEmpty(oaiEndpoint) || string.IsNullOrEmpty(oaiKey) || string.IsNullOrEmpty(oaiDeploymentName) )
+    if (string.IsNullOrEmpty(oaiEndpoint) || string.IsNullOrEmpty(oaiKey) || string.IsNullOrEmpty(oaiDeploymentName))
     {
         Console.WriteLine("Please check your appsettings.json file for missing or incorrect values.");
         return;
     }
-    
+
     // Configure the Azure OpenAI client
 
 
     // Format and send the request to the model
 
-    
-    ChatCompletions completions = response.Value;
-    string completion = completions.Choices[0].Message.Content;
-    
+
+
+
     // Write response full response to console, if requested
     if (printFullResponse)
     {
@@ -73,4 +73,4 @@ async Task GetResponseFromOpenAI(string systemMessage, string userMessage)
 
     // Write response to console
     Console.WriteLine($"\nResponse:\n{completion}\n\n");
-}  
+}

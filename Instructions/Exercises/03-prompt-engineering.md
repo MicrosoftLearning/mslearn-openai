@@ -194,7 +194,7 @@ Applications for both C# and Python have been provided, and both apps feature th
     **C#**:
 
     ```
-    dotnet add package Azure.AI.OpenAI --version 1.0.0-beta.14
+    dotnet add package Azure.AI.OpenAI --version 2.0.0
     ```
 
     **Python**:
@@ -239,7 +239,8 @@ Now you're ready to use the Azure OpenAI SDK to consume your deployed model.
 
     ```csharp
     // Configure the Azure OpenAI client
-    OpenAIClient client = new OpenAIClient(new Uri(oaiEndpoint), new AzureKeyCredential(oaiKey));
+    AzureOpenAIClient azureClient = new AzureOpenAIClient(new Uri(oaiEndpoint), new ApiKeyCredential(oaiKey));
+    ChatClient client = azureClient.GetChatClient(oaiDeploymentName);
     ```
 
     **Python**: prompt-engineering.py
@@ -259,20 +260,18 @@ Now you're ready to use the Azure OpenAI SDK to consume your deployed model.
 
     ```csharp
     // Format and send the request to the model
-    var chatCompletionsOptions = new ChatCompletionsOptions()
+   ChatCompletionOptions chatCompletionOptions = new()
     {
-        Messages =
-        {
-            new ChatRequestSystemMessage(systemMessage),
-            new ChatRequestUserMessage(userMessage)
-        },
         Temperature = 0.7f,
-        MaxTokens = 800,
-        DeploymentName = oaiDeploymentName
+        MaxOutputTokenCount = 800
     };
-    
-    // Get response from Azure OpenAI
-    Response<ChatCompletions> response = await client.GetChatCompletionsAsync(chatCompletionsOptions);
+
+    ChatCompletion response = client.CompleteChat([
+        new SystemChatMessage(systemMessage),
+        new UserChatMessage(userMessage)
+    ], chatCompletionOptions);
+        
+    string completion = response.Content[0].Text;
     ```
 
     **Python**: prompt-engineering.py
