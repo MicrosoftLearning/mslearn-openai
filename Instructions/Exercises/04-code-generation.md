@@ -138,7 +138,7 @@ Applications for both C# and Python have been provided, as well as a sample text
     **C#**:
 
     ```
-    dotnet add package Azure.AI.OpenAI --version 1.0.0-beta.14
+    dotnet add package Azure.AI.OpenAI --version 2.0.0
     ```
 
     **Python**:
@@ -167,23 +167,19 @@ Now you're ready to use the Azure OpenAI SDK to consume your deployed model.
 
     ```csharp
     // Format and send the request to the model
-    var chatCompletionsOptions = new ChatCompletionsOptions()
-    {
-        Messages =
-        {
-            new ChatRequestSystemMessage(systemPrompt),
-            new ChatRequestUserMessage(userPrompt)
-        },
-        Temperature = 0.7f,
-        MaxTokens = 1000,
-        DeploymentName = oaiDeploymentName
-    };
+    AzureOpenAIClient oaiClient = new AzureOpenAIClient(new Uri(oaiEndpoint), new ApiKeyCredential(oaiKey));
+ChatClient client = oaiClient.GetChatClient(oaiDeploymentName);
+ChatCompletionOptions options = new ChatCompletionOptions();
+options.Temperature = 0.7f;
+options.MaxOutputTokenCount = 1000;
 
-    // Get response from Azure OpenAI
-    Response<ChatCompletions> response = await client.GetChatCompletionsAsync(chatCompletionsOptions);
-
-    ChatCompletions completions = response.Value;
-    string completion = completions.Choices[0].Message.Content;
+ChatCompletion response = client.CompleteChat(
+        [
+            new SystemChatMessage(systemPrompt),
+            new UserChatMessage(userPrompt)],
+            options
+        );
+string completion = response.Content[0].Text;
     ```
 
     **Python**: code-generation.py
