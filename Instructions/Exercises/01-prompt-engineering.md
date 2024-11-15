@@ -59,7 +59,7 @@ az cognitiveservices account deployment create \
 
 Applications for both C# and Python have been provided, and both apps feature the same functionality. First, you'll complete some key parts of the application to enable using your Azure OpenAI resource with asynchronous API calls.
 
-1. In Visual Studio Code, in the **Explorer** pane, browse to the **Labfiles/01-prompt-engineering** folder and expand the **CSharp** or **Python** folder depending on your language preference. Each folder contains the language-specific files for an app into which you're you're going to integrate Azure OpenAI functionality.
+1. In Visual Studio Code, in the **Explorer** pane, browse to the **Labfiles/01-generative-ai** folder and expand the **CSharp** or **Python** folder depending on your language preference. Each folder contains the language-specific files for an app into which you're you're going to integrate Azure OpenAI functionality.
 2. Right-click the **CSharp** or **Python** folder containing your code files and open an integrated terminal. Then install the Azure OpenAI SDK package by running the appropriate command for your language preference:
 
     **C#**:
