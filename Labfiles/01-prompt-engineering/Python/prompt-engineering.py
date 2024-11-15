@@ -43,7 +43,7 @@ async def main():
         print(ex)
 
 async def call_openai_model(system_message, user_message, model, client):
-    # Format and send the request to the model
+    # Get response from Azure OpenAI
     
 
 

@@ -65,7 +65,7 @@ Applications for both C# and Python have been provided, and both apps feature th
     **C#**:
 
     ```
-    dotnet add package Azure.AI.OpenAI --version 1.0.0-beta.17
+    dotnet add package Azure.AI.OpenAI --version 2.0.0
     ```
 
     **Python**:
@@ -93,8 +93,9 @@ Now you're ready to use the Azure OpenAI SDK to consume your deployed model.
     **C#**: Program.cs
 
     ```csharp
-    // Add Azure OpenAI package
+    // Add Azure OpenAI packages
     using Azure.AI.OpenAI;
+    using OpenAI.Chat;
     ```
 
     **Python**: prompt-engineering.py
@@ -110,7 +111,13 @@ Now you're ready to use the Azure OpenAI SDK to consume your deployed model.
 
     ```csharp
     // Configure the Azure OpenAI client
-    OpenAIClient client = new OpenAIClient(new Uri(oaiEndpoint), new AzureKeyCredential(oaiKey));
+       AzureOpenAIClient azureClient = new (new Uri(oaiEndpoint), new ApiKeyCredential(oaiKey));
+        ChatClient chatClient = azureClient.GetChatClient(oaiDeploymentName);
+        ChatCompletion completion = chatClient.CompleteChat(
+        [
+        new SystemChatMessage(systemMessage),
+        new UserChatMessage(userMessage),
+        ]);
     ```
 
     **Python**: prompt-engineering.py
@@ -124,32 +131,20 @@ Now you're ready to use the Azure OpenAI SDK to consume your deployed model.
         )
     ```
 
-3. In the function that calls the Azure OpenAI model, under the comment ***Format and send the request to the model***, add the code to format and send the request to the model.
+3. In the function that calls the Azure OpenAI model, under the comment ***Get response from Azure OpenAI***, add the code to format and send the request to the model.
 
     **C#**: Program.cs
 
     ```csharp
-    // Format and send the request to the model
-    var chatCompletionsOptions = new ChatCompletionsOptions()
-    {
-        Messages =
-        {
-            new ChatRequestSystemMessage(systemMessage),
-            new ChatRequestUserMessage(userMessage)
-        },
-        Temperature = 0.7f,
-        MaxTokens = 800,
-        DeploymentName = oaiDeploymentName
-    };
-    
     // Get response from Azure OpenAI
-    Response<ChatCompletions> response = await client.GetChatCompletionsAsync(chatCompletionsOptions);
+    Console.WriteLine($"{completion.Role}: {completion.Content[0].Text}");
+
     ```
 
     **Python**: prompt-engineering.py
 
     ```python
-    # Format and send the request to the model
+    # Get response from Azure OpenAI
     messages =[
         {"role": "system", "content": system_message},
         {"role": "user", "content": user_message},
