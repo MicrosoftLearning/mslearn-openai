@@ -26,8 +26,8 @@ Before you can use Azure OpenAI to generate images, you must provision an Azure 
     > \* DALL-E 3 models are only available in Azure OpenAI service resources in the **East US** and **Sweden Central** regions.
 
 1. Wait for deployment to complete. Then go to the deployed Azure OpenAI resource in the Azure portal.
-1. On the **Overview** page for your Azure OpenAI resource, scroll down to the **Get Started** section and select the button to go to **AI Studio**.
-1. In Azure AI Studio, in the pane on the left, select the **Deployments** page and view your existing model deployments. If you don't already have one for DALL-E 3, create a new deployment of the **dall-e-3** model with the following settings:
+1. On the **Overview** page for your Azure OpenAI resource, scroll down to the **Get Started** section and select the button to go to **AI Foundry portal** (previously AI Studio).
+1. In Azure AI Foundry portal, in the pane on the left, select the **Deployments** page and view your existing model deployments. If you don't already have one for DALL-E 3, create a new deployment of the **dall-e-3** model with the following settings:
     - **Deployment name**: dalle3
     - **Model version**: *Use default version*
     - **Deployment type**: Standard
@@ -38,16 +38,16 @@ Before you can use Azure OpenAI to generate images, you must provision an Azure 
 
 ## Explore image-generation in the images playground
 
-You can use the Images playground in **Azure AI Studio** to experiment with image generation.
+You can use the Images playground in **Azure AI Foundry portal** to experiment with image generation.
 
-1. In the **Images playground** section, your deployment of DALL-E 3 should be automatically selected. If not, select it from the deployment dropdown.
+1. In the **Images** playground section, your deployment of DALL-E 3 should be automatically selected. If not, select it from the deployment dropdown.
 1. In the **Prompt** box, enter a description of an image you'd like to generate. For example, `An elephant on a skateboard` Then select **Generate** and view the image that is generated.
 
-    ![The Images Playground in Azure AI Studio with a generated image.](../media/images-playground.png)
+    ![The Images Playground in Azure AI Foundry portal with a generated image.](../media/images-playground.png)
 
 1. Modify the prompt to provide a more specific description. For example `An elephant on a skateboard in the style of Picasso`. Then generate the new image and review the results.
 
-    ![The Images Playground in Azure AI Studio with two generated images.](../media/images-playground-new-style.png)
+    ![The Images Playground in Azure AI Foundry portal with two generated images.](../media/images-playground-new-style.png)
 
 ## Use the REST API to generate images
 

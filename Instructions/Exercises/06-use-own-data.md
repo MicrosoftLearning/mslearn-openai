@@ -73,10 +73,10 @@ You're going to use two AI models in this exercise:
 - A text embedding model to *vectorize* the text in the brochures so it can be indexed efficiently for use in grounding prompts.
 - A GPT model that you application can use to generate responses to prompts that are grounded in your data.
 
-To deploy these models, you'll use AI Studio.
+To deploy these models, you'll use AI Foundry.
 
-1. In the Azure portal, navigate to your Azure OpenAI resource. Then use the link to open your resource in **Azure AI Studio**..
-1. In Azure AI Studio, on the **Deployments** page, view your existing model deployments. Then create a new base model deployment of the **text-embedding-ada-002** model with the following settings:
+1. In the Azure portal, navigate to your Azure OpenAI resource. Then use the link to open your resource in **Azure AI Foundry portal**..
+1. In Azure AI Foundry portal, on the **Deployments** page, view your existing model deployments. Then create a new base model deployment of the **text-embedding-ada-002** model with the following settings:
     - **Deployment name**: text-embedding-ada-002
     - **Model**: text-embedding-ada-002
     - **Model version**: *The default version*
@@ -161,7 +161,7 @@ Applications for both C# and Python have been provided, and both apps feature th
     
 4. Update the configuration values to include:
     - The  **endpoint** and a **key** from the Azure OpenAI resource you created (available on the **Keys and Endpoint** page for your Azure OpenAI resource in the Azure portal)
-    - The **deployment name** you specified for your gpt-35-turbo model deployment (available in the **Deployments** page in Azure AI Studio).
+    - The **deployment name** you specified for your gpt-35-turbo model deployment (available in the **Deployments** page in Azure AI Foundry portal).
     - The endpoint for your search service (the **Url** value on the overview page for your search resource in the Azure portal).
     - A **key** for your search resource (available in the **Keys** page for your search resource in the Azure portal - you can use either of the admin keys)
     - The name of the search index (which should be `margies-index`).
