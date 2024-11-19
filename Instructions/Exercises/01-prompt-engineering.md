@@ -55,6 +55,9 @@ az cognitiveservices account deployment create \
 
     > \* Sku-capacity is measured in thousands of tokens per minute. A rate limit of 5,000 tokens per minute is more than adequate to complete this exercise while leaving capacity for other people using the same subscription.
 
+> [!NOTE]
+> If you see a warnings about net7.0 framework being out of support, you can disregard them for this exercise.
+
 ## Configure your application
 
 Applications for both C# and Python have been provided, and both apps feature the same functionality. First, you'll complete some key parts of the application to enable using your Azure OpenAI resource with asynchronous API calls.
