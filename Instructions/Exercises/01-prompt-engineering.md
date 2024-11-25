@@ -39,7 +39,7 @@ If you don't already have one, provision an Azure OpenAI resource in your Azure 
 
 ## Deploy a model
 
-Next, you will deploy an Azure OpenAI model resource from the CLI. Refer to this example and replace the following variables with your own vales from above:
+Next, you will deploy an Azure OpenAI model resource from the CLI. Refer to this example and replace the following variables with your own values from above:
 
 ```dotnetcli
 az cognitiveservices account deployment create \
