@@ -87,7 +87,7 @@ Applications for both C# and Python have been provided. Both apps feature the sa
     **Python**:
 
     ```
-    pip install openai==1.13.3
+    pip install openai==1.55.3
     ```
 
 3. In the **Explorer** pane, in the **CSharp** or **Python** folder, open the configuration file for your preferred language
