@@ -1,11 +1,11 @@
 ---
 lab:
-    title: 'Prompt engineering with Azure OpenAI Service'
+    title: 'Application development with Azure OpenAI Service'
 ---
 
-# Prompt engineering with Azure OpenAI Service
+# Application development with Azure OpenAI Service
 
-When working with the Azure OpenAI Service, how developers shape their prompt greatly impacts how the generative AI model will respond. Azure OpenAI models are able to tailor and format content, if requested in a clear and concise way. In this exercise, you'll learn how different prompts for similar content help shape the AI model's response to better satisfy your requirements.
+With the Azure OpenAI Service, developers can create chatbots and other applications that excel at understanding natural human language through the use of REST APIs or language specific SDKs. When working with these language models, how developers shape their prompt greatly impacts how the generative AI model will respond. Azure OpenAI models are able to tailor and format content, if requested in a clear and concise way. In this exercise, you'll learn how to connect your application to Azure OpenAI and see how different prompts for similar content help shape the AI model's response to better satisfy your requirements.
 
 In the scenario for this exercise, you will perform the role of a software developer working on a wildlife marketing campaign. You are exploring how to use generative AI to improve advertising emails and categorize articles that might apply to your team. The prompt engineering techniques used in the exercise can be applied similarly for a variety of use cases.
 
@@ -62,7 +62,7 @@ az cognitiveservices account deployment create \
 
 Applications for both C# and Python have been provided, and both apps feature the same functionality. First, you'll complete some key parts of the application to enable using your Azure OpenAI resource with asynchronous API calls.
 
-1. In Visual Studio Code, in the **Explorer** pane, browse to the **Labfiles/01-generative-ai** folder and expand the **CSharp** or **Python** folder depending on your language preference. Each folder contains the language-specific files for an app into which you're you're going to integrate Azure OpenAI functionality.
+1. In Visual Studio Code, in the **Explorer** pane, browse to the **Labfiles/01-app-develop** folder and expand the **CSharp** or **Python** folder depending on your language preference. Each folder contains the language-specific files for an app into which you're you're going to integrate Azure OpenAI functionality.
 2. Right-click the **CSharp** or **Python** folder containing your code files and open an integrated terminal. Then install the Azure OpenAI SDK package by running the appropriate command for your language preference:
 
     **C#**:
@@ -101,7 +101,7 @@ Now you're ready to use the Azure OpenAI SDK to consume your deployed model.
     using OpenAI.Chat;
     ```
 
-    **Python**: prompt-engineering.py
+    **Python**: application.py
 
     ```python
     # Add Azure OpenAI package
@@ -123,7 +123,7 @@ Now you're ready to use the Azure OpenAI SDK to consume your deployed model.
         ]);
     ```
 
-    **Python**: prompt-engineering.py
+    **Python**: application.py
 
     ```python
     # Configure the Azure OpenAI client
@@ -144,7 +144,7 @@ Now you're ready to use the Azure OpenAI SDK to consume your deployed model.
 
     ```
 
-    **Python**: prompt-engineering.py
+    **Python**: application.py
 
     ```python
     # Get response from Azure OpenAI
@@ -174,7 +174,7 @@ Now that your app has been configured, run it to send your request to your model
 1. In the interactive terminal pane, ensure the folder context is the folder for your preferred language. Then enter the following command to run the application.
 
     - **C#**: `dotnet run`
-    - **Python**: `python prompt-engineering.py`
+    - **Python**: `python application.py`
 
     > **Tip**: You can use the **Maximize panel size** (**^**) icon in the terminal toolbar to see more of the console text.
 
@@ -264,7 +264,7 @@ Now that your app has been configured, run it to send your request to your model
     userMessage = groundingText + userMessage;
     ```
 
-    **Python**: prompt-engineering.py
+    **Python**: application.py
 
     ```python
     # Format and send the request to the model
