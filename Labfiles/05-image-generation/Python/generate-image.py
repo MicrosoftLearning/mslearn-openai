@@ -16,7 +16,7 @@ def main():
         prompt = input("\nEnter a prompt to request an image: ")
 
         # Call the DALL-E model
-        url = "{}openai/deployments/dalle3/images/generations?api-version={}".format(api_base, api_version)
+        url = "{}openai/deployments/dall-e-3/images/generations?api-version={}".format(api_base, api_version)
         headers= { "api-key": api_key, "Content-Type": "application/json" }
         body = {
             "prompt": prompt,
