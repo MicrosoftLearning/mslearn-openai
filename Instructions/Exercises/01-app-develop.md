@@ -116,20 +116,6 @@ Now you're ready to use the Azure OpenAI SDK to consume your deployed model.
     // Configure the Azure OpenAI client
     AzureOpenAIClient azureClient = new (new Uri(oaiEndpoint), new ApiKeyCredential(oaiKey));
     ChatClient chatClient = azureClient.GetChatClient(oaiDeploymentName);
-    
-    ChatCompletionOptions chatCompletionOptions = new ChatCompletionOptions()
-    {
-        Temperature = 0.7f, // Set the desired temperature (range: 0-1)
-        MaxOutputTokenCount = 800
-    };
-
-    ChatCompletion completion = chatClient.CompleteChat(
-        [
-            new SystemChatMessage(request.SystemMessage),
-            new UserChatMessage(request.UserMessage)
-        ],
-        chatCompletionOptions
-    );
     ```
 
     **Python**: application.py
@@ -149,8 +135,21 @@ Now you're ready to use the Azure OpenAI SDK to consume your deployed model.
 
     ```csharp
     // Get response from Azure OpenAI
-    Console.WriteLine($"{completion.Role}: {completion.Content[0].Text}");
+    ChatCompletionOptions chatCompletionOptions = new ChatCompletionOptions()
+    {
+        Temperature = 0.7f,
+        MaxOutputTokenCount = 800
+    };
 
+    ChatCompletion completion = chatClient.CompleteChat(
+        [
+            new SystemChatMessage(systemMessage),
+            new UserChatMessage(userMessage)
+        ],
+        chatCompletionOptions
+    );
+
+    Console.WriteLine($"{completion.Role}: {completion.Content[0].Text}");
     ```
 
     **Python**: application.py
