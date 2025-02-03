@@ -59,12 +59,12 @@ Azure provides a web-based portal named **Azure AI Foundry portal**, that you ca
 
 Let's start by exploring some prompt engineering techniques in the Chat playground.
 
-1. In the **Playground** section, select the **Chat** page. The **Chat** playground page consists of a row of buttons and two main panels (which may be arranged right-to-left horizontally, or top-to-bottom vertically depending on your screen resolution):
-    - **Configuration** - used to select your deployment, define system message, and set parameters for interacting with your deployment.
-    - **Chat session** - used to submit chat messages and view responses.
-2. Under **Deployments**, ensure that your gpt-35-turbo-16k model deployment is selected.
-1. Review the default **System message**, which should be *You are an AI assistant that helps people find information.*
-4. In the **Chat session**, submit the following query:
+1. In the **Playgrounds** section (on the left part of AI Foundry portal), select the **Chat** page. The **Chat** playground page consists of a row of buttons and two main panels (which may be arranged right-to-left horizontally, or top-to-bottom vertically depending on your screen resolution):
+    - **Setup** - used to select your deployment, define system message, and set parameters for interacting with your deployment.
+    - **Chat history** - used to submit chat messages and view responses.
+2. Under **Deployment**, ensure that your gpt-35-turbo-16k model deployment is selected.
+1. Review the default System Message contains in the text box under the label **Give the model instructions and context**, which should be *You are an AI assistant that helps people find information.*
+4. In the **Chat history**, submit the following query:
 
     ```prompt
     What kind of article is this?
@@ -80,7 +80,7 @@ Let's start by exploring some prompt engineering techniques in the Chat playgrou
 
     The response provides a description of the article. However, suppose you want a more specific format for article categorization.
 
-5. In the **Configuration** section change the system message to `You are a news aggregator that categorizes news articles.`
+5. In the **Setup** section change the system message to `You are a news aggregator that categorizes news articles.`
 
 6. Under the new system message, select the **Add section** button, and choose **Examples**. Then add the following example.
 
@@ -127,9 +127,9 @@ Let's start by exploring some prompt engineering techniques in the Chat playgrou
     Entertainment
     ```
 
-8. Use the **Apply changes** button at the top of the **Configuration** section to save your changes.
+8. Use the **Apply changes** button under the system message textbox in the **Setup** section to save your changes.
 
-9. In the **Chat session** section, resubmit the following prompt:
+9. In the **Chat history** section, resubmit the following prompt:
 
     ```prompt
     What kind of article is this?
@@ -147,7 +147,7 @@ Let's start by exploring some prompt engineering techniques in the Chat playgrou
 
 10. Change the system message back to the default template, which should be `You are an AI assistant that helps people find information.` with no examples. Then apply the changes.
 
-11. In the **Chat session** section, submit the following prompt:
+11. In the **Chat history** section, submit the following prompt:
 
     ```prompt
     # 1. Create a list of animals
