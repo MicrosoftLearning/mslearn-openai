@@ -59,11 +59,11 @@ Azure provides a web-based portal named **Azure AI Foundry portal**, that you ca
 
 Let's start by exploring some prompt engineering techniques in the Chat playground.
 
-1. In the **Playgrounds** section (on the left part of AI Foundry portal), select the **Chat** page. The **Chat** playground page consists of a row of buttons and two main panels (which may be arranged right-to-left horizontally, or top-to-bottom vertically depending on your screen resolution):
+1. On the left side pane, in the **Playgrounds** section, select the **Chat** page. The **Chat** playground page consists of a row of buttons and two main panels (which may be arranged right-to-left horizontally, or top-to-bottom vertically depending on your screen resolution):
     - **Setup** - used to select your deployment, define system message, and set parameters for interacting with your deployment.
     - **Chat history** - used to submit chat messages and view responses.
 2. Under **Deployment**, ensure that your gpt-35-turbo-16k model deployment is selected.
-1. Review the default System Message contains in the text box under the label **Give the model instructions and context**, which should be *You are an AI assistant that helps people find information.*
+1. Review the default system message contains in the textbox immediately under the selected deployment, which should be *You are an AI assistant that helps people find information.*
 4. In the **Chat history**, submit the following query:
 
     ```prompt
