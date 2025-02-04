@@ -51,6 +51,8 @@ do {
     }
     else
     {
+        // Format and send the request to the model
+
         GetResponseFromOpenAI(systemMessage, userMessage);
     }
 } while (true);
