@@ -56,9 +56,9 @@ Next, you will deploy an Azure OpenAI model resource from the CLI. Refer to this
 az cognitiveservices account deployment create \
    -g *Your resource group* \
    -n *Name of your OpenAI service* \
-   --deployment-name gpt-4 \
-   --model-name gpt-4 \
-   --model-version 0613  \
+   --deployment-name gpt-4o \
+   --model-name gpt-4o \
+   --model-version 2024-05-13 \
    --model-format OpenAI \
    --sku-name "Standard" \
    --sku-capacity 5
