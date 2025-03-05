@@ -44,9 +44,9 @@ Azure provides a web-based portal named **Azure AI Foundry portal**, that you ca
 > **Note**: As you use Azure AI Foundry portal, message boxes suggesting tasks for you to perform may be displayed. You can close these and follow the steps in this exercise.
 
 1. In the Azure portal, on the **Overview** page for your Azure OpenAI resource, scroll down to the **Get Started** section and select the button to go to **AI Foundry portal** (previously AI Studio).
-1. In Azure AI Foundry portal, in the pane on the left, select the **Deployments** page and view your existing model deployments. If you don't already have one, create a new deployment of the **gpt-35-turbo-16k** model with the following settings:
+1. In Azure AI Foundry portal, in the pane on the left, select the **Deployments** page and view your existing model deployments. If you don't already have one, create a new deployment of the **gpt-4** model with the following settings:
     - **Deployment name**: *A unique name of your choice*
-    - **Model**: gpt-35-turbo-16k *(if the 16k model isn't available, choose gpt-35-turbo)*
+    - **Model**: gpt-4
     - **Model version**: *Use default version*
     - **Deployment type**: Standard
     - **Tokens per minute rate limit**: 5K\*
@@ -57,14 +57,14 @@ Azure provides a web-based portal named **Azure AI Foundry portal**, that you ca
 
 ## Use the Chat playground
 
-Now that you've deployed a model, you can use it to generate responses based on natural language prompts. The *Chat* playground in Azure AI Foundry portal provides a chatbot interface for GPT 3.5 and higher models.
+Now that you've deployed a model, you can use it to generate responses based on natural language prompts. The *Chat* playground in Azure AI Foundry portal provides a chatbot interface for GPT 4 and higher models.
 
 > **Note:** The *Chat* playground uses the *ChatCompletions* API rather than the older *Completions* API that is used by the *Completions* playground. The Completions playground is provided for compatibility with older models.
 
 1. In the **Playground** section, select the **Chat** page. The **Chat** playground page consists of a row of buttons and two main panels (which may be arranged right-to-left horizontally, or top-to-bottom vertically depending on your screen resolution):
     - **Configuration** - used to select your deployment, define system message, and set parameters for interacting with your deployment.
     - **Chat session** - used to submit chat messages and view responses.
-1. Under **Deployments**, ensure that your gpt-35-turbo-16k model deployment is selected.
+1. Under **Deployments**, ensure that your gpt-4 model deployment is selected.
 1. Review the default **System message**, which should be *You are an AI assistant that helps people find information.* The system message is included in prompts submitted to the model, and provides context for the model's responses; setting expectations about how an AI agent based on the model should interact with the user.
 1. In the **Chat session** panel, enter the user query `How can I use generative AI to help me market a new product?`
 
