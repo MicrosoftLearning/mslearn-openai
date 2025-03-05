@@ -56,9 +56,9 @@ Next, you will deploy an Azure OpenAI model resource from the CLI. Refer to this
 az cognitiveservices account deployment create \
    -g *Your resource group* \
    -n *Name of your OpenAI service* \
-   --deployment-name gpt-35-turbo \
-   --model-name gpt-35-turbo \
-   --model-version 0125  \
+   --deployment-name gpt-4 \
+   --model-name gpt-4 \
+   --model-version 0613  \
    --model-format OpenAI \
    --sku-name "Standard" \
    --sku-capacity 5
@@ -79,13 +79,13 @@ Applications for both C# and Python have been provided, and both apps feature th
     **C#**:
 
     ```
-    dotnet add package Azure.AI.OpenAI --version 2.0.0
+    dotnet add package Azure.AI.OpenAI --version 2.1.0
     ```
 
     **Python**:
 
     ```
-    pip install openai==1.54.3
+    pip install openai==1.65.2
     ```
 
 3. In the **Explorer** pane, in the **CSharp** or **Python** folder, open the configuration file for your preferred language
