@@ -17,7 +17,7 @@ string? oaiEndpoint = config["AzureOAIEndpoint"];
 string? oaiKey = config["AzureOAIKey"];
 string? oaiDeploymentName = config["AzureOAIDeploymentName"];
 
-bool printFullResponse = true;
+bool printFullResponse = false;
 
 do {
     // Pause for system message update
