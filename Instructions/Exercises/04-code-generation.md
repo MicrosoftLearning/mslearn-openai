@@ -44,9 +44,9 @@ Azure provides a web-based portal named **Azure AI Foundry portal**, that you ca
 > **Note**: As you use Azure AI Foundry portal, message boxes suggesting tasks for you to perform may be displayed. You can close these and follow the steps in this exercise.
 
 1. In the Azure portal, on the **Overview** page for your Azure OpenAI resource, scroll down to the **Get Started** section and select the button to go to **AI Foundry portal** (previously AI Studio).
-1. In Azure AI Foundry portal, in the pane on the left, select the **Deployments** page and view your existing model deployments. If you don't already have one, create a new deployment of the **gpt-35-turbo-16k** model with the following settings:
+1. In Azure AI Foundry portal, in the pane on the left, select the **Deployments** page and view your existing model deployments. If you don't already have one, create a new deployment of the **gpt-4o** model with the following settings:
     - **Deployment name**: *A unique name of your choice*
-    - **Model**: gpt-35-turbo-16k *(if the 16k model isn't available, choose gpt-35-turbo)*
+    - **Model**: gpt-4o
     - **Model version**: *Use default version*
     - **Deployment type**: Standard
     - **Tokens per minute rate limit**: 5K\*
@@ -66,7 +66,7 @@ Before using in your app, examine how Azure OpenAI can generate and explain code
 1. In the **System message** area, set the system message to `You are a programming assistant helping write code` and apply the changes.
 1. In the **Chat session**, submit the following query:
 
-    ```
+    ```prompt
     Write a function in python that takes a character and a string as input, and returns how many times the character appears in the string
     ```
 
@@ -78,7 +78,7 @@ Before using in your app, examine how Azure OpenAI can generate and explain code
 
 1. Next, let's explore using AI to understand code. Submit the following prompt as the user message.
 
-    ```
+    ```prompt
     What does the following function do?  
     ---  
     def multiply(a, b):  
@@ -104,11 +104,11 @@ Before using in your app, examine how Azure OpenAI can generate and explain code
 
     The model should describe what the function does, which is to multiply two numbers together by using a loop.
 
-7. Submit the prompt `Can you simplify the function?`.
+1. Submit the prompt `Can you simplify the function?`.
 
     The model should write a simpler version of the function.
 
-8. Submit the prompt: `Add some comments to the function.`
+1. Submit the prompt: `Add some comments to the function.`
 
     The model adds comments to the code.
 
@@ -119,7 +119,7 @@ Now let's explore how you could build a custom app that uses Azure OpenAI servic
 > **Tip**: If you have already cloned the **mslearn-openai** repo, open it in Visual Studio code. Otherwise, follow these steps to clone it to your development environment.
 
 1. Start Visual Studio Code.
-2. Open the palette (SHIFT+CTRL+P) and run a **Git: Clone** command to clone the `https://github.com/MicrosoftLearning/mslearn-openai` repository to a local folder (it doesn't matter which folder).
+2. Open the command palette (SHIFT+CTRL+P or **View** > **Command Palette...**) and run a **Git: Clone** command to clone the `https://github.com/MicrosoftLearning/mslearn-openai` repository to a local folder (it doesn't matter which folder).
 3. When the repository has been cloned, open the folder in Visual Studio Code.
 
     > **Note**: If Visual Studio Code shows you a pop-up message to prompt you to trust the code you are opening, click on **Yes, I trust the authors** option in the pop-up.
@@ -137,21 +137,21 @@ Applications for both C# and Python have been provided, as well as a sample text
 
     **C#**:
 
-    ```
-    dotnet add package Azure.AI.OpenAI --version 1.0.0-beta.14
+    ```powershell
+    dotnet add package Azure.AI.OpenAI --version 2.1.0
     ```
 
     **Python**:
 
-    ```
-    pip install openai==1.55.3
+    ```powershell
+    pip install openai==1.65.2
     ```
 
 3. In the **Explorer** pane, in the **CSharp** or **Python** folder, open the configuration file for your preferred language
 
     - **C#**: appsettings.json
     - **Python**: .env
-    
+
 4. Update the configuration values to include:
     - The  **endpoint** and a **key** from the Azure OpenAI resource you created (available on the **Keys and Endpoint** page for your Azure OpenAI resource in the Azure portal)
     - The **deployment name** you specified for your model deployment (available in the **Deployments** page in Azure AI Foundry portal).
@@ -167,23 +167,19 @@ Now you're ready to use the Azure OpenAI SDK to consume your deployed model.
 
     ```csharp
     // Format and send the request to the model
-    var chatCompletionsOptions = new ChatCompletionsOptions()
+    var chatCompletionsOptions = new ChatCompletionOptions()
     {
-        Messages =
-        {
-            new ChatRequestSystemMessage(systemPrompt),
-            new ChatRequestUserMessage(userPrompt)
-        },
         Temperature = 0.7f,
-        MaxTokens = 1000,
-        DeploymentName = oaiDeploymentName
+        MaxOutputTokenCount = 800
     };
-
+    
     // Get response from Azure OpenAI
-    Response<ChatCompletions> response = await client.GetChatCompletionsAsync(chatCompletionsOptions);
-
-    ChatCompletions completions = response.Value;
-    string completion = completions.Choices[0].Message.Content;
+    ChatCompletion response = await chatClient.CompleteChatAsync(
+        [
+            new SystemChatMessage(systemPrompt),
+            new UserChatMessage(userPrompt),
+        ],
+        chatCompletionsOptions);
     ```
 
     **Python**: code-generation.py
@@ -204,7 +200,7 @@ Now you're ready to use the Azure OpenAI SDK to consume your deployed model.
     )
     ```
 
-4. Save the changes to the code file.
+1. Save the changes to the code file.
 
 ## Run the application
 
@@ -248,7 +244,7 @@ Now that your app has been configured, run it to try generating code for each us
     - **Python**: Fixes are made on line 18 and 31
 
     The app for Go Fish in **sample-code** can be run if you replace the lines that contain bugs with the response from Azure OpenAI. If you run it without the fixes, it will not work correctly.
-    
+
     > **Note**: It's important to note that even though the code for this Go Fish app was corrected for some syntax, it's not a strictly accurate representation of the game. If you look closely, there are issues with not checking if the deck is empty when drawing cards, not removing pairs from the players hand when they get a pair, and a few other bugs that require understanding of card games to realize. This is a great example of how useful generative AI models can be to assist with code generation, but can't be trusted as correct and need to be verified by the developer.
 
     If you would like to see the full response from Azure OpenAI, you can set the **printFullResponse** variable to `True`, and rerun the app.

@@ -16,7 +16,7 @@ This exercise will take approximately **30** minutes.
 If you have not already done so, you must clone the code repository for this course:
 
 1. Start Visual Studio Code.
-2. Open the palette (SHIFT+CTRL+P) and run a **Git: Clone** command to clone the `https://github.com/MicrosoftLearning/mslearn-openai` repository to a local folder (it doesn't matter which folder).
+2. Open the command palette (SHIFT+CTRL+P or **View** > **Command Palette...**) and run a **Git: Clone** command to clone the `https://github.com/MicrosoftLearning/mslearn-openai` repository to a local folder (it doesn't matter which folder).
 3. When the repository has been cloned, open the folder in Visual Studio Code.
 4. Wait while additional files are installed to support the C# code projects in the repo.
 
@@ -46,7 +46,7 @@ If you don't already have one, provision an Azure OpenAI resource in your Azure 
 
     > \* Azure OpenAI resources are constrained by regional quotas. The listed regions include default quota for the model type(s) used in this exercise. Randomly choosing a region reduces the risk of a single region reaching its quota limit in scenarios where you are sharing a subscription with other users. In the event of a quota limit being reached later in the exercise, there's a possibility you may need to create another resource in a different region.
 
-3. Wait for deployment to complete. Then go to the deployed Azure OpenAI resource in the Azure portal.
+1. Wait for deployment to complete. Then go to the deployed Azure OpenAI resource in the Azure portal.
 
 ## Deploy a model
 
@@ -54,8 +54,8 @@ Next, you will deploy an Azure OpenAI model resource from the CLI. Refer to this
 
 ```dotnetcli
 az cognitiveservices account deployment create \
-   -g *Your resource group* \
-   -n *Name of your OpenAI service* \
+   -g <your_resource_group> \
+   -n <your_OpenAI_service> \
    --deployment-name gpt-4o \
    --model-name gpt-4o \
    --model-version 2024-05-13 \
@@ -64,10 +64,7 @@ az cognitiveservices account deployment create \
    --sku-capacity 5
 ```
 
-    > \* Sku-capacity is measured in thousands of tokens per minute. A rate limit of 5,000 tokens per minute is more than adequate to complete this exercise while leaving capacity for other people using the same subscription.
-
-> [!NOTE]
-> If you see a warnings about net7.0 framework being out of support, you can disregard them for this exercise.
+> **Note**: Sku-capacity is measured in thousands of tokens per minute. A rate limit of 5,000 tokens per minute is more than adequate to complete this exercise while leaving capacity for other people using the same subscription.
 
 ## Configure your application
 
@@ -78,13 +75,13 @@ Applications for both C# and Python have been provided, and both apps feature th
 
     **C#**:
 
-    ```
+    ```powershell
     dotnet add package Azure.AI.OpenAI --version 2.1.0
     ```
 
     **Python**:
 
-    ```
+    ```powershell
     pip install openai==1.65.2
     ```
 
@@ -92,7 +89,7 @@ Applications for both C# and Python have been provided, and both apps feature th
 
     - **C#**: appsettings.json
     - **Python**: .env
-    
+
 4. Update the configuration values to include:
     - The  **endpoint** and a **key** from the Azure OpenAI resource you created (available on the **Keys and Endpoint** page for your Azure OpenAI resource in the Azure portal)
     - The **deployment name** you specified for your model deployment.

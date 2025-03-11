@@ -33,8 +33,8 @@ Next, you will create a deployment of the **dalle3** model from the CLI. In the 
 
 ```dotnetcli
 az cognitiveservices account deployment create \
-   -g *your resource group* \
-   -n *your Open AI resource* \
+   -g <your_resource_group> \
+   -n <your_OpenAI_resource> \
    --deployment-name dall-e-3 \
    --model-name dall-e-3 \
    --model-version 3.0  \
@@ -43,8 +43,7 @@ az cognitiveservices account deployment create \
    --sku-capacity 1
 ```
 
-    > \* Sku-capacity is measured in thousands of tokens per minute. A rate limit of 1,000 tokens per minute is more than adequate to complete this exercise while leaving capacity for other people using the same subscription.
-
+> **Note**: Sku-capacity is measured in thousands of tokens per minute. A rate limit of 1,000 tokens per minute is more than adequate to complete this exercise while leaving capacity for other people using the same subscription.
 
 ## Use the REST API to generate images
 
@@ -57,7 +56,7 @@ Now let's explore how you could build a custom app that uses Azure OpenAI servic
 > **Tip**: If you have already cloned the **mslearn-openai** repo, open it in Visual Studio code. Otherwise, follow these steps to clone it to your development environment.
 
 1. Start Visual Studio Code.
-2. Open the palette (SHIFT+CTRL+P) and run a **Git: Clone** command to clone the `https://github.com/MicrosoftLearning/mslearn-openai` repository to a local folder (it doesn't matter which folder).
+2. Open the command palette (SHIFT+CTRL+P or **View** > **Command Palette...**) and run a **Git: Clone** command to clone the `https://github.com/MicrosoftLearning/mslearn-openai` repository to a local folder (it doesn't matter which folder).
 3. When the repository has been cloned, open the folder in Visual Studio Code.
 
     > **Note**: If Visual Studio Code shows you a pop-up message to prompt you to trust the code you are opening, click on **Yes, I trust the authors** option in the pop-up.
@@ -75,7 +74,7 @@ Applications for both C# and Python have been provided. Both apps feature the sa
 
     - **C#**: appsettings.json
     - **Python**: .env
-    
+
 3. Update the configuration values to include the **endpoint** and **key** from the Azure OpenAI resource you created (available on the **Keys and Endpoint** page for your Azure OpenAI resource in the Azure portal).
 4. Save the configuration file.
 
@@ -92,7 +91,7 @@ Now you're ready to explore the code used to call the REST API and generate an i
     - The code makes an https request to the endpoint for your service, including the key for your service in the header. Both of these values are obtained from the configuration file.
     - The request includes some parameters, including the prompt from on the image should be based, the number of images to generate, and the size of the generated image(s).
     - The response includes a revised prompt that the DALL-E model extrapolated from the user-provided prompt to make it more descriptive, and the URL for the generated image.
-    
+
     > **Important**: If you named your deployment anything other than the recommended *dalle3*, you'll need to update the code to use the name of your deployment.
 
 ### Run the app
@@ -102,23 +101,25 @@ Now that you've reviewed the code, it's time to run it and generate some images.
 1. Right-click the **CSharp** or **Python** folder containing your code files and open an integrated terminal. Then enter the appropriate command to run your application:
 
    **C#**
-   ```
+
+   ```powershell
    dotnet run
    ```
-   
+
    **Python**
-   ```
+
+   ```powershell
    pip install requests
    python generate-image.py
    ```
 
-3. When prompted, enter a description for an image. For example, *A giraffe flying a kite*.
+1. When prompted, enter a description for an image. For example, *A giraffe flying a kite*.
 
-4. Wait for the image to be generated - a hyperlink will be displayed in the terminal pane. Then select the hyperlink to open a new browser tab and review the image that was generated.
+1. Wait for the image to be generated - a hyperlink will be displayed in the terminal pane. Then select the hyperlink to open a new browser tab and review the image that was generated.
 
    > **TIP**: If the app doesn't return a response, wait a minute and try again. Newly deployed resources can take up to 5 minutes to become available.
 
-5. Close the browser tab containing the generated image and re-run the app to generate a new image with a different prompt.
+1. Close the browser tab containing the generated image and re-run the app to generate a new image with a different prompt.
 
 ## Clean up
 

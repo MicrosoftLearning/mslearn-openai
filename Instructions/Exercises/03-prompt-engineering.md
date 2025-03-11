@@ -44,9 +44,9 @@ Azure provides a web-based portal named **Azure AI Foundry portal**, that you ca
 > **Note**: As you use Azure AI Foundry portal, message boxes suggesting tasks for you to perform may be displayed. You can close these and follow the steps in this exercise.
 
 1. In the Azure portal, on the **Overview** page for your Azure OpenAI resource, scroll down to the **Get Started** section and select the button to go to **AI Foundry portal** (previously AI Studio).
-1. In Azure AI Foundry portal, in the pane on the left, select the **Deployments** page and view your existing model deployments. If you don't already have one, create a new deployment of the **gpt-35-turbo-16k** model with the following settings:
+1. In Azure AI Foundry portal, in the pane on the left, select the **Deployments** page and view your existing model deployments. If you don't already have one, create a new deployment of the **gpt-4o** model with the following settings:
     - **Deployment name**: *A unique name of your choice*
-    - **Model**: gpt-35-turbo-16k *(if the 16k model isn't available, choose gpt-35-turbo)*
+    - **Model**: gpt-4o
     - **Model version**: *Use default version*
     - **Deployment type**: Standard
     - **Tokens per minute rate limit**: 5K\*
@@ -62,9 +62,9 @@ Let's start by exploring some prompt engineering techniques in the Chat playgrou
 1. On the left side pane, in the **Playgrounds** section, select the **Chat** page. The **Chat** playground page consists of a row of buttons and two main panels (which may be arranged right-to-left horizontally, or top-to-bottom vertically depending on your screen resolution):
     - **Setup** - used to select your deployment, define system message, and set parameters for interacting with your deployment.
     - **Chat history** - used to submit chat messages and view responses.
-2. Under **Deployment**, ensure that your gpt-35-turbo-16k model deployment is selected.
+1. Under **Deployment**, ensure that your gpt-4o model deployment is selected.
 1. Review the default system message contained in the textbox immediately under the selected deployment, which should be *You are an AI assistant that helps people find information.*
-4. In the **Chat history**, submit the following query:
+1. In the **Chat history**, submit the following query:
 
     ```prompt
     What kind of article is this?
@@ -80,12 +80,12 @@ Let's start by exploring some prompt engineering techniques in the Chat playgrou
 
     The response provides a description of the article. However, suppose you want a more specific format for article categorization.
 
-5. In the **Setup** section change the system message to `You are a news aggregator that categorizes news articles.`
+1. In the **Setup** section change the system message to `You are a news aggregator that categorizes news articles.`
 
-6. Under the new system message, select the **Add section** button, and choose **Examples**. Then add the following example.
+1. Under the new system message, select the **Add section** button, and choose **Examples**. Then add the following example.
 
     **User:**
-    
+
     ```prompt
     What kind of article is this?
     ---
@@ -97,17 +97,17 @@ Let's start by exploring some prompt engineering techniques in the Chat playgrou
     
     The Chicago Cyclones' two hits came in the 2nd and the 5th innings but were unable to get the runner home to score.
     ```
-    
+
     **Assistant:**
-    
+
     ```prompt
     Sports
       ```
 
-7. Add another example with the following text.
+1. Add another example with the following text.
 
     **User:**
-    
+
     ```prompt
     Categorize this article:
     ---
@@ -120,16 +120,16 @@ Let's start by exploring some prompt engineering techniques in the Chat playgrou
     
     From Robin Kline's history-making win to a full performance by none other than Casey Jensen herself, don't miss tomorrows rerun of all the festivities.
     ```
-    
+
     **Assistant:**
-    
+
     ```prompt
     Entertainment
     ```
 
-8. Use the **Apply changes** button under the system message textbox in the **Setup** section to save your changes.
+1. Use the **Apply changes** button under the system message textbox in the **Setup** section to save your changes.
 
-9. In the **Chat history** section, resubmit the following prompt:
+1. In the **Chat history** section, resubmit the following prompt:
 
     ```prompt
     What kind of article is this?
@@ -145,9 +145,9 @@ Let's start by exploring some prompt engineering techniques in the Chat playgrou
 
     The combination of a more specific system message and some examples of expected queries and responses results in a consistent format for the results.
 
-10. Change the system message back to the default template, which should be `You are an AI assistant that helps people find information.` with no examples. Then apply the changes.
+1. Change the system message back to the default template, which should be `You are an AI assistant that helps people find information.` with no examples. Then apply the changes.
 
-11. In the **Chat history** section, submit the following prompt:
+1. In the **Chat history** section, submit the following prompt:
 
     ```prompt
     # 1. Create a list of animals
@@ -157,10 +157,10 @@ Let's start by exploring some prompt engineering techniques in the Chat playgrou
 
     The model will likely respond with an answer to satisfy the prompt, split into a numbered list. This is an appropriate response, but suppose what you actually wanted was for the model to write a Python program that performs the tasks you described?
 
-12. Change the system message to `You are a coding assistant helping write python code.` and apply the changes.
-13. Resubmit the following prompt to the model:
+1. Change the system message to `You are a coding assistant helping write python code.` and apply the changes.
+1. Resubmit the following prompt to the model:
 
-    ```
+    ```prompt
     # 1. Create a list of animals
     # 2. Create a list of whimsical names for those animals
     # 3. Combine them randomly into a list of 25 animal and name pairs
@@ -175,7 +175,7 @@ Now let's explore the use of prompt engineering in an app that uses the Azure Op
 > **Tip**: If you have already cloned the **mslearn-openai** repo, open it in Visual Studio code. Otherwise, follow these steps to clone it to your development environment.
 
 1. Start Visual Studio Code.
-2. Open the palette (SHIFT+CTRL+P) and run a **Git: Clone** command to clone the `https://github.com/MicrosoftLearning/mslearn-openai` repository to a local folder (it doesn't matter which folder).
+2. Open the palette (SHIFT+CTRL+P or **View** > **Command Palette...**) and run a **Git: Clone** command to clone the `https://github.com/MicrosoftLearning/mslearn-openai` repository to a local folder (it doesn't matter which folder).
 3. When the repository has been cloned, open the folder in Visual Studio Code.
 
     > **Note**: If Visual Studio Code shows you a pop-up message to prompt you to trust the code you are opening, click on **Yes, I trust the authors** option in the pop-up.
@@ -193,21 +193,21 @@ Applications for both C# and Python have been provided, and both apps feature th
 
     **C#**:
 
-    ```
-    dotnet add package Azure.AI.OpenAI --version 1.0.0-beta.14
+    ```powershell
+    dotnet add package Azure.AI.OpenAI --version 2.1.0
     ```
 
     **Python**:
 
-    ```
-    pip install openai==1.55.3
+    ```powershell
+    pip install openai==1.65.2
     ```
 
 3. In the **Explorer** pane, in the **CSharp** or **Python** folder, open the configuration file for your preferred language
 
     - **C#**: appsettings.json
     - **Python**: .env
-    
+
 4. Update the configuration values to include:
     - The  **endpoint** and a **key** from the Azure OpenAI resource you created (available on the **Keys and Endpoint** page for your Azure OpenAI resource in the Azure portal)
     - The **deployment name** you specified for your model deployment (available in the **Deployments** page in Azure AI Foundry portal).
@@ -224,6 +224,7 @@ Now you're ready to use the Azure OpenAI SDK to consume your deployed model.
     ```csharp
     // Add Azure OpenAI package
     using Azure.AI.OpenAI;
+    using OpenAI.Chat;
     ```
 
     **Python**: prompt-engineering.py
@@ -239,7 +240,8 @@ Now you're ready to use the Azure OpenAI SDK to consume your deployed model.
 
     ```csharp
     // Configure the Azure OpenAI client
-    OpenAIClient client = new OpenAIClient(new Uri(oaiEndpoint), new AzureKeyCredential(oaiKey));
+    AzureOpenAIClient azureClient = new (new Uri(oaiEndpoint), new ApiKeyCredential(oaiKey));
+    ChatClient chatClient = azureClient.GetChatClient(oaiDeploymentName);
     ```
 
     **Python**: prompt-engineering.py
@@ -259,20 +261,19 @@ Now you're ready to use the Azure OpenAI SDK to consume your deployed model.
 
     ```csharp
     // Format and send the request to the model
-    var chatCompletionsOptions = new ChatCompletionsOptions()
+    var chatCompletionsOptions = new ChatCompletionOptions()
     {
-        Messages =
-        {
-            new ChatRequestSystemMessage(systemMessage),
-            new ChatRequestUserMessage(userMessage)
-        },
         Temperature = 0.7f,
-        MaxTokens = 800,
-        DeploymentName = oaiDeploymentName
+        MaxOutputTokenCount = 800
     };
     
     // Get response from Azure OpenAI
-    Response<ChatCompletions> response = await client.GetChatCompletionsAsync(chatCompletionsOptions);
+    ChatCompletion response = await chatClient.CompleteChatAsync(
+        [
+            new SystemChatMessage(systemMessage),
+            new UserChatMessage(userMessage),
+        ],
+        chatCompletionsOptions);
     ```
 
     **Python**: prompt-engineering.py
