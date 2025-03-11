@@ -92,7 +92,7 @@ Now you're ready to explore the code used to call the REST API and generate an i
     - The request includes some parameters, including the prompt from on the image should be based, the number of images to generate, and the size of the generated image(s).
     - The response includes a revised prompt that the DALL-E model extrapolated from the user-provided prompt to make it more descriptive, and the URL for the generated image.
 
-    > **Important**: If you named your deployment anything other than the recommended *dalle3*, you'll need to update the code to use the name of your deployment.
+    > **Important**: If you named your deployment anything other than the recommended *dall-e-3*, you'll need to update the code to use the name of your deployment.
 
 ### Run the app
 

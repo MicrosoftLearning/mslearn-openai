@@ -33,7 +33,7 @@ namespace generate_image
                 using (var client = new HttpClient())
                 {
                     var contentType = new MediaTypeWithQualityHeaderValue("application/json");
-                    var api = "openai/deployments/dalle3/images/generations?api-version=2024-02-15-preview";
+                    var api = "openai/deployments/dall-e-3/images/generations?api-version=2024-02-15-preview";
                     client.BaseAddress = new Uri(aoaiEndpoint);
                     client.DefaultRequestHeaders.Accept.Add(contentType);
                     client.DefaultRequestHeaders.Add("api-key", aoaiKey);
