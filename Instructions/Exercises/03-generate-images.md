@@ -54,7 +54,7 @@ Now you're ready to deploy a DALL-E model to support image-generation.
 Before creating a client application, let's test the DALL-E model in the playground.
 
 1. In the page for the DALL-E model you deployed, select **Open in playground** (or in the **Playgrounds** page, open the **Images playground**).
-1. Ensure your DALL-E model deployment is selected. Then, in the **Prompt** box, enter a prompt such as `Create an image of an robot easting spaghetti`.
+1. Ensure your DALL-E model deployment is selected. Then, in the **Prompt** box, enter a prompt such as `Create an image of an robot eating spaghetti`.
 1. Review the resulting image in the playground:
 
     ![Screenshot of the images playground with a generated image.](../media/images-playground.png)
