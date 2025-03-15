@@ -1,70 +1,90 @@
-using System;
+﻿using System;
+using Azure;
+using System.IO;
 using System.Text;
-using System.Text.Json;
-using System.Text.Json.Nodes;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Web;
 using Microsoft.Extensions.Configuration;
+using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace generate_image
+// Add references
+
+
+namespace dalle_client
 {
     class Program
     {
-        private static string? aoaiEndpoint;
-        private static string? aoaiKey;
         static async Task Main(string[] args)
         {
+            // Clear the console
+            Console.Clear();
+            
             try
             {
-                // Get config settings from AppSettings
+                // Get config settings
                 IConfigurationBuilder builder = new ConfigurationBuilder().AddJsonFile("appsettings.json");
                 IConfigurationRoot configuration = builder.Build();
-                aoaiEndpoint = configuration["AzureOAIEndpoint"] ?? "";
-                aoaiKey = configuration["AzureOAIKey"] ?? "";
+                string project_connection = configuration["PROJECT_CONNECTION"];
+                string model_deployment = configuration["MODEL_DEPLOYMENT"];
 
-                // Get prompt for image to be generated
-                Console.Clear();
-                Console.WriteLine("Enter a prompt to request an image:");
-                string prompt = Console.ReadLine() ?? "";
+                // Initialize the project client
 
-                // Call the DALL-E model
-                using (var client = new HttpClient())
+
+
+                // Get an OpenAI client
+ 
+
+
+                // Loop until the user types 'quit'
+                int imageCount = 0;
+                Uri imageUrl;
+                string input_text = "";
+                while (input_text.ToLower() != "quit")
                 {
-                    var contentType = new MediaTypeWithQualityHeaderValue("application/json");
-                    var api = "openai/deployments/dalle3/images/generations?api-version=2024-02-15-preview";
-                    client.BaseAddress = new Uri(aoaiEndpoint);
-                    client.DefaultRequestHeaders.Accept.Add(contentType);
-                    client.DefaultRequestHeaders.Add("api-key", aoaiKey);
-                    var data = new
+                    // Get user input
+                    Console.WriteLine("Enter the prompt (or type 'quit' to exit):");
+                    input_text = Console.ReadLine();
+                    if (input_text.ToLower() != "quit")
                     {
-                        prompt=prompt,
-                        n=1,
-                        size="1024x1024"
-                    };
+                        // Generate an image
+                        
 
-                    var jsonData = JsonSerializer.Serialize(data);
-                    var contentData = new StringContent(jsonData, Encoding.UTF8, "application/json");
-                    var response = await client.PostAsync(api, contentData); 
 
-                    // Get the revised prompt and image URL from the response
-                    var stringResponse = await response.Content.ReadAsStringAsync();
-                    JsonNode contentNode = JsonNode.Parse(stringResponse)!;
-                    JsonNode dataCollectionNode = contentNode!["data"];
-                    JsonNode dataNode = dataCollectionNode[0]!;
-                    JsonNode revisedPrompt = dataNode!["revised_prompt"];
-                    JsonNode url = dataNode!["url"];
-                    Console.WriteLine(revisedPrompt.ToJsonString());
-                    Console.WriteLine(url.ToJsonString().Replace(@"\u0026", "&"));
-
+                        // Save the image to a file
+                        if(imageUrl != null)
+                        {
+                            imageCount++;
+                            string fileName = $"image_{imageCount}.png";
+                            await SaveImage(imageUrl, fileName);
+                        }
+                        
+                    }
                 }
+
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
         }
-    }
 
+        static async Task SaveImage(Uri imageUrl, string fileName)
+        {
+            // Create the folder path
+            string folderPath = Path.Combine(Directory.GetCurrentDirectory(), "images");
+            Directory.CreateDirectory(folderPath);
+            string filePath = Path.Combine(folderPath, fileName);
+
+            // Download the image
+            using (HttpClient client = new HttpClient())
+            {
+                byte[] image = await client.GetByteArrayAsync(imageUrl);
+                File.WriteAllBytes(filePath, image);
+            }
+            Console.WriteLine("Image saved as " + filePath);
+
+
+        }
+
+    }
 }
+
