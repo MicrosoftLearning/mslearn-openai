@@ -43,8 +43,6 @@ You can use the Images playground in **Azure AI Foundry portal** to experiment w
 1. In the **Images** playground section, your deployment of DALL-E 3 should be automatically selected. If not, select it from the deployment dropdown.
 1. In the **Prompt** box, enter a description of an image you'd like to generate. For example, `An elephant on a skateboard` Then select **Generate** and view the image that is generated.
 
-    ![The Images Playground in Azure AI Foundry portal with a generated image.](../media/images-playground.png)
-
 1. Modify the prompt to provide a more specific description. For example `An elephant on a skateboard in the style of Picasso`. Then generate the new image and review the results.
 
     ![The Images Playground in Azure AI Foundry portal with two generated images.](../media/images-playground-new-style.png)
