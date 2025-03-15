@@ -4,8 +4,6 @@ lab:
     description: 'Learn how to use a DALL-E OpenAI model to generate images.'
 ---
 
-> **UNDER DEVELOPMENT**: This exercise is not yet complete.
-
 # Generate images with AI
 
 In this exercise, you use the the OpenAI DALL-E generative AI model to generate images. You'll develop your app by using Azure AI Foundry and the Azure OpenAI service.
