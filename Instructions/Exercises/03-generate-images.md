@@ -6,7 +6,7 @@ lab:
 
 # Generate images with AI
 
-In this exercise, you use the the OpenAI DALL-E generative AI model to generate images. You'll develop your app by using Azure AI Foundry and the Azure OpenAI service.
+In this exercise, you use the OpenAI DALL-E generative AI model to generate images. You'll develop your app by using Azure AI Foundry and the Azure OpenAI service.
 
 This exercise takes approximately **30** minutes.
 
@@ -39,7 +39,7 @@ Let's start by creating an Azure AI Foundry project.
 
 Now you're ready to deploy a DALL-E model to support image-generation.
 
-1. In the toolbar at the top right of your Azure AI Foundry project page, use the **Preview features** icon to enable the **Deploy models to Azure AI model inference service** feature. This feature ensures your model deployment is available to the Azure AI Inference service, which you'll use in your application code.
+1. In the toolbar at the top right of your Azure AI Foundry project page, use the **Preview features** icon to enable the **Deploy models to Azure AI model inference service** feature.
 1. In the pane on the left for your project, in the **My assets** section, select the **Models + endpoints** page.
 1. In the **Models + endpoints** page, in the **Model deployments** tab, in the **+ Deploy model** menu, select **Deploy base model**.
 1. Search for the **dall-e-3** model in the list, and then select and confirm it.
