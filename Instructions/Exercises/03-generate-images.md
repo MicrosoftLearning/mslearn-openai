@@ -1,126 +1,298 @@
 ---
 lab:
-    title: 'Generate images with a DALL-E model'
+    title: 'Generate images with AI'
+    description: 'Learn how to use a DALL-E OpenAI model to generate images.'
 ---
 
-# Generate images with a DALL-E model
+# Generate images with AI
 
-The Azure OpenAI Service includes an image-generation model named DALL-E. You can use this model to submit natural language prompts that describe a desired image, and the model will generate an original image based on the description you provide.
+In this exercise, you use the OpenAI DALL-E generative AI model to generate images. You'll develop your app by using Azure AI Foundry and the Azure OpenAI service.
 
-In this exercise, you'll use a DALL-E version 3 model to generate images based on natural language prompts.
+This exercise takes approximately **30** minutes.
 
-This exercise will take approximately **25** minutes.
+## Create an Azure AI Foundry project
 
-## Provision an Azure OpenAI resource
+Let's start by creating an Azure AI Foundry project.
 
-Before you can use Azure OpenAI to generate images, you must provision an Azure OpenAI resource in your Azure subscription. The resource must be in a region where DALL-E models are supported.
+1. In a web browser, open the [Azure AI Foundry portal](https://ai.azure.com) at `https://ai.azure.com` and sign in using your Azure credentials. Close any tips or quick start panes that are opened the first time you sign in, and if necessary use the **Azure AI Foundry** logo at the top left to navigate to the home page, which looks similar to the following image:
 
-1. Sign into the **Azure portal** at `https://portal.azure.com`.
-1. Create an **Azure OpenAI** resource with the following settings:
-    - **Subscription**: *Select an Azure subscription that has been approved for access to the Azure OpenAI service, including DALL-E*
-    - **Resource group**: *Choose or create a resource group*
-    - **Region**: *Choose either **East US**, **Australia East**, or **Sweden Central***\*
-    - **Name**: *A unique name of your choice*
-    - **Pricing tier**: Standard S0
+    ![Screenshot of Azure AI Foundry portal.](../media/ai-foundry-home.png)
 
-    > \* DALL-E 3 models are only available in Azure OpenAI service resources in the **East US**, **Australia East**, and **Sweden Central** regions.
+1. In the home page, select **+ Create project**.
+1. In the **Create a project** wizard, enter a suitable project name for (for example, `my-ai-project`) then review the Azure resources that will be automatically created to support your project.
+1. Select **Customize** and specify the following settings for your hub:
+    - **Hub name**: *A unique name - for example `my-ai-hub`*
+    - **Subscription**: *Your Azure subscription*
+    - **Resource group**: *Create a new resource group with a unique name (for example, `my-ai-resources`), or select an existing one*
+    - **Location**: Select **Help me choose** and then select **dalle** in the Location helper window and use the recommended region\*
+    - **Connect Azure AI Services or Azure OpenAI**: *Create a new AI Services resource with an appropriate name (for example, `my-ai-services`) or use an existing one*
+    - **Connect Azure AI Search**: Skip connecting
 
-1. Wait for deployment to complete. Then go to the deployed Azure OpenAI resource in the Azure portal.
+    > \* Azure OpenAI resources are constrained at the tenant level by regional quotas. In the event of a quota limit being reached later in the exercise, there's a possibility you may need to create another resource in a different region.
 
-## Deploy a model
+1. Select **Next** and review your configuration. Then select **Create** and wait for the process to complete.
+1. When your project is created, close any tips that are displayed and review the project page in Azure AI Foundry portal, which should look similar to the following image:
 
-Next, you will create a deployment of the **dalle3** model from the CLI. In the Azure portal; select **Cloud Shell** icon from the top menu bar and ensure that your terminal is set to **Bash**. Refer to this example and replace the following variables with your own values:
+    ![Screenshot of a Azure AI project details in Azure AI Foundry portal.](../media/ai-foundry-project.png)
 
-```dotnetcli
-az cognitiveservices account deployment create \
-   -g <your_resource_group> \
-   -n <your_OpenAI_resource> \
-   --deployment-name dall-e-3 \
-   --model-name dall-e-3 \
-   --model-version 3.0  \
-   --model-format OpenAI \
-   --sku-name "Standard" \
-   --sku-capacity 1
-```
+## Deploy a DALL-E model
 
-> **Note**: Sku-capacity is measured in thousands of tokens per minute. A rate limit of 1,000 tokens per minute is more than adequate to complete this exercise while leaving capacity for other people using the same subscription.
+Now you're ready to deploy a DALL-E model to support image-generation.
 
-## Use the REST API to generate images
+1. In the toolbar at the top right of your Azure AI Foundry project page, use the **Preview features** icon to enable the **Deploy models to Azure AI model inference service** feature.
+1. In the pane on the left for your project, in the **My assets** section, select the **Models + endpoints** page.
+1. In the **Models + endpoints** page, in the **Model deployments** tab, in the **+ Deploy model** menu, select **Deploy base model**.
+1. Search for the **dall-e-3** model in the list, and then select and confirm it.
+1. Agree to the license agreement if prompted, and then deploy the model with the following settings by selecting **Customize** in the deployment details:
+    - **Deployment name**: *A unique name for your model deployment - for example `dall-e-3` (remember the name you assign, you'll need it later*)
+    - **Deployment type**: Standard
+    - **Deployment details**: *Use the default settings*
+1. Wait for the deployment provisioning state to be **Completed**.
 
-The Azure OpenAI service provides a REST API that you can use to submit prompts for content generation - including images generated by a DALL-E model.
+## Test the model in the playground
 
-### Prepare to develop an app in Visual Studio Code
+Before creating a client application, let's test the DALL-E model in the playground.
 
-Now let's explore how you could build a custom app that uses Azure OpenAI service to generate images. You'll develop your app using Visual Studio Code. The code files for your app have been provided in a GitHub repo.
+1. In the page for the DALL-E model you deployed, select **Open in playground** (or in the **Playgrounds** page, open the **Images playground**).
+1. Ensure your DALL-E model deployment is selected. Then, in the **Prompt** box, enter a prompt such as `Create an image of an robot eating spaghetti`.
+1. Review the resulting image in the playground:
 
-> **Tip**: If you have already cloned the **mslearn-openai** repo, open it in Visual Studio code. Otherwise, follow these steps to clone it to your development environment.
+    ![Screenshot of the images playground with a generated image.](../media/images-playground.png)
 
-1. Start Visual Studio Code.
-2. Open the command palette (SHIFT+CTRL+P or **View** > **Command Palette...**) and run a **Git: Clone** command to clone the `https://github.com/MicrosoftLearning/mslearn-openai` repository to a local folder (it doesn't matter which folder).
-3. When the repository has been cloned, open the folder in Visual Studio Code.
+1. Enter a follow-up prompt, such as `Show the robot in a restaurant` and review the resulting image.
+1. Continue testing with new prompts to refine the image until you are happy with it.
 
-    > **Note**: If Visual Studio Code shows you a pop-up message to prompt you to trust the code you are opening, click on **Yes, I trust the authors** option in the pop-up.
+## Create a client application
 
-4. Wait while additional files are installed to support the C# code projects in the repo.
+The model seems to work in the playground. Now you can use the Azure OpenAI SDK to use it in a client application.
 
-    > **Note**: If you are prompted to add required assets to build and debug, select **Not Now**.
+> **Tip**: You can choose to develop your solution using Python or Microsoft C#. Follow the instructions in the appropriate section for your chosen language.
 
-### Configure your application
+### Prepare the application configuration
 
-Applications for both C# and Python have been provided. Both apps feature the same functionality. First, you'll add the endpoint and key for your Azure OpenAI resource to the app's configuration file.
+1. In the Azure AI Foundry portal, view the **Overview** page for your project.
+1. In the **Project details** area, note the **Project connection string**. You'll use this connection string to connect to your project in a client application.
+1. Open a new browser tab (keeping the Azure AI Foundry portal open in the existing tab). Then in the new tab, browse to the [Azure portal](https://portal.azure.com) at `https://portal.azure.com`; signing in with your Azure credentials if prompted.
+1. Use the **[\>_]** button to the right of the search bar at the top of the page to create a new Cloud Shell in the Azure portal, selecting a ***PowerShell*** environment. The cloud shell provides a command line interface in a pane at the bottom of the Azure portal.
 
-1. In Visual Studio Code, in the **Explorer** pane, browse to the **Labfiles/03-image-generation** folder and expand the **CSharp** or **Python** folder depending on your language preference. Each folder contains the language-specific files for an app into which you're you're going to integrate Azure OpenAI functionality.
-2. In the **Explorer** pane, in the **CSharp** or **Python** folder, open the configuration file for your preferred language
+    > **Note**: If you have previously created a cloud shell that uses a *Bash* environment, switch it to ***PowerShell***.
 
-    - **C#**: appsettings.json
-    - **Python**: .env
+1. In the cloud shell toolbar, in the **Settings** menu, select **Go to Classic version** (this is required to use the code editor).
 
-3. Update the configuration values to include the **endpoint** and **key** from the Azure OpenAI resource you created (available on the **Keys and Endpoint** page for your Azure OpenAI resource in the Azure portal).
-4. Save the configuration file.
+    > **Tip**: As you paste commands into the cloudshell, the ouput may take up a large amount of the screen buffer. You can clear the screen by entering the `cls` command to make it easier to focus on each task.
 
-### View application code
+1. In the PowerShell pane, enter the following commands to clone the GitHub repo for this exercise:
 
-Now you're ready to explore the code used to call the REST API and generate an image.
+    ```
+    rm -r mslearn-openai -f
+    git clone https://github.com/microsoftlearning/mslearn-openai mslearn-openai
+    ```
 
-1. In the **Explorer** pane, select the main code file for your application:
+> **Note**: Follow the steps for your chosen programming language.
 
-    - C#: `Program.cs`
-    - Python: `generate-image.py`
+1. After the repo has been cloned, navigate to the folder containing the application code files:  
 
-2. Review the code that the file contains, noting the following key features:
-    - The code makes an https request to the endpoint for your service, including the key for your service in the header. Both of these values are obtained from the configuration file.
-    - The request includes some parameters, including the prompt from on the image should be based, the number of images to generate, and the size of the generated image(s).
-    - The response includes a revised prompt that the DALL-E model extrapolated from the user-provided prompt to make it more descriptive, and the URL for the generated image.
+    **Python**
 
-    > **Important**: If you named your deployment anything other than the recommended *dall-e-3*, you'll need to update the code to use the name of your deployment.
+    ```
+   cd mslearn-openai/Labfiles/03-image-generation/Python
+    ```
 
-### Run the app
+    **C#**
 
-Now that you've reviewed the code, it's time to run it and generate some images.
+    ```
+   cd mslearn-openai/Labfiles/03-image-generation/CSharp
+    ```
 
-1. Right-click the **CSharp** or **Python** folder containing your code files and open an integrated terminal. Then enter the appropriate command to run your application:
+1. In the cloud shell command line pane, enter the following command to install the libraries you'll use:
 
-   **C#**
+    **Python**
 
-   ```powershell
+    ```
+   pip install python-dotenv azure-identity azure-ai-projects openai requests
+    ```
+
+    *You can ignore errors about the version of pip and the local path*
+
+    **C#**
+
+    ```
+   dotnet add package Azure.Identity
+   dotnet add package Azure.AI.Projects --prerelease
+   dotnet add package Azure.AI.OpenAI
+    ```
+
+1. Enter the following command to edit the configuration file that has been provided:
+
+    **Python**
+
+    ```
+   code .env
+    ```
+
+    **C#**
+
+    ```
+   code appsettings.json
+    ```
+
+    The file is opened in a code editor.
+
+1. In the code file, replace the **your_project_endpoint** placeholder with the connection string for your project (copied from the project **Overview** page in the Azure AI Foundry portal), and the **your_model_deployment** placeholder with the name you assigned to your dall-e-3 model deployment.
+1. After you've replaced the placeholders, use the **CTRL+S** command to save your changes and then use the **CTRL+Q** command to close the code editor while keeping the cloud shell command line open.
+
+### Write code to connect to your project and chat with your model
+
+> **Tip**: As you add code, be sure to maintain the correct indentation.
+
+1. Enter the following command to edit the code file that has been provided:
+
+    **Python**
+
+    ```
+   code dalle-client.py
+    ```
+
+    **C#**
+
+    ```
+   code Program.cs
+    ```
+
+1. In the code file, note the existing statements that have been added at the top of the file to import the necessary SDK namespaces. Then, under the comment **Add references**, add the following code to reference the namespaces in the libraries you installed previously:
+
+    **Python**
+
+    ```
+   from dotenv import load_dotenv
+   from azure.identity import DefaultAzureCredential
+   from azure.ai.projects import AIProjectClient
+   from openai import AzureOpenAI
+   import requests
+    ```
+
+    **C#**
+
+    ```
+   using Azure.Identity;
+   using Azure.AI.Projects;
+   using Azure.AI.OpenAI;
+   using OpenAI.Images;
+    ```
+
+1. In the **main** function, under the comment **Get configuration settings**, note that the code loads the project connection string and model deployment name values you defined in the configuration file.
+1. Under the comment **Initialize the project client**, add the following code to connect to your Azure AI Foundry project using the Azure credentials you are currently signed in with:
+
+    **Python**
+
+    ```
+   project_client = AIProjectClient.from_connection_string(
+        conn_str=project_connection,
+        credential=DefaultAzureCredential())
+    ```
+
+    **C#**
+
+    ```
+   var projectClient = new AIProjectClient(project_connection,
+                        new DefaultAzureCredential());
+    ```
+
+1. Under the comment **Get an OpenAI client**, add the following code to create a client object for chatting with a model:
+
+    **Python**
+
+    ```
+   openai_client = project_client.inference.get_azure_openai_client(api_version="2024-06-01")
+
+    ```
+
+    **C#**
+
+    ```
+   ConnectionResponse connection = projectClient.GetConnectionsClient().GetDefaultConnection(ConnectionType.AzureOpenAI, withCredential: true);
+
+   var connectionProperties = connection.Properties as ConnectionPropertiesApiKeyAuth;
+
+   AzureOpenAIClient openAIClient = new(
+        new Uri(connectionProperties.Target),
+        new AzureKeyCredential(connectionProperties.Credentials.Key));
+
+   ImageClient openAIimageClient = openAIClient.GetImageClient(model_deployment);
+
+    ```
+
+1. Note that the code includes a loop to allow a user to input a prompt until they enter "quit". Then in the loop section, under the comment **Generate an image**, add the following code to submit the prompt and retrieve the URL for the generated image from your model:
+
+    **Python**
+
+    ```python
+   result = openai_client.images.generate(
+        model=model_deployment,
+        prompt=input_text,
+        n=1
+    )
+
+    json_response = json.loads(result.model_dump_json())
+    image_url = json_response["data"][0]["url"] 
+    ```
+
+    **C#**
+
+    ```
+   var imageGeneration = await openAIimageClient.GenerateImageAsync(
+            input_text,
+            new ImageGenerationOptions()
+            {
+                Size = GeneratedImageSize.W1024xH1024
+            }
+   );
+   imageUrl= imageGeneration.Value.ImageUri;
+    ```
+
+1. Note that the code in the remainder of the **main** function passes the image URL and a filename to a provided function, which downloads the generated image and saves it as a .png file.
+
+1. Use the **CTRL+S** command to save your changes to the code file and then use the **CTRL+Q** command to close the code editor while keeping the cloud shell command line open.
+
+### Run the client application
+
+1. In the cloud shell command line pane, enter the following command to run the app:
+
+    **Python**
+
+    ```
+   python dalle-client.py
+    ```
+
+    **C#**
+
+    ```
    dotnet run
-   ```
+    ```
 
-   **Python**
+1. When prompted, enter a request for an image, such as `Create an image of a robot eating pizza`. After a moment or two, the app should confirm that the image has been saved.
+1. Try a few more prompts. When you're finished, enter `quit` to exit the program.
 
-   ```powershell
-   pip install requests
-   python generate-image.py
-   ```
+    > **Note**: In this simple app, we haven't implemented logic to retain conversation history; so the model will treat each prompt as a new request with no context of the previous prompt.
 
-1. When prompted, enter a description for an image. For example, *A giraffe flying a kite*.
+1. To download and view the images that were generated by your app, in the toolbar for the cloud shell pane, use the **Upload/Download files** button to download a file, and then open it. To download a file, complete its file path in the download interface; for example:
 
-1. Wait for the image to be generated - a hyperlink will be displayed in the terminal pane. Then select the hyperlink to open a new browser tab and review the image that was generated.
+    **Python**
 
-   > **TIP**: If the app doesn't return a response, wait a minute and try again. Newly deployed resources can take up to 5 minutes to become available.
+    /home/*user*`/mslearn-openai/Labfiles/03-image-generation/Python/images/image_1.png`
 
-1. Close the browser tab containing the generated image and re-run the app to generate a new image with a different prompt.
+    **C#**
+
+    /home/*user*`/mslearn-openai/Labfiles/03-image-generation/CSharp/images/image_1.png`
+
+## Summary
+
+In this exercise, you used Azure AI Foundry and the Azure OpenAI SDK to create a client application uses a DALL-E model to generate images.
 
 ## Clean up
 
-When you're done with your Azure OpenAI resource, remember to delete the resource in the **Azure portal** at `https://portal.azure.com`.
+If you've finished exploring DALL-E, you should delete the resources you have created in this exercise to avoid incurring unnecessary Azure costs.
+
+1. Return to the browser tab containing the Azure portal (or re-open the [Azure portal](https://portal.azure.com) at `https://portal.azure.com` in a new browser tab) and view the contents of the resource group where you deployed the resources used in this exercise.
+1. On the toolbar, select **Delete resource group**.
+1. Enter the resource group name and confirm that you want to delete it.
