@@ -1,6 +1,7 @@
 ---
 lab:
     title: 'Get started with Azure OpenAI service'
+    status: stale
 ---
 
 # Get started with Azure OpenAI service

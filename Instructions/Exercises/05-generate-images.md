@@ -1,6 +1,7 @@
 ---
 lab:
     title: 'Generate images with a DALL-E model'
+    status: stale
 ---
 
 # Generate images with a DALL-E model

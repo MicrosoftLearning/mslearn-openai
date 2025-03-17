@@ -1,6 +1,7 @@
 ---
 lab:
     title: 'Generate and improve code with Azure OpenAI Service'
+    status: stale
 ---
 
 # Generate and improve code with Azure OpenAI Service

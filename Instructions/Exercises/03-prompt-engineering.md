@@ -1,6 +1,7 @@
 ---
 lab:
     title: 'Utilize prompt engineering in your app'
+    status: stale
 ---
 
 # Utilize prompt engineering in your app

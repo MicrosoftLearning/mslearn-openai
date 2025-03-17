@@ -2,6 +2,7 @@
 lab:
     title: 'Generate images with AI'
     description: 'Learn how to use a DALL-E OpenAI model to generate images.'
+    status: new
 ---
 
 # Generate images with AI
