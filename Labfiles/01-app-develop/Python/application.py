@@ -5,8 +5,6 @@ from dotenv import load_dotenv
 # Add Azure OpenAI package
 
 
-# Set to True to print the full response from OpenAI for each call
-printFullResponse = False
 
 async def main(): 
         
@@ -51,8 +49,6 @@ async def call_openai_model(system_message, user_message, model, client):
     
 
 
-    if printFullResponse:
-        print(response)
 
     print("Response:\n" + response.choices[0].message.content + "\n")
 
