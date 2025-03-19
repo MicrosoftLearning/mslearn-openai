@@ -20,6 +20,7 @@ async def main():
         
         # Configure the Azure OpenAI client
         
+        #Initialize messages array
 
         while True:
             # Pause the app to allow the user to enter the system prompt
@@ -32,7 +33,9 @@ async def main():
             if user_text.lower() == 'quit' or system_text.lower() == 'quit':
                 print('Exiting program...')
                 break
-            
+
+            # Format and send the request to the model
+
             await call_openai_model(system_message = system_text, 
                                     user_message = user_text, 
                                     model=azure_oai_deployment, 
@@ -42,6 +45,7 @@ async def main():
     except Exception as ex:
         print(ex)
 
+# Define the function that will get the response from Azure OpenAI endpoint
 async def call_openai_model(system_message, user_message, model, client):
     # Get response from Azure OpenAI
     
