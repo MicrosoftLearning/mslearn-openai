@@ -26,6 +26,7 @@ oaiEndpoint = config["AzureOAIEndpoint"];
 oaiKey = config["AzureOAIKey"];
 oaiDeploymentName = config["AzureOAIDeploymentName"];
 
+//Initialize messages list
 
 do {
     // Pause for system message update
@@ -59,6 +60,7 @@ do {
 
 }
 
+// Define the function that gets the response from Azure OpenAI endpoint
 private static void GetResponseFromOpenAI(string systemMessage, string userMessage)  
 {   
     Console.WriteLine("\nSending prompt to Azure OpenAI endpoint...\n\n");
