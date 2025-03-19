@@ -134,7 +134,7 @@ Now you're ready to use the Azure OpenAI SDK to consume your deployed model.
         azure_endpoint = azure_oai_endpoint, 
         api_key=azure_oai_key,  
         api_version="2024-02-15-preview"
-        )
+    )
     ```
 
 3. In the function that calls the Azure OpenAI model, under the comment ***Get response from Azure OpenAI***, add the code to format and send the request to the model.
@@ -289,14 +289,16 @@ Now that your app has been configured, run it to send your request to your model
     **Python**: application.py
 
     ```python
-    # Format and send the request to the model
+    # Initialize messages array
     print("\nAdding grounding context from grounding.txt")
     grounding_text = open(file="grounding.txt", encoding="utf8").read().strip()
-    user_message = grounding_text + user_message
+    messages_array = [{"role": "user", "content": grounding_text}]
     ```
 
 1. Under the comment ***Format and send the request to the model***, replace the code from the comment to the end of the **while** loop with the following code. The code is mostly the same, but now using the messages array to send the request to the model.
 
+    **C#**: Program.cs
+   
     ```csharp
     // Format and send the request to the model
     messagesList.Add(new SystemChatMessage(systemMessage));
@@ -304,15 +306,38 @@ Now that your app has been configured, run it to send your request to your model
     GetResponseFromOpenAI(messagesList);
     ```
 
-1. Under the comment ***Define the function that will get the response from Azure OpenAI endpoint***, replace the function declaration with the following code to use the chat history list when calling the `GetResponseFromOpenAI` function.
+    **Python**: application.py
 
+    ```python
+    # Format and send the request to the model
+    messages_array.append({"role": "system", "content": system_text})
+    messages_array.append({"role": "user", "content": user_text})
+    await call_openai_model(messages=messages_array, 
+        model=azure_oai_deployment, 
+        client=client
+    )
+    ```
+
+1. Under the comment ***Define the function that will get the response from Azure OpenAI endpoint***, replace the function declaration with the following code to use the chat history list when calling the function `GetResponseFromOpenAI` for C# or `call_openai_model` for Python.
+
+    **C#**: Program.cs
+   
     ```csharp
     // Define the function that gets the response from Azure OpenAI endpoint
     private static void GetResponseFromOpenAI(List<ChatMessage> messagesList)
     ```
 
+    **Python**: application.py
+
+    ```python
+    # Define the function that will get the response from Azure OpenAI endpoint
+    async def call_openai_model(messages, model, client):
+    ```
+    
 1. Lastly, replace all the code under ***Get response from Azure OpenAI***. The code is mostly the same, but now using the messages array to store the conversation history.
 
+    **C#**: Program.cs
+   
     ```csharp
     // Get response from Azure OpenAI
     ChatCompletionOptions chatCompletionOptions = new ChatCompletionOptions()
@@ -330,6 +355,24 @@ Now that your app has been configured, run it to send your request to your model
     messagesList.Add(new AssistantChatMessage(completion.Content[0].Text));
     ```
 
+    **Python**: application.py
+
+    ```python
+    # Get response from Azure OpenAI
+    print("\nSending request to Azure OpenAI model...\n")
+
+    # Call the Azure OpenAI model
+    response = await client.chat.completions.create(
+        model=model,
+        messages=messages,
+        temperature=0.7,
+        max_tokens=800
+    )   
+
+    print("Response:\n" + response.choices[0].message.content + "\n")
+    messages.append({"role": "assistant", "content": response.choices[0].message.content})
+    ```
+    
 1. Save the file and rerun your app.
 1. Enter the following prompts (with the **system message** still being entered and saved in `system.txt`).
 
@@ -345,6 +388,18 @@ Now that your app has been configured, run it to send your request to your model
     What animal is the favorite of children at Contoso?
     ```
 
+   Notice that the model uses the grounding text information to answer your question.
+
+1. Without changing the system message, enter the following prompt for the user message:
+
+    **User message:**
+
+    ```prompt
+    How can they interact with it at Contoso?
+    ```
+
+    Notice that the model recognizes "they" as the children and "it" as their favorite animal, since now it has access to your previous question in the chat history.
+   
 ## Clean up
 
 When you're done with your Azure OpenAI resource, remember to delete the deployment or the entire resource in the **Azure portal** at `https://portal.azure.com`.
