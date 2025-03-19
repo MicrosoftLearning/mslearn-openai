@@ -1,11 +1,11 @@
-using System;
-using System.Text.Json;
+using System.ClientModel;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Configuration.Json;
-using Azure;
 
 // Add Azure OpenAI package
 using Azure.AI.OpenAI;
+using Azure.Search.Documents.Models;
+using OpenAI.Chat;
+using Azure.AI.OpenAI.Chat;
 
 // Flag to show citations
 bool showCitations = false;
@@ -22,55 +22,42 @@ string azureSearchKey = config["AzureSearchKey"] ?? "";
 string azureSearchIndex = config["AzureSearchIndex"] ?? "";
 
 // Initialize the Azure OpenAI client
-OpenAIClient client = new OpenAIClient(new Uri(oaiEndpoint), new AzureKeyCredential(oaiKey));
+AzureOpenAIClient azureClient = new (new Uri(oaiEndpoint), new ApiKeyCredential(oaiKey));
+ChatClient chatClient = azureClient.GetChatClient(oaiDeploymentName);
 
 // Get the prompt text
 Console.WriteLine("Enter a question:");
 string text = Console.ReadLine() ?? "";
 
 // Configure your data source
-   // Configure your data source
-    AzureSearchChatExtensionConfiguration ownDataConfig = new()
-    {
-            SearchEndpoint = new Uri(azureSearchEndpoint),
-            Authentication = new OnYourDataApiKeyAuthenticationOptions(azureSearchKey),
-            IndexName = azureSearchIndex
-    };
 
 // Send request to Azure OpenAI model  
 Console.WriteLine("...Sending the following request to Azure OpenAI endpoint...");  
 Console.WriteLine("Request: " + text + "\n");
 
-ChatCompletionsOptions chatCompletionsOptions = new ChatCompletionsOptions()
-{
-    Messages =
-    {
-        new ChatRequestUserMessage(text)
-    },
-    MaxTokens = 600,
-    Temperature = 0.9f,
-    DeploymentName = oaiDeploymentName,
-    // Specify extension options
-    AzureExtensionsOptions = new AzureChatExtensionsOptions()
-    {
-        Extensions = {ownDataConfig}
-    }
-};
+ChatCompletion completion = chatClient.CompleteChat(
+    [
+        new SystemChatMessage("You are an AI assistant that helps with travel-related inquiries, offering tips, advice, and recommendations as a knowledgeable travel agent."),
+        new UserChatMessage(text),
+    ],
+    chatCompletionsOptions);
 
-ChatCompletions response = client.GetChatCompletions(chatCompletionsOptions);
-ChatResponseMessage responseMessage = response.Choices[0].Message;
+ChatMessageContext onYourDataContext = completion.GetMessageContext();
+
+if (onYourDataContext?.Intent is not null)
+{
+    Console.WriteLine($"Intent: {onYourDataContext.Intent}");
+}
 
 // Print response
-Console.WriteLine("Response: " + responseMessage.Content + "\n");
-Console.WriteLine("  Intent: " + responseMessage.AzureExtensionsContext.Intent);
+Console.WriteLine($"{completion.Role}: {completion.Content[0].Text}");
 
 if (showCitations)
 {
     Console.WriteLine($"\n  Citations of data used:");
 
-    foreach (AzureChatExtensionDataSourceResponseCitation citation in responseMessage.AzureExtensionsContext.Citations)
+    foreach (ChatCitation citation in onYourDataContext?.Citations ?? [])
     {
-        Console.WriteLine($"    Citation: {citation.Title} - {citation.Url}");
+        Console.WriteLine($"Citation: {citation.Content}");
     }
 }
-

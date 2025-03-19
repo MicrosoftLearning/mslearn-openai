@@ -1,6 +1,7 @@
 ﻿// Implicit using statements are included
 using System.Text;
 using System.Text.Json;
+using System.ClientModel;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.Json;
 using Azure;
@@ -60,17 +61,14 @@ async Task GetResponseFromOpenAI(string systemMessage, string userMessage)
 
 
     // Format and send the request to the model
+    
 
-    
-    ChatCompletions completions = response.Value;
-    string completion = completions.Choices[0].Message.Content;
-    
     // Write response full response to console, if requested
     if (printFullResponse)
     {
-        Console.WriteLine($"\nFull response: {JsonSerializer.Serialize(completions, new JsonSerializerOptions { WriteIndented = true })}\n\n");
+        Console.WriteLine($"\nFull response: {JsonSerializer.Serialize(response.Content, new JsonSerializerOptions { WriteIndented = true })}\n\n");
     }
 
     // Write response to console
-    Console.WriteLine($"\nResponse:\n{completion}\n\n");
+    Console.WriteLine($"{response.Role}: {response.Content[0].Text}");
 }  
