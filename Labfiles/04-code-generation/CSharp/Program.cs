@@ -1,12 +1,14 @@
 ﻿// Implicit using statements are included
 using System.Text;
 using System.Text.Json;
+using System.ClientModel;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.Json;
 using Azure;
 
 // Add Azure OpenAI package
 using Azure.AI.OpenAI;
+using OpenAI.Chat;
 
 // Build a config object and retrieve user settings.
 IConfiguration config = new ConfigurationBuilder()
@@ -62,7 +64,8 @@ async Task GetResponseFromOpenAI(string prompt)
     }
     
     // Configure the Azure OpenAI client
-    OpenAIClient client = new OpenAIClient(new Uri(oaiEndpoint), new AzureKeyCredential(oaiKey));
+    AzureOpenAIClient azureClient = new (new Uri(oaiEndpoint), new ApiKeyCredential(oaiKey));
+    ChatClient chatClient = azureClient.GetChatClient(oaiDeploymentName);
 
     // Define chat prompts
     string systemPrompt = "You are a helpful AI assistant that helps programmers write code.";
@@ -74,11 +77,11 @@ async Task GetResponseFromOpenAI(string prompt)
     // Write full response to console, if requested
     if (printFullResponse)
     {
-        Console.WriteLine($"\nFull response: {JsonSerializer.Serialize(completions, new JsonSerializerOptions { WriteIndented = true })}\n\n");
+        Console.WriteLine($"\nFull response: {JsonSerializer.Serialize(response.Content, new JsonSerializerOptions { WriteIndented = true })}\n\n");
     }
 
     // Write the file.
-    System.IO.File.WriteAllText("result/app.txt", completion);
+    System.IO.File.WriteAllText("result/app.txt", response.Content[0].Text);
 
     // Write response to console
     Console.WriteLine($"\nResponse written to result/app.txt\n\n");

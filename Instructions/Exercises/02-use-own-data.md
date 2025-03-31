@@ -74,15 +74,14 @@ You're going to use two AI models in this exercise:
 - A text embedding model to *vectorize* the text in the brochures so it can be indexed efficiently for use in grounding prompts.
 - A GPT model that you application can use to generate responses to prompts that are grounded in your data.
 
-
 ## Deploy a model
 
 Next, you will deploy an Azure OpenAI model resource from the CLI. In the Azure portal; select **Cloud Shell** icon from the top menu bar and ensure that your terminal is set to **Bash**. Refer to this example and replace the following variables with your own values:
 
 ```dotnetcli
 az cognitiveservices account deployment create \
-   -g *your resource group* \
-   -n *your Open AI resource* \
+   -g <your_resource_group> \
+   -n <your_OpenAI_resource> \
    --deployment-name text-embedding-ada-002 \
    --model-name text-embedding-ada-002 \
    --model-version "2"  \
@@ -91,24 +90,21 @@ az cognitiveservices account deployment create \
    --sku-capacity 5
 ```
 
-    > \* Sku-capacity is measured in thousands of tokens per minute. A rate limit of 5,000 tokens per minute is more than adequate to complete this exercise while leaving capacity for other people using the same subscription.
+> **Note**: Sku-capacity is measured in thousands of tokens per minute. A rate limit of 5,000 tokens per minute is more than adequate to complete this exercise while leaving capacity for other people using the same subscription.
 
-
-After the text embedding model has been deployed, create a new deployment of the **gpt-35-turbo-16k** model with the following settings:
+After the text embedding model has been deployed, create a new deployment of the **gpt-4o** model with the following settings:
 
 ```dotnetcli
 az cognitiveservices account deployment create \
-   -g *your resource group* \
-   -n *your Open AI resource* \
-   --deployment-name gpt-35-turbo-16k \
-   --model-name gpt-35-turbo-16k \
-   --model-version "0125"  \
+   -g <your_resource_group> \
+   -n <your_OpenAI_resource> \
+   --deployment-name gpt-4o \
+   --model-name gpt-4o \
+   --model-version "2024-05-13" \
    --model-format OpenAI \
    --sku-name "Standard" \
    --sku-capacity 5
 ```
-
-    > \* Sku-capacity is measured in thousands of tokens per minute. A rate limit of 5,000 tokens per minute is more than adequate to complete this exercise while leaving capacity for other people using the same subscription.
 
 ## Create an index
 
@@ -130,7 +126,7 @@ To make it easy to use your own data in a prompt, you'll index it using Azure AI
     - **Model deployment**: text-embedding-ada-002
     - **Authentication type**: API key
     - **I acknowledge that connecting to an Azure OpenAI service will incur additional costs to my account**: Selected
-1. On the next page, do <u>not</u> select the option to vectorize images or extract data with AI skills.
+1. On the next page, do **not** select the option to vectorize images or extract data with AI skills.
 1. On the next page, enable semantic ranking and schedule the indexer to run once.
 1. On the final page, set the **Objects name prefix** to `margies-index` and then create the index.
 
@@ -141,7 +137,7 @@ Now let's explore the use of your own data in an app that uses the Azure OpenAI 
 > **Tip**: If you have already cloned the **mslearn-openai** repo, open it in Visual Studio code. Otherwise, follow these steps to clone it to your development environment.
 
 1. Start Visual Studio Code.
-2. Open the palette (SHIFT+CTRL+P) and run a **Git: Clone** command to clone the `https://github.com/MicrosoftLearning/mslearn-openai` repository to a local folder (it doesn't matter which folder).
+2. Open the palette (SHIFT+CTRL+P or **View** > **Command Palette...**) and run a **Git: Clone** command to clone the `https://github.com/MicrosoftLearning/mslearn-openai` repository to a local folder (it doesn't matter which folder).
 3. When the repository has been cloned, open the folder in Visual Studio Code.
 
     > **Note**: If Visual Studio Code shows you a pop-up message to prompt you to trust the code you are opening, click on **Yes, I trust the authors** option in the pop-up.
@@ -159,24 +155,25 @@ Applications for both C# and Python have been provided, and both apps feature th
 
     **C#**:
 
-    ```
-    dotnet add package Azure.AI.OpenAI --version 1.0.0-beta.17
+    ```powershell
+    dotnet add package Azure.AI.OpenAI --version 2.1.0
+    dotnet add package Azure.Search.Documents --version 11.6.0
     ```
 
     **Python**:
 
-    ```
-    pip install openai==1.54.3
+    ```powershell
+    pip install openai==1.65.2
     ```
 
 3. In the **Explorer** pane, in the **CSharp** or **Python** folder, open the configuration file for your preferred language
 
     - **C#**: appsettings.json
     - **Python**: .env
-    
+
 4. Update the configuration values to include:
     - The  **endpoint** and a **key** from the Azure OpenAI resource you created (available on the **Keys and Endpoint** page for your Azure OpenAI resource in the Azure portal)
-    - The **deployment name** you specified for your gpt-35-turbo model deployment (should be `gpt-35-turbo-16k`.
+    - The **deployment name** you specified for your gpt-4o model deployment (should be `gpt-4o`).
     - The endpoint for your search service (the **Url** value on the overview page for your search resource in the Azure portal).
     - A **key** for your search resource (available in the **Keys** page for your search resource in the Azure portal - you can use either of the admin keys)
     - The name of the search index (which should be `margies-index`).
@@ -186,55 +183,62 @@ Applications for both C# and Python have been provided, and both apps feature th
 
 Now you're ready to use the Azure OpenAI SDK to consume your deployed model.
 
-1. In the **Explorer** pane, in the **CSharp** or **Python** folder, open the code file for your preferred language, and replace the comment ***Configure your data source*** with code to add the Azure OpenAI SDK library:
+1. In the **Explorer** pane, in the **CSharp** or **Python** folder, open the code file for your preferred language, and replace the comment ***Configure your data source*** with code to your index as a data source for chat completion:
 
     **C#**: ownData.cs
 
     ```csharp
     // Configure your data source
-    AzureSearchChatExtensionConfiguration ownDataConfig = new()
+    // Extension methods to use data sources with options are subject to SDK surface changes. Suppress the warning to acknowledge this and use the subject-to-change AddDataSource method.
+    #pragma warning disable AOAI001
+    
+    ChatCompletionOptions chatCompletionsOptions = new ChatCompletionOptions()
     {
-            SearchEndpoint = new Uri(azureSearchEndpoint),
-            Authentication = new OnYourDataApiKeyAuthenticationOptions(azureSearchKey),
-            IndexName = azureSearchIndex
+        MaxOutputTokenCount = 600,
+        Temperature = 0.9f,
     };
+    
+    chatCompletionsOptions.AddDataSource(new AzureSearchChatDataSource()
+    {
+        Endpoint = new Uri(azureSearchEndpoint),
+        IndexName = azureSearchIndex,
+        Authentication = DataSourceAuthentication.FromApiKey(azureSearchKey),
+    });
     ```
 
     **Python**: ownData.py
 
     ```python
-# Configure your data source
-text = input('\nEnter a question:\n')
-
-completion = client.chat.completions.create(
-    model=deployment,
-    messages=[
-        {
-            "role": "user",
-            "content": text,
-        },
-    ],
-    extra_body={
-        "data_sources":[
+    # Configure your data source
+    text = input('\nEnter a question:\n')
+    
+    completion = client.chat.completions.create(
+        model=deployment,
+        messages=[
             {
-                "type": "azure_search",
-                "parameters": {
-                    "endpoint": os.environ["AZURE_SEARCH_ENDPOINT"],
-                    "index_name": os.environ["AZURE_SEARCH_INDEX"],
-                    "authentication": {
-                        "type": "api_key",
-                        "key": os.environ["AZURE_SEARCH_KEY"],
+                "role": "user",
+                "content": text,
+            },
+        ],
+        extra_body={
+            "data_sources":[
+                {
+                    "type": "azure_search",
+                    "parameters": {
+                        "endpoint": os.environ["AZURE_SEARCH_ENDPOINT"],
+                        "index_name": os.environ["AZURE_SEARCH_INDEX"],
+                        "authentication": {
+                            "type": "api_key",
+                            "key": os.environ["AZURE_SEARCH_KEY"],
+                        }
                     }
                 }
-            }
-        ],
-    }
-)
+            ],
+        }
+    )
     ```
 
-2. Review the rest of the code, noting the use of the *extensions* in the request body that is used to provide information about the data source settings.
-
-3. Save the changes to the code file.
+1. Save the changes to the code file.
 
 ## Run your application
 

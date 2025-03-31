@@ -45,9 +45,9 @@ Azure provides a web-based portal named **Azure AI Foundry portal**, that you ca
 > **Note**: As you use Azure AI Foundry portal, message boxes suggesting tasks for you to perform may be displayed. You can close these and follow the steps in this exercise.
 
 1. In the Azure portal, on the **Overview** page for your Azure OpenAI resource, scroll down to the **Get Started** section and select the button to go to **AI Foundry portal** (previously AI Studio).
-1. In Azure AI Foundry portal, in the pane on the left, select the **Deployments** page and view your existing model deployments. If you don't already have one, create a new deployment of the **gpt-35-turbo-16k** model with the following settings:
+1. In Azure AI Foundry portal, in the pane on the left, select the **Deployments** page and view your existing model deployments. If you don't already have one, create a new deployment of the **gpt-4o** model with the following settings:
     - **Deployment name**: *A unique name of your choice*
-    - **Model**: gpt-35-turbo-16k *(if the 16k model isn't available, choose gpt-35-turbo)*
+    - **Model**: gpt-4o
     - **Model version**: *Use default version*
     - **Deployment type**: Standard
     - **Tokens per minute rate limit**: 5K\*
@@ -58,14 +58,14 @@ Azure provides a web-based portal named **Azure AI Foundry portal**, that you ca
 
 ## Use the Chat playground
 
-Now that you've deployed a model, you can use it to generate responses based on natural language prompts. The *Chat* playground in Azure AI Foundry portal provides a chatbot interface for GPT 3.5 and higher models.
+Now that you've deployed a model, you can use it to generate responses based on natural language prompts. The *Chat* playground in Azure AI Foundry portal provides a chatbot interface for GPT 4 and higher models.
 
 > **Note:** The *Chat* playground uses the *ChatCompletions* API rather than the older *Completions* API that is used by the *Completions* playground. The Completions playground is provided for compatibility with older models.
 
 1. In the **Playground** section, select the **Chat** page. The **Chat** playground page consists of a row of buttons and two main panels (which may be arranged right-to-left horizontally, or top-to-bottom vertically depending on your screen resolution):
     - **Configuration** - used to select your deployment, define system message, and set parameters for interacting with your deployment.
     - **Chat session** - used to submit chat messages and view responses.
-1. Under **Deployments**, ensure that your gpt-35-turbo-16k model deployment is selected.
+1. Under **Deployments**, ensure that your gpt-4o model deployment is selected.
 1. Review the default **System message**, which should be *You are an AI assistant that helps people find information.* The system message is included in prompts submitted to the model, and provides context for the model's responses; setting expectations about how an AI agent based on the model should interact with the user.
 1. In the **Chat session** panel, enter the user query `How can I use generative AI to help me market a new product?`
 
@@ -96,13 +96,13 @@ So far, you've engaged in a chat conversation with your model based on the defau
 1. Under the **System message** text box, expand the dropdown for **Add section** and select **Examples**. Then type the following message and response in the designated boxes:
 
     **User**:
-    
+
     ```prompt
     Write an advertisement for the lightweight "Ultramop" mop, which uses patented absorbent materials to clean floors.
     ```
-    
+
     **Assistant**:
-    
+
     ```prompt
     Welcome to the future of cleaning!
     
@@ -147,7 +147,7 @@ Now that you've explored some of the capabilities of a generative AI model in th
     - **Resource group**: *The resource group in which you provisioned your Azure OpenAI resource*
     - **Locations**: *The region where you provisioned your Azure OpenAI resource*
     - **Pricing plan**: Free (F1) - *If this is not available, select Basic (B1)*
-    - **Enable chat history in the web app**: <u>Un</u>selected
+    - **Enable chat history in the web app**: **Un**selected
     - **I acknowledge that web apps will incur usage to my account**: Selected
 1. Deploy the new web app and wait for deployment to complete (which may take 10 minutes or so)
 1. After your web app has deployed successfully, use the button at the top right of the **Chat** playground page to launch the web app. The app may take a few minutes to launch. If prompted, accept the permissions request.

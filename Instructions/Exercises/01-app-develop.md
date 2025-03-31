@@ -17,7 +17,7 @@ This exercise will take approximately **30** minutes.
 If you have not already done so, you must clone the code repository for this course:
 
 1. Start Visual Studio Code.
-2. Open the palette (SHIFT+CTRL+P) and run a **Git: Clone** command to clone the `https://github.com/MicrosoftLearning/mslearn-openai` repository to a local folder (it doesn't matter which folder).
+2. Open the command palette (SHIFT+CTRL+P or **View** > **Command Palette...**) and run a **Git: Clone** command to clone the `https://github.com/MicrosoftLearning/mslearn-openai` repository to a local folder (it doesn't matter which folder).
 3. When the repository has been cloned, open the folder in Visual Studio Code.
 4. Wait while additional files are installed to support the C# code projects in the repo.
 
@@ -47,7 +47,7 @@ If you don't already have one, provision an Azure OpenAI resource in your Azure 
 
     > \* Azure OpenAI resources are constrained by regional quotas. The listed regions include default quota for the model type(s) used in this exercise. Randomly choosing a region reduces the risk of a single region reaching its quota limit in scenarios where you are sharing a subscription with other users. In the event of a quota limit being reached later in the exercise, there's a possibility you may need to create another resource in a different region.
 
-3. Wait for deployment to complete. Then go to the deployed Azure OpenAI resource in the Azure portal.
+1. Wait for deployment to complete. Then go to the deployed Azure OpenAI resource in the Azure portal.
 
 ## Deploy a model
 
@@ -55,20 +55,17 @@ Next, you will deploy an Azure OpenAI model resource from the CLI. Refer to this
 
 ```dotnetcli
 az cognitiveservices account deployment create \
-   -g *Your resource group* \
-   -n *Name of your OpenAI service* \
-   --deployment-name gpt-35-turbo \
-   --model-name gpt-35-turbo \
-   --model-version 0125  \
+   -g <your_resource_group> \
+   -n <your_OpenAI_service> \
+   --deployment-name gpt-4o \
+   --model-name gpt-4o \
+   --model-version 2024-05-13 \
    --model-format OpenAI \
    --sku-name "Standard" \
    --sku-capacity 5
 ```
 
-    > \* Sku-capacity is measured in thousands of tokens per minute. A rate limit of 5,000 tokens per minute is more than adequate to complete this exercise while leaving capacity for other people using the same subscription.
-
-> [!NOTE]
-> If you see a warnings about net7.0 framework being out of support, you can disregard them for this exercise.
+> **Note**: Sku-capacity is measured in thousands of tokens per minute. A rate limit of 5,000 tokens per minute is more than adequate to complete this exercise while leaving capacity for other people using the same subscription.
 
 ## Configure your application
 
@@ -79,21 +76,21 @@ Applications for both C# and Python have been provided, and both apps feature th
 
     **C#**:
 
-    ```
-    dotnet add package Azure.AI.OpenAI --version 2.0.0
+    ```powershell
+    dotnet add package Azure.AI.OpenAI --version 2.1.0
     ```
 
     **Python**:
 
-    ```
-    pip install openai==1.54.3
+    ```powershell
+    pip install openai==1.65.2
     ```
 
 3. In the **Explorer** pane, in the **CSharp** or **Python** folder, open the configuration file for your preferred language
 
     - **C#**: appsettings.json
     - **Python**: .env
-    
+
 4. Update the configuration values to include:
     - The  **endpoint** and a **key** from the Azure OpenAI resource you created (available on the **Keys and Endpoint** page for your Azure OpenAI resource in the Azure portal)
     - The **deployment name** you specified for your model deployment.
@@ -138,7 +135,7 @@ Now you're ready to use the Azure OpenAI SDK to consume your deployed model.
         azure_endpoint = azure_oai_endpoint, 
         api_key=azure_oai_key,  
         api_version="2024-02-15-preview"
-        )
+    )
     ```
 
 3. In the function that calls the Azure OpenAI model, under the comment ***Get response from Azure OpenAI***, add the code to format and send the request to the model.
@@ -271,28 +268,112 @@ Now that your app has been configured, run it to send your request to your model
     ```
 
 1. Observe the output. This time you'll likely see the email in a similar format, but with a much more informal tone. You'll likely even see jokes included!
-1. For the final iteration, we're deviating from email generation and exploring *grounding context*. Here you provide a simple system message, and change the app to provide the grounding context as the beginning of the user prompt. The app will then append the user input, and extract information from the grounding context to answer our user prompt.
+
+## Use grounding context and maintain chat history
+
+1. For the final iteration, we're deviating from email generation and exploring *grounding context* and maintaining chat history. Here you provide a simple system message, and change the app to provide the grounding context as the beginning of the chat history. The app will then append the user input, and extract information from the grounding context to answer our user prompt.
 1. Open the file `grounding.txt` and briefly read the grounding context you'll be inserting.
-1. In your app immediately after the comment ***Format and send the request to the model*** and before any existing code, add the following code snippet to read text in from `grounding.txt` to augment the user prompt with the grounding context.
+1. In your app immediately after the comment ***Initialize messages list*** and before any existing code, add the following code snippet to read text in from `grounding.txt` and to initialize the chat history with the grounding context.
 
     **C#**: Program.cs
 
     ```csharp
-    // Format and send the request to the model
+    // Initialize messages list
     Console.WriteLine("\nAdding grounding context from grounding.txt");
     string groundingText = System.IO.File.ReadAllText("grounding.txt");
-    userMessage = groundingText + userMessage;
+    var messagesList = new List<ChatMessage>()
+    {
+        new UserChatMessage(groundingText),
+    };
+    ```
+
+    **Python**: application.py
+
+    ```python
+    # Initialize messages array
+    print("\nAdding grounding context from grounding.txt")
+    grounding_text = open(file="grounding.txt", encoding="utf8").read().strip()
+    messages_array = [{"role": "user", "content": grounding_text}]
+    ```
+
+1. Under the comment ***Format and send the request to the model***, replace the code from the comment to the end of the **while** loop with the following code. The code is mostly the same, but now using the messages array to send the request to the model.
+
+    **C#**: Program.cs
+   
+    ```csharp
+    // Format and send the request to the model
+    messagesList.Add(new SystemChatMessage(systemMessage));
+    messagesList.Add(new UserChatMessage(userMessage));
+    GetResponseFromOpenAI(messagesList);
     ```
 
     **Python**: application.py
 
     ```python
     # Format and send the request to the model
-    print("\nAdding grounding context from grounding.txt")
-    grounding_text = open(file="grounding.txt", encoding="utf8").read().strip()
-    user_message = grounding_text + user_message
+    messages_array.append({"role": "system", "content": system_text})
+    messages_array.append({"role": "user", "content": user_text})
+    await call_openai_model(messages=messages_array, 
+        model=azure_oai_deployment, 
+        client=client
+    )
     ```
 
+1. Under the comment ***Define the function that will get the response from Azure OpenAI endpoint***, replace the function declaration with the following code to use the chat history list when calling the function `GetResponseFromOpenAI` for C# or `call_openai_model` for Python.
+
+    **C#**: Program.cs
+   
+    ```csharp
+    // Define the function that gets the response from Azure OpenAI endpoint
+    private static void GetResponseFromOpenAI(List<ChatMessage> messagesList)
+    ```
+
+    **Python**: application.py
+
+    ```python
+    # Define the function that will get the response from Azure OpenAI endpoint
+    async def call_openai_model(messages, model, client):
+    ```
+    
+1. Lastly, replace all the code under ***Get response from Azure OpenAI***. The code is mostly the same, but now using the messages array to store the conversation history.
+
+    **C#**: Program.cs
+   
+    ```csharp
+    // Get response from Azure OpenAI
+    ChatCompletionOptions chatCompletionOptions = new ChatCompletionOptions()
+    {
+        Temperature = 0.7f,
+        MaxOutputTokenCount = 800
+    };
+
+    ChatCompletion completion = chatClient.CompleteChat(
+        messagesList,
+        chatCompletionOptions
+    );
+
+    Console.WriteLine($"{completion.Role}: {completion.Content[0].Text}");
+    messagesList.Add(new AssistantChatMessage(completion.Content[0].Text));
+    ```
+
+    **Python**: application.py
+
+    ```python
+    # Get response from Azure OpenAI
+    print("\nSending request to Azure OpenAI model...\n")
+
+    # Call the Azure OpenAI model
+    response = await client.chat.completions.create(
+        model=model,
+        messages=messages,
+        temperature=0.7,
+        max_tokens=800
+    )   
+
+    print("Response:\n" + response.choices[0].message.content + "\n")
+    messages.append({"role": "assistant", "content": response.choices[0].message.content})
+    ```
+    
 1. Save the file and rerun your app.
 1. Enter the following prompts (with the **system message** still being entered and saved in `system.txt`).
 
@@ -308,8 +389,18 @@ Now that your app has been configured, run it to send your request to your model
     What animal is the favorite of children at Contoso?
     ```
 
-> **Tip**: If you would like to see the full response from Azure OpenAI, you can set the **printFullResponse** variable to `True`, and rerun the app.
+   Notice that the model uses the grounding text information to answer your question.
 
+1. Without changing the system message, enter the following prompt for the user message:
+
+    **User message:**
+
+    ```prompt
+    How can they interact with it at Contoso?
+    ```
+
+    Notice that the model recognizes "they" as the children and "it" as their favorite animal, since now it has access to your previous question in the chat history.
+   
 ## Clean up
 
 When you're done with your Azure OpenAI resource, remember to delete the deployment or the entire resource in the **Azure portal** at `https://portal.azure.com`.
