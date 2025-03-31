@@ -1,6 +1,7 @@
 ---
 lab:
     title: 'Use Azure OpenAI SDKs in your app'
+    status: stale
 ---
 
 # Use Azure OpenAI APIs in your app

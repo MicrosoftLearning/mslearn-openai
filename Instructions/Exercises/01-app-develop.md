@@ -1,6 +1,7 @@
 ---
 lab:
     title: 'Application development with Azure OpenAI Service'
+    status: new
 ---
 
 # Application development with Azure OpenAI Service
