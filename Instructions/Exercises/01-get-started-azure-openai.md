@@ -21,16 +21,14 @@ If you don't already have one, provision an Azure OpenAI resource in your Azure 
     - **Subscription**: *Select an Azure subscription that has been approved for access to the Azure OpenAI service*
     - **Resource group**: *Choose or create a resource group*
     - **Region**: *Make a **random** choice from any of the following regions*\*
-        - Australia East
-        - Canada East
         - East US
         - East US 2
-        - France Central
-        - Japan East
         - North Central US
+        - South Central US
         - Sweden Central
-        - Switzerland North
-        - UK South
+        - West US
+        - West US 3
+
     - **Name**: *A unique name of your choice*
     - **Pricing tier**: Standard S0
 
