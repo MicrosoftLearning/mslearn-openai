@@ -74,7 +74,11 @@ You're going to use two AI models in this exercise:
 
 ## Deploy a model
 
-Next, you will deploy an Azure OpenAI model resource from the CLI. In the Azure portal; select **Cloud Shell** icon from the top menu bar and ensure that your terminal is set to **Bash**. Refer to this example and replace the following variables with your own values:
+Next, you will deploy Azure OpenAI models from Cloud Shell.
+
+1. Use the **[\>_]** button to the right of the search bar at the top of the page to create a new Cloud Shell in the Azure portal, selecting a ***Bash*** environment. The cloud shell provides a command line interface in a pane at the bottom of the Azure portal.
+
+    > **Note**: If you have previously created a cloud shell that uses a *PowerShell* environment, switch it to ***Bash***.
 
 ```dotnetcli
 az cognitiveservices account deployment create \
