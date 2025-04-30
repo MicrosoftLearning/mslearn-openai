@@ -7,7 +7,7 @@ lab:
 
 # Generate images with AI
 
-In this exercise, you use the OpenAI DALL-E generative AI model to generate images. You'll develop your app by using Azure AI Foundry and the Azure OpenAI service.
+In this exercise, you use the the OpenAI DALL-E generative AI model to generate images. You'll develop your app by using Azure AI Foundry and the Azure OpenAI service.
 
 This exercise takes approximately **30** minutes.
 
@@ -20,16 +20,16 @@ Let's start by creating an Azure AI Foundry project.
     ![Screenshot of Azure AI Foundry portal.](../media/ai-foundry-home.png)
 
 1. In the home page, select **+ Create project**.
-1. In the **Create a project** wizard, enter a suitable project name for (for example, `my-ai-project`) then review the Azure resources that will be automatically created to support your project.
+1. In the **Create a project** wizard, enter a valid name for your project and if an existing hub is suggested, choose the option to create a new one. Then review the Azure resources that will be automatically created to support your hub and project.
 1. Select **Customize** and specify the following settings for your hub:
-    - **Hub name**: *A unique name - for example `my-ai-hub`*
+    - **Hub name**: *A valid name for your hub*
     - **Subscription**: *Your Azure subscription*
-    - **Resource group**: *Create a new resource group with a unique name (for example, `my-ai-resources`), or select an existing one*
+    - **Resource group**: *Create or select a resource group*
     - **Location**: Select **Help me choose** and then select **dalle** in the Location helper window and use the recommended region\*
-    - **Connect Azure AI Services or Azure OpenAI**: *Create a new AI Services resource with an appropriate name (for example, `my-ai-services`) or use an existing one*
+    - **Connect Azure AI Services or Azure OpenAI**: *Create a new AI Services resource*
     - **Connect Azure AI Search**: Skip connecting
 
-    > \* Azure OpenAI resources are constrained at the tenant level by regional quotas. In the event of a quota limit being reached later in the exercise, there's a possibility you may need to create another resource in a different region.
+    > \* Azure OpenAI resources are constrained by regional quotas. In the event of a quota limit being reached later in the exercise, there's a possibility you may need to create another resource in a different region.
 
 1. Select **Next** and review your configuration. Then select **Create** and wait for the process to complete.
 1. When your project is created, close any tips that are displayed and review the project page in Azure AI Foundry portal, which should look similar to the following image:
@@ -40,12 +40,12 @@ Let's start by creating an Azure AI Foundry project.
 
 Now you're ready to deploy a DALL-E model to support image-generation.
 
-1. In the toolbar at the top right of your Azure AI Foundry project page, use the **Preview features** icon to enable the **Deploy models to Azure AI model inference service** feature.
+1. In the toolbar at the top right of your Azure AI Foundry project page, use the **Preview features** icon to enable the **Deploy models to Azure AI model inference service** feature. This feature ensures your model deployment is available to the Azure AI Inference service, which you'll use in your application code.
 1. In the pane on the left for your project, in the **My assets** section, select the **Models + endpoints** page.
 1. In the **Models + endpoints** page, in the **Model deployments** tab, in the **+ Deploy model** menu, select **Deploy base model**.
 1. Search for the **dall-e-3** model in the list, and then select and confirm it.
 1. Agree to the license agreement if prompted, and then deploy the model with the following settings by selecting **Customize** in the deployment details:
-    - **Deployment name**: *A unique name for your model deployment - for example `dall-e-3` (remember the name you assign, you'll need it later*)
+    - **Deployment name**: *A valid name for your model deployment*
     - **Deployment type**: Standard
     - **Deployment details**: *Use the default settings*
 1. Wait for the deployment provisioning state to be **Completed**.
@@ -78,20 +78,20 @@ The model seems to work in the playground. Now you can use the Azure OpenAI SDK 
 
     > **Note**: If you have previously created a cloud shell that uses a *Bash* environment, switch it to ***PowerShell***.
 
-1. In the cloud shell toolbar, in the **Settings** menu, select **Go to Classic version** (this is required to use the code editor).
+5. In the cloud shell toolbar, in the **Settings** menu, select **Go to Classic version** (this is required to use the code editor).
 
-    > **Tip**: As you paste commands into the cloudshell, the ouput may take up a large amount of the screen buffer. You can clear the screen by entering the `cls` command to make it easier to focus on each task.
+    **<font color="red">Ensure you've switched to the classic version of the cloud shell before continuing.</font>**
 
-1. In the PowerShell pane, enter the following commands to clone the GitHub repo for this exercise:
+1. In the cloud shell pane, enter the following commands to clone the GitHub repo containing the code files for this exercise (type the command, or copy it to the clipboard and then right-click in the command line and paste as plain text):
 
     ```
     rm -r mslearn-openai -f
     git clone https://github.com/microsoftlearning/mslearn-openai mslearn-openai
     ```
 
-> **Note**: Follow the steps for your chosen programming language.
+    > **Tip**: As you paste commands into the cloudshell, the ouput may take up a large amount of the screen buffer. You can clear the screen by entering the `cls` command to make it easier to focus on each task.
 
-1. After the repo has been cloned, navigate to the folder containing the application code files:  
+1. After the repo has been cloned, navigate to the language-specific folder containing the application code files, based on the programming language of your choice (Python or C#):  
 
     **Python**
 
@@ -110,10 +110,10 @@ The model seems to work in the playground. Now you can use the Azure OpenAI SDK 
     **Python**
 
     ```
+   python -m venv labenv
+   ./labenv/bin/Activate.ps1
    pip install python-dotenv azure-identity azure-ai-projects openai requests
     ```
-
-    *You can ignore errors about the version of pip and the local path*
 
     **C#**
 
@@ -164,7 +164,8 @@ The model seems to work in the playground. Now you can use the Azure OpenAI SDK 
 
     **Python**
 
-    ```
+    ```python
+   # Add references
    from dotenv import load_dotenv
    from azure.identity import DefaultAzureCredential
    from azure.ai.projects import AIProjectClient
@@ -174,7 +175,8 @@ The model seems to work in the playground. Now you can use the Azure OpenAI SDK 
 
     **C#**
 
-    ```
+    ```csharp
+   // Add references
    using Azure.Identity;
    using Azure.AI.Projects;
    using Azure.AI.OpenAI;
@@ -186,7 +188,8 @@ The model seems to work in the playground. Now you can use the Azure OpenAI SDK 
 
     **Python**
 
-    ```
+    ```python
+   # Initialize the project client
    project_client = AIProjectClient.from_connection_string(
         conn_str=project_connection,
         credential=DefaultAzureCredential())
@@ -194,7 +197,8 @@ The model seems to work in the playground. Now you can use the Azure OpenAI SDK 
 
     **C#**
 
-    ```
+    ```csharp
+   // Initialize the project client
    var projectClient = new AIProjectClient(project_connection,
                         new DefaultAzureCredential());
     ```
@@ -203,14 +207,16 @@ The model seems to work in the playground. Now you can use the Azure OpenAI SDK 
 
     **Python**
 
-    ```
+    ```python
+   # Get an OpenAI client
    openai_client = project_client.inference.get_azure_openai_client(api_version="2024-06-01")
 
     ```
 
     **C#**
 
-    ```
+    ```csharp
+   // Get an OpenAI client
    ConnectionResponse connection = projectClient.GetConnectionsClient().GetDefaultConnection(ConnectionType.AzureOpenAI, withCredential: true);
 
    var connectionProperties = connection.Properties as ConnectionPropertiesApiKeyAuth;
@@ -228,6 +234,7 @@ The model seems to work in the playground. Now you can use the Azure OpenAI SDK 
     **Python**
 
     ```python
+   # Generate an image
    result = openai_client.images.generate(
         model=model_deployment,
         prompt=input_text,
@@ -240,7 +247,8 @@ The model seems to work in the playground. Now you can use the Azure OpenAI SDK 
 
     **C#**
 
-    ```
+    ```csharp
+   // Generate an image
    var imageGeneration = await openAIimageClient.GenerateImageAsync(
             input_text,
             new ImageGenerationOptions()
@@ -276,15 +284,13 @@ The model seems to work in the playground. Now you can use the Azure OpenAI SDK 
 
     > **Note**: In this simple app, we haven't implemented logic to retain conversation history; so the model will treat each prompt as a new request with no context of the previous prompt.
 
-1. To download and view the images that were generated by your app, in the toolbar for the cloud shell pane, use the **Upload/Download files** button to download a file, and then open it. To download a file, complete its file path in the download interface; for example:
+1. To download and view the images that were generated by your app, use the cloud shell **download** command - specifying the .png file that was generated:
 
-    **Python**
+    ```
+   download ./images/image_1.png
+    ```
 
-    /home/*user*`/mslearn-openai/Labfiles/03-image-generation/Python/images/image_1.png`
-
-    **C#**
-
-    /home/*user*`/mslearn-openai/Labfiles/03-image-generation/CSharp/images/image_1.png`
+    The download command creates a popup link at the bottom right of your browser, which you can select to download and open the file.
 
 ## Summary
 
