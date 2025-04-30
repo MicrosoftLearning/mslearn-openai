@@ -28,7 +28,6 @@ If you don't already have one, provision an Azure OpenAI resource in your Azure 
         - Sweden Central
         - West US
         - West US 3
-
     - **Name**: *A unique name of your choice*
     - **Pricing tier**: Standard S0
 
