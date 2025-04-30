@@ -33,15 +33,14 @@ If you don't already have one, provision an Azure OpenAI resource in your Azure 
     - **Subscription**: *Select an Azure subscription that has been approved for access to the Azure OpenAI service*
     - **Resource group**: *Choose or create a resource group*
     - **Region**: *Make a **random** choice from any of the following regions*\*
-        - Canada East
         - East US
         - East US 2
-        - France Central
-        - Japan East
         - North Central US
+        - South Central US
         - Sweden Central
-        - Switzerland North
-        - UK South
+        - West US
+        - West US 3
+
     - **Name**: *A unique name of your choice*
     - **Pricing tier**: Standard S0
 
@@ -51,19 +50,25 @@ If you don't already have one, provision an Azure OpenAI resource in your Azure 
 
 ## Deploy a model
 
-Next, you will deploy an Azure OpenAI model resource from the CLI. Refer to this example and replace the following variables with your own values from above:
+Next, you will deploy an Azure OpenAI model resource from Cloud Shell.
 
-```dotnetcli
-az cognitiveservices account deployment create \
-   -g <your_resource_group> \
-   -n <your_OpenAI_service> \
-   --deployment-name gpt-4o \
-   --model-name gpt-4o \
-   --model-version 2024-05-13 \
-   --model-format OpenAI \
-   --sku-name "Standard" \
-   --sku-capacity 5
-```
+1. Use the **[\>_]** button to the right of the search bar at the top of the page to create a new Cloud Shell in the Azure portal, selecting a ***Bash*** environment. The cloud shell provides a command line interface in a pane at the bottom of the Azure portal.
+
+    > **Note**: If you have previously created a cloud shell that uses a *PowerShell* environment, switch it to ***Bash***.
+
+1. Refer to this example and replace the following variables with your own values from above:
+
+    ```dotnetcli
+    az cognitiveservices account deployment create \
+       -g <your_resource_group> \
+       -n <your_OpenAI_service> \
+       --deployment-name gpt-4o \
+       --model-name gpt-4o \
+       --model-version 2024-05-13 \
+       --model-format OpenAI \
+       --sku-name "Standard" \
+       --sku-capacity 5
+    ```
 
 > **Note**: Sku-capacity is measured in thousands of tokens per minute. A rate limit of 5,000 tokens per minute is more than adequate to complete this exercise while leaving capacity for other people using the same subscription.
 
@@ -245,7 +250,7 @@ Now that your app has been configured, run it to send your request to your model
     - Rescue name is Contoso 
     - It specializes in elephants, as well as zebras and giraffes 
     - Call for donations to be given at our website 
-    \n Include a list of the current animals we have at our rescue after the signature, in the form of a table. These animals include elephants, zebras, gorillas, lizards, and jackrabbits.
+    Include a list of the current animals we have at our rescue after the signature, in the form of a table. These animals include elephants, zebras, gorillas, lizards, and jackrabbits.
     ```
 
 1. Observe the output, and see how the email has changed based on your clear instructions.
@@ -264,7 +269,7 @@ Now that your app has been configured, run it to send your request to your model
     - Rescue name is Contoso 
     - It specializes in elephants, as well as zebras and giraffes 
     - Call for donations to be given at our website 
-    \n Include a list of the current animals we have at our rescue after the signature, in the form of a table. These animals include elephants, zebras, gorillas, lizards, and jackrabbits.
+    Include a list of the current animals we have at our rescue after the signature, in the form of a table. These animals include elephants, zebras, gorillas, lizards, and jackrabbits.
     ```
 
 1. Observe the output. This time you'll likely see the email in a similar format, but with a much more informal tone. You'll likely even see jokes included!
