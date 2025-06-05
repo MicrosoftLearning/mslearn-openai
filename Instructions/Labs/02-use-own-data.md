@@ -80,33 +80,33 @@ Next, you will deploy Azure OpenAI models from Cloud Shell.
 
     > **Note**: If you have previously created a cloud shell that uses a *PowerShell* environment, switch it to ***Bash***.
 
-```dotnetcli
-az cognitiveservices account deployment create \
-   -g <your_resource_group> \
-   -n <your_OpenAI_resource> \
-   --deployment-name text-embedding-ada-002 \
-   --model-name text-embedding-ada-002 \
-   --model-version "2"  \
-   --model-format OpenAI \
-   --sku-name "Standard" \
-   --sku-capacity 5
-```
+    ```dotnetcli
+   az cognitiveservices account deployment create \
+      -g <your_resource_group> \
+      -n <your_OpenAI_resource> \
+      --deployment-name text-embedding-ada-002 \
+      --model-name text-embedding-ada-002 \
+      --model-version "2"  \
+      --model-format OpenAI \
+      --sku-name "Standard" \
+      --sku-capacity 5
+    ```
 
-> **Note**: Sku-capacity is measured in thousands of tokens per minute. A rate limit of 5,000 tokens per minute is more than adequate to complete this exercise while leaving capacity for other people using the same subscription.
+    > **Note**: Sku-capacity is measured in thousands of tokens per minute. A rate limit of 5,000 tokens per minute is more than adequate to complete this exercise while leaving capacity for other people using the same subscription.
 
-After the text embedding model has been deployed, create a new deployment of the **gpt-4o** model with the following settings:
+    After the text embedding model has been deployed, create a new deployment of the **gpt-4o** model with the following settings:
 
-```dotnetcli
-az cognitiveservices account deployment create \
-   -g <your_resource_group> \
-   -n <your_OpenAI_resource> \
-   --deployment-name gpt-4o \
-   --model-name gpt-4o \
-   --model-version "2024-05-13" \
-   --model-format OpenAI \
-   --sku-name "Standard" \
-   --sku-capacity 5
-```
+    ```dotnetcli
+   az cognitiveservices account deployment create \
+      -g <your_resource_group> \
+      -n <your_OpenAI_resource> \
+      --deployment-name gpt-4o \
+      --model-name gpt-4o \
+      --model-version "2024-05-13" \
+      --model-format OpenAI \
+      --sku-name "Standard" \
+      --sku-capacity 5
+    ```
 
 ## Create an index
 
@@ -132,112 +132,160 @@ To make it easy to use your own data in a prompt, you'll index it using Azure AI
 1. On the next page, enable semantic ranking and schedule the indexer to run once.
 1. On the final page, set the **Objects name prefix** to `margies-index` and then create the index.
 
-## Prepare to develop an app in Visual Studio Code
+## Prepare to develop an app in Cloud Shell
 
-Now let's explore the use of your own data in an app that uses the Azure OpenAI service SDK. You'll develop your app using Visual Studio Code. The code files for your app have been provided in a GitHub repo.
+Now let's explore the use of your own data in an app that uses the Azure OpenAI service SDK. You'll develop your app using Cloud Shell. The code files for your app have been provided in a GitHub repo.
 
-> **Tip**: If you have already cloned the **mslearn-openai** repo, open it in Visual Studio code. Otherwise, follow these steps to clone it to your development environment.
+> **Tip**: If you have already cloned the **mslearn-openai** repo, navigate to the exercise's folder in Cloud Shell. Otherwise, follow these steps to clone it to your development environment.
 
-1. Start Visual Studio Code.
-2. Open the palette (SHIFT+CTRL+P or **View** > **Command Palette...**) and run a **Git: Clone** command to clone the `https://github.com/MicrosoftLearning/mslearn-openai` repository to a local folder (it doesn't matter which folder).
-3. When the repository has been cloned, open the folder in Visual Studio Code.
+1. In the cloud shell toolbar, select **Switch to Powershell**, and in the **Settings** menu, select **Go to Classic version** (this is required to use the code editor).
 
-    > **Note**: If Visual Studio Code shows you a pop-up message to prompt you to trust the code you are opening, click on **Yes, I trust the authors** option in the pop-up.
+    **<font color="red">Ensure you've switched to the classic version of the cloud shell before continuing.</font>**
 
-4. Wait while additional files are installed to support the C# code projects in the repo.
+1. In the cloud shell pane, enter the following commands to clone the GitHub repo containing the code files for this exercise (type the command, or copy it to the clipboard and then right-click in the command line and paste as plain text):
 
-    > **Note**: If you are prompted to add required assets to build and debug, select **Not Now**.
+    ```
+   rm -r mslearn-openai -f
+   git clone https://github.com/microsoftlearning/mslearn-openai mslearn-openai
+    ```
+
+    > **Tip**: As you enter commands into the cloudshell, the output may take up a large amount of the screen buffer. You can clear the screen by entering the `cls` command to make it easier to focus on each task.
 
 ## Configure your application
 
 Applications for both C# and Python have been provided, and both apps feature the same functionality. First, you'll complete some key parts of the application to enable using your Azure OpenAI resource.
 
-1. In Visual Studio Code, in the **Explorer** pane, browse to the **Labfiles/02-use-own-data** folder and expand the **CSharp** or **Python** folder depending on your language preference. Each folder contains the language-specific files for an app into which you're going to integrate Azure OpenAI functionality.
-2. Right-click the **CSharp** or **Python** folder containing your code files and open an integrated terminal. Then install the Azure OpenAI SDK package by running the appropriate command for your language preference:
+1. After the repo has been cloned, navigate to the folder containing the chat application code files:
 
-    **C#**:
+    Use the command below depending on your choice of programming language.
 
-    ```powershell
-    dotnet add package Azure.AI.OpenAI --version 2.1.0
-    dotnet add package Azure.Search.Documents --version 11.6.0
+    **Python**
+
+    ```
+   cd mslearn-openai/Labfiles/02-use-own-data/Python
     ```
 
-    **Python**:
+    **C#**
 
-    ```powershell
-    pip install openai==1.65.2
+    ```
+   cd mslearn-openai/Labfiles/02-use-own-data/CSharp
     ```
 
-3. In the **Explorer** pane, in the **CSharp** or **Python** folder, open the configuration file for your preferred language
+1. In the cloud shell command-line pane, enter the following command to install the libraries you'll use:
 
-    - **C#**: appsettings.json
-    - **Python**: .env
+    **Python**
 
-4. Update the configuration values to include:
+    ```
+   python -m venv labenv
+   ./labenv/bin/Activate.ps1
+   pip install python-dotenv openai==1.65.2
+    ```
+
+    **C#**
+
+    ```
+   dotnet add package Azure.AI.OpenAI --version 2.1.0
+   dotnet add package Azure.Search.Documents --version 11.6.0
+    ```
+
+1. Enter the following command to edit the configuration file that has been provided:
+
+    **Python**
+
+    ```
+   code .env
+    ```
+
+    **C#**
+
+    ```
+   code appsettings.json
+    ```
+
+    The file is opened in a code editor.
+
+1. Update the configuration values to include:
     - The  **endpoint** and a **key** from the Azure OpenAI resource you created (available on the **Keys and Endpoint** page for your Azure OpenAI resource in the Azure portal)
     - The **deployment name** you specified for your gpt-4o model deployment (should be `gpt-4o`).
     - The endpoint for your search service (the **Url** value on the overview page for your search resource in the Azure portal).
     - A **key** for your search resource (available in the **Keys** page for your search resource in the Azure portal - you can use either of the admin keys)
     - The name of the search index (which should be `margies-index`).
-5. Save the configuration file.
+
+1. After you've replaced the placeholders, within the code editor, use the **CTRL+S** command or **Right-click > Save** to save your changes and then use the **CTRL+Q** command or **Right-click > Quit** to close the code editor while keeping the cloud shell command line open.
 
 ### Add code to use the Azure OpenAI service
 
 Now you're ready to use the Azure OpenAI SDK to consume your deployed model.
 
-1. In the **Explorer** pane, in the **CSharp** or **Python** folder, open the code file for your preferred language, and replace the comment ***Configure your data source*** with code to your index as a data source for chat completion:
+> **Tip**: As you add code, be sure to maintain the correct indentation.
 
-    **C#**: ownData.cs
+1. Enter the following command to edit the code file that has been provided:
 
-    ```csharp
-    // Configure your data source
-    // Extension methods to use data sources with options are subject to SDK surface changes. Suppress the warning to acknowledge this and use the subject-to-change AddDataSource method.
-    #pragma warning disable AOAI001
-    
-    ChatCompletionOptions chatCompletionsOptions = new ChatCompletionOptions()
-    {
-        MaxOutputTokenCount = 600,
-        Temperature = 0.9f,
-    };
-    
-    chatCompletionsOptions.AddDataSource(new AzureSearchChatDataSource()
-    {
-        Endpoint = new Uri(azureSearchEndpoint),
-        IndexName = azureSearchIndex,
-        Authentication = DataSourceAuthentication.FromApiKey(azureSearchKey),
-    });
+    **Python**
+
+    ```
+   code ownData.py
     ```
 
-    **Python**: ownData.py
+    **C#**
+
+    ```
+   code OwnData.cs
+    ```
+
+1. In the code editor, and replace the comment ***Configure your data source*** with code to your index as a data source for chat completion:
+
+    **Python**
 
     ```python
-    # Configure your data source
-    text = input('\nEnter a question:\n')
+   # Configure your data source
+   text = input('\nEnter a question:\n')
     
-    completion = client.chat.completions.create(
-        model=deployment,
-        messages=[
-            {
-                "role": "user",
-                "content": text,
-            },
-        ],
-        extra_body={
-            "data_sources":[
-                {
-                    "type": "azure_search",
-                    "parameters": {
-                        "endpoint": os.environ["AZURE_SEARCH_ENDPOINT"],
-                        "index_name": os.environ["AZURE_SEARCH_INDEX"],
-                        "authentication": {
-                            "type": "api_key",
-                            "key": os.environ["AZURE_SEARCH_KEY"],
-                        }
-                    }
-                }
-            ],
-        }
-    )
+   completion = client.chat.completions.create(
+       model=deployment,
+       messages=[
+           {
+               "role": "user",
+               "content": text,
+           },
+       ],
+       extra_body={
+           "data_sources":[
+               {
+                   "type": "azure_search",
+                   "parameters": {
+                       "endpoint": os.environ["AZURE_SEARCH_ENDPOINT"],
+                       "index_name": os.environ["AZURE_SEARCH_INDEX"],
+                       "authentication": {
+                           "type": "api_key",
+                           "key": os.environ["AZURE_SEARCH_KEY"],
+                       }
+                   }
+               }
+           ],
+       }
+   )
+    ```
+
+    **C#**
+
+    ```csharp
+   // Configure your data source
+   // Extension methods to use data sources with options are subject to SDK surface changes. Suppress the warning to acknowledge this and use the subject-to-change AddDataSource method.
+   #pragma warning disable AOAI001
+    
+   ChatCompletionOptions chatCompletionsOptions = new ChatCompletionOptions()
+   {
+       MaxOutputTokenCount = 600,
+       Temperature = 0.9f,
+   };
+    
+   chatCompletionsOptions.AddDataSource(new AzureSearchChatDataSource()
+   {
+       Endpoint = new Uri(azureSearchEndpoint),
+       IndexName = azureSearchIndex,
+       Authentication = DataSourceAuthentication.FromApiKey(azureSearchKey),
+   });
     ```
 
 1. Save the changes to the code file.
