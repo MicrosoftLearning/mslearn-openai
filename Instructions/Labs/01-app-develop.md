@@ -90,7 +90,7 @@ Applications for both C# and Python have been provided, and both apps feature th
     **C#**
 
     ```
-   cd mslearn-ai-foundry/Labfiles/01-app-develop/CSharp
+   cd mslearn-openai/Labfiles/01-app-develop/CSharp
     ```
 
 1. In the cloud shell command-line pane, enter the following command to install the libraries you'll use:
