@@ -2,6 +2,9 @@ import os
 import openai
 import dotenv
 
+## Flag to show citations
+showCitations = False
+
 dotenv.load_dotenv()
 
 endpoint = os.environ.get("AZURE_OAI_ENDPOINT")
@@ -17,4 +20,7 @@ client = openai.AzureOpenAI(
 # Configure your data source
 
 
-print(completion.model_dump_json(indent=2))
+print(completion.choices[0].message.content)
+
+if showCitations:
+    print(f"\n{completion.choices[0].message.context}")
