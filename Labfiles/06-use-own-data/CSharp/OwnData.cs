@@ -9,7 +9,7 @@ using Azure.AI.OpenAI;
 
 // Flag to show citations
 bool showCitations = false;
-
+var hoi = 1;
 // Get configuration settings  
 IConfiguration config = new ConfigurationBuilder()
     .AddJsonFile("appsettings.json")
